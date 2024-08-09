@@ -7,6 +7,11 @@ let hamburger = document.querySelector(".hamburger");
 let addAccountBtn = document.querySelector(".add-account");
 let accountBox = document.querySelector(".box-body");
 let accountsList = document.querySelectorAll(".account-list li");
+let accountDelBtn = document.querySelectorAll(".delete-account");
+let dots = document.querySelectorAll(".operations .dot");
+let options = document.querySelectorAll(".operations .options");
+let editBtns = document.querySelectorAll(".edit-btn");
+
 navIcons.forEach((icon, index) => {
   icon.addEventListener("click", () => changePage(icon, index));
 });
@@ -25,9 +30,14 @@ document.addEventListener("click", (e) => {
   if (!sideBar.contains(e.target) && !hamburger.contains(e.target)) {
     sideBar.classList.remove("active");
   }
+  if (!addAccountBtn.contains(e.target) && !accountBox.contains(e.target)) {
+    accountBox.classList.remove("active");
+    accountPage.classList.remove("blurbg");
+  }
 });
 
 addAccountBtn.addEventListener("click", () => {
+  closeEditBox();
   accountBox.classList.add("active");
   accountPage.classList.add("blurbg");
 });
@@ -35,6 +45,9 @@ addAccountBtn.addEventListener("click", () => {
 function closeAccountBox() {
   accountBox.classList.remove("active");
   accountPage.classList.remove("blurbg");
+}
+function closeEditBox() {
+  document.querySelector(".edit-box-body").classList.remove("active");
 }
 
 function removeActiveAccount() {
@@ -55,9 +68,9 @@ function saveAccount() {
   let initialAmount =
     document.getElementById("initial-amount").value.trim() || 0;
   let accountName = document.getElementById("account-name").value.trim();
-  if(isNaN(initialAmount)){
-    initialAmount = 0
-  };
+  if (isNaN(initialAmount)) {
+    initialAmount = 0;
+  }
   if (accountName === "" || accountName.lenght < 0) {
     return;
   }
@@ -84,3 +97,58 @@ function saveAccount() {
   document.getElementById("initial-amount").value = "";
   document.getElementById("account-name").value = "";
 }
+
+//delete account
+accountDelBtn.forEach((account) => {
+  account.addEventListener("click", () => {
+    account.parentElement.parentElement.parentElement.remove();
+  });
+});
+//edit account
+editBtns.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    const accountName =
+      btn.parentElement.parentElement.parentElement.children[0].children[1]
+        .children[0].textContent;
+    const amount =
+      btn.parentElement.parentElement.parentElement.children[0].children[1].children[1].children[0].textContent.slice(
+        1
+      );
+    options[index].classList.remove("active");
+
+    openEditPanael(accountName, amount);
+  });
+});
+
+function openEditPanael(account, amount) {
+  let acutalAmount = amount.split(",").join("");
+  let editAmount = document.getElementById("edit-amount");
+  let editAccountName = document.getElementById("edit-account-name");
+  editAmount.value = acutalAmount;
+  editAccountName.value = account;
+  document.querySelector(".edit-box-body").classList.add("active");
+  editAmount.focus();
+}
+
+function updateAccount() {
+  closeEditBox();
+  let updatedAmount = document.getElementById("edit-amount").value.trime();
+  let updatedAccountName = document
+    .getElementById("edit-account-name")
+    .value.trime();
+  if (isNaN(updatedAmount) || updatedAccountName.lenght === 0) return;
+  
+}
+
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    if (options[index].classList.contains("active")) {
+      options[index].classList.remove("active");
+    } else {
+      // Deactivate all options
+      options.forEach((option) => option.classList.remove("active"));
+      // Activate the clicked option
+      options[index].classList.add("active");
+    }
+  });
+});

@@ -300,9 +300,9 @@ main section.active {
   background-color: rgb(225, 225, 225);
 }
 /* accoutn add style */
-.box-body {
+.box-body ,.edit-box-body{
   border-radius: 5px;
-  width: 320px;
+  width: 330px;
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -323,7 +323,8 @@ main section.active {
   transform-origin: center;
   transform-style: preserve-3d;
 }
-.box-body.active {
+
+.box-body.active,.edit-box-body.active {
   display: flex;
 }
 @keyframes open {
@@ -441,4 +442,46 @@ main section.active {
 }
 .account-btns button:focus {
   outline: none;
+}
+.operations{
+  position: relative;
+}
+.operations .options{
+  position: absolute;
+  animation: down .3s ease;
+  right: 30px;
+  top: 10px;
+  display: flex;
+  width: 100px;
+  height: max-content;
+  flex-direction: column;
+  background-color: rgb(234, 234, 234);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  -webkit-animation: down .3s ease;
+  display: none;
+}
+.operations .options.active{
+  display: flex;
+}
+
+@keyframes down {
+  from{
+    transform: translateY(-20px) scale(0);
+    -webkit-transform: translateY(-20px) scale(0);
+    -moz-transform: translateY(-20px) scale(0);
+    -ms-transform: translateY(-20px) scale(0);
+    -o-transform: translateY(-20px) scale(0);
+}
+}
+.options p{
+  padding: 7px 15px;
+  font-size: 17px;
+  font-weight: 500;
+}
+.options p:hover{
+  background-color: #c0c0c0;
 }
