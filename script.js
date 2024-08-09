@@ -12,6 +12,10 @@ let dots = document.querySelectorAll(".operations .dot");
 let options = document.querySelectorAll(".operations .options");
 let editBtns = document.querySelectorAll(".edit-btn");
 
+//Global variables
+let selectedCard = "";
+let accountImg = "";
+
 navIcons.forEach((icon, index) => {
   icon.addEventListener("click", () => changePage(icon, index));
 });
@@ -110,12 +114,19 @@ editBtns.forEach((btn, index) => {
     const accountName =
       btn.parentElement.parentElement.parentElement.children[0].children[1]
         .children[0].textContent;
+
     const amount =
       btn.parentElement.parentElement.parentElement.children[0].children[1].children[1].children[0].textContent.slice(
         1
       );
     options[index].classList.remove("active");
+    selectedCard = btn.parentElement.parentElement.parentElement;
 
+    accountsList.forEach((account) => {
+      if (account.classList.contains("active")) {
+        accountImg = account.children[0].getAttribute("src");
+      }
+    });
     openEditPanael(accountName, amount);
   });
 });
@@ -132,12 +143,20 @@ function openEditPanael(account, amount) {
 
 function updateAccount() {
   closeEditBox();
-  let updatedAmount = document.getElementById("edit-amount").value.trime();
+  let updatedAmount = document.getElementById("edit-amount").value.trim();
   let updatedAccountName = document
     .getElementById("edit-account-name")
-    .value.trime();
-  if (isNaN(updatedAmount) || updatedAccountName.lenght === 0) return;
-  
+    .value.trim();
+
+  selectedCard.children[0].children[0].setAttribute("src", accountImg);
+  if (isNaN(updatedAmount) || updatedAccountName.length === 0) return;
+
+  let formatedAmount = Number(updatedAmount);
+  selectedCard.children[0].children[1].children[0].innerHTML =
+    updatedAccountName;
+
+  selectedCard.children[0].children[1].children[1].children[0].innerHTML =
+    formatedAmount == 0 ? "₹0" : "₹" + formatedAmount.toLocaleString("en-IN");
 }
 
 dots.forEach((dot, index) => {
