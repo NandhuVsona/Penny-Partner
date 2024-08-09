@@ -92,8 +92,12 @@ main section.account {
   
 }
 main section.account.blurbg{
-  background-color: var(--blur);
- 
+ background-color: var(--blur);
+ transition: background-color 1s ease;
+ -webkit-transition: background-color 1s ease;
+ -moz-transition: background-color 1s ease;
+ -ms-transition: background-color 1s ease;
+ -o-transition: background-color 1s ease;
 }
 main section.budgets {
   background-color: rgb(43, 226, 67);
