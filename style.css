@@ -6,13 +6,29 @@
   font-family: "Poppins", sans-serif;
   user-select: none;
 }
+:root{
+  --blur: rgb(160, 160, 160);
+}
 .app {
   position: relative;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+  scrollbar-width: none;
+}
+ul {
+  list-style: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+.app::-webkit-scrollbar {
+  display: none; /* hides scrollbar in Chrome, Safari, and Edge */
 }
 header.main {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   padding: 5px 10px;
@@ -61,7 +77,7 @@ main {
 }
 main section {
   flex-grow: 1;
-  background-color: blue;
+
   height: 100%;
   display: none;
   width: 100%;
@@ -70,8 +86,14 @@ main section.categories {
   background-color: blueviolet;
 }
 main section.account {
-  background-color: rgb(255, 255, 255);
+  overflow-y: scroll;
+  scrollbar-width: none;
   flex-direction: column;
+  
+}
+main section.account.blurbg{
+  background-color: var(--blur);
+ 
 }
 main section.budgets {
   background-color: rgb(43, 226, 67);
@@ -136,6 +158,7 @@ main section.active {
   padding: 10px;
   display: flex;
   gap: 15px;
+  margin-bottom: 60px;
   flex-direction: column;
 }
 .accounts .card {
@@ -170,6 +193,7 @@ main section.active {
   align-items: center;
   border: 1px solid gray;
   padding: 10px;
+  margin-bottom: 80px;
 }
 /* SideBar style */
 .sidebar {
@@ -191,7 +215,6 @@ main section.active {
     -o-transform: translateX(-100px);
   }
 }
-
 
 .sidebar header {
   display: flex;
@@ -268,4 +291,134 @@ main section.active {
 
 .sidebar .settings ul li:hover {
   background-color: rgb(225, 225, 225);
+}
+/* accoutn add style */
+.box-body{
+  border-radius: 5px;
+  width: 320px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  display:none;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  padding: 15px;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  animation: open .5s ease;
+  -webkit-animation: open .5s ease;
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+.box-body.active{
+  display: flex;
+}
+@keyframes open {
+  from{
+   transform: translate(-50%, -50%) scale(0);
+   opacity: 0;
+   -webkit-transform: translate(-50%, -50%) scale(0);
+   -moz-transform: translate(-50%, -50%) scale(0);
+   -ms-transform: translate(-50%, -50%) scale(0);
+   -o-transform: translate(-50%, -50%) scale(0);
+}
+}
+.input-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.input-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+}
+.input-body input {
+  border: 1px solid grey;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  font-size: inherit;
+  font-weight: 600;
+  padding-left: 10px;
+}
+.input-body label {
+  position: absolute;
+  left: 10px;
+  transition: all 0.7s ease;
+  -webkit-transition: all 0.7s ease;
+  -moz-transition: all 0.7s ease;
+  -ms-transition: all 0.7s ease;
+  -o-transition: all 0.7s ease;
+  top: 5px;
+  font-size: 16px;
+}
+.input-body input:focus {
+  outline: none;
+}
+.input-body input:focus ~ label,
+.input-body input:valid ~ label {
+  top: -25px;
+}
+.account-icons-parent {
+  width: 100%;
+}
+.account-icons-parent p {
+  text-align: left;
+}
+.account-icons-parent ul {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: scroll;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 1px 0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.account-icons-parent ul li img {
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+}
+.account-icons-parent ul li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.account-icons-parent ul li.active{
+ border: 1px solid #050505;
+ background-color: #fef4f4;
+}
+.account-btns {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  height: 40px;
+  gap: 15px;
+}
+.account-btns button {
+  flex-grow: 1;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: inherit;
+}
+.account-btns button:focus {
+  outline: none;
 }

@@ -10,7 +10,7 @@
     <div class="app">
       <header class="main">
         <div class="left">
-          <img  class="hamburger" src="icons/hamburger.svg" alt="" />
+          <img class="hamburger" src="icons/hamburger.svg" alt="" />
           <h2>Penny Partner</h2>
         </div>
         <img src="icons/search.svg" alt="" />
@@ -77,11 +77,68 @@
                   <img src="icons/dot.svg" alt="" />
                 </div>
               </li>
+              <li class="card">
+                <div class="card-body">
+                  <img src="accounts/bitcoin_1490849.png" alt="" />
+                  <div class="card-info">
+                    <p class="bold">Bitcoin</p>
+                    <p>Balance: <span class="green bold">₹223</span></p>
+                  </div>
+                </div>
+                <div class="options">
+                  <img src="icons/dot.svg" alt="" />
+                </div>
+              </li>
               <li class="add-account">
                 <img src="icons/plus.svg" alt="" />
                 <p>ADD NEW ACCOUNT</p>
               </li>
             </ul>
+          </div>
+          <!-- add account -->
+          <div class="box-body">
+            <header><h3>Add New Account</h3></header>
+            <div class="input-container">
+              <div class="input-body">
+                <input autocomplete="off" pattern="[0-9]*" required type="tel" id="initial-amount" />
+                <label for="initial-amount">Initial amount</label>
+              </div>
+              <div class="input-body">
+                <input autocomplete="off" type="text" required id="accout-name" />
+                <label for="account-name">Account name</label>
+              </div>
+            </div>
+            <div class="account-icons-parent">
+              <p>Icons</p>
+              <ul>
+                <li class="active">
+                  <img src="accounts/currency-notes_15326442.png" alt="" />
+                </li>
+                <li><img src="accounts/atm-card_8983163.png" alt="" /></li>
+
+                <li>
+                  <img src="accounts/piggy-bank_15326531 (2).png" alt="" />
+                </li>
+                <li><img src="accounts/dollar-bag_15326399.png" alt="" /></li>
+                <li><img src="accounts/bitcoin_1490849.png" alt="" /></li>
+                <li>
+                  <img src="accounts/business-target_15326317.png" alt="" />
+                </li>
+
+                <li><img src="accounts/business_15801144.png" alt="" /></li>
+                <li>
+                  <img src="accounts/currency-exchange_15326510.png" alt="" />
+                </li>
+
+                <li><img src="accounts/business_15801114.png" alt="" /></li>
+                <li><img src="accounts/economy_3258522.png" alt="" /></li>
+                <li><img src="accounts/bank_12161294.png" alt="" /></li>
+              </ul>
+            </div>
+            <div class="account-btns">
+              <button onclick="closeAccountBox()">cancle</button>
+              <button>Save</button>
+            </div>
           </div>
         </section>
         <section class="categories">0</section>
@@ -113,7 +170,7 @@
         </nav>
       </footer>
       <div class="sidebar">
-        <img src="icons/close.svg" alt="" class="close">
+        <img src="icons/close.svg" alt="" class="close" />
         <header>
           <img class="user-profile" src="images/men.png" alt="" />
           <h3>Hello Ganesh</h3>
@@ -121,46 +178,46 @@
         <div class="settings">
           <ul>
             <li>
-              <img src="icons/edit.svg" alt="">
+              <img src="icons/edit.svg" alt="" />
               <div class="info">
                 <p>Ganesh</p>
                 <small>Tap to edit username</small>
               </div>
             </li>
             <li>
-              <img src="icons/sun.svg" alt="">
+              <img src="icons/sun.svg" alt="" />
               <div class="info">
                 <p>Preference</p>
                 <small>Click to change theme</small>
               </div>
             </li>
             <li>
-              <img src="icons/reset.svg" alt="">
+              <img src="icons/reset.svg" alt="" />
               <div class="info">
                 <p>Reset</p>
                 <small>Reset app to initial state</small>
               </div>
             </li>
             <li>
-              <img src="icons/logout.svg" alt="">
+              <img src="icons/logout.svg" alt="" />
               <div class="info">
                 <p>Logout</p>
                 <small>Double click to logout</small>
               </div>
             </li>
             <li>
-              <img src="icons/delete.svg" alt="">
+              <img src="icons/delete.svg" alt="" />
               <div class="info">
                 <p>Delete</p>
                 <small>Delete everything</small>
               </div>
             </li>
-           
+
             <li>
-              <img src="icons/arrrow.svg" alt="">
+              <img src="icons/arrrow.svg" alt="" />
               <div class="info">
-               <p>Privacy Policy</p>
-               <small>Know our privacy policy</small>
+                <p>Privacy Policy</p>
+                <small>Know our privacy policy</small>
               </div>
             </li>
           </ul>
