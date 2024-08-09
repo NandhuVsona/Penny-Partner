@@ -89,33 +89,45 @@
                   <img src="icons/dot.svg" alt="" />
                 </div>
               </li>
-              <li class="add-account">
-                <img src="icons/plus.svg" alt="" />
-                <p>ADD NEW ACCOUNT</p>
-              </li>
             </ul>
           </div>
+          <div class="add-account">
+            <div class="add-box">
+              <img src="icons/plus.svg" alt="" />
+              <p>ADD NEW ACCOUNT</p>
+            </div>
+          </div>
           <!-- add account -->
-          <div class="box-body">
+          <div class="box-body active">
             <header><h3>Add New Account</h3></header>
             <div class="input-container">
               <div class="input-body">
-                <input autocomplete="off" pattern="[0-9]*" required type="tel" id="initial-amount" />
+                <input
+                  autocomplete="off"
+                  pattern="[0-9]*"
+                  required
+                  type="tel"
+                  id="initial-amount"
+                />
                 <label for="initial-amount">Initial amount</label>
               </div>
               <div class="input-body">
-                <input autocomplete="off" type="text" required id="accout-name" />
+                <input
+                  autocomplete="off"
+                  type="text"
+                  required
+                  id="account-name"
+                />
                 <label for="account-name">Account name</label>
               </div>
             </div>
             <div class="account-icons-parent">
-              <p>Icons</p>
-              <ul>
+              <p>Select icons</p>
+              <ul class="account-list">
                 <li class="active">
                   <img src="Accounts/currency-notes_15326442.png" alt="" />
                 </li>
                 <li><img src="Accounts/atm-card_8983163.png" alt="" /></li>
-
                 <li>
                   <img src="Accounts/piggy-bank_15326531 (2).png" alt="" />
                 </li>
@@ -124,12 +136,10 @@
                 <li>
                   <img src="Accounts/business-target_15326317.png" alt="" />
                 </li>
-
                 <li><img src="Accounts/business_15801144.png" alt="" /></li>
                 <li>
                   <img src="Accounts/currency-exchange_15326510.png" alt="" />
                 </li>
-
                 <li><img src="Accounts/business_15801114.png" alt="" /></li>
                 <li><img src="Accounts/economy_3258522.png" alt="" /></li>
                 <li><img src="Accounts/bank_12161294.png" alt="" /></li>
@@ -137,7 +147,7 @@
             </div>
             <div class="account-btns">
               <button onclick="closeAccountBox()">cancle</button>
-              <button>Save</button>
+              <button onclick="saveAccount()">Save</button>
             </div>
           </div>
         </section>

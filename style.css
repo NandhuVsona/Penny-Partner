@@ -6,7 +6,7 @@
   font-family: "Poppins", sans-serif;
   user-select: none;
 }
-:root{
+:root {
   --blur: rgb(160, 160, 160);
 }
 .app {
@@ -89,15 +89,14 @@ main section.account {
   overflow-y: scroll;
   scrollbar-width: none;
   flex-direction: column;
-  
 }
-main section.account.blurbg{
- background-color: var(--blur);
- transition: background-color 1s ease;
- -webkit-transition: background-color 1s ease;
- -moz-transition: background-color 1s ease;
- -ms-transition: background-color 1s ease;
- -o-transition: background-color 1s ease;
+main section.account.blurbg {
+  background-color: var(--blur);
+  transition: background-color 1s ease;
+  -webkit-transition: background-color 1s ease;
+  -moz-transition: background-color 1s ease;
+  -ms-transition: background-color 1s ease;
+  -o-transition: background-color 1s ease;
 }
 main section.budgets {
   background-color: rgb(43, 226, 67);
@@ -162,7 +161,7 @@ main section.active {
   padding: 10px;
   display: flex;
   gap: 15px;
-  margin-bottom: 60px;
+  margin-bottom: 15px;
   flex-direction: column;
 }
 .accounts .card {
@@ -192,12 +191,16 @@ main section.active {
 }
 .add-account {
   display: flex;
-  gap: 10px;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
+  margin-bottom: 130px;
+}
+.add-account .add-box {
+  display: flex;
+  gap: 10px;
   padding: 10px;
-  margin-bottom: 80px;
+  border: 1px solid grey;
 }
 /* SideBar style */
 .sidebar {
@@ -297,14 +300,14 @@ main section.active {
   background-color: rgb(225, 225, 225);
 }
 /* accoutn add style */
-.box-body{
+.box-body {
   border-radius: 5px;
   width: 320px;
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-  display:none;
+  display: none;
   justify-content: center;
   background-color: rgb(255, 255, 255);
   padding: 15px;
@@ -315,23 +318,23 @@ main section.active {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  animation: open .5s ease;
-  -webkit-animation: open .5s ease;
+  animation: open 0.5s ease;
+  -webkit-animation: open 0.5s ease;
   transform-origin: center;
   transform-style: preserve-3d;
 }
-.box-body.active{
+.box-body.active {
   display: flex;
 }
 @keyframes open {
-  from{
-   transform: translate(-50%, -50%) scale(0);
-   opacity: 0;
-   -webkit-transform: translate(-50%, -50%) scale(0);
-   -moz-transform: translate(-50%, -50%) scale(0);
-   -ms-transform: translate(-50%, -50%) scale(0);
-   -o-transform: translate(-50%, -50%) scale(0);
-}
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
+  }
 }
 .input-container {
   margin-top: 15px;
@@ -407,10 +410,22 @@ main section.active {
   justify-content: flex-start;
   align-items: center;
 }
-.account-icons-parent ul li.active{
- border: 1px solid #050505;
- background-color: #fef4f4;
+.account-icons-parent ul li.active {
+  border: 1px solid #050505;
+  background-color: #fef4f4;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  position: relative;
 }
+
 .account-btns {
   width: 100%;
   display: flex;
