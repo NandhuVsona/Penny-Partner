@@ -123,8 +123,14 @@ editBtns.forEach((btn, index) => {
     selectedCard = btn.parentElement.parentElement.parentElement;
 
     accountsList.forEach((account) => {
-      if (account.classList.contains("active")) {
+      if (
+        account.children[0].getAttribute("src") ==
+        selectedCard.children[0].children[0].getAttribute("src")
+      ) {
         accountImg = account.children[0].getAttribute("src");
+        account.classList.add("active");
+      } else {
+        account.classList.remove("active");
       }
     });
     openEditPanael(accountName, amount);
@@ -148,7 +154,14 @@ function updateAccount() {
     .getElementById("edit-account-name")
     .value.trim();
 
-  selectedCard.children[0].children[0].setAttribute("src", accountImg);
+  let imageSrc = "";
+  accountsList.forEach((account) => {
+    if (account.classList.contains("active")) {
+      imageSrc = account.children[0].getAttribute("src");
+    }
+  });
+
+  selectedCard.children[0].children[0].setAttribute("src", imageSrc);
   if (isNaN(updatedAmount) || updatedAccountName.length === 0) return;
 
   let formatedAmount = Number(updatedAmount);

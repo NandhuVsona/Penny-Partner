@@ -8,8 +8,12 @@
 }
 :root {
   --blur: rgb(160, 160, 160);
+  --one : #080202;
+  --two: #73BBC9;
+  --three: #F1D4E5;
+  --four: #FCE9F1
 }
-.app {
+.app{
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -17,6 +21,11 @@
 
   scrollbar-width: none;
 }
+.app.dark{
+  background-color: #0d1516;
+  color: #ffffff;
+}
+
 ul {
   list-style: none;
 }
@@ -34,7 +43,7 @@ header.main {
   padding: 5px 10px;
   align-items: center;
   width: 100vw;
-  background-color: rgb(255, 255, 255);
+  
 }
 header .left {
   display: flex;
@@ -48,7 +57,7 @@ footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: rgb(255, 255, 255);
+  
   width: 100%;
   border-top: 1px solid gray;
 }
