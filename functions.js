@@ -28,25 +28,26 @@ function reloadFunctionality() {
   //delete account
   accountDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
-      console.log("ho");
+      console.log('ho')
       account.parentElement.parentElement.parentElement.remove();
 
       //local Storage functionality
       let data = JSON.parse(localStorage.getItem("data")) || [];
-
+      console.log(data);
       let updatedArray = [];
-      let accountName =
-        account.parentElement.parentElement.parentElement.children[0]
-          .children[1].children[0].textContent;
-      let amount =
-        account.parentElement.parentElement.parentElement.children[0].children[1].children[1].children[0].textContent.slice(
-          1
-        );
       data.forEach((item) => {
-        if (item.accountName != accountName && item.amount != amount) {
-          updatedArray.push(item);
+        console.log(
+          account.parentElement.parentElement.parentElement.contains(
+            item.accountName
+          )
+        );
+        if (
+          !account.parentElement.parentElement.parentElement.contains(
+            item.accountName
+          )
+        ) {
+          updateAccount.push(data);
         }
-
         localStorage.setItem("data", JSON.stringify(updatedArray));
       });
     });
@@ -219,25 +220,3 @@ function openEditPanael(account, amount) {
   editAmount.focus();
 }
 
-//function for localstorage
-let data = JSON.parse(localStorage.getItem("data")) || [];
-data.forEach((item) => {
-  let existingAccounts = document.querySelector(".accounts");
-  let template = `<li class="card">
-                <div class="card-body">
-                  <img src="${item.imageSrc}" alt="" />
-                  <div class="card-info">
-                    <p class="bold">${item.accountName}</p>
-                    <p>Balance: <span class="green bold">₹${item.formatedAmount}</span></p>
-                  </div>
-                </div>
-                <div class="operations">
-                  <img class="dot" src="icons/dot.svg" alt="" />
-                  <div class="options">
-                    <p class="edit-btn">Edit</p>
-                    <p class="delete-account">Delete</p>
-                  </div>
-                </div>
-              </li>`;
-  existingAccounts.innerHTML += template;
-});

@@ -1,5 +1,29 @@
 import { saveAccount, updateAccount } from "./functions.js";
 
+//function for localstorage
+let data = JSON.parse(localStorage.getItem("data")) || [];
+data.forEach((item) => {
+  let existingAccounts = document.querySelector(".accounts");
+  let template = `<li class="card">
+                <div class="card-body">
+                  <img src="${item.imageSrc}" alt="" />
+                  <div class="card-info">
+                    <p class="bold">${item.accountName}</p>
+                    <p>Balance: <span class="green bold">₹${item.formatedAmount}</span></p>
+                  </div>
+                </div>
+                <div class="operations">
+                  <img class="dot" src="icons/dot.svg" alt="" />
+                  <div class="options">
+                    <p class="edit-btn">Edit</p>
+                    <p class="delete-account">Delete</p>
+                  </div>
+                </div>
+              </li>`;
+  existingAccounts.innerHTML += template;
+});
+
+
 let navIcons = document.querySelectorAll("footer nav ul li");
 let pages = document.querySelectorAll("main section");
 let closeSideBar = document.querySelector(".close");
