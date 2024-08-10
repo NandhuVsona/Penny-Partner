@@ -5,7 +5,6 @@ let editBtns = document.querySelectorAll(".edit-btn");
 let options = document.querySelectorAll(".operations .options");
 let accountPage = document.querySelector(".account");
 
-
 //Global variables
 let selectedCard = "";
 let accountImg = "";
@@ -29,7 +28,27 @@ function reloadFunctionality() {
   //delete account
   accountDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
+      console.log("ho");
       account.parentElement.parentElement.parentElement.remove();
+
+      //local Storage functionality
+      let data = JSON.parse(localStorage.getItem("data")) || [];
+
+      let updatedArray = [];
+      let accountName =
+        account.parentElement.parentElement.parentElement.children[0]
+          .children[1].children[0].textContent;
+      let amount =
+        account.parentElement.parentElement.parentElement.children[0].children[1].children[1].children[0].textContent.slice(
+          1
+        );
+      data.forEach((item) => {
+        if (item.accountName != accountName && item.amount != amount) {
+          updatedArray.push(item);
+        }
+
+        localStorage.setItem("data", JSON.stringify(updatedArray));
+      });
     });
   });
 
@@ -120,6 +139,15 @@ export function saveAccount() {
   document.getElementById("initial-amount").value = "";
   document.getElementById("account-name").value = "";
   reloadFunctionality();
+  //local storage
+  let array = JSON.parse(localStorage.getItem("data")) || [];
+  let data = {
+    accountName,
+    formatedAmount,
+    imageSrc,
+  };
+  array.push(data);
+  localStorage.setItem("data", JSON.stringify(array));
 }
 
 //update functionality---------------------------------------------
@@ -181,7 +209,6 @@ editBtns.forEach((btn, index) => {
 
 function openEditPanael(account, amount) {
   accountPage.classList.add("blur");
-  
 
   let acutalAmount = amount.split(",").join("");
   let editAmount = document.getElementById("edit-amount");
@@ -191,3 +218,26 @@ function openEditPanael(account, amount) {
   document.querySelector(".edit-box-body").classList.add("active");
   editAmount.focus();
 }
+
+//function for localstorage
+let data = JSON.parse(localStorage.getItem("data")) || [];
+data.forEach((item) => {
+  let existingAccounts = document.querySelector(".accounts");
+  let template = `<li class="card">
+                <div class="card-body">
+                  <img src="${item.imageSrc}" alt="" />
+                  <div class="card-info">
+                    <p class="bold">${item.accountName}</p>
+                    <p>Balance: <span class="green bold">₹${item.formatedAmount}</span></p>
+                  </div>
+                </div>
+                <div class="operations">
+                  <img class="dot" src="icons/dot.svg" alt="" />
+                  <div class="options">
+                    <p class="edit-btn">Edit</p>
+                    <p class="delete-account">Delete</p>
+                  </div>
+                </div>
+              </li>`;
+  existingAccounts.innerHTML += template;
+});
