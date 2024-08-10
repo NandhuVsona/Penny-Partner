@@ -99,7 +99,7 @@ main section.account {
   scrollbar-width: none;
   flex-direction: column;
 }
-main section.account.blurbg {
+main section.account.blurbg,main section.account.blur {
   background-color: var(--blur);
   transition: background-color 1s ease;
   -webkit-transition: background-color 1s ease;
@@ -137,6 +137,7 @@ main section.active {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  background:linear-gradient(to bottom left,rgba(35, 224, 183, 0.534),rgba(157, 0, 255, 0.315)) ;
 }
 .penny-info .top {
   width: 100%;
@@ -311,7 +312,7 @@ main section.active {
 /* accoutn add style */
 .box-body ,.edit-box-body{
   border-radius: 5px;
-  width: 330px;
+  width: 350px;
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -322,7 +323,7 @@ main section.active {
   padding: 15px;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -351,6 +352,7 @@ main section.active {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 100%;
 }
 .input-body {
   position: relative;
@@ -361,7 +363,7 @@ main section.active {
 .input-body input {
   border: 1px solid grey;
   width: 100%;
-  height: 40px;
+  height: 50px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -373,21 +375,22 @@ main section.active {
 }
 .input-body label {
   position: absolute;
-  left: 10px;
-  transition: all 0.7s ease;
-  -webkit-transition: all 0.7s ease;
-  -moz-transition: all 0.7s ease;
-  -ms-transition: all 0.7s ease;
-  -o-transition: all 0.7s ease;
-  top: 5px;
-  font-size: 16px;
+  left: 15px;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  top: 13px;
+  font-size: 17px;
 }
 .input-body input:focus {
   outline: none;
 }
 .input-body input:focus ~ label,
 .input-body input:valid ~ label {
-  top: -25px;
+  top: -27px;
+  left: 0px;
 }
 .account-icons-parent {
   width: 100%;
@@ -404,7 +407,7 @@ main section.active {
   scrollbar-width: none;
   border: 1px solid grey;
   border-radius: 5px;
-  padding: 1px 0px;
+  padding: 5px 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -440,7 +443,7 @@ main section.active {
   width: 100%;
   display: flex;
   margin-top: 10px;
-  height: 40px;
+  height: 50px;
   gap: 15px;
 }
 .account-btns button {

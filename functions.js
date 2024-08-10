@@ -3,6 +3,8 @@ import { closeEditBox, closeAccountBox } from "./script.js";
 let accountsList = document.querySelectorAll(".account-list li");
 let editBtns = document.querySelectorAll(".edit-btn");
 let options = document.querySelectorAll(".operations .options");
+let accountPage = document.querySelector(".account");
+
 
 //Global variables
 let selectedCard = "";
@@ -123,6 +125,7 @@ export function saveAccount() {
 //update functionality---------------------------------------------
 
 export function updateAccount() {
+  accountPage.classList.remove("blur");
   closeEditBox();
   let updatedAmount = document.getElementById("edit-amount").value.trim();
   let updatedAccountName = document
@@ -177,6 +180,9 @@ editBtns.forEach((btn, index) => {
 });
 
 function openEditPanael(account, amount) {
+  accountPage.classList.add("blur");
+  
+
   let acutalAmount = amount.split(",").join("");
   let editAmount = document.getElementById("edit-amount");
   let editAccountName = document.getElementById("edit-account-name");

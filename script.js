@@ -56,6 +56,7 @@ export function closeAccountBox() {
   accountPage.classList.remove("blurbg");
 }
 export function closeEditBox() {
+  accountPage.classList.remove("blur");
   document.querySelector(".edit-box-body").classList.remove("active");
 }
 
