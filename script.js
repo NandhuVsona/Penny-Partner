@@ -92,3 +92,28 @@ dots.forEach((dot, index) => {
     }
   });
 });
+
+let startX;
+let moveX;
+
+document.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove", (e) => {
+  moveX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", () => {
+  if (moveX !== undefined) {
+    if (startX + 100 < moveX) {
+      sideBar.classList.add("active")
+      // Implement your logic for right swipe here
+    } else if (startX - 100 > moveX) {
+      sideBar.classList.remove("active")
+      // Implement your logic for left swipe here
+    }
+  }
+  // Reset moveX after handling the event
+  moveX = undefined;
+});
