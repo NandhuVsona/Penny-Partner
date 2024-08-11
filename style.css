@@ -90,9 +90,9 @@ main section {
   display: none;
   width: 100%;
 }
-main section.categories {
-  background-color: blueviolet;
-}
+/* main section.categories {
+  
+} */
 main section.account {
   overflow-y: scroll;
   scrollbar-width: none;
