@@ -1,0 +1,57 @@
+:root {
+    --blur: rgb(160, 160, 160);
+    --darkblur: rgb(66, 66, 66);
+    --dark: #080202;
+    --lightDark: rgb(53, 53, 53);
+  }
+
+.app.dark,.app.dark .sidebar{
+    background-color:var(--dark);
+    color: #ffffff;
+  }
+  .app.dark img.svg{
+    filter: invert(1);
+    -webkit-filter: invert(1);
+  }
+  .app.dark main section.account .box-body,
+  .app.dark main section.account .edit-box-body
+  
+  {
+    background-color:var(--dark);
+    color: #ffffff;
+  }
+  .app.dark main section.account .box-body .input-container .input-body input,
+  .app.dark main section.account .edit-box-body .input-container .input-body input{
+    background-color:var(--dark);
+    color: #ffffff;
+  }
+  .app.dark main section.account .account-container ul li .operations .options,
+  .app.dark main section.categories .category-container .income-category ul li  .right-portion .options,
+  .app.dark main section.categories .category-container .expense-category ul li  .right-portion .options{
+    background-color: var(--lightDark);
+    color: #ffffff;
+  }
+  .app.dark main section.account .account-container ul li .operations .options p:hover,
+  .app.dark main section.categories .category-container .income-category ul li  .right-portion .options p:hover,
+  .app.dark main section.categories .category-container .expense-category ul li  .right-portion .options p:hover
+  {
+    background-color: rgb(80, 80, 80)!important;
+  
+  }
+  
+  .app.dark .sidebar .settings ul li:hover {
+    background-color: rgb(53, 53, 53);
+  }
+  .app.dark main section.account.blurbg,
+  .app.dark main section.account.blur {
+    background-color: var(--darkblur);
+    color: #050505;
+    transition: background-color color 1s ease;
+    -webkit-transition: background-color color 1s ease;
+    -moz-transition: background-color color 1s ease;
+    -ms-transition: background-color color 1s ease;
+    -o-transition: background-color color 1s ease;
+  }
+  .app.dark footer{
+    background-color: var(--dark);
+  }

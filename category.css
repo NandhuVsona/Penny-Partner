@@ -24,7 +24,7 @@ main section.categories .category-container {
 .category-container .income-category ul,
 .category-container .expense-category ul {
   display: flex;
-  width: 100%;
+  width: 100%; 
   flex-direction: column;
   justify-content: center;
   align-items: center;

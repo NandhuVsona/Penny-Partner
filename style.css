@@ -13,7 +13,7 @@
   --two: #73bbc9;
   --three: #f1d4e5;
   --four: #fce9f1;
-  --lightDark:rgb(53, 53, 53);
+  --lightDark: rgb(53, 53, 53);
 }
 .app {
   position: relative;
@@ -22,51 +22,6 @@
   overflow: hidden;
 
   scrollbar-width: none;
-}
-.app.dark,.app.dark .sidebar{
-  background-color:var(--dark);
-  color: #ffffff;
-}
-.app.dark img.svg{
-  filter: invert(1);
-  -webkit-filter: invert(1);
-}
-.app.dark main section.account .box-body,
-.app.dark main section.account .edit-box-body
-
-{
-  background-color:var(--dark);
-  color: #ffffff;
-}
-.app.dark main section.account .box-body .input-container .input-body input,
-.app.dark main section.account .edit-box-body .input-container .input-body input{
-  background-color:var(--dark);
-  color: #ffffff;
-}
-.app.dark main section.account .account-container ul li .operations .options{
-  background-color: var(--lightDark);
-  color: #ffffff;
-}
-.app.dark main section.account .account-container ul li .operations .options p:hover{
-  background-color: rgb(80, 80, 80)!important;
-
-}
-
-.app.dark .sidebar .settings ul li:hover {
-  background-color: rgb(53, 53, 53);
-}
-.app.dark main section.account.blurbg,
-.app.dark main section.account.blur {
-  background-color: var(--darkblur);
-  color: #050505;
-  transition: background-color color 1s ease;
-  -webkit-transition: background-color color 1s ease;
-  -moz-transition: background-color color 1s ease;
-  -ms-transition: background-color color 1s ease;
-  -o-transition: background-color color 1s ease;
-}
-.app.dark footer{
-  background-color: var(--dark);
 }
 
 ul {
@@ -150,7 +105,8 @@ main section.account.blur {
   -ms-transition: background-color 1s ease;
   -o-transition: background-color 1s ease;
 }
-main section.account.blurbg img.active,main section.account.blur img.active {
+main section.account.blurbg img.active,
+main section.account.blur img.active {
   filter: brightness(0.6);
   -webkit-filter: brightness(0.6);
   transition: filter 1s ease;
@@ -239,7 +195,6 @@ main section.active {
   -o-border-radius: 10px;
 }
 
-
 .accounts .card .card-body {
   display: flex;
   gap: 20px;
@@ -253,14 +208,16 @@ main section.active {
   font-weight: 600;
   font-size: 17px;
 }
-.add-account,.add-category{
+.add-account,
+.add-category {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   margin-bottom: 130px;
 }
-.add-account .add-box,.add-category .add-box{
+.add-account .add-box,
+.add-category .add-box {
   display: flex;
   gap: 10px;
   padding: 10px;
@@ -511,10 +468,12 @@ main section.active {
 .account-btns button:focus {
   outline: none;
 }
-.operations {
+.operations,
+.right-portion {
   position: relative;
 }
-.operations .options {
+.operations .options,
+.right-portion .options {
   position: absolute;
   animation: down 0.3s ease;
   right: 30px;
@@ -532,7 +491,8 @@ main section.active {
   -webkit-animation: down 0.3s ease;
   display: none;
 }
-.operations .options.active {
+.operations .options.active,
+.right-portion .options.active {
   display: flex;
 }
 

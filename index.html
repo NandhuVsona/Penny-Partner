@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Penny Partner</title>
+    <link rel="stylesheet" href="darkmode.css">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="category.css" />
   </head>
@@ -25,8 +26,8 @@
             <h3>Overall</h3>
             <div class="penny-info">
               <div class="top">
-                <div class="expense">               
-                <p>EXPENSE SO FAR</p>
+                <div class="expense">
+                  <p>EXPENSE SO FAR</p>
                   <b class="red bold">-₹5,000</b>
                 </div>
                 <div class="income">
@@ -205,7 +206,11 @@
                     <p class="change-font-style">Awards</p>
                   </div>
                   <div class="right-portion">
-                    <img class="svg" src="icons/dot.svg" alt="" />
+                    <img class="dot svg" src="icons/dot.svg" alt="" />
+                    <div class="options">
+                      <p class="edit-btn">Edit</p>
+                      <p class="delete-account">Delete</p>
+                    </div>
                   </div>
                 </li>
                 <li>
@@ -457,7 +462,6 @@
               </div>
             </div>
           </div>
-          
         </section>
       </main>
       <footer>
@@ -544,5 +548,7 @@
 
     <script async type="module" src="script.js"></script>
     <script defer type="module" src="functions.js"></script>
+    <script defer type="module" src="category.js"></script>
+    
   </body>
 </html>
