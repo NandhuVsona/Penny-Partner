@@ -1,29 +1,5 @@
 import { saveAccount, updateAccount } from "./functions.js";
 
-//function for localstorage
-let data = JSON.parse(localStorage.getItem("data")) || [];
-data.forEach((item) => {
-  let existingAccounts = document.querySelector(".accounts");
-  let template = `<li class="card">
-                <div class="card-body">
-                  <img src="${item.imageSrc}" alt="" />
-                  <div class="card-info">
-                    <p class="bold">${item.accountName}</p>
-                    <p>Balance: <span class="green bold">₹${item.formatedAmount}</span></p>
-                  </div>
-                </div>
-                <div class="operations">
-                  <img class="dot" src="icons/dot.svg" alt="" />
-                  <div class="options">
-                    <p class="edit-btn">Edit</p>
-                    <p class="delete-account">Delete</p>
-                  </div>
-                </div>
-              </li>`;
-  existingAccounts.innerHTML += template;
-});
-
-
 let navIcons = document.querySelectorAll("footer nav ul li");
 let pages = document.querySelectorAll("main section");
 let closeSideBar = document.querySelector(".close");
@@ -40,6 +16,7 @@ let accountsList = document.querySelectorAll(".account-list li");
 let accountDelBtn = document.querySelectorAll(".delete-account");
 let dots = document.querySelectorAll(".operations .dot");
 let options = document.querySelectorAll(".operations .options");
+let editBox = document.querySelector(".edit-box-body");
 
 cancelAddAccount.addEventListener("click", closeAccountBox);
 saveAccountBtn.addEventListener("click", saveAccount);
@@ -66,6 +43,38 @@ document.addEventListener("click", (e) => {
   if (!addAccountBtn.contains(e.target) && !accountBox.contains(e.target)) {
     accountBox.classList.remove("active");
     accountPage.classList.remove("blurbg");
+  }
+
+  let isoptionBox;
+  let dots = document.querySelectorAll(".operations .dot");
+  let options = document.querySelectorAll(".operations .options");
+
+  options.forEach((opt) => {
+    if (opt.contains(e.target)) {
+      isoptionBox = true;
+    }
+  });
+
+  if (!editBox.contains(e.target) && !isoptionBox) {
+    editBox.classList.remove("active");
+    accountPage.classList.remove("blur");
+  }
+  let isOptionsClicked = "";
+  let isDotsClicked = true;
+
+  options.forEach((opt) => {
+    if (opt.contains(e.target)) {
+      isOptionsClicked = true;
+    }
+  });
+  dots.forEach((dot) => {
+    if (dot.contains(e.target)) {
+      isDotsClicked = false;
+    }
+  });
+
+  if (isDotsClicked) {
+    options.forEach((opt) => opt.classList.remove("active"));
   }
 });
 
@@ -138,19 +147,22 @@ dots.forEach((dot, index) => {
 
 let startX;
 let moveX;
-
+let a = false;
 document.addEventListener("touchstart", (e) => {
+  if (accountBox.contains(e.target)) a = true;
   startX = e.touches[0].clientX;
 });
 
 document.addEventListener("touchmove", (e) => {
+  if (accountBox.contains(e.target)) a = true;
   moveX = e.touches[0].clientX;
 });
 
-document.addEventListener("touchend", () => {
+document.addEventListener("touchend", (e) => {
   if (moveX !== undefined) {
     if (startX + 100 < moveX) {
-      sideBar.classList.add("active");
+      if (!a) sideBar.classList.add("active");
+
       // Implement your logic for right swipe here
     } else if (startX - 100 > moveX) {
       sideBar.classList.remove("active");

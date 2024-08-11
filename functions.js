@@ -2,6 +2,7 @@ import { closeEditBox, closeAccountBox } from "./script.js";
 
 let accountsList = document.querySelectorAll(".account-list li");
 let editBtns = document.querySelectorAll(".edit-btn");
+
 let options = document.querySelectorAll(".operations .options");
 let accountPage = document.querySelector(".account");
 
@@ -118,7 +119,7 @@ export function saveAccount() {
   let existingAccounts = document.querySelector(".accounts");
   let template = `<li class="card">
                 <div class="card-body">
-                  <img src="${imageSrc}" alt="" />
+                  <img class='active' src="${imageSrc}" alt="" />
                   <div class="card-info">
                     <p class="bold">${accountName}</p>
                     <p>Balance: <span class="green bold">₹${

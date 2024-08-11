@@ -56,7 +56,7 @@ footer {
   position: fixed;
   bottom: 0;
   left: 0;
- background-color: #ffffff;
+  background-color: #ffffff;
   width: 100%;
   border-top: 1px solid gray;
 }
@@ -107,6 +107,16 @@ main section.account.blur {
   -ms-transition: background-color 1s ease;
   -o-transition: background-color 1s ease;
 }
+main section.account.blurbg img.active,main section.account.blur img.active {
+  filter: brightness(0.6);
+  -webkit-filter: brightness(0.6);
+  transition: filter 1s ease;
+  -webkit-transition: filter 1s ease;
+  -moz-transition: filter 1s ease;
+  -ms-transition: filter 1s ease;
+  -o-transition: filter 1s ease;
+}
+
 main section.budgets {
   background-color: rgb(43, 226, 67);
 }
