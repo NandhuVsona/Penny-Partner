@@ -15,10 +15,11 @@ main section.categories .category-container {
 .category-container .expense-category {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 .category-container .expense-category {
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 .category-container .income-category ul,
 .category-container .expense-category ul {
