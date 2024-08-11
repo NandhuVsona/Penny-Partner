@@ -130,7 +130,7 @@ export function saveAccount() {
                   </div>
                 </div>
                 <div class="operations">
-                  <img class="dot" src="icons/dot.svg" alt="" />
+                  <img class="dot svg" src="icons/dot.svg" alt="" />
                   <div class="options">
                     <p class="edit-btn">Edit</p>
                     <p class="delete-account">Delete</p>

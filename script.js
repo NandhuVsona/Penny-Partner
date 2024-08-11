@@ -13,7 +13,7 @@ data.forEach((item) => {
                   </div>
                 </div>
                 <div class="operations">
-                  <img class="dot" src="icons/dot.svg" alt="" />
+                  <img class="dot svg" src="icons/dot.svg" alt="" />
                   <div class="options">
                     <p class="edit-btn">Edit</p>
                     <p class="delete-account">Delete</p>
@@ -22,6 +22,12 @@ data.forEach((item) => {
               </li>`;
   existingAccounts.innerHTML += template;
 });
+
+let isDark = JSON.parse(localStorage.getItem("Theme"));
+
+if (isDark) {
+  document.querySelector(".app").classList.add("dark");
+}
 let navIcons = document.querySelectorAll("footer nav ul li");
 let pages = document.querySelectorAll("main section");
 let closeSideBar = document.querySelector(".close");
@@ -39,6 +45,17 @@ let accountDelBtn = document.querySelectorAll(".delete-account");
 let dots = document.querySelectorAll(".operations .dot");
 let options = document.querySelectorAll(".operations .options");
 let editBox = document.querySelector(".edit-box-body");
+let preference = document.querySelector(".theme");
+
+preference.addEventListener("click", () => {
+  let app = document.querySelector(".app");
+  app.classList.toggle("dark");
+  if (app.classList.contains("dark")) {
+    localStorage.setItem("Theme", "true");
+  } else {
+    localStorage.setItem("Theme", "false");
+  }
+});
 
 cancelAddAccount.addEventListener("click", closeAccountBox);
 saveAccountBtn.addEventListener("click", saveAccount);
