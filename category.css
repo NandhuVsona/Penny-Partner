@@ -75,7 +75,7 @@ main section.categories .category-container {
 .education {
   background-color: rgb(138, 37, 172);
 }
-.car {
+.car{
   background-color: rgb(255, 0, 0);
 }
 .insurance {
@@ -84,7 +84,7 @@ main section.categories .category-container {
 .entertain {
   background-color: rgb(3, 17, 209);
 }
-.shopping {
+.shopping{
   background-color: rgb(0, 145, 255);
 }
 .cloth {
@@ -95,6 +95,30 @@ main section.categories .category-container {
 }
 .computer{
     background-color: rgb(65, 113, 97);
+}
+.cupon{
+  background-color: #FF4E88;
+}
+.grant{
+  background-color: #914F1E;
+}
+.awards{
+  background-color: #009FBD;
+}
+.refund{
+  background-color: #667BC6;
+}
+.salary{
+  background-color: #850F8D;
+}
+.sale{
+  background-color: #f86e6e;
+}
+.rent{
+  background-color: #0004ff;
+}
+.lottery{
+  background-color: #41B06E;
 }
 .category-container .income-category ul li .right-portion,
 .category-container .expense-category ul li .right-portion {
