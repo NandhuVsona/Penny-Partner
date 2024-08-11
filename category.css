@@ -18,7 +18,7 @@ main section.categories .category-container {
   gap: 10px;
 }
 .category-container .expense-category {
-  margin-bottom: 150px;
+  margin-bottom: 20px;
 }
 .category-container .income-category ul,
 .category-container .expense-category ul {

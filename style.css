@@ -253,14 +253,14 @@ main section.active {
   font-weight: 600;
   font-size: 17px;
 }
-.add-account {
+.add-account,.add-category{
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   margin-bottom: 130px;
 }
-.add-account .add-box {
+.add-account .add-box,.add-category .add-box{
   display: flex;
   gap: 10px;
   padding: 10px;
