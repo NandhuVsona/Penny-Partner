@@ -88,6 +88,9 @@ document.addEventListener("click", (e) => {
   let dots = document.querySelectorAll(".operations .dot");
   let options = document.querySelectorAll(".operations .options");
 
+  let catedots = document.querySelectorAll(".right-portion .dot");
+  let cateoptions = document.querySelectorAll(".right-portion .options");
+
   options.forEach((opt) => {
     if (opt.contains(e.target)) {
       isoptionBox = true;
