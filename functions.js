@@ -29,7 +29,7 @@ function reloadFunctionality() {
   //delete account
   accountDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
-      console.log('ho')
+      console.log("ho");
       account.parentElement.parentElement.parentElement.remove();
 
       //local Storage functionality
@@ -220,4 +220,3 @@ function openEditPanael(account, amount) {
   document.querySelector(".edit-box-body").classList.add("active");
   editAmount.focus();
 }
-
