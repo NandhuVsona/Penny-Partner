@@ -176,7 +176,11 @@ document.addEventListener("touchstart", (e) => {
 });
 
 document.addEventListener("touchmove", (e) => {
-  if (accountBox.contains(e.target)) a = true;
+  if (
+    accountBox.classList.contains("active") ||
+    editBox.classList.contains("active")
+  )
+    a = true;
   moveX = e.touches[0].clientX;
 });
 
@@ -193,4 +197,5 @@ document.addEventListener("touchend", (e) => {
   }
   // Reset moveX after handling the event
   moveX = undefined;
+  a = false;
 });
