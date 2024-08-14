@@ -46,7 +46,8 @@ let dots = document.querySelectorAll(".operations .dot");
 let options = document.querySelectorAll(".operations .options");
 let editBox = document.querySelector(".edit-box-body");
 let preference = document.querySelector(".theme");
-let categoryBox = document.querySelector(".category-box-body")
+let categoryBox = document.querySelector(".category-box-body");
+let addCategoryBtn = document.querySelector(".add-category .add-box");
 
 preference.addEventListener("click", () => {
   let app = document.querySelector(".app");
@@ -83,6 +84,10 @@ document.addEventListener("click", (e) => {
   if (!addAccountBtn.contains(e.target) && !accountBox.contains(e.target)) {
     accountBox.classList.remove("active");
     accountPage.classList.remove("blurbg");
+  }
+
+  if(!categoryBox.contains(e.target) && !addCategoryBtn.contains(e.target)){
+    categoryBox.classList.remove("active")
   }
 
   let isoptionBox;
