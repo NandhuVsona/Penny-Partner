@@ -46,6 +46,7 @@ let dots = document.querySelectorAll(".operations .dot");
 let options = document.querySelectorAll(".operations .options");
 let editBox = document.querySelector(".edit-box-body");
 let preference = document.querySelector(".theme");
+let categoryBox = document.querySelector(".category-box-body")
 
 preference.addEventListener("click", () => {
   let app = document.querySelector(".app");
@@ -198,7 +199,7 @@ document.addEventListener("touchstart", (e) => {
 document.addEventListener("touchmove", (e) => {
   if (
     accountBox.classList.contains("active") ||
-    editBox.classList.contains("active")
+    editBox.classList.contains("active") || categoryBox.classList.contains("active")
   )
     a = true;
   moveX = e.touches[0].clientX;
