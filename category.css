@@ -67,24 +67,16 @@ main section.categories .category-container {
   padding-right: 10px;
 }
 
-.category-box-body{
-  color: black;
-  animation: none;
-  -webkit-animation: none;
-
-}
-
-.category-box-body .input-container .category{
-
+.category-box-body .input-container .category {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-.category-box-body .input-container .category .switch{
+.category-box-body .input-container .category .switch {
   width: 70px;
   height: 35px;
-  background:linear-gradient(to left,rgb(255, 162, 0),rgb(128, 0, 255));
+  background: linear-gradient(to left, rgb(255, 162, 0), rgb(128, 0, 255));
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
@@ -93,8 +85,8 @@ main section.categories .category-container {
   position: relative;
 }
 
-.category-box-body .input-container .category .switch::before{
-  content: '';
+.category-box-body .input-container .category .switch::before {
+  content: "";
   position: absolute;
   left: 3px;
   top: 3px;
@@ -106,12 +98,12 @@ main section.categories .category-container {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-  transition: all .3s ease;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
-.category-box-body .input-container .category .switch.active::before{
+.category-box-body .input-container .category .switch.active::before {
   left: 38px;
 }

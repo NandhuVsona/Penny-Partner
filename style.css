@@ -345,10 +345,8 @@ main section.active {
   transform-origin: center;
   transform-style: preserve-3d;
 }
-.category-box-body{
-  display: flex;
-}
-.box-body.active,
+
+.box-body.active,.category-box-body.active,
 .edit-box-body.active {
   display: flex;
 }
