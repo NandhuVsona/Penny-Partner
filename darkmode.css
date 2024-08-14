@@ -14,6 +14,7 @@
     -webkit-filter: invert(1);
   }
   .app.dark main section.account .box-body,
+  .app.dark main section.categories .category-box-body,
   .app.dark main section.account .edit-box-body
   
   {
@@ -21,6 +22,7 @@
     color: #ffffff;
   }
   .app.dark main section.account .box-body .input-container .input-body input,
+  .app.dark main section.categories .category-box-body .input-container .input-body input,
   .app.dark main section.account .edit-box-body .input-container .input-body input{
     background-color:var(--dark);
     color: #ffffff;
