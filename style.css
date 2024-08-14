@@ -514,10 +514,11 @@ main section.active {
   background-color: #c0c0c0;
 }
 .category-icons-parent .category-container{
+ 
   display: flex;
   flex-direction: column;
   width: 100% !important;
- height: 123px;
+ height: 135px;
   overflow: scroll;
   border: 1px solid;
   border-radius: 5px;
@@ -534,7 +535,7 @@ width: fit-content;
   position: absolute;
   top: 5px;
   left: 10px;
-
+  padding-right: 10px;
   justify-content: space-between;
   align-items: center;
  overflow-x: scroll;
@@ -549,7 +550,7 @@ width: fit-content;
 .category-icons-parent .category-container ul.bottom{
 
   position: absolute;
-  top: 65px;
+  top: 70px;
   left: 10px;
 
 }
@@ -557,14 +558,16 @@ width: fit-content;
 .category-icons-parent .category-container ul li img{
   width: 50px;
   height: 50px;
-  padding: 5px;
+  padding: 5px 5px 1px 5px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-.category-icons-parent .category-container ul li.active {
+.category-icons-parent .category-container ul li.active{
+  padding: 0 !important;
+ 
   border: 1px solid #050505;
   background-color: #fef4f4;
   border-radius: 5px;

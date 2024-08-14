@@ -5,6 +5,14 @@ let addCategoryBtn = document.querySelector(".add-category .add-box");
 let categoryBox = document.querySelector(".category-box-body");
 let cancelCategoryBox = document.querySelector(".cancel-add-category");
 let categoryPage = document.querySelector(".categories");
+let categories = document.querySelectorAll(".category-container .category-list li");
+
+categories.forEach(categorie =>{
+  categorie.addEventListener("click",()=>{
+    categories.forEach(categorie =>categorie.classList.remove('active'))
+    categorie.classList.add("active")
+  })
+})
 
 switchBtn.addEventListener("click", ()=>{
   document.querySelector(".switch").classList.toggle("active")
