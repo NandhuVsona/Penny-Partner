@@ -82,8 +82,8 @@ main section.categories .category-container {
   align-items: center;
 }
 .category-box-body .input-container .category .switch{
-  width: 80px;
-  height: 40px;
+  width: 70px;
+  height: 35px;
   background:linear-gradient(to left,rgb(153, 0, 255),rgb(255, 204, 0));
   border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -98,8 +98,8 @@ main section.categories .category-container {
   position: absolute;
   left: 3px;
   top: 3px;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   background-color: white;
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -113,5 +113,5 @@ main section.categories .category-container {
   -o-transition: all .3s ease;
 }
 .category-box-body .input-container .category .switch.active::before{
-  left: 43px;
+  left: 38px;
 }

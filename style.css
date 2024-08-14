@@ -519,11 +519,13 @@ main section.active {
   display: flex;
   flex-direction: column;
   width: 100% !important;
-overflow: scroll;
-border: 1px solid;
-
-
-  
+  overflow: scroll;
+  border: 1px solid;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 .category-icons-parent .category-container ul{
   display: flex;
