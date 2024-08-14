@@ -66,3 +66,52 @@ main section.categories .category-container {
 .category-container .expense-category ul li .right-portion {
   padding-right: 10px;
 }
+
+.category-box-body{
+  color: black;
+  animation: none;
+  -webkit-animation: none;
+  background-color: rgb(104, 104, 104);
+}
+
+.category-box-body .input-container .category{
+cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.category-box-body .input-container .category .switch{
+  width: 80px;
+  height: 40px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  position: relative;
+}
+
+.category-box-body .input-container .category .switch::before{
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+}
+.category-box-body .input-container .category .switch.active::before{
+  left: 43px;
+}

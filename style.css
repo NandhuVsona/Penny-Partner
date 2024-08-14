@@ -321,7 +321,7 @@ main section.active {
   background-color: rgb(225, 225, 225);
 }
 /* accoutn add style */
-.box-body,
+.box-body,.category-box-body,
 .edit-box-body {
   border-radius: 5px;
   width: 350px;
@@ -345,7 +345,9 @@ main section.active {
   transform-origin: center;
   transform-style: preserve-3d;
 }
-
+.category-box-body{
+  display: flex;
+}
 .box-body.active,
 .edit-box-body.active {
   display: flex;
