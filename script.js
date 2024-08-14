@@ -48,6 +48,7 @@ let editBox = document.querySelector(".edit-box-body");
 let preference = document.querySelector(".theme");
 let categoryBox = document.querySelector(".category-box-body");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
+let categoryPage = document.querySelector(".categories");
 
 preference.addEventListener("click", () => {
   let app = document.querySelector(".app");
@@ -87,7 +88,8 @@ document.addEventListener("click", (e) => {
   }
 
   if(!categoryBox.contains(e.target) && !addCategoryBtn.contains(e.target)){
-    categoryBox.classList.remove("active")
+    categoryBox.classList.remove("active");
+    categoryPage.classList.remove("blurbg");
   }
 
   let isoptionBox;

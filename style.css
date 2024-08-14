@@ -96,7 +96,7 @@ main section.account {
   scrollbar-width: none;
   flex-direction: column;
 }
-main section.account.blurbg,
+main section.account.blurbg,main section.categories.blurbg,
 main section.account.blur {
   background-color: var(--blur);
   transition: background-color 1s ease;
