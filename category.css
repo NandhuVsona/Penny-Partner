@@ -76,7 +76,7 @@ main section.categories .category-container {
 .category-box-body .input-container .category .switch {
   width: 70px;
   height: 35px;
-  background: linear-gradient(to left, rgb(255, 162, 0), rgb(128, 0, 255));
+  background: linear-gradient(to left, rgb(130, 130, 130), rgb(123, 120, 120));
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;

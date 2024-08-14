@@ -568,7 +568,7 @@ width: fit-content;
 .category-icons-parent .category-container ul li.active{
   padding: 0 !important;
  
-  border: 1px solid #050505;
+  border: 1px solid #605e5e;
   background-color: #fef4f4;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -582,6 +582,4 @@ width: fit-content;
   -o-transition: all 0.3s ease;
   position: relative;
 }
-.category-icons-parent .category-container ul {
-background-color: ;
-}
+
