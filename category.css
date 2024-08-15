@@ -40,7 +40,6 @@ main section.categories .category-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
 }
 .category-container .income-category ul li .left-portion,
