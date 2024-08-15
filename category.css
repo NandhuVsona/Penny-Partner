@@ -54,7 +54,6 @@ main section.categories .category-container {
   border-radius: 10px;
   width: 40px;
   padding: 3px;
-  height: 40px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -66,13 +65,15 @@ main section.categories .category-container {
   padding-right: 10px;
 }
 
-.category-box-body .input-container .category {
+.category-box-body .input-container .category, 
+.edit-category-box-body .input-container .category {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-.category-box-body .input-container .category .switch {
+.category-box-body .input-container .category .switch ,
+.edit-category-box-body .input-container .category .switch {
   width: 70px;
   height: 35px;
   background: linear-gradient(to left, rgb(130, 130, 130), rgb(123, 120, 120));
@@ -84,7 +85,8 @@ main section.categories .category-container {
   position: relative;
 }
 
-.category-box-body .input-container .category .switch::before {
+.category-box-body .input-container .category .switch::before,
+.edit-category-box-body .input-container .category .switch::before {
   content: "";
   position: absolute;
   left: 3px;
@@ -103,6 +105,7 @@ main section.categories .category-container {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
 }
-.category-box-body .input-container .category .switch.active::before {
+.category-box-body .input-container .category .switch.active::before,
+.edit-category-box-body .input-container .category .switch.active::before {
   left: 38px;
 }

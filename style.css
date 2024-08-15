@@ -96,7 +96,8 @@ main section.account {
   scrollbar-width: none;
   flex-direction: column;
 }
-main section.account.blurbg,main section.categories.blurbg,
+main section.account.blurbg,
+main section.categories.blurbg,
 main section.account.blur {
   background-color: var(--blur);
   transition: background-color 1s ease;
@@ -321,8 +322,10 @@ main section.active {
   background-color: rgb(225, 225, 225);
 }
 /* accoutn add style */
-.box-body,.category-box-body,
-.edit-box-body {
+.box-body,
+.category-box-body,
+.edit-box-body,
+.edit-category-box-body {
   border-radius: 5px;
   width: 350px;
   position: absolute;
@@ -346,8 +349,10 @@ main section.active {
   transform-style: preserve-3d;
 }
 
-.box-body.active,.category-box-body.active,
-.edit-box-body.active {
+.box-body.active,
+.category-box-body.active,
+.edit-box-body.active,
+.edit-category-box-body.active {
   display: flex;
 }
 @keyframes open {
@@ -405,13 +410,15 @@ main section.active {
   top: -27px;
   left: 0px;
 }
-.account-icons-parent,.category-icons-parent{
+.account-icons-parent,
+.category-icons-parent {
   width: 100%;
 }
-.account-icons-parent p,.category-icons-parent p {
+.account-icons-parent p,
+.category-icons-parent p {
   text-align: left;
 }
-.account-icons-parent ul{
+.account-icons-parent ul {
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -426,7 +433,7 @@ main section.active {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-.account-icons-parent ul li img{
+.account-icons-parent ul li img {
   width: 50px;
   height: 50px;
   padding: 5px;
@@ -436,7 +443,7 @@ main section.active {
   justify-content: flex-start;
   align-items: center;
 }
-.account-icons-parent ul li.active{
+.account-icons-parent ul li.active {
   border: 1px solid #050505;
   background-color: #fef4f4;
   border-radius: 5px;
@@ -452,20 +459,23 @@ main section.active {
   position: relative;
 }
 
-.account-btns,.category-btns {
+.account-btns,
+.category-btns {
   width: 100%;
   display: flex;
   margin-top: 10px;
   height: 50px;
   gap: 15px;
 }
-.account-btns button,.category-btns button{
+.account-btns button,
+.category-btns button {
   flex-grow: 1;
   font-family: inherit;
   font-weight: 600;
   font-size: inherit;
 }
-.account-btns button:focus,.category-btns button:focus {
+.account-btns button:focus,
+.category-btns button:focus {
   outline: none;
 }
 .operations,
@@ -513,12 +523,11 @@ main section.active {
 .options p:hover {
   background-color: #c0c0c0;
 }
-.category-icons-parent .category-container{
- 
+.category-icons-parent .category-container {
   display: flex;
   flex-direction: column;
   width: 100% !important;
- height: 135px;
+  height: 135px;
   overflow: scroll;
   border: 1px solid;
   border-radius: 5px;
@@ -528,9 +537,9 @@ main section.active {
   -o-border-radius: 5px;
   position: relative;
 }
-.category-icons-parent .category-container ul{
+.category-icons-parent .category-container ul {
   display: flex;
-width: fit-content;
+  width: fit-content;
   gap: 10px;
   position: absolute;
   top: 5px;
@@ -538,7 +547,7 @@ width: fit-content;
   padding-right: 10px;
   justify-content: space-between;
   align-items: center;
- overflow-x: scroll;
+  overflow-x: scroll;
   scrollbar-width: none;
   border-radius: 5px;
 
@@ -547,15 +556,13 @@ width: fit-content;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-.category-icons-parent .category-container ul.bottom{
-
+.category-icons-parent .category-container ul.bottom {
   position: absolute;
   top: 70px;
   left: 10px;
-
 }
 
-.category-icons-parent .category-container ul li img{
+.category-icons-parent .category-container ul li img {
   width: 50px;
   height: 50px;
   padding: 5px 5px 1px 5px;
@@ -565,9 +572,9 @@ width: fit-content;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-.category-icons-parent .category-container ul li.active{
+.category-icons-parent .category-container ul li.active {
   padding: 0 !important;
- 
+
   border: 1px solid #605e5e;
   background-color: #fef4f4;
   border-radius: 5px;
@@ -582,4 +589,6 @@ width: fit-content;
   -o-transition: all 0.3s ease;
   position: relative;
 }
-
+.category-icons-parent p {
+  margin-bottom: 5px;
+}
