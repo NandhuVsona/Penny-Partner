@@ -33,6 +33,7 @@ reload();
 function reload() {
   let dots = document.querySelectorAll(".right-portion .dot");
   let options = document.querySelectorAll(".right-portion .options");
+  let categoryDelBtn = document.querySelectorAll(".delete-account");
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
       if (options[index].classList.contains("active")) {
@@ -43,6 +44,20 @@ function reload() {
         // Activate the clicked option
         options[index].classList.add("active");
       }
+    });
+  });
+  //delete category
+  categoryDelBtn.forEach((account) => {
+    account.addEventListener("click", () => {
+      account.parentElement.parentElement.parentElement.remove();
+
+      let accountName =
+        account.parentElement.parentElement.parentElement.children[0]
+          .children[1].children[0].textContent;
+      let amount =
+        account.parentElement.parentElement.parentElement.children[0].children[1].children[1].children[0].textContent.slice(
+          1
+        );
     });
   });
 }
