@@ -116,3 +116,8 @@ main section.categories .category-container,
 .edit-category-box-body .input-container .category .switch.active::before {
   left: 38px;
 }
+
+.change-font-style{
+  font-size: 17px;
+  font-weight: 500;
+}
