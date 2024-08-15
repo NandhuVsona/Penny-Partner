@@ -1,3 +1,5 @@
+import { incomeCategories } from "./data/categories.js";
+
 let switchBtn = document.querySelector(".category");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
 let categoryBox = document.querySelector(".category-box-body");
@@ -10,6 +12,24 @@ let categories = document.querySelectorAll(
 );
 let saveCategoryBtn = document.querySelector(".save-category-btn");
 let clickedItem = "";
+let incomeCategoryParent = document.querySelector(`.income-category ul`);
+
+incomeCategories.forEach((category) => {
+  let template = `  <li>
+                  <div class="left-portion">
+                    <img src="${category.image}" alt="" />
+                    <p class="change-font-style">${category.name}</p>
+                  </div>
+                  <div class="right-portion">
+                    <img class="dot svg" src="icons/dot.svg" alt="" />
+                    <div class="options">
+                      <p class="edit-category-btn">Edit</p>
+                      <p class="delete-account">Delete</p>
+                    </div>
+                  </div>
+                </li>`;
+  incomeCategoryParent.innerHTML += template;
+});
 
 reload();
 
@@ -159,3 +179,5 @@ function createCategory(name, icons, category) {
   document.getElementById("category-name").value = "";
   reload();
 }
+
+incomeCategories.forEach((i) => console.log(i));
