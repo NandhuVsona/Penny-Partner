@@ -1,6 +1,6 @@
 :root {
     --blur: rgb(160, 160, 160);
-    --darkblur: rgb(66, 66, 66);
+    --darkblur: rgb(0, 0, 0);
     --dark: #080202;
     --lightDark: rgb(53, 53, 53);
   }
@@ -15,6 +15,7 @@
   }
   .app.dark main section.account .box-body,
   .app.dark main section.categories .category-box-body,
+  .app.dark main section.categories .edit-category-box-body,
   .app.dark main section.account .edit-box-body
   
   {
@@ -23,6 +24,7 @@
   }
   .app.dark main section.account .box-body .input-container .input-body input,
   .app.dark main section.categories .category-box-body .input-container .input-body input,
+  .app.dark main section.categories .edit-category-box-body .input-container .input-body input,
   .app.dark main section.account .edit-box-body .input-container .input-body input{
     background-color:var(--dark);
     color: #ffffff;
@@ -45,8 +47,10 @@
     background-color: rgb(53, 53, 53);
   }
   .app.dark main section.account.blurbg,
+  .app.dark main section.categories.blur,
+  .app.dark main section.categories.blurbg,
   .app.dark main section.account.blur {
-    background-color: var(--darkblur);
+    background-color: rgb(38, 37, 37);
     color: #050505;
     transition: background-color color 1s ease;
     -webkit-transition: background-color color 1s ease;

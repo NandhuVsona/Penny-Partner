@@ -36,7 +36,10 @@ incomeCategories.forEach((category) => {
   incomeCategoryParent.innerHTML += baseTemplate(category.name, category.image);
 });
 expenseCategories.forEach((category) => {
-  expenseCategoryParent.innerHTML += baseTemplate(category.name, category.image);
+  expenseCategoryParent.innerHTML += baseTemplate(
+    category.name,
+    category.image
+  );
 });
 
 reload();
@@ -63,7 +66,7 @@ cancelCategoryBox.addEventListener("click", () => {
 });
 cancelEditCategoryBox.addEventListener("click", () => {
   editcategoryBox.classList.remove("active");
-  categoryPage.classList.remove("blurbg");
+  categoryPage.classList.remove("blur");
 });
 
 function reload() {
@@ -115,6 +118,7 @@ function reload() {
 }
 
 function openEditPanel(name, src) {
+  categoryPage.classList.add("blur");
   let editName = document.getElementById("edit-category-name");
   editName.value = name;
 
@@ -188,4 +192,26 @@ function createCategory(name, icons, category) {
   reload();
 }
 
-incomeCategories.forEach((i) => console.log(i));
+document.addEventListener("click", (e) => {
+  let dots = document.querySelectorAll(".right-portion .dot");
+  let options = document.querySelectorAll(".right-portion .options");
+
+  dots.forEach((dot, i) => {
+    if (!dot.contains(e.target)) {
+      options[i].classList.remove("active");
+    }
+  });
+
+  let isClicked = true;
+
+  options.forEach(opt =>{
+    if(opt.contains(e.target)){
+      isClicked = false;
+    }
+  })
+
+  if(!editcategoryBox.contains(e.target) && isClicked ){
+    editcategoryBox.classList.remove('active')
+    categoryPage.classList.remove("blur")
+  }
+});

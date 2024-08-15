@@ -38,7 +38,7 @@ export const expenseCategories = [
     image: "icons/Income-expense/car.jpg",
   },
   {
-    name: "Baby Care",
+    name: "Baby",
     image: "icons/Income-expense/babyfoot.jpg",
   },
   {
@@ -58,7 +58,7 @@ export const expenseCategories = [
     image: "icons/Income-expense/entertainment.jpg",
   },
   {
-    name: "Food & Beverages",
+    name: "Foods",
     image: "icons/Income-expense/food.jpg",
   },
   {
@@ -66,7 +66,7 @@ export const expenseCategories = [
     image: "icons/Income-expense/health.jpg",
   },
   {
-    name: "Home & Utilities",
+    name: "Home",
     image: "icons/Income-expense/home.jpg",
   },
   {
@@ -74,15 +74,15 @@ export const expenseCategories = [
     image: "icons/Income-expense/insurance.jpg",
   },
   {
-    name: "Newspaper & Magazines",
+    name: "Newspaper",
     image: "icons/Income-expense/newspaper.jpg",
   },
   {
-    name: "Petrol & Fuel",
+    name: "Fuel",
     image: "icons/Income-expense/petrol.jpg",
   },
   {
-    name: "Recharge & Bills",
+    name: "Recharge",
     image: "icons/Income-expense/phone.jpg",
   },
   {
@@ -90,15 +90,15 @@ export const expenseCategories = [
     image: "icons/Income-expense/shopping.jpg",
   },
   {
-    name: "Social & Events",
+    name: "Social",
     image: "icons/Income-expense/social.jpg",
   },
   {
-    name: "Sports & Fitness",
+    name: "Sports",
     image: "icons/Income-expense/settlecork.jpg",
   },
   {
-    name: "Tax & Compliance",
+    name: "Tax",
     image: "icons/Income-expense/list.jpg",
   },
   {
