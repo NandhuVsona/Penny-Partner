@@ -97,7 +97,8 @@ main section.account {
   flex-direction: column;
 }
 main section.account.blurbg,
-main section.categories.blurbg,main section.categories.blur,
+main section.categories.blurbg,
+main section.categories.blur,
 main section.account.blur {
   background-color: var(--blur);
   transition: background-color 1s ease;
@@ -117,9 +118,6 @@ main section.account.blur img.active {
   -o-transition: filter 1s ease;
 }
 
-main section.budgets {
-  background-color: rgb(43, 226, 67);
-}
 main section.analysis {
   background-color: rgb(226, 125, 43);
 }

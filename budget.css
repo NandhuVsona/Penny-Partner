@@ -1,0 +1,53 @@
+main section.budgets {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+.budgets header {
+  width: 100%;
+}
+.budgets header .head-content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.budgets header .head-content  h3{
+    padding: 10px 0px 0px 0px;
+}
+.budgets header .head-content .budget-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.budgets header .head-content .budget-info .total-budget,
+.budgets header .head-content .budget-info .spent-budget {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  gap: 5px;
+}
+
+.stylish{
+    font-size: 20px;
+    font-weight: bold;
+}
+/* .category-budgets .budget-list li .right-portion{
+  background-color: red;
+  border: 1px solid;
+  padding:5px 10px;
+} */
+.category-budgets .budget-list li .right-portion button{
+ border-radius: 5px;
+ padding:5px 20px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ -ms-border-radius: 5px;
+ -o-border-radius: 5px;
+}
