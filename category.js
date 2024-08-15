@@ -1,4 +1,4 @@
-import { incomeCategories } from "./data/categories.js";
+import { expenseCategories, incomeCategories } from "./data/categories.js";
 
 let switchBtn = document.querySelector(".category");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
@@ -13,22 +13,30 @@ let categories = document.querySelectorAll(
 let saveCategoryBtn = document.querySelector(".save-category-btn");
 let clickedItem = "";
 let incomeCategoryParent = document.querySelector(`.income-category ul`);
+let expenseCategoryParent = document.querySelector(`.expense-category ul`);
+
+function baseTemplate(name, image) {
+  let template = `  <li>
+  <div class="left-portion">
+    <img src="${image}" alt="" />
+    <p class="change-font-style">${name}</p>
+  </div>
+  <div class="right-portion">
+    <img class="dot svg" src="icons/dot.svg" alt="" />
+    <div class="options">
+      <p class="edit-category-btn">Edit</p>
+      <p class="delete-account">Delete</p>
+    </div>
+  </div>
+</li>`;
+  return template;
+}
 
 incomeCategories.forEach((category) => {
-  let template = `  <li>
-                  <div class="left-portion">
-                    <img src="${category.image}" alt="" />
-                    <p class="change-font-style">${category.name}</p>
-                  </div>
-                  <div class="right-portion">
-                    <img class="dot svg" src="icons/dot.svg" alt="" />
-                    <div class="options">
-                      <p class="edit-category-btn">Edit</p>
-                      <p class="delete-account">Delete</p>
-                    </div>
-                  </div>
-                </li>`;
-  incomeCategoryParent.innerHTML += template;
+  incomeCategoryParent.innerHTML += baseTemplate(category.name, category.image);
+});
+expenseCategories.forEach((category) => {
+  expenseCategoryParent.innerHTML += baseTemplate(category.name, category.image);
 });
 
 reload();
