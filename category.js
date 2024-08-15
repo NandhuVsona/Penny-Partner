@@ -1,4 +1,4 @@
-let switchBtn = document.querySelectorAll(".category");
+let switchBtn = document.querySelector(".category");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
 let categoryBox = document.querySelector(".category-box-body");
 let editcategoryBox = document.querySelector(".edit-category-box-body");
@@ -9,6 +9,9 @@ let categories = document.querySelectorAll(
   ".category-container .category-list li"
 );
 let saveCategoryBtn = document.querySelector(".save-category-btn");
+let clickedItem = "";
+
+reload();
 
 categories.forEach((categorie) => {
   categorie.addEventListener("click", () => {
@@ -17,12 +20,8 @@ categories.forEach((categorie) => {
   });
 });
 
-switchBtn.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".switch").forEach((switchh) => {
-      switchh.classList.toggle("active");
-    });
-  });
+switchBtn.addEventListener("click", () => {
+  document.querySelector(".switch").classList.toggle("active");
 });
 
 addCategoryBtn.addEventListener("click", () => {
@@ -39,9 +38,9 @@ cancelEditCategoryBox.addEventListener("click", () => {
   categoryPage.classList.remove("blurbg");
 });
 
-reload();
 function reload() {
   let editBtn = document.querySelectorAll(".edit-category-btn");
+
   let dots = document.querySelectorAll(".right-portion .dot");
   let options = document.querySelectorAll(".right-portion .options");
   let categoryDelBtn = document.querySelectorAll(".delete-account");
@@ -57,6 +56,7 @@ function reload() {
       }
     });
   });
+
   //delete category
   categoryDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
@@ -79,25 +79,19 @@ function reload() {
         )
           ? "income"
           : "expense";
-      let clickedCategory = btn.parentElement.parentElement.parentElement;
-      openEditPanel(categoryName, imageSrc, category,clickedCategory);
+      clickedItem = btn.parentElement.parentElement.parentElement;
+      openEditPanel(categoryName, imageSrc);
       options.forEach((option) => option.classList.remove("active"));
     });
   });
 }
 
-function openEditPanel(name, src, category,clicked) {
+function openEditPanel(name, src) {
   let editName = document.getElementById("edit-category-name");
-
-  if (category == "income") {
-    document.querySelectorAll(".switch")[1].classList.add("active");
-  }
-  else{
-    document.querySelectorAll(".switch")[1].classList.remove("active");
-  }
   editName.value = name;
- 
+
   editcategoryBox.classList.add("active");
+
   categories.forEach((categorie) => {
     if (categorie.children[0].getAttribute("src") == src) {
       categorie.classList.add("active");
@@ -105,13 +99,25 @@ function openEditPanel(name, src, category,clicked) {
       categorie.classList.remove("active");
     }
   });
-  document.querySelector(".save-edit-category-btn").addEventListener("click",()=>{updateCategory(clicked,editName,category)})
 }
-function updateCategory(clickedItem,updatedName,category){
-  if(updatedName.value.trim().lenght<0) return;
+
+document
+  .querySelector(".save-edit-category-btn")
+  .addEventListener("click", updateCategory);
+function updateCategory() {
+  editcategoryBox.classList.remove("active");
+  let updatedName = document.getElementById("edit-category-name");
+  if (updatedName.value.trim().lenght < 0) return;
+
+  let updatedIcon;
+  categories.forEach((item) => {
+    if (item.classList.contains("active")) {
+      updatedIcon = item.children[0].getAttribute("src");
+    }
+  });
+
+  clickedItem.children[0].children[0].setAttribute("src", updatedIcon);
   clickedItem.children[0].children[1].textContent = updatedName.value;
-  console.log(category)
-  document.querySelector(`.${category}-category ul`).appendChild(clickedItem)
 }
 
 saveCategoryBtn.addEventListener("click", () => {
@@ -127,7 +133,7 @@ saveCategoryBtn.addEventListener("click", () => {
   let category = document.querySelector(".switch").classList.contains("active")
     ? "income"
     : "expense";
-  console.log(category);
+
   createCategory(categoryName.value.trim(), selectedIcon, category);
 });
 
