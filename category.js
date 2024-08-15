@@ -98,5 +98,6 @@ function createCategory(name, icons, category) {
                   </div>
                 </li>`;
   parent.innerHTML += template;
+  document.getElementById("category-name").value = ''
   reload();
 }
