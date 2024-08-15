@@ -1,9 +1,16 @@
 main section.budgets {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  height: 100vh;
+}
+.budget-container {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
 .budgets header {
   width: 100%;
 }
@@ -15,8 +22,8 @@ main section.budgets {
   justify-content: center;
   gap: 15px;
 }
-.budgets header .head-content  h3{
-    padding: 10px 0px 0px 0px;
+.budgets header .head-content h3 {
+  padding: 10px 0px 0px 0px;
 }
 .budgets header .head-content .budget-info {
   display: flex;
@@ -34,20 +41,20 @@ main section.budgets {
   gap: 5px;
 }
 
-.stylish{
-    font-size: 20px;
-    font-weight: bold;
+.stylish {
+  font-size: 20px;
+  font-weight: bold;
 }
 /* .category-budgets .budget-list li .right-portion{
   background-color: red;
   border: 1px solid;
   padding:5px 10px;
 } */
-.category-budgets .budget-list li .right-portion button{
- border-radius: 5px;
- padding:5px 20px;
- -webkit-border-radius: 5px;
- -moz-border-radius: 5px;
- -ms-border-radius: 5px;
- -o-border-radius: 5px;
+.category-budgets .budget-list li .right-portion button {
+  border-radius: 5px;
+  padding: 5px 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }

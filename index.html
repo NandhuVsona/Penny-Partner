@@ -22,55 +22,44 @@
         <section class="home"></section>
         <section class="analysis">e</section>
         <section class="budgets active">
-          <header>
-            <div class="head-content">
-              <h3>August,2024</h3>
-              <div class="budget-info">
-                <div class="total-budget">
-                  <p>TOTAL BUDGET</p>
-                  <b class="green stylish">₹0.00</b>
-                </div>
-                <div class="spent-budget">
-                  <p>SPENT BUDGET</p>
-                  <b class="red stylish">₹0.00</b>
+          <div class="budget-container">
+            <header>
+              <div class="head-content">
+                <h3>August,2024</h3>
+                <div class="budget-info">
+                  <div class="total-budget">
+                    <p>TOTAL BUDGET</p>
+                    <b class="green stylish">₹0.00</b>
+                  </div>
+                  <div class="spent-budget">
+                    <p>SPENT BUDGET</p>
+                    <b class="red stylish">₹0.00</b>
+                  </div>
                 </div>
               </div>
+            </header>
+            <div class="budgeted-categories">
+              <h3>Budgeted categories: Aug,2024</h3>
             </div>
-          </header>
-          <div class="budgeted-categories">
-            <h3>Budgeted categories: Aug,2024</h3>
-          </div>
-          <div class="spent-categories">
-            <h3>Not budgeted this month</h3>
-            <div class="category-budgets">
-              <ul class="budget-list">
-                <li>
-                  <div class="left-portion">
-                    <img
-                      class="icon"
-                      src="./icons//Income-expense/books.jpg"
-                      alt=""
-                    />
-                    <p class="change-font-style">Book</p>
-                  </div>
-                  <div class="right-portion">
-                    <button>SET BUDGET</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="left-portion">
-                    <img
-                      class="icon"
-                      src="./icons//Income-expense/books.jpg"
-                      alt=""
-                    />
-                    <p class="change-font-style">Book</p>
-                  </div>
-                  <div class="right-portion">
-                    <button>SET BUDGET</button>
-                  </div>
-                </li>
-              </ul>
+            <div class="spent-categories">
+              <h3>Not budgeted this month</h3>
+              <div class="category-budgets">
+                <ul class="budget-list">
+                  <!-- <li>
+                    <div class="left-portion">
+                      <img
+                        class="icon"
+                        src="./icons//Income-expense/books.jpg"
+                        alt=""
+                      />
+                      <p class="change-font-style">Book</p>
+                    </div>
+                    <div class="right-portion">
+                      <button>SET BUDGET</button>
+                    </div>
+                  </li> -->
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -656,5 +645,6 @@
     <script async type="module" src="script.js"></script>
     <script defer type="module" src="functions.js"></script>
     <script defer type="module" src="category.js"></script>
+    <script defer type="module" src="budget.js"></script>
   </body>
 </html>
