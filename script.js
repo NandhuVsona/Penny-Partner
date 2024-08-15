@@ -6,7 +6,7 @@ data.forEach((item) => {
   let existingAccounts = document.querySelector(".accounts");
   let template = `<li class="card">
                 <div class="card-body">
-                  <img class="sv" src="${item.imageSrc}" alt="" />
+                  <img class="icon" src="${item.imageSrc}" alt="" />
                   <div class="card-info">
                     <p class="bold">${item.accountName}</p>
                     <p>Balance: <span class="green bold">₹${item.formatedAmount}</span></p>

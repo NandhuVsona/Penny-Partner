@@ -1,63 +1,160 @@
 :root {
-    --blur: rgb(160, 160, 160);
-    --darkblur: rgb(0, 0, 0);
-    --dark: #080202;
-    --lightDark: rgb(53, 53, 53);
-  }
+  --blur: rgb(160, 160, 160);
+  --darkblur: rgb(0, 0, 0);
+  --dark: #080202;
+  --lightDark: rgb(53, 53, 53);
+}
 
-.app.dark,.app.dark .sidebar{
-    background-color:var(--dark);
-    color: #ffffff;
-  }
-  .app.dark img.svg{
-    filter: invert(1);
-    -webkit-filter: invert(1);
-  }
-  .app.dark main section.account .box-body,
-  .app.dark main section.categories .category-box-body,
-  .app.dark main section.categories .edit-category-box-body,
-  .app.dark main section.account .edit-box-body
-  
-  {
-    background-color:var(--dark);
-    color: #ffffff;
-  }
-  .app.dark main section.account .box-body .input-container .input-body input,
-  .app.dark main section.categories .category-box-body .input-container .input-body input,
-  .app.dark main section.categories .edit-category-box-body .input-container .input-body input,
-  .app.dark main section.account .edit-box-body .input-container .input-body input{
-    background-color:var(--dark);
-    color: #ffffff;
-  }
-  .app.dark main section.account .account-container ul li .operations .options,
-  .app.dark main section.categories .category-container .income-category ul li  .right-portion .options,
-  .app.dark main section.categories .category-container .expense-category ul li  .right-portion .options{
-    background-color: var(--lightDark);
-    color: #ffffff;
-  }
-  .app.dark main section.account .account-container ul li .operations .options p:hover,
-  .app.dark main section.categories .category-container .income-category ul li  .right-portion .options p:hover,
-  .app.dark main section.categories .category-container .expense-category ul li  .right-portion .options p:hover
-  {
-    background-color: rgb(80, 80, 80)!important;
-  
-  }
-  
-  .app.dark .sidebar .settings ul li:hover {
-    background-color: rgb(53, 53, 53);
-  }
-  .app.dark main section.account.blurbg,
-  .app.dark main section.categories.blur,
-  .app.dark main section.categories.blurbg,
-  .app.dark main section.account.blur {
-    background-color: rgb(38, 37, 37);
-    color: #050505;
-    transition: background-color color 1s ease;
-    -webkit-transition: background-color color 1s ease;
-    -moz-transition: background-color color 1s ease;
-    -ms-transition: background-color color 1s ease;
-    -o-transition: background-color color 1s ease;
-  }
-  .app.dark footer{
-    background-color: var(--dark);
-  }
+.app.dark,
+.app.dark .sidebar {
+  background-color: var(--dark);
+  color: #ffffff;
+}
+
+.app.dark img.svg {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+}
+
+.app.dark main section.account .box-body,
+.app.dark main section.categories .category-box-body,
+.app.dark main section.categories .edit-category-box-body,
+.app.dark main section.account .edit-box-body {
+  background-color: var(--dark);
+  color: #ffffff;
+}
+.app.dark main section.account .box-body .input-container .input-body input,
+.app.dark
+  main
+  section.categories
+  .category-box-body
+  .input-container
+  .input-body
+  input,
+.app.dark
+  main
+  section.categories
+  .edit-category-box-body
+  .input-container
+  .input-body
+  input,
+.app.dark
+  main
+  section.account
+  .edit-box-body
+  .input-container
+  .input-body
+  input {
+  background-color: var(--dark);
+  color: #ffffff;
+}
+.app.dark main section.account .account-container ul li .operations .options,
+.app.dark
+  main
+  section.categories
+  .category-container
+  .income-category
+  ul
+  li
+  .right-portion
+  .options,
+.app.dark
+  main
+  section.categories
+  .category-container
+  .expense-category
+  ul
+  li
+  .right-portion
+  .options {
+  background-color: var(--lightDark);
+  color: #ffffff;
+}
+.app.dark
+  main
+  section.account
+  .account-container
+  ul
+  li
+  .operations
+  .options
+  p:hover,
+.app.dark
+  main
+  section.categories
+  .category-container
+  .income-category
+  ul
+  li
+  .right-portion
+  .options
+  p:hover,
+.app.dark
+  main
+  section.categories
+  .category-container
+  .expense-category
+  ul
+  li
+  .right-portion
+  .options
+  p:hover {
+  background-color: rgb(80, 80, 80) !important;
+}
+
+.app.dark .sidebar .settings ul li:hover {
+  background-color: rgb(53, 53, 53);
+}
+.app.dark main section.account.blurbg,
+.app.dark main section.categories.blur,
+.app.dark main section.categories.blurbg,
+.app.dark main section.account.blur {
+  background-color: rgb(38, 37, 37);
+  color: #050505;
+  transition: background-color color 1s ease;
+  -webkit-transition: background-color color 1s ease;
+  -moz-transition: background-color color 1s ease;
+  -ms-transition: background-color color 1s ease;
+  -o-transition: background-color color 1s ease;
+}
+.app.dark footer {
+  background-color: var(--dark);
+}
+.app.dark main section.categories.blur img.icon,
+.app.dark main section.account.blurbg img.icon,
+.app.dark main section.account.blurbg img.svg,
+.app.dark main section.account.blur img.svg,
+.app.dark main section.account.blur img.icon,
+.app.dark main section.categories.blurbg img.icon,
+.app.dark main section.categories.blurbg img.svg,
+.app.dark main section.categories.blur img.svg {
+  filter: brightness(0.3);
+  -webkit-filter: brightness(0.2);
+}
+.app main section.categories.blur img.icon,
+.app main section.account.blurbg img.icon,
+.app main section.account.blurbg img.svg,
+.app main section.account.blur img.svg,
+.app main section.account.blur img.icon,
+.app main section.categories.blurbg img.icon,
+.app main section.categories.blurbg img.svg,
+.app main section.categories.blur img.svg {
+  transition: all .5s ease;
+  filter: brightness(0.7);
+  -webkit-filter: brightness(0.7);
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  -o-transition: all .5s ease;
+}
+.app.dark main section.account.blur .card ,
+.app.dark main section.account.blur .penny-info ,
+.app.dark main section.account.blurbg .penny-info ,
+.app.dark main section.account.blurbg .card {
+  transition: all 0s ease;
+  -webkit-transition: all 0s ease;
+  -moz-transition: all 0s ease;
+  -ms-transition: all 0s ease;
+  -o-transition: all 0s ease;
+  border: none;
+}

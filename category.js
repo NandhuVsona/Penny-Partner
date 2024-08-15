@@ -1,5 +1,7 @@
 import { expenseCategories, incomeCategories } from "./data/categories.js";
 
+
+
 let switchBtn = document.querySelector(".category");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
 let categoryBox = document.querySelector(".category-box-body");
@@ -18,7 +20,7 @@ let expenseCategoryParent = document.querySelector(`.expense-category ul`);
 function baseTemplate(name, image) {
   let template = `  <li>
   <div class="left-portion">
-    <img src="${image}" alt="" />
+    <img class="icon" src="${image}" alt="" />
     <p class="change-font-style">${name}</p>
   </div>
   <div class="right-portion">
