@@ -38,13 +38,20 @@ function reload() {
   let options = document.querySelectorAll(".budget-operations");
   let removeBtns = document.querySelectorAll(".remove-budget");
 
-  removeBtns.forEach(btn =>{
-    btn.addEventListener("click",()=>{
-      console.log(btn.parentElement.parentElement.dataset.categoryId)
-      let btnId = btn.parentElement.parentElement.dataset.categoryId
-      btn.parentElement.parentElement.parentElement.parentElement.remove()
-    })
-  })
+  removeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let btnId = btn.parentElement.dataset.categoryId;
+
+      let data = budgetedCategories.filter((bud) => bud.id == btnId);
+
+      btn.parentElement.parentElement.parentElement.parentElement.remove();
+      updatedArray.push(data[0]);
+      parent.innerHTML = "";
+      updatedArray.forEach((item) => {
+        baseTemplate(item.name, item.image, item.id);
+      });
+    });
+  });
 
   threeDots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
@@ -112,10 +119,10 @@ function setBudgetTemplate(id, budget) {
                           </div>
                         </div>
                       </div>
-                      <div class="right-portion" dataset-category-id="${id}">
+                      <div class="right-portion">
                         <img class="three-dot svg" src="icons/dot.svg" alt="" />
                         <small class="added-time opacity">(Aug,2004)</small>
-                        <div class="budget-operations">
+                        <div class="budget-operations" data-category-id="${id}">
                           <p class="change-limit">Change limit</p>
                           <p class="remove-budget">Remove budget</p>
                       </div>
