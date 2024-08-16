@@ -7,7 +7,7 @@ function goFullscreen() {
       document.documentElement.msRequestFullscreen();
     }
   }
-  document.addEventListener('click', goFullscreen);
+  // document.addEventListener('click', goFullscreen);
   // Call the function when the page is loaded or based on user action
  
   

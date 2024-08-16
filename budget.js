@@ -34,6 +34,21 @@ let ulParent = document.querySelector(".set-budgeted-list");
 reload();
 function reload() {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
+  let threeDots = document.querySelectorAll(".three-dot");
+  let options = document.querySelectorAll(".budget-operations");
+
+  threeDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      if (options[index].classList.contains("active")) {
+        options[index].classList.remove("active");
+      } else {
+        options.forEach((opt) => opt.classList.remove("active"));
+
+        options[index].classList.toggle("active");
+      }
+    });
+  });
+
   setBudgetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       let image =
@@ -91,6 +106,10 @@ function setBudgetTemplate(id, budget) {
                       <div class="right-portion" dataset-category-id="${id}">
                         <img class="three-dot svg" src="icons/dot.svg" alt="" />
                         <small class="added-time opacity">(Aug,2004)</small>
+                        <div class="budget-operations">
+                          <p class="change-limit">Change limit</p>
+                          <p class="remove-budget">Remove budget</p>
+                      </div>
                       </div>
                     </div>
                     <div class="bar-container">
@@ -101,6 +120,7 @@ function setBudgetTemplate(id, budget) {
                     </div>
                   </li>`;
   ulParent.innerHTML += template;
+  reload();
 }
 
 setBudgetLimitBtn.addEventListener("click", () => {
