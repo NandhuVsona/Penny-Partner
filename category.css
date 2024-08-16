@@ -2,7 +2,7 @@ main section.categories {
   height: 100%;
 }
 
-main section.categories .category-container,
+main section.categories .category-container,.set-budgeted-container,
 .category-budgets {
   display: flex;
   gap: 15px;
@@ -24,6 +24,7 @@ main section.categories .category-container,
 }
 .category-container .income-category ul,
 .category-budgets .budget-list,
+.set-budgeted-container .set-budgeted-list,
 .category-container .expense-category ul {
   display: flex;
   width: 100%;
@@ -34,11 +35,14 @@ main section.categories .category-container,
 }
 .category-container .income-category ul li,
 .category-budgets .budget-list li,
+.set-budgeted-container .set-budgeted-list li,
 .category-container .expense-category ul li {
   display: flex;
   width: 100%;
+ 
 }
 .category-container .income-category ul li,
+.set-budgeted-container .set-budgeted-list li,
 .category-budgets .budget-list li,
 .category-container .expense-category ul li {
   display: flex;
@@ -47,6 +51,7 @@ main section.categories .category-container,
   width: 100%;
 }
 .category-container .income-category ul li .left-portion,
+.set-budgeted-container .set-budgeted-list li .left-portion,
 .category-budgets .budget-list li .left-portion,
 .category-container .expense-category ul li .left-portion {
   display: flex;
@@ -56,6 +61,7 @@ main section.categories .category-container,
 }
 .category-container .income-category ul li .left-portion img,
 .category-budgets .budget-list li .left-portion img,
+.set-budgeted-container .set-budgeted-list li .left-portion img,
 .category-container .expense-category ul li .left-portion img {
   border-radius: 10px;
   width: 40px;
@@ -68,6 +74,7 @@ main section.categories .category-container,
 
 .category-container .income-category ul li .right-portion,
 .category-budgets .budget-list li .right-portion,
+.set-budgeted-container .set-budgeted-list li .right-portion,
 .category-container .expense-category ul li .right-portion {
   padding-right: 10px;
 }
@@ -117,7 +124,7 @@ main section.categories .category-container,
   left: 38px;
 }
 
-.change-font-style{
+.change-font-style {
   font-size: 17px;
   font-weight: 500;
 }
