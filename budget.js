@@ -25,6 +25,7 @@ expenseCategories.forEach((category) => {
 let cancelBudget = document.querySelector(".cancel-budget-box");
 let budgetBox = document.querySelector(".budget-input-container");
 let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
+let budgetContainer = document.querySelector(".budget-container");
 
 reload();
 function reload() {
@@ -48,9 +49,11 @@ function openBudgetBox(category, src) {
   image.setAttribute("src",src)
 
   budgetBox.classList.add("active");
+  budgetContainer.classList.add("blur")
 }
 
 function closeBudgetBox() {
   budgetBox.classList.remove("active");
+  budgetContainer.classList.remove("blur")
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
