@@ -1,7 +1,7 @@
 import { expenseCategories } from "./data/categories.js";
 let parent = document.querySelector(".budget-list");
 let budgetedCategories = [];
-let updatedArray = expenseCategories
+let updatedArray = expenseCategories;
 function baseTemplate(name, image, id) {
   let template = `<li>
                   <div class="left-portion">
@@ -66,7 +66,7 @@ cancelBudget.addEventListener("click", closeBudgetBox);
 
 function setBudgetTemplate(id, budget) {
   let data = budgetedCategories.filter((item) => item.id == id);
-  console.log(data);
+
   let { image, name } = data[0];
   let template = `<li>
                     <div class="text-container">
