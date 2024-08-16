@@ -18,6 +18,7 @@ function baseTemplate(name, image, id) {
                 </li>`;
 
   parent.innerHTML += template;
+  reload()
 }
 expenseCategories.forEach((category) => {
   baseTemplate(category.name, category.image, category.id);
@@ -43,13 +44,16 @@ function reload() {
       let btnId = btn.parentElement.dataset.categoryId;
 
       let data = budgetedCategories.filter((bud) => bud.id == btnId);
+      budgetedCategories = budgetedCategories.filter((bud) => bud.id !== btnId);
 
       btn.parentElement.parentElement.parentElement.parentElement.remove();
       updatedArray.push(data[0]);
       parent.innerHTML = "";
       updatedArray.forEach((item) => {
         baseTemplate(item.name, item.image, item.id);
+       
       });
+     
     });
   });
 
