@@ -18,7 +18,6 @@ function baseTemplate(name, image, id) {
                 </li>`;
 
   parent.innerHTML += template;
-  reload()
 }
 expenseCategories.forEach((category) => {
   baseTemplate(category.name, category.image, category.id);
@@ -31,7 +30,37 @@ let budgetContainer = document.querySelector(".budget-container");
 
 let setBudgetLimitBtn = document.querySelector(".set-limit");
 let ulParent = document.querySelector(".set-budgeted-list");
+function removeBudget(btn) {
+  let btnId = btn.parentElement.dataset.categoryId;
 
+  let data = budgetedCategories.filter((bud) => bud.id == btnId);
+  budgetedCategories = budgetedCategories.filter((bud) => bud.id !== btnId);
+
+  btn.parentElement.parentElement.parentElement.parentElement.remove();
+  updatedArray.push(data[0]);
+  parent.innerHTML = "";
+  updatedArray.forEach((item) => {
+    baseTemplate(item.name, item.image, item.id);
+  });
+  reloadtwo()
+  
+}
+
+function reloadtwo(){
+  let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
+  setBudgetBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let image =
+        btn.parentElement.parentElement.children[0].children[0].getAttribute(
+          "src"
+        );
+      let name =
+        btn.parentElement.parentElement.children[0].children[1].textContent;
+      let id = btn.dataset.categoryId;
+      openBudgetBox(name, image, id);
+    });
+  });
+}
 reload();
 function reload() {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
@@ -40,21 +69,7 @@ function reload() {
   let removeBtns = document.querySelectorAll(".remove-budget");
 
   removeBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      let btnId = btn.parentElement.dataset.categoryId;
-
-      let data = budgetedCategories.filter((bud) => bud.id == btnId);
-      budgetedCategories = budgetedCategories.filter((bud) => bud.id !== btnId);
-
-      btn.parentElement.parentElement.parentElement.parentElement.remove();
-      updatedArray.push(data[0]);
-      parent.innerHTML = "";
-      updatedArray.forEach((item) => {
-        baseTemplate(item.name, item.image, item.id);
-       
-      });
-     
-    });
+    btn.addEventListener("click", () =>removeBudget(btn));
   });
 
   threeDots.forEach((dot, index) => {
