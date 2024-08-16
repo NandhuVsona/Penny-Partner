@@ -251,11 +251,11 @@ color: #ffff;
   -moz-border-radius: 0px 0px 20px 20px;
   -ms-border-radius: 0px 0px 20px 20px;
   -o-border-radius: 0px 0px 20px 20px;
-  animation: down .5s ease;
-  -webkit-animation: down .5s ease;
+  animation: openbg .5s ease;
+  -webkit-animation: openbg .5s ease;
   transform-origin: center;
 }
-@keyframes down {
+@keyframes openbg {
   from{
    width: 0%;
    transform: translateX(150px);

@@ -1,7 +1,7 @@
 import { expenseCategories } from "./data/categories.js";
 let parent = document.querySelector(".budget-list");
 
-function baseTemplate(name, image) {
+function baseTemplate(name, image, id) {
   let template = `<li>
                   <div class="left-portion">
                     <img
@@ -12,14 +12,14 @@ function baseTemplate(name, image) {
                     <p class="change-font-style">${name}</p>
                   </div>
                   <div class="right-portion">
-                    <button class="set-budget-btn">SET BUDGET</button>
+                    <button class="set-budget-btn" data-category-id="${id}">SET BUDGET</button>
                   </div>
                 </li>`;
 
   return template;
 }
 expenseCategories.forEach((category) => {
-  parent.innerHTML += baseTemplate(category.name, category.image);
+  parent.innerHTML += baseTemplate(category.name, category.image, category.id);
 });
 
 let cancelBudget = document.querySelector(".cancel-budget-box");
@@ -40,14 +40,15 @@ function reload() {
         );
       let name =
         btn.parentElement.parentElement.children[0].children[1].textContent;
-      openBudgetBox(name, image);
+      let id = btn.dataset.categoryId;
+      openBudgetBox(name, image, id);
     });
   });
 }
-function openBudgetBox(category, src) {
+function openBudgetBox(category, src, id) {
   let name = document.querySelector(".budget-category-name");
   let image = document.querySelector(".set-budget-icon");
-
+  setBudgetLimitBtn.dataset.categoryId = id;
   name.innerHTML = category;
   image.setAttribute("src", src);
 
@@ -61,13 +62,15 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate(name,src,budget) {
+function setBudgetTemplate(id, budget) {
+  let data = expenseCategories.filter(item => item.id==id);
+  let {image,name} = data[0]
   let template = `<li>
                     <div class="text-container">
                       <div class="left-portion">
                         <img
                           class="icon"
-                          src="${src}"
+                          src="${image}"
                           alt=""
                         />
                         <div class="budget-details">
@@ -82,7 +85,7 @@ function setBudgetTemplate(name,src,budget) {
                           </div>
                         </div>
                       </div>
-                      <div class="right-portion">
+                      <div class="right-portion" dataset-category-id="${id}">
                         <img class="three-dot svg" src="icons/dot.svg" alt="" />
                         <small class="added-time opacity">(Aug,2004)</small>
                       </div>
@@ -98,14 +101,25 @@ function setBudgetTemplate(name,src,budget) {
 }
 
 setBudgetLimitBtn.addEventListener("click", () => {
-  closeBudgetBox()
+  closeBudgetBox();
+  let id = setBudgetLimitBtn.dataset.categoryId;
   let budget = document.getElementById("budget-value").value.trim();
-  let categoryName = document.querySelector(".budget-category-name").textContent;
-  let categoryIcon = document.querySelector(".set-budget-icon").getAttribute("src");
   try {
-    if (Number(budget) > 0)
-      setBudgetTemplate(categoryName, categoryIcon, budget);
+    if (Number(budget) > 0) setBudgetTemplate(id, budget);
   } catch {
     return;
+  }
+});
+
+document.addEventListener("click", (e) => {
+  let isBtnClick = true;
+  setBudgetBtns.forEach((btn) => {
+    if (btn.contains(e.target)) {
+      isBtnClick = false;
+    }
+  });
+  if (!budgetBox.contains(e.target) && isBtnClick) {
+    closeBudgetBox();
+    console.log("Box is closed");
   }
 });
