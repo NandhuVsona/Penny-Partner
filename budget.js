@@ -1,6 +1,7 @@
 import { expenseCategories } from "./data/categories.js";
 let parent = document.querySelector(".budget-list");
-
+let budgetedCategories = [];
+let updatedArray = expenseCategories
 function baseTemplate(name, image, id) {
   let template = `<li>
                   <div class="left-portion">
@@ -16,15 +17,15 @@ function baseTemplate(name, image, id) {
                   </div>
                 </li>`;
 
-  return template;
+  parent.innerHTML += template;
 }
 expenseCategories.forEach((category) => {
-  parent.innerHTML += baseTemplate(category.name, category.image, category.id);
+  baseTemplate(category.name, category.image, category.id);
 });
 
 let cancelBudget = document.querySelector(".cancel-budget-box");
 let budgetBox = document.querySelector(".budget-input-container");
-let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
+
 let budgetContainer = document.querySelector(".budget-container");
 
 let setBudgetLimitBtn = document.querySelector(".set-limit");
@@ -32,6 +33,7 @@ let ulParent = document.querySelector(".set-budgeted-list");
 
 reload();
 function reload() {
+  let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
   setBudgetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       let image =
@@ -63,8 +65,9 @@ function closeBudgetBox() {
 cancelBudget.addEventListener("click", closeBudgetBox);
 
 function setBudgetTemplate(id, budget) {
-  let data = expenseCategories.filter(item => item.id==id);
-  let {image,name} = data[0]
+  let data = budgetedCategories.filter((item) => item.id == id);
+  console.log(data);
+  let { image, name } = data[0];
   let template = `<li>
                     <div class="text-container">
                       <div class="left-portion">
@@ -103,6 +106,16 @@ function setBudgetTemplate(id, budget) {
 setBudgetLimitBtn.addEventListener("click", () => {
   closeBudgetBox();
   let id = setBudgetLimitBtn.dataset.categoryId;
+  let data = expenseCategories.filter((item) => item.id == id);
+  budgetedCategories.push(data[0]);
+
+  parent.innerHTML = "";
+  updatedArray = updatedArray.filter((item) => item.id != id);
+  updatedArray.forEach((item) => {
+    baseTemplate(item.name, item.image, item.id);
+  });
+  reload();
+
   let budget = document.getElementById("budget-value").value.trim();
   try {
     if (Number(budget) > 0) setBudgetTemplate(id, budget);
@@ -112,6 +125,7 @@ setBudgetLimitBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("click", (e) => {
+  let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
   let isBtnClick = true;
   setBudgetBtns.forEach((btn) => {
     if (btn.contains(e.target)) {
@@ -120,6 +134,5 @@ document.addEventListener("click", (e) => {
   });
   if (!budgetBox.contains(e.target) && isBtnClick) {
     closeBudgetBox();
-    console.log("Box is closed");
   }
 });

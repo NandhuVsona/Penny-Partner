@@ -1,4 +1,4 @@
- export const incomeCategories = [
+export const incomeCategories = [
   {
     name: "Awards",
     image: "icons/Income-expense/awards.jpg",
@@ -124,3 +124,5 @@ export const expenseCategories = [
     image: "icons/Income-expense/bus.jpg",
   },
 ];
+
+export const budgetedCategories = [];
