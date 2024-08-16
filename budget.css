@@ -154,7 +154,7 @@ main section.budgets {
 .budget-input-container {
   padding: 15px;
   position: absolute;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -175,6 +175,21 @@ main section.budgets {
   -moz-border-radius:10px ;
   -ms-border-radius:10px ;
   -o-border-radius:10px ;
+}
+@keyframes open {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
+  }
+}
+.budget-input-container.active{
+  display: flex;
+  animation: open .3s ease;
+  -webkit-animation: open .3s ease;
 }
 .budget-card .card-body {
   display: flex;
