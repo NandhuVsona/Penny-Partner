@@ -53,14 +53,14 @@
                         <div class="budget-details">
                           <p class="change-font-style">Book</p>
 
-                          <small class="spent-box">
+                          <div class="spent-box">
                             <p>Spent:</p>
                             <p class="amount-spent red">₹0.00</p>
-                          </small>
-                          <small class="remaining-box">
+                          </div>
+                          <div class="remaining-box">
                             <p>Remaining:</p>
                             <p class="amount-remaining green">₹108.00</p>
-                          </small>
+                          </div>
                         </div>
                       </div>
                       <div class="right-portion">
@@ -162,6 +162,35 @@
                     </div>
                   </li> -->
                 </ul>
+              </div>
+            </div>
+          </div>
+          <!-- set Budget -->
+          <div class="budget-input-container">
+            <h3>Set Budget</h3>
+            <div class="budget-card">
+              <div class="card-body">
+                <img class="icon" src="./icons/Income-expense/bag.jpg" alt="" />
+                <div class="card-info">
+                  <p class="bold">Hand Bag</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-container">
+              <div class="input-body">
+                <input
+                  autocomplete="off"
+                  pattern="[0-9]*"
+                  required
+                  type="tel"
+                  id="budget-value"
+                />
+                <label for="initial-amount">Enter Limit</label>
+              </div>
+              <div class="account-btns">
+                <button class="cancelEdit">cancle</button>
+                <button class="updateBtn">Update</button>
               </div>
             </div>
           </div>
@@ -287,15 +316,6 @@
                   id="edit-amount"
                 />
                 <label for="initial-amount">Amount</label>
-              </div>
-              <div class="input-body">
-                <input
-                  autocomplete="off"
-                  type="text"
-                  required
-                  id="edit-account-name"
-                />
-                <label for="account-name">Account name</label>
               </div>
             </div>
             <div class="account-icons-parent">

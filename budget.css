@@ -69,8 +69,8 @@ main section.budgets {
 .bar-container .label-content {
   position: absolute;
   right: 0px;
-  z-index: 2;
-  top: -2.2em;
+  z-index: -1;
+  top: -2.5em;
   content: "";
   background-color: rgb(0, 164, 41);
   color: #ffffff;
@@ -83,7 +83,7 @@ main section.budgets {
   height: 100%;
   background-color: rgb(0, 164, 41);
   top: 10px;
-  z-index: -1;
+  z-index: -2;
   right: 0;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
 }
@@ -121,7 +121,7 @@ main section.budgets {
 
 .set-budgeted-container .set-budgeted-list li {
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 .set-budgeted-list li .right-portion {
   position: absolute;
@@ -135,20 +135,67 @@ main section.budgets {
 .set-budgeted-container .set-budgeted-list {
   gap: 25px;
 }
-.budgeted-categories{
+.budgeted-categories {
   padding: 10px;
 }
 
 .budget-container {
-  
   padding-bottom: 8rem;
   gap: 20px;
   display: flex;
   flex-direction: column;
 }
-.spent-categories h3{
+.spent-categories h3 {
   padding-left: 10px;
 }
-.opacity{
+.opacity {
   opacity: 0.7;
+}
+.budget-input-container {
+  padding: 15px 5px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius:10px ;
+  content: "";
+  width: 280px;
+  background-color: rgb(198, 193, 193);
+  color: #000000;
+  top: 50%;
+  gap: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-border-radius:10px ;
+  -moz-border-radius:10px ;
+  -ms-border-radius:10px ;
+  -o-border-radius:10px ;
+}
+.budget-card .card-body {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.budget-card .card-body img {
+  width:50px;
+  height:50px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.budget-input-container .form-container{
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+  gap: 10px;
 }
