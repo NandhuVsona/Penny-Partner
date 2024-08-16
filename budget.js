@@ -36,6 +36,15 @@ function reload() {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
   let threeDots = document.querySelectorAll(".three-dot");
   let options = document.querySelectorAll(".budget-operations");
+  let removeBtns = document.querySelectorAll(".remove-budget");
+
+  removeBtns.forEach(btn =>{
+    btn.addEventListener("click",()=>{
+      console.log(btn.parentElement.parentElement.dataset.categoryId)
+      let btnId = btn.parentElement.parentElement.dataset.categoryId
+      btn.parentElement.parentElement.parentElement.parentElement.remove()
+    })
+  })
 
   threeDots.forEach((dot, index) => {
     dot.addEventListener("click", () => {

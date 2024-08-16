@@ -42,7 +42,6 @@
               <h3>Budgeted categories: Aug,2024</h3>
               <div class="set-budgeted-container">
                 <ul class="set-budgeted-list">
-                 
                   <li>
                     <div class="text-container">
                       <div class="left-portion">
@@ -64,7 +63,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="right-portion">
+                      <div class="right-portion" data-category-id="6">
                         <img class="three-dot svg" src="icons/dot.svg" alt="" />
                         <small class="added-time opacity">(Aug,2004)</small>
                         <div class="budget-operations">
@@ -80,44 +79,6 @@
                       <div class="bar-status limited"></div>
                     </div>
                   </li>
-                  <li>
-                    <div class="text-container">
-                      <div class="left-portion">
-                        <img
-                          class="icon"
-                          src="./icons//Income-expense/entertainment.jpg"
-                          alt=""
-                        />
-                        <div class="budget-details">
-                          <p class="change-font-style">Entertainment</p>
-
-                          <div class="spent-box">
-                            <p>Spent:</p>
-                            <p class="amount-spent red">₹0.00</p>
-                          </div>
-                          <div class="remaining-box">
-                            <p>Remaining:</p>
-                            <p class="amount-remaining green">₹1000.00</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right-portion">
-                        <img class="three-dot svg" src="icons/dot.svg" alt="" />
-                        <small class="added-time opacity">(Aug,2004)</small>
-                        <div class="budget-operations">
-                          <p class="change-limit">Change limit</p>
-                          <p class="remove-budget">Remove budget</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="bar-container">
-                      <div class="label-content">
-                        <div class="label">₹1000.00</div>
-                      </div>
-                      <div class="bar-status limited"></div>
-                    </div>
-                  </li>
-                  
                 </ul>
               </div>
             </div>
@@ -144,10 +105,10 @@
           </div>
           <!-- set Budget -->
           <div class="budget-input-container">
-           <header>
-            <h3>Set Budget</h3>
-            <h3 class="opacity">Aug,2024</h3>
-           </header>
+            <header>
+              <h3>Set Budget</h3>
+              <h3 class="opacity">Aug,2024</h3>
+            </header>
             <div class="budget-card">
               <div class="card-body">
                 <img class="icon set-budget-icon" src="" alt="" />
@@ -744,7 +705,7 @@
       </div>
     </div>
 
-    <script  src="home.js"></script>
+    <script src="home.js"></script>
     <script async type="module" src="script.js"></script>
     <script defer type="module" src="functions.js"></script>
     <script defer type="module" src="category.js"></script>
