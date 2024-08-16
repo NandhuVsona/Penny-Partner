@@ -149,3 +149,6 @@ main section.budgets {
 .spent-categories h3{
   padding-left: 10px;
 }
+.opacity{
+  opacity: 0.7;
+}
