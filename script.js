@@ -48,7 +48,7 @@ let editBox = document.querySelector(".edit-box-body");
 let preference = document.querySelector(".theme");
 let categoryBox = document.querySelector(".category-box-body");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
-let categoryPage = document.querySelector(".categories");
+let categoryContainer = document.querySelector(".categories .category-container");
 let accountContainer = document.querySelector(".account-container");
 
 preference.addEventListener("click", () => {
@@ -90,7 +90,7 @@ document.addEventListener("click", (e) => {
 
   if(!categoryBox.contains(e.target) && !addCategoryBtn.contains(e.target)){
     categoryBox.classList.remove("active");
-    categoryPage.classList.remove("blurbg");
+    categoryContainer.classList.remove("blurbg");
   }
 
   let isoptionBox;

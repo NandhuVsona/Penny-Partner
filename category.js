@@ -8,7 +8,7 @@ let categoryBox = document.querySelector(".category-box-body");
 let editcategoryBox = document.querySelector(".edit-category-box-body");
 let cancelCategoryBox = document.querySelector(".cancel-add-category");
 let cancelEditCategoryBox = document.querySelector(".cancel-edit-category");
-let categoryPage = document.querySelector(".categories");
+let categoryContainer = document.querySelector(".categories .category-container");
 let categories = document.querySelectorAll(
   ".category-container .category-list li"
 );
@@ -59,16 +59,16 @@ switchBtn.addEventListener("click", () => {
 
 addCategoryBtn.addEventListener("click", () => {
   categoryBox.classList.add("active");
-  categoryPage.classList.add("blurbg");
+  categoryContainer.classList.add("blurbg");
 });
 
 cancelCategoryBox.addEventListener("click", () => {
   categoryBox.classList.remove("active");
-  categoryPage.classList.remove("blurbg");
+  categoryContainer.classList.remove("blurbg");
 });
 cancelEditCategoryBox.addEventListener("click", () => {
   editcategoryBox.classList.remove("active");
-  categoryPage.classList.remove("blur");
+  categoryContainer.classList.remove("blur");
 });
 
 function reload() {
@@ -120,7 +120,7 @@ function reload() {
 }
 
 function openEditPanel(name, src) {
-  categoryPage.classList.add("blur");
+  categoryContainer.classList.add("blur");
   let editName = document.getElementById("edit-category-name");
   editName.value = name;
 
@@ -156,7 +156,7 @@ function updateCategory() {
 
 saveCategoryBtn.addEventListener("click", () => {
   categoryBox.classList.remove("active");
-  categoryPage.classList.remove("blurbg");
+  categoryContainer.classList.remove("blurbg");
   let categoryName = document.getElementById("category-name");
   let selectedIcon = "";
   categories.forEach((categorie) => {
@@ -214,6 +214,6 @@ document.addEventListener("click", (e) => {
 
   if(!editcategoryBox.contains(e.target) && isClicked ){
     editcategoryBox.classList.remove('active')
-    categoryPage.classList.remove("blur")
+    categoryContainer.classList.remove("blur")
   }
 });

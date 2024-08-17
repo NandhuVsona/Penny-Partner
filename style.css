@@ -97,8 +97,8 @@ main section.account {
   flex-direction: column;
 }
 main section.account .account-container.blurbg,
-main section.categories.blurbg,
-main section.categories.blur,
+main section.categories .category-container.blurbg,
+main section.categories .category-container.blur,
 main section.account .account-container.blur {
   opacity: 0;
   transition: opacity 0.3s linear;
