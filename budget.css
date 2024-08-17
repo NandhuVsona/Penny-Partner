@@ -119,6 +119,10 @@ main section.budgets {
 .text-container .left-portion {
   align-items: start !important;
 }
+.text-container .left-portion img{
+  width: 70px !important;
+  height:70px;
+}
 
 .set-budgeted-container .set-budgeted-list li {
   flex-direction: column;
@@ -152,9 +156,12 @@ main section.budgets {
 .opacity {
   opacity: 0.7;
 }
+.budget-input-container header{
+padding: 15px;
+}
 .budget-input-container,
 .budget-edit-container {
-  padding: 15px;
+ 
   position: absolute;
   display: none;
   flex-direction: column;
@@ -162,7 +169,7 @@ main section.budgets {
   align-items: center;
   border-radius: 5px;
   content: "";
-  width: 280px;
+  width: 300px;
   background-color: rgb(255, 255, 255);
   color: #000000;
   top: 50%;
@@ -203,8 +210,8 @@ main section.budgets {
   align-items: center;
 }
 .budget-card .card-body img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -218,7 +225,10 @@ main section.budgets {
   margin-top: 5px;
   flex-direction: column;
   gap: 10px;
+ width: 100%;
+
 }
+
 .budget-container.blur,
 .budget-container.blurbg {
   opacity: 0;
@@ -241,8 +251,8 @@ main section.budgets {
 .budget-input-container::after {
   content: "";
   position: inherit;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 
   z-index: -1;
 }
@@ -255,7 +265,7 @@ main section.budgets {
     rgb(187, 0, 255)
   );
   border-radius: 0px 0px 20px 20px;
-  height: 93px;
+  height: 100px;
   left: 0;
   width: 100%;
   -webkit-border-radius: 0px 0px 20px 20px;
