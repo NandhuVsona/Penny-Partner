@@ -117,11 +117,12 @@ main section.budgets {
 }
 
 .text-container .left-portion {
-  align-items: start !important;
+  align-items: center !important;
 }
+/* ------------------------------------------------ */
 .text-container .left-portion img{
-  width: 70px !important;
-  height:70px;
+  width: 60px !important;
+  height:60px;
 }
 
 .set-budgeted-container .set-budgeted-list li {
