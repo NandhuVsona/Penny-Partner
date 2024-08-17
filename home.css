@@ -1,0 +1,129 @@
+.home-container {
+  width: 100%;
+  margin-top: 20px;
+}
+.home-container header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.home-container header .left-arrow,
+.home-container header .right-arrow {
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
+  border-left: 3px solid;
+  border-top: 3px solid;
+  transform: rotate(-46deg);
+  -webkit-transform: rotate(-46deg);
+  -moz-transform: rotate(-46deg);
+  -ms-transform: rotate(-46deg);
+  -o-transform: rotate(-46deg);
+}
+.home-container header .right-arrow {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+}
+.home-container header .month-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.balance-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+.semi-bold {
+  font-weight: 600;
+  font-size: 17px;
+}
+.home-container .main-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  margin-top: 10px;
+  padding: 20px;
+}
+.home-container .main-content .sub-content {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+.transaction-history {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  gap: 20px;
+}
+.transaction-history li {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.transaction-history li .transaction-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.transaction-history li .transaction-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.transaction-history li .transaction-info .cat-account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:5px;
+}
+.transaction-history
+  li
+  .transaction-info
+  .cat-account
+  .transaction-account-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ gap: 10px;
+}
+.transaction-history
+  li
+  .transaction-info
+  .cat-account
+  .transaction-account-info img {
+ width: 20px;
+ height: 20px;
+ border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -moz-border-radius: 10px;
+ -ms-border-radius: 10px;
+ -o-border-radius: 10px;
+}
+.little-bold{
+    font-weight: 500;
+    font-size: 17px;
+}
+.transaction-amount{
+    padding-right: 10px;
+}

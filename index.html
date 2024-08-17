@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Penny Partner</title>
     <link rel="stylesheet" href="darkmode.css" />
+    <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="category.css" />
     <link rel="stylesheet" href="budget.css" />
@@ -19,8 +20,99 @@
         <img class="svg" src="icons/search.svg" alt="" />
       </header>
       <main>
-        <section class="home"></section>
-        <section class="analysis">e</section>
+        <section class="home active">
+          <div class="home-container">
+            <header>
+              <div class="month-body">
+                <div class="left-arrow"></div>
+                <h3 class="month">Aug 17, 2024</h3>
+                <div class="right-arrow"></div>
+              </div>
+              <div class="balance-info">
+                <div class="expense-box">
+                  <p>EXPENSE</p>
+                  <p class="red stylish">₹0.00</p>
+                </div>
+                <div class="income-box">
+                  <p>INCOME</p>
+                  <p class="green stylish">₹2,999</p>
+                </div>
+                <div class="total-box">
+                  <p>TOTAL</p>
+                  <p class="green stylish">₹5899</p>
+                </div>
+              </div>
+            </header>
+            <div class="main-content">
+              <div class="sub-content">
+                <div class="added-day-info semi-bold">Aug 17, Saturday</div>
+                <ul class="transaction-history">
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/salary.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Salary</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/atm-card_8983163.png" alt="" class="account-icon">
+                          <small class="account-name">Card</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount green">₹2999</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/health.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Health</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/wallet_3258446.png" alt="" class="account-icon">
+                          <small class="account-name">Wallet</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount red">₹5699</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/gift.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Grants</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/gpay.png" alt="" class="account-icon">
+                          <small class="account-name">Google Pay</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount green">₹5699</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/shopping.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Shopping</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/bank.png" alt="" class="account-icon">
+                          <small class="account-name">VICI Bank</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount red">₹5699</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="analysis"></section>
         <section class="budgets">
           <div class="budget-container">
             <header>
@@ -41,9 +133,7 @@
             <div class="budgeted-categories">
               <h3>Budgeted categories: Aug,2024</h3>
               <div class="set-budgeted-container">
-                <ul class="set-budgeted-list">
-                  
-                </ul>
+                <ul class="set-budgeted-list"></ul>
               </div>
             </div>
             <div class="spent-categories">
@@ -120,7 +210,7 @@
             </div>
           </div>
         </section>
-        <section class="account active">
+        <section class="account">
           <div class="account-container">
             <header class="account-header">
               <h3>Overall</h3>

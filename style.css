@@ -118,9 +118,7 @@ main section.account.blur img.active {
   -o-transition: filter 1s ease;
 }
 
-main section.analysis {
-  background-color: rgb(226, 125, 43);
-}
+
 main section.active {
   display: flex;
 }
