@@ -24,17 +24,19 @@ expenseCategories.forEach((category) => {
 });
 
 let cancelBudget = document.querySelector(".cancel-budget-box");
+let cancelEdit = document.querySelector(".cancel-edit-box");
 let budgetBox = document.querySelector(".budget-input-container");
-
+let editBudgetBox = document.querySelector(".budget-edit-container");
+let updatedLimitinput = document.getElementById("budget-updated-value");
 let budgetContainer = document.querySelector(".budget-container");
-
+let updateLimitBtn = document.querySelector(".updated-limit");
 let setBudgetLimitBtn = document.querySelector(".set-limit");
 let ulParent = document.querySelector(".set-budgeted-list");
 function removeBudget(btn) {
   let btnId = btn.parentElement.dataset.categoryId;
 
   let data = budgetedCategories.filter((bud) => bud.id == btnId);
-  budgetedCategories = budgetedCategories.filter((bud) => bud.id !== btnId);
+  budgetedCategories = budgetedCategories.filter((bud) => bud.id != btnId);
 
   btn.parentElement.parentElement.parentElement.parentElement.remove();
   updatedArray.push(data[0]);
@@ -42,11 +44,15 @@ function removeBudget(btn) {
   updatedArray.forEach((item) => {
     baseTemplate(item.name, item.image, item.id);
   });
-  reloadtwo()
-  
+  reloadtwo();
+}
+cancelEdit.addEventListener("click", closeEditBox);
+
+function closeEditBox() {
+  editBudgetBox.classList.remove("active");
 }
 
-function reloadtwo(){
+function reloadtwo() {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
   setBudgetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -67,9 +73,10 @@ function reload() {
   let threeDots = document.querySelectorAll(".three-dot");
   let options = document.querySelectorAll(".budget-operations");
   let removeBtns = document.querySelectorAll(".remove-budget");
+  let changeLimitBtn = document.querySelectorAll(".change-limit");
 
   removeBtns.forEach((btn) => {
-    btn.addEventListener("click", () =>removeBudget(btn));
+    btn.addEventListener("click", () => removeBudget(btn));
   });
 
   threeDots.forEach((dot, index) => {
@@ -96,7 +103,44 @@ function reload() {
       openBudgetBox(name, image, id);
     });
   });
+
+  changeLimitBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      options.forEach((opt) => opt.classList.remove("active"));
+      openEditBox(btn);
+    });
+  });
 }
+
+function openEditBox(btn) {
+  let clickedBtn = btn;
+  let id = btn.parentElement.dataset.categoryId;
+  let isFound = budgetedCategories.filter((item) => item.id == id);
+  let data = isFound[0];
+  let itemName = document.querySelector(".edit-category-name");
+  let itemImage = document.querySelector(".edit-budget-icon");
+
+  updatedLimitinput.value = data.budget;
+  updateLimitBtn.dataset.categoryId = data.id;
+  itemName.innerHTML = data.name;
+  itemImage.setAttribute("src", data.image);
+  editBudgetBox.classList.add("active");
+
+  updateLimitBtn.addEventListener("click", () => {
+    closeEditBox();
+    let id = updateLimitBtn.dataset.categoryId;
+    budgetedCategories = budgetedCategories.map((bud) => {
+      if (bud.id == id) {
+        return { ...bud, budget: updatedLimitinput.value }; // Update the budget for the matching id
+      } else {
+        return bud; // Return the original object for non-matching ids
+      }
+    });
+
+    setBudgetTemplate();
+  });
+}
+
 function openBudgetBox(category, src, id) {
   let name = document.querySelector(".budget-category-name");
   let image = document.querySelector(".set-budget-icon");
@@ -114,54 +158,60 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate(id, budget) {
-  let data = budgetedCategories.filter((item) => item.id == id);
+function setBudgetTemplate() {
+  ulParent.innerHTML = " ";
+  budgetedCategories.forEach((data) => {
+    let { image, name, budget, id } = data;
 
-  let { image, name } = data[0];
-  let template = `<li>
-                    <div class="text-container">
-                      <div class="left-portion">
-                        <img
-                          class="icon"
-                          src="${image}"
-                          alt=""
-                        />
-                        <div class="budget-details">
-                          <p class="change-font-style">${name}</p>
-                          <div class="spent-box">
-                            <p>Spent:</p>
-                            <p class="amount-spent red">₹0.00</p>
-                          </div>
-                          <div class="remaining-box">
-                            <p>Remaining:</p>
-                            <p class="amount-remaining green">₹${budget}</p>
+    let template = `<li>
+                      <div class="text-container">
+                        <div class="left-portion">
+                          <img
+                            class="icon"
+                            src="${image}"
+                            alt=""
+                          />
+                          <div class="budget-details">
+                            <p class="change-font-style">${name}</p>
+                            <div class="spent-box">
+                              <p>Spent:</p>
+                              <p class="amount-spent red">₹0.00</p>
+                            </div>
+                            <div class="remaining-box">
+                              <p>Remaining:</p>
+                              <p class="amount-remaining green">₹${budget}</p>
+                            </div>
                           </div>
                         </div>
+                        <div class="right-portion">
+                          <img class="three-dot svg" src="icons/dot.svg" alt="" />
+                          <small class="added-time opacity">(Aug,2004)</small>
+                          <div class="budget-operations" data-category-id="${id}">
+                            <p class="change-limit">Change limit</p>
+                            <p class="remove-budget">Remove budget</p>
+                        </div>
+                        </div>
                       </div>
-                      <div class="right-portion">
-                        <img class="three-dot svg" src="icons/dot.svg" alt="" />
-                        <small class="added-time opacity">(Aug,2004)</small>
-                        <div class="budget-operations" data-category-id="${id}">
-                          <p class="change-limit">Change limit</p>
-                          <p class="remove-budget">Remove budget</p>
+                      <div class="bar-container">
+                        <div class="label-content">
+                          <div class="label">₹${budget}</div>
+                        </div>
+                        <div class="bar-status"></div>
                       </div>
-                      </div>
-                    </div>
-                    <div class="bar-container">
-                      <div class="label-content">
-                        <div class="label">₹${budget}</div>
-                      </div>
-                      <div class="bar-status"></div>
-                    </div>
-                  </li>`;
-  ulParent.innerHTML += template;
+                    </li>`;
+    ulParent.innerHTML += template;
+  });
   reload();
 }
 
 setBudgetLimitBtn.addEventListener("click", () => {
+  let budget = document.getElementById("budget-value").value.trim();
   closeBudgetBox();
+
   let id = setBudgetLimitBtn.dataset.categoryId;
   let data = expenseCategories.filter((item) => item.id == id);
+
+  data[0].budget = budget;
   budgetedCategories.push(data[0]);
 
   parent.innerHTML = "";
@@ -171,11 +221,10 @@ setBudgetLimitBtn.addEventListener("click", () => {
   });
   reload();
 
-  let budget = document.getElementById("budget-value").value.trim();
   try {
-    if (Number(budget) > 0) setBudgetTemplate(id, budget);
-  } catch {
-    return;
+    if (Number(budget) > 0) setBudgetTemplate();
+  } catch (err) {
+    console.log(err);
   }
 });
 
