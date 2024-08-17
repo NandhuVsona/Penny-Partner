@@ -190,7 +190,7 @@
   background-color: rgb(0, 0, 0);
   border: none;
 }
-.app.dark main section.budgets .budget-container.blur .green {
+/* .app.dark main section.budgets .budget-container.blur .green {
   opacity: 0.2;
 }
 .app.dark main section.budgets .budget-container.blur .red {
@@ -205,4 +205,11 @@
   .bar-container
   .label-content {
   opacity: 0.1;
+} */
+.app.dark main section.budgets .right-portion .budget-operations{
+  background-color: var(--lightDark);
+  color: #ffffff;
+}
+.app.dark main section.budgets .right-portion .budget-operations p:hover{
+  background-color: rgb(80, 80, 80) !important;
 }

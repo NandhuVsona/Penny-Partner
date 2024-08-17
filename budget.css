@@ -219,15 +219,17 @@ main section.budgets {
   flex-direction: column;
   gap: 10px;
 }
-.budget-container.blur {
+.budget-container.blur,
+.budget-container.blurbg
+{
   background: rgba(169, 169, 169, 0.715);
   backdrop-filter: blur(10px);
   opacity: 0;
-  transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
+  transition: opacity .3s linear;
+  -webkit-transition: opacity .3s linear;
+  -moz-transition: opacity .3s linear;
+  -ms-transition: opacity .3s linear;
+  -o-transition: opacity .3s linear;
 }
 .budget-input-container header,
 .budget-edit-container header {

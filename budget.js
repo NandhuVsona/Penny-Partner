@@ -50,6 +50,7 @@ cancelEdit.addEventListener("click", closeEditBox);
 
 function closeEditBox() {
   editBudgetBox.classList.remove("active");
+  budgetContainer.classList.remove("blurbg");
 }
 
 function reloadtwo() {
@@ -113,7 +114,7 @@ function reload() {
 }
 
 function openEditBox(btn) {
-  let clickedBtn = btn;
+  
   let id = btn.parentElement.dataset.categoryId;
   let isFound = budgetedCategories.filter((item) => item.id == id);
   let data = isFound[0];
@@ -125,6 +126,7 @@ function openEditBox(btn) {
   itemName.innerHTML = data.name;
   itemImage.setAttribute("src", data.image);
   editBudgetBox.classList.add("active");
+  budgetContainer.classList.add("blurbg");
 
   updateLimitBtn.addEventListener("click", () => {
     closeEditBox();
