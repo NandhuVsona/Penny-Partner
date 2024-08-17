@@ -220,16 +220,13 @@ main section.budgets {
   gap: 10px;
 }
 .budget-container.blur,
-.budget-container.blurbg
-{
-  background: rgba(169, 169, 169, 0.715);
-  backdrop-filter: blur(10px);
+.budget-container.blurbg {
   opacity: 0;
-  transition: opacity .3s linear;
-  -webkit-transition: opacity .3s linear;
-  -moz-transition: opacity .3s linear;
-  -ms-transition: opacity .3s linear;
-  -o-transition: opacity .3s linear;
+  transition: opacity 0.15s linear;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -ms-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
 }
 .budget-input-container header,
 .budget-edit-container header {
@@ -240,7 +237,8 @@ main section.budgets {
 }
 .budget-input-container::before,
 .budget-edit-container::before,
-.budget-edit-container::after, .budget-input-container::after {
+.budget-edit-container::after,
+.budget-input-container::after {
   content: "";
   position: inherit;
   width: 100px;
@@ -288,7 +286,7 @@ main section.budgets {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border: 10px solid #ffff;
-  background: rgba(255, 255, 255, 0.715) ;
+  background: rgba(255, 255, 255, 0.715);
 }
 
 .budget-operations {

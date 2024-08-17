@@ -121,11 +121,11 @@
 .app.dark .sidebar .settings ul li:hover {
   background-color: rgb(53, 53, 53);
 }
-.app.dark main section.account.blurbg,
+/* .app.dark main section.account.blurbg, */
 .app.dark main section.categories.blur,
-.app.dark main section.categories.blurbg,
-.app.dark main section.budgets .budget-container.blur,
-.app.dark main section.account.blur {
+.app.dark main section.categories.blurbg
+/* .app.dark main section.budgets .budget-container.blur, */
+{
   background-color: rgb(38, 37, 37);
   color: #050505;
   transition: background-color color 1s ease;

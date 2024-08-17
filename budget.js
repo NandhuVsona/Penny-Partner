@@ -233,7 +233,22 @@ setBudgetLimitBtn.addEventListener("click", () => {
 
 document.addEventListener("click", (e) => {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
+  let changeLimitBtn = document.querySelectorAll(".change-limit");
+  let threeDots = document.querySelectorAll(".three-dot");
+  let options = document.querySelectorAll(".budget-operations");
   let isBtnClick = true;
+  let dots = true;
+  let opt = true;
+  threeDots.forEach(dot =>{
+    if(dot.contains(e.target)){
+      dots = false;
+    }
+  })
+  options.forEach(opt =>{
+    if(opt.contains(e.target)){
+      opt = false;
+    }
+  })
   setBudgetBtns.forEach((btn) => {
     if (btn.contains(e.target)) {
       isBtnClick = false;
@@ -241,5 +256,17 @@ document.addEventListener("click", (e) => {
   });
   if (!budgetBox.contains(e.target) && isBtnClick) {
     closeBudgetBox();
+  }
+
+  changeLimitBtn.forEach(dot =>{
+    if(dot.contains(e.target)){
+      isBtnClick = false
+    }
+  })
+  if(!editBudgetBox.contains(e.target) && isBtnClick){
+    closeEditBox()
+  }
+  if(dots && opt){
+    options.forEach(option => option.classList.remove("active"))
   }
 });

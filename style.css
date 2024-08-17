@@ -96,16 +96,16 @@ main section.account {
   scrollbar-width: none;
   flex-direction: column;
 }
-main section.account.blurbg,
+main section.account .account-container.blurbg,
 main section.categories.blurbg,
 main section.categories.blur,
-main section.account.blur {
-  background-color: var(--blur);
-  transition: background-color 1s ease;
-  -webkit-transition: background-color 1s ease;
-  -moz-transition: background-color 1s ease;
-  -ms-transition: background-color 1s ease;
-  -o-transition: background-color 1s ease;
+main section.account .account-container.blur {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -ms-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
 }
 main section.account.blurbg img.active,
 main section.account.blur img.active {

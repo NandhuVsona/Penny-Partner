@@ -49,6 +49,7 @@ let preference = document.querySelector(".theme");
 let categoryBox = document.querySelector(".category-box-body");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
 let categoryPage = document.querySelector(".categories");
+let accountContainer = document.querySelector(".account-container");
 
 preference.addEventListener("click", () => {
   let app = document.querySelector(".app");
@@ -84,7 +85,7 @@ document.addEventListener("click", (e) => {
   }
   if (!addAccountBtn.contains(e.target) && !accountBox.contains(e.target)) {
     accountBox.classList.remove("active");
-    accountPage.classList.remove("blurbg");
+    accountContainer.classList.remove("blurbg");
   }
 
   if(!categoryBox.contains(e.target) && !addCategoryBtn.contains(e.target)){
@@ -107,7 +108,7 @@ document.addEventListener("click", (e) => {
 
   if (!editBox.contains(e.target) && !isoptionBox) {
     editBox.classList.remove("active");
-    accountPage.classList.remove("blur");
+    accountContainer.classList.remove("blur");
   }
   let isOptionsClicked = "";
   let isDotsClicked = true;
@@ -131,15 +132,15 @@ document.addEventListener("click", (e) => {
 addAccountBtn.addEventListener("click", () => {
   closeEditBox();
   accountBox.classList.add("active");
-  accountPage.classList.add("blurbg");
+  accountContainer.classList.add("blurbg");
 });
 
 export function closeAccountBox() {
   accountBox.classList.remove("active");
-  accountPage.classList.remove("blurbg");
+  accountContainer.classList.remove("blurbg");
 }
 export function closeEditBox() {
-  accountPage.classList.remove("blur");
+  accountContainer.classList.remove("blur");
   document.querySelector(".edit-box-body").classList.remove("active");
 }
 

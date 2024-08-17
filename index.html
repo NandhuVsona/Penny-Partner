@@ -21,7 +21,7 @@
       <main>
         <section class="home"></section>
         <section class="analysis">e</section>
-        <section class="budgets active">
+        <section class="budgets">
           <div class="budget-container">
             <header>
               <div class="head-content">
@@ -63,7 +63,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="right-portion" >
+                      <div class="right-portion">
                         <img class="three-dot svg" src="icons/dot.svg" alt="" />
                         <small class="added-time opacity">(Aug,2004)</small>
                         <div class="budget-operations" data-category-id="6">
@@ -85,21 +85,7 @@
             <div class="spent-categories">
               <h3>Not budgeted this month</h3>
               <div class="category-budgets">
-                <ul class="budget-list">
-                  <!-- <li>
-                    <div class="left-portion">
-                      <img
-                        class="icon"
-                        src="./icons//Income-expense/books.jpg"
-                        alt=""
-                      />
-                      <p class="change-font-style">Book</p>
-                    </div>
-                    <div class="right-portion">
-                      <button>SET BUDGET</button>
-                    </div>
-                  </li> -->
-                </ul>
+                <ul class="budget-list"></ul>
               </div>
             </div>
           </div>
@@ -142,7 +128,11 @@
             </header>
             <div class="budget-card">
               <div class="card-body">
-                <img class="icon edit-budget-icon" src="./icons/Income-expense/dress.jpg" alt="" />
+                <img
+                  class="icon edit-budget-icon"
+                  src="./icons/Income-expense/dress.jpg"
+                  alt=""
+                />
                 <div class="card-info">
                   <p class="bold edit-category-name">Dress</p>
                 </div>
@@ -166,50 +156,52 @@
             </div>
           </div>
         </section>
-        <section class="account">
-          <header class="account-header">
-            <h3>Overall</h3>
-            <div class="penny-info">
-              <div class="top">
-                <div class="expense">
-                  <p>EXPENSE SO FAR</p>
-                  <b class="red stylish">-₹5,000</b>
-                </div>
-                <div class="income">
-                  <p>INCOME SO FAR</p>
-                  <b class="green stylish">₹20,302</b>
-                </div>
-              </div>
-              <div class="bottom">
-                <p>All accounts balance: <b class="bold">₹23,323</b></p>
-              </div>
-            </div>
-          </header>
+        <section class="account active">
           <div class="account-container">
-            <ul class="accounts">
-              <h3>Accounts</h3>
-              <!-- <li class="card">
-                <div class="card-body">
-                  <img src="Accounts/currency-notes_15326442.png" alt="" />
-                  <div class="card-info">
-                    <p class="bold">Card</p>
-                    <p>Balance: <span class="green bold">₹23,323</span></p>
+            <header class="account-header">
+              <h3>Overall</h3>
+              <div class="penny-info">
+                <div class="top">
+                  <div class="expense">
+                    <p>EXPENSE SO FAR</p>
+                    <b class="red stylish">-₹5,000</b>
+                  </div>
+                  <div class="income">
+                    <p>INCOME SO FAR</p>
+                    <b class="green stylish">₹20,302</b>
                   </div>
                 </div>
-                <div class="operations">
-                  <img class="dot" src="icons/dot.svg" alt="" />
-                  <div class="options">
-                    <p class="edit-btn">Edit</p>
-                    <p class="delete-account">Delete</p>
-                  </div>
+                <div class="bottom">
+                  <p>All accounts balance: <b class="bold">₹23,323</b></p>
                 </div>
-              </li>-->
-            </ul>
-          </div>
-          <div class="add-account">
-            <div class="add-box">
-              <img class="svg" src="icons/plus.svg" alt="" />
-              <p>ADD NEW ACCOUNT</p>
+              </div>
+            </header>
+            <div class="account-container">
+              <ul class="accounts">
+                <h3>Accounts</h3>
+                <!-- <li class="card">
+                  <div class="card-body">
+                    <img src="Accounts/currency-notes_15326442.png" alt="" />
+                    <div class="card-info">
+                      <p class="bold">Card</p>
+                      <p>Balance: <span class="green bold">₹23,323</span></p>
+                    </div>
+                  </div>
+                  <div class="operations">
+                    <img class="dot" src="icons/dot.svg" alt="" />
+                    <div class="options">
+                      <p class="edit-btn">Edit</p>
+                      <p class="delete-account">Delete</p>
+                    </div>
+                  </div>
+                </li>-->
+              </ul>
+            </div>
+            <div class="add-account">
+              <div class="add-box">
+                <img class="svg" src="icons/plus.svg" alt="" />
+                <p>ADD NEW ACCOUNT</p>
+              </div>
             </div>
           </div>
           <!-- add account -->
