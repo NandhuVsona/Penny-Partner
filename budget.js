@@ -219,6 +219,7 @@ setBudgetLimitBtn.addEventListener("click", () => {
   updatedArray.forEach((item) => {
     baseTemplate(item.name, item.image, item.id);
   });
+  document.getElementById("budget-value").value = ' '
   reload();
 
   try {

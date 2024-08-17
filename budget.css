@@ -222,6 +222,7 @@ main section.budgets {
 .budget-container.blur {
   background: rgba(169, 169, 169, 0.715);
   backdrop-filter: blur(10px);
+  opacity: 0;
   transition: all 0.3s linear;
   -webkit-transition: all 0.3s linear;
   -moz-transition: all 0.3s linear;
@@ -285,7 +286,7 @@ main section.budgets {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border: 10px solid #ffff;
-  background: rgba(255, 255, 255, 0.715) !important;
+  background: rgba(255, 255, 255, 0.715) ;
 }
 
 .budget-operations {

@@ -19,6 +19,8 @@
 .app.dark main section.account .box-body,
 .app.dark main section.categories .category-box-body,
 .app.dark main section.categories .edit-category-box-body,
+.app.dark main section.budgets .budget-input-container,
+.app.dark main section.budgets .budget-edit-container,
 .app.dark main section.account .edit-box-body {
   background-color: var(--dark);
   color: #ffffff;
@@ -36,6 +38,20 @@
   section.categories
   .edit-category-box-body
   .input-container
+  .input-body
+  input,
+.app.dark
+  main
+  section.budgets
+  .budget-input-container
+  .form-container
+  .input-body
+  input,
+.app.dark
+  main
+  section.budgets
+  .budget-edit-container
+  .form-container
   .input-body
   input,
 .app.dark
@@ -108,6 +124,7 @@
 .app.dark main section.account.blurbg,
 .app.dark main section.categories.blur,
 .app.dark main section.categories.blurbg,
+.app.dark main section.budgets .budget-container.blur,
 .app.dark main section.account.blur {
   background-color: rgb(38, 37, 37);
   color: #050505;
@@ -126,6 +143,9 @@
 .app.dark main section.account.blur img.svg,
 .app.dark main section.account.blur img.icon,
 .app.dark main section.categories.blurbg img.icon,
+.app.dark main section.budgets .budget-container.blur img.svg,
+.app.dark main section.budgets .budget-container.blur img,
+.app.dark main section.budgets .budget-container.blur button,
 .app.dark main section.categories.blurbg img.svg,
 .app.dark main section.categories.blur img.svg {
   filter: brightness(0.3);
@@ -139,17 +159,24 @@
 .app main section.categories.blurbg img.icon,
 .app main section.categories.blurbg img.svg,
 .app main section.categories.blur img.svg {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   filter: brightness(0.7);
   -webkit-filter: brightness(0.7);
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  -ms-transition: all .5s ease;
-  -o-transition: all .5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
 }
-.app.dark main section.account.blur .card ,
-.app.dark main section.account.blur .penny-info ,
-.app.dark main section.account.blurbg .penny-info ,
+.app.dark main section.account.blur .card,
+.app.dark main section.account.blur .penny-info,
+.app.dark main section.account.blurbg .penny-info,
+.app.dark
+  main
+  section.budgets
+  .budget-container.blur
+  .set-budgeted-list
+  li
+  .bar-container,
 .app.dark main section.account.blurbg .card {
   transition: all 0s ease;
   -webkit-transition: all 0s ease;
@@ -157,4 +184,25 @@
   -ms-transition: all 0s ease;
   -o-transition: all 0s ease;
   border: none;
+}
+.app.dark main section.budgets .budget-input-container::after,
+.app.dark main section.budgets .budget-edit-container::after {
+  background-color: rgb(0, 0, 0);
+  border: none;
+}
+.app.dark main section.budgets .budget-container.blur .green {
+  opacity: 0.2;
+}
+.app.dark main section.budgets .budget-container.blur .red {
+  opacity: 0.1;
+}
+.app.dark
+  main
+  section.budgets
+  .budget-container.blur
+  .set-budgeted-list
+  li
+  .bar-container
+  .label-content {
+  opacity: 0.1;
 }
