@@ -1,4 +1,5 @@
-.home-container,.analysis-container {
+.home-container,
+.analysis-container {
   width: 100%;
   height: 100%;
   padding-top: 15px;
@@ -7,7 +8,8 @@
   scrollbar-width: none;
   padding-bottom: 140px;
 }
-.home-container header,.analysis-container header {
+.home-container header,
+.analysis-container header {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -37,8 +39,7 @@
 .home-container header .balance-info .income-box,
 .analysis-container header .balance-info .income-box,
 .analysis-container header .balance-info .total-box,
-.home-container header .balance-info .total-box
- {
+.home-container header .balance-info .total-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -163,23 +164,90 @@
 }
 
 /* analysis page style */
-.analysis-container{
+.analysis-container {
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: flex-start;
-gap: 20px;
-  align-items:center;
+  gap: 20px;
+  align-items: center;
   flex-direction: column;
 }
 
-
-.analysis-container .chart{
+.analysis-container .chart {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height:250px;
+  height: 250px;
   padding: 0px 10px;
+}
+.current-chart {
+  position: relative;
+ 
+}
+
+.category-options{
+  position: absolute;
+  background-color: #dddddd;
+  width: 100%;
+  display:none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  bottom: -86px;
+  left: 0px;
+  animation: openup .3s ease;
+  -webkit-animation: openup .3s ease;
+ 
+}
+.category-options.active{
+  display: flex;
+}
+@keyframes openup {
+  from{
+    opacity: 0;
+    
+    transform: translateY(-60px);
+    -webkit-transform: translateY(-60px);
+    -moz-transform: translateY(-60px);
+    -ms-transform: translateY(-60px);
+    -o-transform: translateY(-60px);
+}
+}
+
+.category-options p {
+  padding: 8px 20px 8px 25px;
+  width: 100%;
+}
+.category-options p:hover {
+  background-color: rgb(196, 196, 196);
+}
+.arrow-down {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 255, 255);
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  margin-bottom: 8px;
+}
+.current-chart .opt-body {
+  display: flex;
+  width: 230px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  padding: 8px 20px;
+  gap: 10px;
 }
 

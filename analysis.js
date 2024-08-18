@@ -50,3 +50,17 @@ new Chart(ctx, {
     animation: false,  // Disable animation
   },
 });
+
+
+//dom content
+let optionBody = document.querySelector(".opt-body")
+let options = document.querySelector(".category-options")
+optionBody.addEventListener("click",()=>{
+  options.classList.toggle("active")
+})
+
+document.addEventListener("click",(e)=>{
+  if(!optionBody.contains(e.target) && !options.contains(e.target)){
+    options.classList.remove("active")
+  }
+})
