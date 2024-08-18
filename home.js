@@ -10,7 +10,29 @@ function goFullscreen() {
   }
 }
 
-document.addEventListener("dblclick", goFullscreen);
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    /* IE11 */
+    document.msExitFullscreen();
+  }
+}
+
+let fullScreenMode = document.querySelector(".view-mode");
+fullScreenMode.addEventListener("click", () => {
+  fullScreenMode.classList.toggle("activate");
+
+  if (fullScreenMode.classList.contains("activate")) {
+    goFullscreen();
+  } else {
+    exitFullscreen();
+  }
+});
+
 // Call the function when the page is loaded or based on user action
 
 //heme page functionality------------------------------------------------------------
@@ -123,10 +145,10 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
-overview("income")
+overview("income");
 
 function overview(category) {
-  dataAnalysContainer.innerHTML = ' '
+  dataAnalysContainer.innerHTML = " ";
   transactionHistory.forEach((data) => {
     let { transactions } = data;
     transactions.forEach((item) => {
@@ -144,14 +166,13 @@ function overview(category) {
 
 analysisOpt.forEach((opt) => {
   opt.addEventListener("click", (e) => {
-    document.querySelector(".category-options").classList.remove("active")
+    document.querySelector(".category-options").classList.remove("active");
     currentView.innerHTML = e.target.textContent.toUpperCase();
 
     if (e.target.classList.contains("expense-view")) {
-      overview("expense")
-    }
-    else{
-      overview("income")
+      overview("expense");
+    } else {
+      overview("income");
     }
   });
 });

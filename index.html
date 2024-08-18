@@ -20,7 +20,7 @@
         <img class="svg" src="icons/search.svg" alt="" />
       </header>
       <main>
-        <section class="home active">
+        <section class="home">
           <div class="home-container">
             <header>
               <div class="month-body">
@@ -46,7 +46,7 @@
             <div class="main-content"></div>
           </div>
         </section>
-        <section class="analysis">
+        <section class="analysis active">
           <div class="analysis-container">
             <header>
               <div class="month-body">
@@ -731,6 +731,13 @@
                 <small>Click to change theme</small>
               </div>
             </li>
+            <li class="view-mode">
+              <img class="svg" src="icons/fullscreen.svg" alt="" />
+              <div class="info">
+                <p>Full Screen</p>
+                <small>For better user experience</small>
+              </div>
+            </li>
             <li>
               <img class="svg" src="icons/reset.svg" alt="" />
               <div class="info">
@@ -768,7 +775,7 @@
     <script type="module" src="home.js"></script>
     <script async type="module" src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="analysis.js"></script>
+    <script type="module" src="analysis.js"></script>
     <script defer type="module" src="functions.js"></script>
     <script defer type="module" src="category.js"></script>
     <script defer type="module" src="budget.js"></script>
