@@ -162,11 +162,13 @@
   justify-content: center;
   align-items: flex-start;
 }
+
+
 .analysis-container .chart{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 380px;
-  padding: 10px;
+
 }

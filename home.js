@@ -8,7 +8,7 @@ function goFullscreen() {
     }
   }
  
-  // document.addEventListener('click', goFullscreen);
+  document.addEventListener('dblclick', goFullscreen);
   // Call the function when the page is loaded or based on user action
  
   
