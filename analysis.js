@@ -9,7 +9,7 @@ new Chart(ctx, {
         label: " of Votes",
         data: [12, 19, 3, 5, 2, 3],
         borderWidth: 0,
-        hoverOffset: 50,
+        hoverOffset: 10,
       },
     ],
   },

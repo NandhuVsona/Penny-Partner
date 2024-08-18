@@ -1,4 +1,4 @@
-.home-container {
+.home-container,.analysis-container {
   width: 100%;
   height: 100%;
   padding-top: 15px;
@@ -7,7 +7,7 @@
   scrollbar-width: none;
   padding-bottom: 140px;
 }
-.home-container header {
+.home-container header,.analysis-container header {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,8 @@
   gap: 20px;
 }
 .home-container header .left-arrow,
+.analysis-container header .left-arrow,
+.analysis-container header .right-arrow,
 .head-content .month-info .left-arrow,
 .home-container header .right-arrow,
 .head-content .month-info .right-arrow {
@@ -31,8 +33,12 @@
   -o-transform: rotate(-46deg);
 }
 .home-container header .balance-info .expense-box,
+.analysis-container header .balance-info .expense-box,
 .home-container header .balance-info .income-box,
-.home-container header .balance-info .total-box {
+.analysis-container header .balance-info .income-box,
+.analysis-container header .balance-info .total-box,
+.home-container header .balance-info .total-box
+ {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,6 +46,7 @@
   gap: 8px;
 }
 .home-container header .right-arrow,
+.analysis-container header .right-arrow,
 .head-content .month-info .right-arrow {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
@@ -47,6 +54,7 @@
   -ms-transform: rotate(135deg);
   -o-transform: rotate(135deg);
 }
+.analysis-container header .month-body,
 .home-container header .month-body {
   display: flex;
   justify-content: center;
@@ -159,8 +167,10 @@
   display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+gap: 20px;
+  align-items:center;
+  flex-direction: column;
 }
 
 
