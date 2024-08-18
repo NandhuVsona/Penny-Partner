@@ -100,15 +100,15 @@ export const transactionHistory = [
       {
         id: "7",
         category: {
-          name: "Paste",
-          icon: "icons/Income-expense/paste.jpg",
-          type: "expense",
+          name: "Refunds",
+          icon: "icons/Income-expense/refunds.jpg",
+          type: "income",
         },
         account: {
-          name: "Savings",
-          icon: "Accounts/dollar-bag_15326399.png",
+          name: "Amazon Pay",
+          icon: "Accounts/apay.png",
         },
-        amount: 100,
+        amount: 9499,
         date: "2024-08-10",
         description: "Monthly car installment",
       },

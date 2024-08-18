@@ -70,7 +70,7 @@ let incomeTags = document.querySelectorAll(".income-box p+p");
 let totalTags = document.querySelectorAll(".total-box p+p");
 let incomeAmount = 0;
 let expenseAmount = 0;
-let totalAmount = 0;
+
 //for incomes
 transactionHistory.forEach((data) => {
   let { transactions } = data;
@@ -99,7 +99,7 @@ incomeTags.forEach((tag) => {
 expenseTags.forEach((tag) => {
   tag.innerHTML = "₹" + expenseAmount.toLocaleString();
 });
-totalAmount = incomeAmount -expenseAmount;
+
 totalTags.forEach((tag) => {
   tag.innerHTML = "₹" + (incomeAmount - expenseAmount).toLocaleString();
 });
@@ -115,7 +115,7 @@ function analysis(src, name, amount, percentage) {
                       <div class="money-value">₹${amount}</div>
                     </div>
                     <div class="analysis-bar-container">
-                      <div class="analysis-bar" style:"width:${Math.floor(percentage)}%"></div>
+                      <div class="analysis-bar" style="width:${percentage}%;"></div>
                     </div>
                   </div>
                   <div class="percentage little-bold">${percentage}%</div>
@@ -130,7 +130,7 @@ transactionHistory.forEach((data) => {
       let amount = item.amount;
       let name = item.category.name;
       let src = item.category.icon;
-      let percentage = ((amount / totalAmount) * 100).toFixed('2');
+      let percentage = ((amount / incomeAmount) * 100).toFixed('2');
       analysis(src, name, amount, percentage);
     }
   });
