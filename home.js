@@ -19,6 +19,8 @@ import { transactionHistory } from "./data/homedata.js";
 
 let mainContent = document.querySelector(".main-content");
 let dataAnalysContainer = document.querySelector(".data-container");
+let analysisOpt = document.querySelectorAll(".category-options p");
+let currentView = document.querySelector(".current-view");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -82,7 +84,6 @@ transactionHistory.forEach((data) => {
     }
   }, 0);
 
-
   expenseAmount += transactions.reduce((accumulator, item) => {
     if (item.category.type == "expense") {
       return accumulator + item.amount;
@@ -122,16 +123,35 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
+overview("income")
 
-transactionHistory.forEach((data) => {
-  let { transactions } = data;
-  transactions.forEach(item => {
-    if (item.category.type == "income") {
-      let amount = item.amount;
-      let name = item.category.name;
-      let src = item.category.icon;
-      let percentage = ((amount / incomeAmount) * 100).toFixed('2');
-      analysis(src, name, amount, percentage);
+function overview(category) {
+  dataAnalysContainer.innerHTML = ' '
+  transactionHistory.forEach((data) => {
+    let { transactions } = data;
+    transactions.forEach((item) => {
+      if (item.category.type == category) {
+        let amount = item.amount;
+        let divideValue = category == "income" ? incomeAmount : expenseAmount;
+        let name = item.category.name;
+        let src = item.category.icon;
+        let percentage = ((amount / divideValue) * 100).toFixed("2");
+        analysis(src, name, amount, percentage);
+      }
+    });
+  });
+}
+
+analysisOpt.forEach((opt) => {
+  opt.addEventListener("click", (e) => {
+    document.querySelector(".category-options").classList.remove("active")
+    currentView.innerHTML = e.target.textContent.toUpperCase();
+
+    if (e.target.classList.contains("expense-view")) {
+      overview("expense")
+    }
+    else{
+      overview("income")
     }
   });
 });

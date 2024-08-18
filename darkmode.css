@@ -74,6 +74,7 @@
   li
   .right-portion
   .options,
+.app.dark .category-options,
 .app.dark
   main
   section.categories
@@ -104,7 +105,7 @@
   li
   .right-portion
   .options
-  p:hover,
+  p:hover,.app.dark .category-options p:hover,
 .app.dark
   main
   section.categories
@@ -124,8 +125,7 @@
 /* .app.dark main section.account.blurbg, */
 .app.dark main section.categories.blur,
 .app.dark main section.categories.blurbg
-/* .app.dark main section.budgets .budget-container.blur, */
-{
+/* .app.dark main section.budgets .budget-container.blur, */ {
   background-color: rgb(38, 37, 37);
   color: #050505;
   transition: background-color color 1s ease;
@@ -206,10 +206,10 @@
   .label-content {
   opacity: 0.1;
 } */
-.app.dark main section.budgets .right-portion .budget-operations{
+.app.dark main section.budgets .right-portion .budget-operations {
   background-color: var(--lightDark);
   color: #ffffff;
 }
-.app.dark main section.budgets .right-portion .budget-operations p:hover{
+.app.dark main section.budgets .right-portion .budget-operations p:hover {
   background-color: rgb(80, 80, 80) !important;
 }
