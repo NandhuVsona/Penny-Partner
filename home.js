@@ -18,6 +18,7 @@ document.addEventListener("dblclick", goFullscreen);
 import { transactionHistory } from "./data/homedata.js";
 
 let mainContent = document.querySelector(".main-content");
+let dataAnalysContainer = document.querySelector(".data-container");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -69,22 +70,27 @@ let incomeTags = document.querySelectorAll(".income-box p+p");
 let totalTags = document.querySelectorAll(".total-box p+p");
 let incomeAmount = 0;
 let expenseAmount = 0;
+let totalAmount = 0;
 //for incomes
 transactionHistory.forEach((data) => {
   let { transactions } = data;
   incomeAmount += transactions.reduce((accumulator, item) => {
-    return accumulator + item.amount;
+    if (item.category.type == "income") {
+      return accumulator + item.amount;
+    } else {
+      return accumulator + 0;
+    }
   }, 0);
+
 
   expenseAmount += transactions.reduce((accumulator, item) => {
     if (item.category.type == "expense") {
       return accumulator + item.amount;
     } else {
-      return 0;
+      return accumulator + 0;
     }
   }, 0);
 });
-
 
 incomeTags.forEach((tag) => {
   tag.innerHTML = "₹" + incomeAmount.toLocaleString();
@@ -93,7 +99,39 @@ incomeTags.forEach((tag) => {
 expenseTags.forEach((tag) => {
   tag.innerHTML = "₹" + expenseAmount.toLocaleString();
 });
+totalAmount = incomeAmount -expenseAmount;
+totalTags.forEach((tag) => {
+  tag.innerHTML = "₹" + (incomeAmount - expenseAmount).toLocaleString();
+});
 
-totalTags.forEach(tag =>{
-  tag.innerHTML ="₹" +(incomeAmount - expenseAmount).toLocaleString()
-})
+function analysis(src, name, amount, percentage) {
+  let template = `<li>
+                  <div class="img-container">
+                    <img src="${src}" alt="" />
+                  </div>
+                  <div class="text-amount-bar">
+                    <div class="category-name-analysis">
+                      <p class="little-bold">${name}</p>
+                      <div class="money-value">₹${amount}</div>
+                    </div>
+                    <div class="analysis-bar-container">
+                      <div class="analysis-bar" style:"width:${Math.floor(percentage)}%"></div>
+                    </div>
+                  </div>
+                  <div class="percentage little-bold">${percentage}%</div>
+                </li>`;
+  dataAnalysContainer.innerHTML += template;
+}
+
+transactionHistory.forEach((data) => {
+  let { transactions } = data;
+  transactions.forEach(item => {
+    if (item.category.type == "income") {
+      let amount = item.amount;
+      let name = item.category.name;
+      let src = item.category.icon;
+      let percentage = ((amount / totalAmount) * 100).toFixed('2');
+      analysis(src, name, amount, percentage);
+    }
+  });
+});
