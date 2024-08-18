@@ -109,15 +109,90 @@
                   </li>
                 </ul>
               </div>
+              <div class="sub-content">
+                <div class="added-day-info semi-bold">Aug 16, Friday</div>
+                <ul class="transaction-history">
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/books.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Books</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/currency-notes_15326442.png" alt="" class="account-icon">
+                          <small class="account-name">Cash</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount red">₹199</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/phone.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Recharge</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/sbi.png" alt="" class="account-icon">
+                          <small class="account-name">SBI</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount red">₹399</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/paste.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Paste</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/dollar-bag_15326399.png" alt="" class="account-icon">
+                          <small class="account-name">Savings</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount red">₹20</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="transaction-info">
+                      <img src="./icons/Income-expense/petrol.jpg" alt="" class="transaction-icon">
+                      <div class="cat-account">
+                        <div class="category-name little-bold">Fuel</div>
+                        <div class="transaction-account-info">
+                          <img src="./Accounts/bank.png" alt="" class="account-icon">
+                          <small class="account-name">Canara Bank</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="transaction-amount">
+                      <p class="amount red">₹200</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
-        <section class="analysis"></section>
+        <section class="analysis">
+          <div class="analysis-container">
+            <div class="chart">
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+        </section>
         <section class="budgets">
           <div class="budget-container">
             <header>
               <div class="head-content">
-                <h3>August,2024</h3>
+                <div class="month-info">
+                  <div class="left-arrow"></div>
+                  <h3>August,2024</h3>
+                  <div class="right-arrow"></div>
+                </div>
                 <div class="budget-info">
                   <div class="total-budget">
                     <p>TOTAL BUDGET</p>
@@ -784,8 +859,11 @@
 
     <script src="home.js"></script>
     <script async type="module" src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="analysis.js"></script>
     <script defer type="module" src="functions.js"></script>
     <script defer type="module" src="category.js"></script>
     <script defer type="module" src="budget.js"></script>
+    
   </body>
 </html>

@@ -19,7 +19,7 @@ main section.budgets {
   justify-content: center;
   gap: 15px;
 }
-.budgets header .head-content h3 {
+.budgets header .head-content .month-info{
   padding: 10px 0px 0px 0px;
 }
 .budgets header .head-content .budget-info {
@@ -337,4 +337,10 @@ padding: 15px;
     -ms-transform: translateY(-20px) scale(0);
     -o-transform: translateY(-20px) scale(0);
   }
+}
+.head-content .month-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
