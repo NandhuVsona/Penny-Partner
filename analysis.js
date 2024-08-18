@@ -3,7 +3,7 @@ const ctx = document.getElementById("myChart");
 new Chart(ctx, {
   type: "bar",
   data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], // X-axis labels
+    labels: ["Salary", "Rent", "Awards", "Grants", "Sale", "Lottery"], // X-axis labels
   datasets: [
     {
         label: "Number of Votes",
