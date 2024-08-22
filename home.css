@@ -382,7 +382,7 @@
   font-weight: 500;
 }
 .detail-view-container .card-top .center-content .respective-amount {
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 500;
 }
 .detail-view-container .card-bottom {
@@ -440,4 +440,10 @@
 }
 .detail-view-container .card-bottom .notes {
 margin-bottom: 10px;
+width: 100%;
+padding:0px 10px;
+text-align: justify;
+overflow: hidden;
+overflow-y: scroll;
+scrollbar-width: none;
 }
