@@ -321,10 +321,10 @@
 }
 .detail-view-container {
   position: absolute;
-  width:350px;
+  width: 320px;
   top: 50%;
   left: 50%;
-  padding: 0px 35px;
+
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -334,22 +334,16 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  border-radius: 7px;
-  overflow: hidden;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
-  animation: openViews .3s ease;
-  -webkit-animation: openViews .3s ease;
+  animation: openViews 0.3s ease;
+  -webkit-animation: openViews 0.3s ease;
 }
 @keyframes openViews {
-  from{
-   opacity: 0;
-   top: 55%;
+  from {
+    opacity: 0;
+    top: 55%;
+  }
 }
-}
-.detail-view-container.active{
+.detail-view-container.active {
   display: flex;
 }
 .detail-view-container .card-top {
@@ -361,6 +355,11 @@
   flex-direction: column;
   width: 100%;
   padding: 10px 10px 0px 10px;
+  border-radius: 10px 10px 0px 0px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  -ms-border-radius: 10px 10px 0px 0px;
+  -o-border-radius: 10px 10px 0px 0px;
 }
 .detail-view-container .card-top .center-content {
   display: flex;
@@ -408,6 +407,11 @@
   padding: 10px;
   flex-direction: column;
   gap: 20px;
+  border-radius: 0px 0px 10px 10px;
+  -webkit-border-radius: 0px 0px 10px 10px;
+  -moz-border-radius: 0px 0px 10px 10px;
+  -ms-border-radius: 0px 0px 10px 10px;
+  -o-border-radius: 0px 0px 10px 10px;
 }
 .detail-view-container .card-bottom ul {
   display: flex;
@@ -444,18 +448,18 @@
   border: 1px solid;
   padding: 5px 10px;
   gap: 10px;
-  border-radius:5px ;
-  -webkit-border-radius:5px ;
-  -moz-border-radius:5px ;
-  -ms-border-radius:5px ;
-  -o-border-radius:5px ;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 .detail-view-container .card-bottom .notes {
-margin-bottom: 10px;
-width: 100%;
-padding:0px 10px;
-text-align: justify;
-overflow: hidden;
-overflow-y: scroll;
-scrollbar-width: none;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 0px 10px;
+  text-align: justify;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
