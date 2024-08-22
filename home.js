@@ -40,9 +40,11 @@ fullScreenMode.addEventListener("click", () => {
 import { transactionHistory } from "./data/homedata.js";
 
 let mainContent = document.querySelector(".main-content");
+
 let dataAnalysContainer = document.querySelector(".data-container");
 let analysisOpt = document.querySelectorAll(".category-options p");
 let currentView = document.querySelector(".current-view");
+let detailView = document.querySelector(".detail-view-container");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -175,4 +177,25 @@ analysisOpt.forEach((opt) => {
       overview("income");
     }
   });
+});
+
+//Detail view box
+let viewLi = document.querySelectorAll(".sub-content li");
+
+viewLi.forEach((li) => {
+  li.addEventListener("click", () => {
+    detailView.classList.add("active");
+  });
+});
+
+document.addEventListener("click", (e) => {
+  let isList = true;
+  viewLi.forEach((li) => {
+    if (li.contains(e.target)) {
+      isList = false;
+    }
+  });
+  if (!detailView.contains(e.target) && isList) {
+    detailView.classList.remove("active");
+  }
 });
