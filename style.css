@@ -49,14 +49,13 @@ header .left {
   gap: 12px;
 }
 footer {
-  padding: 6px;
+  padding: 5px 10px;
   padding-top: 10px;
   position: fixed;
   bottom: 0;
   left: 0;
   background-color: #ffffff;
   width: 100%;
-  border-top: 1px solid gray;
 }
 footer nav ul {
   list-style: none;
@@ -72,9 +71,9 @@ footer nav ul li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   font-size: 14px;
 }
+
 main {
   display: flex;
   justify-content: center;
