@@ -434,11 +434,12 @@
   width: 100%;
   font-size: 17px;
   font-weight: 500;
+  gap: 10px;
 }
 .detail-view-container .card-bottom ul li .accname,
 .detail-view-container .card-bottom ul li .catename
 {
-  width: 100px;
+  width: 80px;
 }
 .detail-view-container .card-bottom ul li img {
   width: 30px;
@@ -457,7 +458,7 @@
   font-weight: 500;
   flex-grow: 1;
   border: 1px solid;
-  padding: 5px 10px;
+  padding: 5px 0px;
   gap: 10px;
   border-radius: 5px;
   -webkit-border-radius: 5px;

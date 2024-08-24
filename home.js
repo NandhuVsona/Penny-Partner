@@ -196,6 +196,8 @@ function openDetailView(id) {
   let accountImg = document.querySelector(".accountImg")
   let categoryImg = document.querySelector(".categoryImg")
   let card = document.querySelector(".card-top")
+  let cInfo = document.querySelector(".c-info")
+  let aInfo= document.querySelector(".a-info")
   if(card.classList.contains("incomeBg") || card.classList.contains("expenseBg")){
     card.classList.remove("incomeBg")
     card.classList.remove("expenseBg")
@@ -208,10 +210,12 @@ function openDetailView(id) {
 
   let info = data[0][0];
   notes.textContent = info.description || 'No notes';
-  amount.textContent = info.amount;
+  amount.textContent = "₹"+info.amount;
   incomeName.textContent = info.category.type
   accountImg.setAttribute("src",info.account.icon);
   categoryImg.setAttribute("src",info.category.icon)
+  aInfo.textContent = info.account.name
+  cInfo.textContent = info.category.name
   card.classList.add(info.category.type+"Bg")
 })}
 
