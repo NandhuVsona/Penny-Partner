@@ -137,7 +137,7 @@
 .app.dark footer {
   background-color: var(--dark);
 }
-.app.dark main section.categories.blur img.icon,
+/* .app.dark main section.categories.blur img.icon,
 .app.dark main section.account.blurbg img.icon,
 .app.dark main section.account.blurbg img.svg,
 .app.dark main section.account.blur img.svg,
@@ -150,8 +150,8 @@
 .app.dark main section.categories.blur img.svg {
   filter: brightness(0.3);
   -webkit-filter: brightness(0.2);
-}
-.app main section.categories.blur img.icon,
+} */
+/* .app main section.categories.blur img.icon,
 .app main section.account.blurbg img.icon,
 .app main section.account.blurbg img.svg,
 .app main section.account.blur img.svg,
@@ -166,7 +166,7 @@
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-}
+} */
 .app.dark main section.account.blur .card,
 .app.dark main section.account.blur .penny-info,
 .app.dark main section.account.blurbg .penny-info,

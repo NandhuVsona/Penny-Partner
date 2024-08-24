@@ -190,34 +190,40 @@ viewLi.forEach((li) => {
 });
 function openDetailView(id) {
   detailView.classList.add("active");
-  let incomeName = document.querySelector(".category-name-detail")
-  let amount = document.querySelector(".respective-amount")
-  let notes = document.querySelector(".notes p")
-  let accountImg = document.querySelector(".accountImg")
-  let categoryImg = document.querySelector(".categoryImg")
-  let card = document.querySelector(".card-top")
-  let cInfo = document.querySelector(".c-info")
-  let aInfo= document.querySelector(".a-info")
-  if(card.classList.contains("incomeBg") || card.classList.contains("expenseBg")){
-    card.classList.remove("incomeBg")
-    card.classList.remove("expenseBg")
+  let incomeName = document.querySelector(".category-name-detail");
+  let amount = document.querySelector(".respective-amount");
+  let notes = document.querySelector(".notes p");
+  let accountImg = document.querySelector(".accountImg");
+  let categoryImg = document.querySelector(".categoryImg");
+  let card = document.querySelector(".card-top");
+  let cInfo = document.querySelector(".c-info");
+  let aInfo = document.querySelector(".a-info");
+  if (
+    card.classList.contains("incomeBg") ||
+    card.classList.contains("expenseBg")
+  ) {
+    card.classList.remove("incomeBg");
+    card.classList.remove("expenseBg");
   }
 
   let data = new Array();
+  let togetherData = [];
   transactionHistory.forEach((item) => {
     let { transactions } = item;
-    data.push(transactions.filter((data) => data.id == id));
 
+    transactions.forEach((i) => togetherData.push(i));
+  });
+  data.push(togetherData.filter((data) => data.id == id));
   let info = data[0][0];
-  notes.textContent = info.description || 'No notes';
-  amount.textContent = "₹"+info.amount;
-  incomeName.textContent = info.category.type
-  accountImg.setAttribute("src",info.account.icon);
-  categoryImg.setAttribute("src",info.category.icon)
-  aInfo.textContent = info.account.name
-  cInfo.textContent = info.category.name
-  card.classList.add(info.category.type+"Bg")
-})}
+  notes.textContent = info.description;
+  amount.textContent = "₹" + info.amount;
+  incomeName.textContent = info.category.type;
+  accountImg.setAttribute("src", info.account.icon);
+  categoryImg.setAttribute("src", info.category.icon);
+  aInfo.textContent = info.account.name;
+  cInfo.textContent = info.category.name;
+  card.classList.add(info.category.type + "Bg");
+}
 
 document.addEventListener("click", (e) => {
   let isList = true;
@@ -226,7 +232,10 @@ document.addEventListener("click", (e) => {
       isList = false;
     }
   });
-  if (!document.querySelector(".detail-view-container").contains(e.target) && isList) {
+  if (
+    !document.querySelector(".detail-view-container").contains(e.target) &&
+    isList
+  ) {
     detailView.classList.remove("active");
   }
 });
