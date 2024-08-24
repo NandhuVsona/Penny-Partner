@@ -60,7 +60,7 @@ export const transactionHistory = [
         },
         amount: 1999,
         date: "2024-08-10",
-        description: "Monthly car installment",
+        description: "Online shopping",
       },
     ],
   },

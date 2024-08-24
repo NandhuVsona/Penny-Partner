@@ -44,7 +44,7 @@ let mainContent = document.querySelector(".main-content");
 let dataAnalysContainer = document.querySelector(".data-container");
 let analysisOpt = document.querySelectorAll(".category-options p");
 let currentView = document.querySelector(".current-view");
-let detailView = document.querySelector(".detail-view-container");
+let detailView = document.querySelector(".parent-detail-view");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -184,9 +184,36 @@ let viewLi = document.querySelectorAll(".sub-content li");
 
 viewLi.forEach((li) => {
   li.addEventListener("click", () => {
-    detailView.classList.add("active");
+    let id = li.dataset.id;
+    openDetailView(id);
   });
 });
+function openDetailView(id) {
+  detailView.classList.add("active");
+  let incomeName = document.querySelector(".category-name-detail")
+  let amount = document.querySelector(".respective-amount")
+  let notes = document.querySelector(".notes p")
+  let accountImg = document.querySelector(".accountImg")
+  let categoryImg = document.querySelector(".categoryImg")
+  let card = document.querySelector(".card-top")
+  if(card.classList.contains("incomeBg") || card.classList.contains("expenseBg")){
+    card.classList.remove("incomeBg")
+    card.classList.remove("expenseBg")
+  }
+
+  let data = new Array();
+  transactionHistory.forEach((item) => {
+    let { transactions } = item;
+    data.push(transactions.filter((data) => data.id == id));
+
+  let info = data[0][0];
+  notes.textContent = info.description || 'No notes';
+  amount.textContent = info.amount;
+  incomeName.textContent = info.category.type
+  accountImg.setAttribute("src",info.account.icon);
+  categoryImg.setAttribute("src",info.category.icon)
+  card.classList.add(info.category.type+"Bg")
+})}
 
 document.addEventListener("click", (e) => {
   let isList = true;
@@ -195,7 +222,7 @@ document.addEventListener("click", (e) => {
       isList = false;
     }
   });
-  if (!detailView.contains(e.target) && isList) {
+  if (!document.querySelector(".detail-view-container").contains(e.target) && isList) {
     detailView.classList.remove("active");
   }
 });
