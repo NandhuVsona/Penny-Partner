@@ -45,6 +45,7 @@ let dataAnalysContainer = document.querySelector(".data-container");
 let analysisOpt = document.querySelectorAll(".category-options p");
 let currentView = document.querySelector(".current-view");
 let detailView = document.querySelector(".parent-detail-view");
+let addItem = document.querySelector(".add-item");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -239,3 +240,7 @@ document.addEventListener("click", (e) => {
     detailView.classList.remove("active");
   }
 });
+
+addItem.addEventListener("click",()=>{
+  addItem.classList.add("active")
+})
