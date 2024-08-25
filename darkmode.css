@@ -16,6 +16,7 @@
   -webkit-filter: invert(1);
 }
 
+.app.dark main section.home .home-container .input-containers,
 .app.dark main section.account .box-body,
 .app.dark main section.categories .category-box-body,
 .app.dark main section.categories .edit-category-box-body,

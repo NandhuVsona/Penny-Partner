@@ -746,6 +746,8 @@
   width: 100%;
 }
 .notes-box textarea {
+  background-color: inherit;
+  color: inherit;
   max-width: 100%;
   min-width: 100%;
   min-height: 80px;
