@@ -513,11 +513,11 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-  transition: all .3s ease;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
 }
 .add-item.active {
   width: 100%;
@@ -532,6 +532,9 @@
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
+}
+.add-item.active .plus {
+  display: none;
 }
 .add-item .plus {
   display: flex;
@@ -563,4 +566,90 @@
   -moz-transform: rotate(90deg) translateX(-1px);
   -ms-transform: rotate(90deg) translateX(-1px);
   -o-transform: rotate(90deg) translateX(-1px);
+}
+.input-container {
+  padding: 10px 20px;
+}
+.input-container .head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.input-container .head .li {
+  display: flex;
+  gap: 10px;
+}
+.sub-head-one {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.expense-body {
+  flex-grow: 1;
+  display: flex;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  text-align: center;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding:0px 10px;
+}
+.income-body,
+.transfer-body {
+  flex-grow: 1;
+  text-align: center;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.sub-head-two {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.sub-head-two .account-body,.sub-head-two .category-body{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  
+}
+.sub-head-two .account-body .child-body,.sub-head-two .category-body .child-body{
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 8px 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.sub-head-two .account-body .child-body img,.sub-head-two .category-body .child-body img{
+ width: 30px;
+ height: 30px;
+}
+.notes-box textarea{
+  max-width: 100%;
+min-width: 100%;
+min-height: 80px;
+max-height: 80px;
+padding: 10px;
+font-size: inherit;
+
+}
+.notes-box textarea:focus{
+  border: 1px solid rgb(126, 41, 210);
+  outline: none;
 }

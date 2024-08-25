@@ -46,6 +46,7 @@ let analysisOpt = document.querySelectorAll(".category-options p");
 let currentView = document.querySelector(".current-view");
 let detailView = document.querySelector(".parent-detail-view");
 let addItem = document.querySelector(".add-item");
+let InputBoxClose = document.querySelector(".input-box-close");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -243,4 +244,8 @@ document.addEventListener("click", (e) => {
 
 addItem.addEventListener("click",()=>{
   addItem.classList.add("active")
+})
+InputBoxClose.addEventListener("click",()=>{
+  addItem.classList.remove("active")
+  
 })
