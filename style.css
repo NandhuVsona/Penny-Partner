@@ -153,6 +153,10 @@ main section.active {
 .penny-info .top .expense {
   border-right: 1px solid grey;
 }
+.penny-info .bottom{
+  display: flex;
+  gap: 10px;
+}
 
 .penny-info .top .expense,
 .penny-info .top .income {

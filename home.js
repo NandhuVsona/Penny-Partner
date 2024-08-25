@@ -22,6 +22,20 @@ function exitFullscreen() {
   }
 }
 
+//function for localstorage
+let data = JSON.parse(localStorage.getItem("data")) || [];
+data.forEach((item) => {
+  let existingAccounts = document.querySelector(".parent-box");
+  let template = `<li>
+                  <div class="left-part">
+                    <img src="${item.imageSrc}" alt="">
+                    <p class="semi-bold">Savings</p>
+                  </div>
+                  <p class="semi-bold green">₹${item.formatedAmount}</p>
+                </li>`;
+  existingAccounts.innerHTML += template;
+});
+
 let fullScreenMode = document.querySelector(".view-mode");
 fullScreenMode.addEventListener("click", () => {
   fullScreenMode.classList.toggle("activate");
@@ -47,6 +61,8 @@ let currentView = document.querySelector(".current-view");
 let detailView = document.querySelector(".parent-detail-view");
 let addItem = document.querySelector(".add-item");
 let InputBoxClose = document.querySelector(".input-box-close");
+let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
+let selectAccountBody = document.querySelector(".account-options-body");
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -276,3 +292,8 @@ calcBtns.forEach((btn) => {
     result.innerHTML = eval(query);
   });
 });
+
+
+selectAccountBtn.addEventListener("click",()=>{
+selectAccountBody.classList.toggle('active')
+})

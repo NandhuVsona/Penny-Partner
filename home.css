@@ -769,7 +769,7 @@
     -moz-transform: rotate(-30deg) translateX(240px);
     -ms-transform: rotate(-30deg) translateX(240px);
     -o-transform: rotate(-30deg) translateX(240px);
-}
+  }
 }
 .sub-head-two .account-body .child-body,
 .sub-head-two .category-body .child-body {
@@ -912,4 +912,53 @@
 .multiply,
 .sub {
   background-color: rgb(255, 170, 0);
+}
+.account-options-body {
+  position: absolute;
+  width: 100%;
+  height: max-content;
+  padding: 10px 0px;
+  background-color: rgb(237, 237, 237);
+  bottom: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+  animation: opnecalc 0.3s ease;
+  -webkit-animation: opnecalc 0.3s ease;
+}
+.account-options-body.active {
+  display: flex;
+}
+.account-options-body ul.parent-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0px 25px 0px 15px;
+  flex-direction: column;
+  gap: 20px;
+}
+.account-options-body ul.parent-box li .left-part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.account-options-body ul.parent-box li p {
+  font-size: 21px;
+  font-weight: 500;
+}
+.account-options-body ul.parent-box li .left-part img {
+  width: 50px;
+  height: 50px;
+}
+.account-options-body ul.parent-box li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
