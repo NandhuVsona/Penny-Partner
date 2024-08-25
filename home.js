@@ -244,16 +244,14 @@ document.addEventListener("click", (e) => {
 
 addItem.addEventListener("click", () => {
   document.querySelector(".input-containers").classList.add("active");
-  history.pushState({ cardOpened: true }, "", "#card");
+  history.pushState({ cardOpened: true }, " ", "card");
 });
 InputBoxClose.addEventListener("click", () => {
   document.querySelector(".input-containers").classList.remove("active");
   history.back();
 });
 window.addEventListener("popstate", (e) => {
-  if (e.state && e.state.cardOpened) {
-    document.querySelector(".input-containers").classList.remove("active");
-  }
+  document.querySelector(".input-containers").classList.remove("active");
 });
 let calcBtns = document.querySelectorAll(".btns");
 let values = document.querySelector(".calc-values");
