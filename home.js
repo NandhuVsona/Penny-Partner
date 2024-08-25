@@ -22,11 +22,12 @@ function exitFullscreen() {
   }
 }
 
+
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
 data.forEach((item) => {
   let existingAccounts = document.querySelector(".parent-box");
-  let template = `<li>
+  let template = `<li data-id="${item.id}" class="bunch-account">
                   <div class="left-part">
                     <img src="${item.imageSrc}" alt="">
                     <p class="semi-bold">Savings</p>
@@ -63,6 +64,9 @@ let addItem = document.querySelector(".add-item");
 let InputBoxClose = document.querySelector(".input-box-close");
 let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
 let selectAccountBody = document.querySelector(".account-options-body");
+let bunchAccounts = document.querySelectorAll(".bunch-account");
+let addtransactonAccImg =  document.querySelector(".account-body .child-body img")
+let addtransactonAccName =  document.querySelector(".account-body .child-body p")
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -296,4 +300,16 @@ calcBtns.forEach((btn) => {
 
 selectAccountBtn.addEventListener("click",()=>{
 selectAccountBody.classList.toggle('active')
+})
+
+
+bunchAccounts.forEach(acc =>{
+  acc.addEventListener("click",()=>{
+    selectAccountBody.classList.remove('active')
+    let selectedAccount = acc.dataset.id;
+    let accountData = data.filter(d => d.id==selectedAccount)
+   addtransactonAccImg.setAttribute("src",accountData[0].imageSrc);
+   addtransactonAccImg.style.filter = 'invert(0)'
+    addtransactonAccName.textContent = accountData[0].accountName;
+  })
 })

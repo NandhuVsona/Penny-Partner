@@ -4,7 +4,7 @@ import { saveAccount, updateAccount } from "./functions.js";
 let data = JSON.parse(localStorage.getItem("data")) || [];
 data.forEach((item) => {
   let existingAccounts = document.querySelector(".accounts");
-  let template = `<li class="card">
+  let template = `<li class="card" data-id="${item.id}">
                 <div class="card-body">
                   <img class="icon" src="${item.imageSrc}" alt="" />
                   <div class="card-info">

@@ -141,12 +141,23 @@ export function saveAccount() {
   document.getElementById("initial-amount").value = "";
   document.getElementById("account-name").value = "";
   reloadFunctionality();
+
+  //function for generating ids
+function generateId(){
+  let id = ''
+  for(let i =0 ; i<10;i++){
+    id+=Math.floor(Math.random()*9)
+  }
+  return id
+}
+console.log(generateId())
   //local storage
   let array = JSON.parse(localStorage.getItem("data")) || [];
   let data = {
     accountName,
     formatedAmount,
     imageSrc,
+    id:generateId()
   };
   array.push(data);
   localStorage.setItem("data", JSON.stringify(array));
