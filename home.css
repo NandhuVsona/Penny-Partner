@@ -980,7 +980,7 @@
   align-items: center;
   gap: 5px;
   flex-direction: column;
-  width:50px;
+  width:60px;
   flex-grow: 1;
 }
 .category-options-body ul li img {

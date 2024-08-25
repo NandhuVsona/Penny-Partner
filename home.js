@@ -67,6 +67,9 @@ let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
 let selectCatBtn = document.querySelector(".sub-head-two .category-body");
 let selectAccountBody = document.querySelector(".account-options-body");
 let bunchAccounts = document.querySelectorAll(".bunch-account");
+let selectedCatImg = document.querySelector(".category-body .child-body img")
+let selectedCatName = document.querySelector(".category-body .child-body p")
+
 let selectedCatBody = document.querySelector(".category-options-body");
 let addtransactonAccImg = document.querySelector(
   ".account-body .child-body img"
@@ -324,7 +327,7 @@ bunchAccounts.forEach((acc) => {
 });
 
 expenseCategories.forEach((cat) => {
-  let template = `<li data-id=${cat.id}>
+  let template = `<li data-id=${cat.id} class="bunch-category">
                   <img src="${cat.image}" alt="" />
                   <small>${cat.name}</small>
                 </li>`;
@@ -335,3 +338,16 @@ selectCatBtn.addEventListener("click", () => {
   selectAccountBody.classList.remove("active");
   selectedCatBody.classList.toggle("active");
 });
+
+let bunchCategory = document.querySelectorAll(".bunch-category");
+
+bunchCategory.forEach(cat =>{
+  cat.addEventListener("click",()=>{
+    selectedCatBody.classList.remove("active");
+    let selectedCat = cat.dataset.id;
+    let accountData = expenseCategories.filter((d) => d.id == selectedCat);
+    selectedCatImg.setAttribute("src",accountData[0].image);
+    selectedCatImg.style.filter = "invert(0)";
+    selectedCatName.textContent = accountData[0].name
+  })
+})
