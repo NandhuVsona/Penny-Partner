@@ -610,7 +610,8 @@
  top: 11%;
  left: 15px;
  right: 15px;
- background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+ background: linear-gradient(135deg, #16222a 0%, #3a6073 100%);
+ /* background: linear-gradient( #1fa2ff ,#12d8fa, #a6ffcb); */
  z-index: -1;
  -webkit-border-radius:5px ;
  -moz-border-radius:5px ;
