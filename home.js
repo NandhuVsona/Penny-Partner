@@ -243,11 +243,12 @@ document.addEventListener("click", (e) => {
 });
 
 addItem.addEventListener("click",()=>{
-  addItem.classList.add("active")
+  addItem.classList.add("open")
+  document.querySelector(".input-containers").classList.add("active")
 })
 InputBoxClose.addEventListener("click",()=>{
-  addItem.classList.remove("active")
-  
+  addItem.classList.remove("open")
+  document.querySelector(".input-containers").classList.remove("active")
 })
 
 
