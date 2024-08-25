@@ -242,37 +242,35 @@ document.addEventListener("click", (e) => {
   }
 });
 
-addItem.addEventListener("click",()=>{
-  addItem.classList.add("open")
+addItem.addEventListener("click", () => {
   document.querySelector(".input-containers").classList.add("active")
-})
-InputBoxClose.addEventListener("click",()=>{
-  addItem.classList.remove("open")
+ 
+});
+InputBoxClose.addEventListener("click", () => {
   document.querySelector(".input-containers").classList.remove("active")
-})
 
+});
 
 let calcBtns = document.querySelectorAll(".btns");
-      let values = document.querySelector(".calc-values");
-      let result = document.querySelector(".calc-answer");
-      let query = "";
-      calcBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-         
-          if (btn.value == "=") {
-            values.innerHTML = eval(query);
-            result.innerHTML = "";
-            query = eval(query);
-            return;
-          } else if (btn.value === "c") {
-            values.innerHTML = "";
-            query = " ";
-            result.innerHTML = "";
-            return;
-          }
-          values.innerHTML += btn.value;
-          query += btn.value;
+let values = document.querySelector(".calc-values");
+let result = document.querySelector(".calc-answer");
+let query = "";
+calcBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.value == "=") {
+      values.innerHTML = eval(query);
+      result.innerHTML = "";
+      query = eval(query);
+      return;
+    } else if (btn.value === "c") {
+      values.innerHTML = "";
+      query = " ";
+      result.innerHTML = "";
+      return;
+    }
+    values.innerHTML += btn.value;
+    query += btn.value;
 
-          result.innerHTML = eval(query);
-        });
-      });
+    result.innerHTML = eval(query);
+  });
+});

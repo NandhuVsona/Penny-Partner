@@ -519,24 +519,8 @@
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
 }
-.add-item.open {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-color: #ffffff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
-}
-.add-item.open .plus {
-  display: none;
-}
-.add-item.open .input-containers {
+
+.input-containers.active {
   display: flex;
 }
 .add-item .plus {
@@ -570,10 +554,10 @@
   -ms-transform: rotate(90deg) translateX(-1px);
   -o-transform: rotate(90deg) translateX(-1px);
 }
-.input-containers.active{
+.input-containers.active {
   display: flex;
 }
- .input-containers{
+.input-containers {
   padding-top: 15px;
   height: 100vh;
   width: 100%;
@@ -585,8 +569,91 @@
   overflow-y: scroll;
   scrollbar-width: none;
   gap: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 1;
+  animation-fill-mode: forwards;
+  animation: homeInput 0.3s ease;
+  -webkit-animation: homeInput 0.3s ease;
 }
-.input-containers .head {
+@keyframes homeInput {
+  0% {
+    opacity: 0;
+    transform: scale(2);
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.input-containers .top-portion {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  animation: topup 0.7s ease-out;
+  -webkit-animation: topup 0.7s ease-out;
+  animation-fill-mode: forwards;
+}
+@keyframes topup {
+  0% {
+    transform: translateY(-500px);
+    -webkit-transform: translateY(-500px);
+    -moz-transform: translateY(-500px);
+    -ms-transform: translateY(-500px);
+    -o-transform: translateY(-500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+  }
+}
+@keyframes leftAccount {
+  0% {
+    transform: translateX(-500px);
+    -webkit-transform: translateX(-500px);
+    -moz-transform: translateX(-500px);
+    -ms-transform: translateX(-500px);
+    -o-transform: translateX(-500px);
+}
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+}
+}
+@keyframes rightCat {
+  0% {
+    transform: translateX(500px);
+    -webkit-transform: translateX(500px);
+    -moz-transform: translateX(500px);
+    -ms-transform: translateX(500px);
+    -o-transform: translateX(500px);
+}
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+  }
+}
+
+.input-containers .top-portion .head {
   width: 100%;
   padding: 0px 20px;
   display: flex;
@@ -632,6 +699,18 @@
   gap: 15px;
   width: 100%;
   padding: 0px 20px;
+}
+.sub-head-two .account-body{
+  opacity: 0;
+  animation: leftAccount .7s ease .5s;
+  -webkit-animation: leftAccount .7s ease .5s;
+  animation-fill-mode: forwards;
+}
+.sub-head-two .category-body{
+  opacity: 0;
+  animation: rightCat .7s ease .5s;
+  -webkit-animation: rightCat .7s ease .5s;
+  animation-fill-mode: forwards;
 }
 .sub-head-two .account-body,
 .sub-head-two .category-body {
@@ -689,6 +768,27 @@
   width: 100%;
   height: 230px;
   padding: 10px;
+  animation: opnecalc 0.3s ease 0.3s;
+  -webkit-animation: opnecalc 0.7s ease 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+@keyframes opnecalc {
+  0% {
+    transform: translateY(500px);
+    -webkit-transform: translateY(500px);
+    -moz-transform: translateY(500px);
+    -ms-transform: translateY(500px);
+    -o-transform: translateY(500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+  }
 }
 .btns {
   width: 50px;
@@ -706,7 +806,7 @@
   -o-border-radius: 10px;
   flex-grow: 1;
 }
-.main-input-box{
+.main-input-box {
   width: 100%;
 }
 
@@ -746,7 +846,6 @@
   gap: 5px;
   padding-right: 30px;
   scrollbar-width: none;
-  
 }
 .calc-values {
   opacity: 0.7;
