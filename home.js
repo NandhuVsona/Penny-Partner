@@ -1,3 +1,5 @@
+import { expenseCategories } from "./data/categories.js";
+
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
     document.documentElement.requestFullscreen();
@@ -21,7 +23,6 @@ function exitFullscreen() {
     document.msExitFullscreen();
   }
 }
-
 
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
@@ -63,10 +64,19 @@ let detailView = document.querySelector(".parent-detail-view");
 let addItem = document.querySelector(".add-item");
 let InputBoxClose = document.querySelector(".input-box-close");
 let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
+let selectCatBtn = document.querySelector(".sub-head-two .category-body");
 let selectAccountBody = document.querySelector(".account-options-body");
 let bunchAccounts = document.querySelectorAll(".bunch-account");
-let addtransactonAccImg =  document.querySelector(".account-body .child-body img")
-let addtransactonAccName =  document.querySelector(".account-body .child-body p")
+let selectedCatBody = document.querySelector(".category-options-body");
+let addtransactonAccImg = document.querySelector(
+  ".account-body .child-body img"
+);
+let addtransactonAccName = document.querySelector(
+  ".account-body .child-body p"
+);
+let categoryOptions = document.querySelector(
+  ".category-options-body .parent-box"
+);
 
 transactionHistory.forEach((item) => {
   let { date, transactions } = item;
@@ -297,19 +307,31 @@ calcBtns.forEach((btn) => {
   });
 });
 
+selectAccountBtn.addEventListener("click", () => {
+  selectedCatBody.classList.remove("active");
+  selectAccountBody.classList.toggle("active");
+});
 
-selectAccountBtn.addEventListener("click",()=>{
-selectAccountBody.classList.toggle('active')
-})
-
-
-bunchAccounts.forEach(acc =>{
-  acc.addEventListener("click",()=>{
-    selectAccountBody.classList.remove('active')
+bunchAccounts.forEach((acc) => {
+  acc.addEventListener("click", () => {
+    selectAccountBody.classList.remove("active");
     let selectedAccount = acc.dataset.id;
-    let accountData = data.filter(d => d.id==selectedAccount)
-   addtransactonAccImg.setAttribute("src",accountData[0].imageSrc);
-   addtransactonAccImg.style.filter = 'invert(0)'
+    let accountData = data.filter((d) => d.id == selectedAccount);
+    addtransactonAccImg.setAttribute("src", accountData[0].imageSrc);
+    addtransactonAccImg.style.filter = "invert(0)";
     addtransactonAccName.textContent = accountData[0].accountName;
-  })
-})
+  });
+});
+
+expenseCategories.forEach((cat) => {
+  let template = `<li data-id=${cat.id}>
+                  <img src="${cat.image}" alt="" />
+                  <small>${cat.name}</small>
+                </li>`;
+  categoryOptions.innerHTML += template;
+});
+
+selectCatBtn.addEventListener("click", () => {
+  selectAccountBody.classList.remove("active");
+  selectedCatBody.classList.toggle("active");
+});
