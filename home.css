@@ -607,7 +607,7 @@
   width: calc(100% - 30px);
   height: 150px;
   border-radius: 5px;
-  top: 11%;
+  top: 17%;
   left: 15px;
   right: 15px;
   background: linear-gradient(135deg, #16222a 0%, #3a6073 100%);
@@ -676,7 +676,7 @@
 
 .input-containers .top-portion .head {
   width: 100%;
-  padding: 0px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -703,6 +703,7 @@
   justify-content: center;
   align-items: center;
   padding: 0px 10px;
+  color: #ffffff !important;
 }
 .income-body,
 .transfer-body {
@@ -712,6 +713,7 @@
   gap: 5px;
   justify-content: center;
   align-items: center;
+  color: #ffffff !important;
 }
 .sub-head-two {
   display: flex;
@@ -741,6 +743,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 5px;
+  color: #ffffff !important;
 }
 .sub-head-two .account-body .child-body::before,
 .sub-head-two .category-body .child-body::before {
@@ -784,6 +787,7 @@
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   overflow: hidden;
+  color: #ffffff !important;
 }
 .sub-head-two .account-body .child-body img,
 .sub-head-two .category-body .child-body img {
