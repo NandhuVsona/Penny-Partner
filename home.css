@@ -601,6 +601,27 @@
   -webkit-animation: topup 0.7s ease-out;
   animation-fill-mode: forwards;
 }
+.input-containers .top-portion .sub-head-one::before {
+ position: absolute;
+ content: "";
+ width: calc(100% - 30px);
+ height: 150px;
+ border-radius:5px ;
+ top: 11%;
+ left: 15px;
+ right: 15px;
+ background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+ z-index: -1;
+ -webkit-border-radius:5px ;
+ -moz-border-radius:5px ;
+ -ms-border-radius:5px ;
+ -o-border-radius:5px ;
+ animation:topup 1s ease 1s ;
+ -webkit-animation:topup 1s ease 1s ;
+ animation-fill-mode: forwards;
+ opacity: 0;
+}
+
 @keyframes topup {
   0% {
     transform: translateY(-500px);
