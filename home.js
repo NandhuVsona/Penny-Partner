@@ -70,7 +70,7 @@ let bunchAccounts = document.querySelectorAll(".bunch-account");
 let selectedCatImg = document.querySelector(".category-body .child-body img");
 let selectedCatName = document.querySelector(".category-body .child-body p");
 let saveTransactionBtn = document.querySelector(".add-transcation-save-btn");
-
+let deleteHis = document.getElementsByClassName("delete-history");
 let selectedCatBody = document.querySelector(".category-options-body");
 let addtransactonAccImg = document.querySelector(
   ".account-body .child-body img"
@@ -227,11 +227,11 @@ analysisOpt.forEach((opt) => {
 
 //Detail view box
 let viewLi = document.querySelectorAll(".sub-content li");
-
-viewLi.forEach((li) => {
+let clickedView = viewLi.forEach((li) => {
   li.addEventListener("click", () => {
     let id = li.dataset.id;
     openDetailView(id);
+    clickedView = li;
   });
 });
 function openDetailView(id) {
@@ -244,6 +244,7 @@ function openDetailView(id) {
   let card = document.querySelector(".card-top");
   let cInfo = document.querySelector(".c-info");
   let aInfo = document.querySelector(".a-info");
+  let cardOperations = document.querySelector(".card-operations");
   if (
     card.classList.contains("incomeBg") ||
     card.classList.contains("expenseBg")
@@ -267,6 +268,7 @@ function openDetailView(id) {
   categoryImg.setAttribute("src", info.category.icon);
   aInfo.textContent = info.account.name;
   cInfo.textContent = info.category.name;
+  cardOperations.dataset.id = info.id;
   card.classList.add(info.category.type + "Bg");
 }
 
@@ -493,9 +495,11 @@ saveTransactionBtn.addEventListener("click", () => {
     document.querySelectorAll(".sub-content li").forEach((li) => {
       li.addEventListener("click", () => {
         let id = li.dataset.id;
+        clickedView = li;
         openDetailView(id);
       });
     });
+    deleteView();
     document.querySelector(".input-containers").classList.remove("active");
   }
 });
@@ -521,3 +525,19 @@ function showMessage(value) {
     successWidth--;
   }, 50);
 }
+
+function deleteView() {
+  for (let i = 0; i < deleteHis.length; i++) {
+    deleteHis[i].addEventListener("click", () => {
+      let deleteId = deleteHis[i].parentElement.dataset.id;
+      detailView.classList.remove("active");
+
+      if (clickedView.parentElement.children.length == 1) {
+        clickedView.parentElement.parentElement.remove();
+      } else {
+        clickedView.remove();
+      }
+    });
+  }
+}
+deleteView();
