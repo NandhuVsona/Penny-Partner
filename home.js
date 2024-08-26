@@ -225,7 +225,7 @@ viewLi.forEach((li) => {
   });
 });
 function openDetailView(id) {
-  detailView.classList.add("active");
+  document.querySelector(".parent-detail-view").classList.add('active')
   let incomeName = document.querySelector(".category-name-detail");
   let amount = document.querySelector(".respective-amount");
   let notes = document.querySelector(".notes p");
@@ -273,6 +273,7 @@ document.addEventListener("click", (e) => {
     isList
   ) {
     detailView.classList.remove("active");
+    detailView.classList.remove("verified");
   }
 });
 
@@ -453,9 +454,17 @@ function verification() {
 }
 saveTransactionBtn.addEventListener("click", () => {
   let isVerified = verification();
-  
+
   if (isVerified) {
     parentTemplate(isVerified.date, isVerified.transactions);
+    document.querySelectorAll(".sub-content li").forEach((li) => {
+      li.addEventListener("click", () => {
+        let id = li.dataset.id;
+        document.querySelector(".parent-detail-view").classList.add('verified')
+        openDetailView(id);
+      });
+    });
+
   }
 });
 
