@@ -87,6 +87,16 @@ transactionHistory.forEach((item) => {
   parentTemplate(date, transactions);
 });
 
+const daysOfWeek = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
 function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
@@ -261,6 +271,7 @@ function openDetailView(id) {
 }
 
 document.addEventListener("click", (e) => {
+  let viewLi = document.querySelectorAll(".sub-content li");
   let isList = true;
   viewLi.forEach((li) => {
     if (li.contains(e.target)) {
@@ -272,7 +283,6 @@ document.addEventListener("click", (e) => {
     isList
   ) {
     detailView.classList.remove("active");
-    detailView.classList.remove("verified");
   }
 });
 
@@ -433,7 +443,7 @@ function verification() {
       category: {
         name,
         icon: image,
-        type: "expense",
+        type: "income",
       },
       account: {
         id,
@@ -446,28 +456,48 @@ function verification() {
     },
   ];
   let sturcturedData = {
-    date: "Aug 17, Saturday",
+    date:
+      new Date().toDateString().split(" ").slice(1, 3).join(" ") +
+      ", " +
+      daysOfWeek[new Date().getDay()],
     transactions: trans,
   };
   return sturcturedData;
 }
 saveTransactionBtn.addEventListener("click", () => {
-  
   let isVerified = verification();
-
+  let isthere = true;
   if (isVerified) {
-    // transactionHistory.push(isVerified);
-    parentTemplate(isVerified.date,isVerified.transactions)
+    transactionHistory.forEach((item) => {
+      if (
+        item.date ==
+        new Date().toDateString().split(" ").slice(1, 3).join(" ") +
+          ", " +
+          daysOfWeek[new Date().getDay()]
+      ) {
+        item.transactions.unshift(isVerified.transactions[0]);
+        isthere = false;
+      }
+    });
+
+    if (isthere) {
+      transactionHistory.unshift(isVerified);
+    }
+
+    mainContent.innerHTML = "";
+    transactionHistory.forEach((item) => {
+      let { date, transactions } = item;
+      parentTemplate(date, transactions);
+    });
+
     document.querySelectorAll(".sub-content li").forEach((li) => {
       li.addEventListener("click", () => {
         let id = li.dataset.id;
-        document.querySelector(".parent-detail-view").classList.add('verified')
         openDetailView(id);
       });
     });
     document.querySelector(".input-containers").classList.remove("active");
   }
-  
 });
 
 function showMessage(value) {
