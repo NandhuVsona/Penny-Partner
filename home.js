@@ -24,9 +24,6 @@ function exitFullscreen() {
   }
 }
 
-
-
-
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
 data.forEach((item) => {
@@ -283,11 +280,11 @@ addItem.addEventListener("click", () => {
   selectAccountBody.classList.remove("active");
   selectedCatBody.classList.remove("active");
   document.querySelector(".input-containers").classList.add("active");
-  history.pushState({ cardOpened: true }, " ", "card");
+  // history.pushState({ cardOpened: true }, " ", "card");
 });
 InputBoxClose.addEventListener("click", () => {
   document.querySelector(".input-containers").classList.remove("active");
-  history.back();
+  // history.back();
 });
 window.addEventListener("popstate", (e) => {
   document.querySelector(".input-containers").classList.remove("active");
@@ -295,7 +292,7 @@ window.addEventListener("popstate", (e) => {
 let calcBtns = document.querySelectorAll(".btns");
 let values = document.querySelector(".calc-values");
 let result = document.querySelector(".calc-answer");
-let query = "";
+let query = " ";
 calcBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     if (btn.value == "=") {
@@ -311,7 +308,6 @@ calcBtns.forEach((btn) => {
     }
     values.innerHTML += btn.value;
     query += btn.value;
-
     result.innerHTML = eval(query);
   });
 });
@@ -332,7 +328,10 @@ bunchAccounts.forEach((acc) => {
     let accountData = data.filter((d) => d.id == selectedAccount);
     addtransactonAccImg.setAttribute("src", accountData[0].imageSrc);
     addtransactonAccImg.style.filter = "invert(0)";
-    addtransactonAccName.textContent = accountData[0].accountName.length>6?accountData[0].accountName.slice(0,6)+"..":accountData[0].accountName;
+    addtransactonAccName.textContent =
+      accountData[0].accountName.length > 6
+        ? accountData[0].accountName.slice(0, 6) + ".."
+        : accountData[0].accountName;
   });
 });
 
@@ -391,9 +390,73 @@ function verification() {
     showMessage(errorData);
     return false;
   }
+  let amount;
+  let isValid = false;
+  let calcAnswer = document.querySelector(".calc-values").textContent;
+  try {
+    if (calcAnswer < 0) {
+      let errorData = {
+        title: "Negative number",
+        message: "Please provide positive number ",
+      };
+      showMessage(errorData);
+      return false;
+    } else if (calcAnswer == "" || calcAnswer == 0) {
+      let errorData = {
+        title: "Amount Error !",
+        message: "please enter the amount.. ",
+      };
+      showMessage(errorData);
+      return false;
+    }
+    amount = eval(calcAnswer);
+    isValid = true;
+  } catch (err) {
+    let errorData = {
+      title: "Math Error",
+      message: "Invalid expression",
+    };
+    showMessage(errorData);
+    return false;
+  }
+
+  let description =
+    document.getElementById("description-notes").value.trim() || "No notes";
+
+  let { accountName, imageSrc, id } = data.filter((d) => d.id == accId)[0];
+
+  let { name, image } = expenseCategories.filter((e) => e.id == catId)[0];
+
+  let trans = [
+    {
+      id: Math.ceil(Math.random() * 10000000),
+      category: {
+        name,
+        icon: image,
+        type: "expense",
+      },
+      account: {
+        id,
+        name: accountName,
+        icon: imageSrc,
+      },
+      amount,
+      date: "2024-08-01",
+      description,
+    },
+  ];
+  let sturcturedData = {
+    date: "Aug 17, Saturday",
+    transactions: trans,
+  };
+  return sturcturedData;
 }
 saveTransactionBtn.addEventListener("click", () => {
   let isVerified = verification();
+  
+  if (isVerified) {
+    parentTemplate(isVerified.date, isVerified.transactions);
+  }
 });
 
 function showMessage(value) {
