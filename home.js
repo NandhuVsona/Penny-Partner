@@ -67,8 +67,9 @@ let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
 let selectCatBtn = document.querySelector(".sub-head-two .category-body");
 let selectAccountBody = document.querySelector(".account-options-body");
 let bunchAccounts = document.querySelectorAll(".bunch-account");
-let selectedCatImg = document.querySelector(".category-body .child-body img")
-let selectedCatName = document.querySelector(".category-body .child-body p")
+let selectedCatImg = document.querySelector(".category-body .child-body img");
+let selectedCatName = document.querySelector(".category-body .child-body p");
+let saveTransactionBtn = document.querySelector(".add-transcation-save-btn");
 
 let selectedCatBody = document.querySelector(".category-options-body");
 let addtransactonAccImg = document.querySelector(
@@ -319,6 +320,10 @@ bunchAccounts.forEach((acc) => {
   acc.addEventListener("click", () => {
     selectAccountBody.classList.remove("active");
     let selectedAccount = acc.dataset.id;
+
+    document.querySelector(".account-body .child-body").dataset.id =
+      selectedAccount;
+
     let accountData = data.filter((d) => d.id == selectedAccount);
     addtransactonAccImg.setAttribute("src", accountData[0].imageSrc);
     addtransactonAccImg.style.filter = "invert(0)";
@@ -341,13 +346,66 @@ selectCatBtn.addEventListener("click", () => {
 
 let bunchCategory = document.querySelectorAll(".bunch-category");
 
-bunchCategory.forEach(cat =>{
-  cat.addEventListener("click",()=>{
+bunchCategory.forEach((cat) => {
+  cat.addEventListener("click", () => {
     selectedCatBody.classList.remove("active");
     let selectedCat = cat.dataset.id;
     let accountData = expenseCategories.filter((d) => d.id == selectedCat);
-    selectedCatImg.setAttribute("src",accountData[0].image);
+    document.querySelector(".category-body .child-body").dataset.id =
+      selectedCat;
+
+    selectedCatImg.setAttribute("src", accountData[0].image);
     selectedCatImg.style.filter = "invert(0)";
-    selectedCatName.textContent = accountData[0].name
-  })
-})
+    selectedCatName.textContent = accountData[0].name;
+  });
+});
+
+function verification() {
+  let accId = document.querySelector(".account-body .child-body").dataset.id;
+
+  let accIdIsSame = accId != "7876543310" ? false : true;
+  if (accIdIsSame) {
+    let errorData = {
+      title : "Account Error",
+      message : "Please select an account."
+    }
+    showMessage(errorData);
+    return false;
+  }
+  let catId = document.querySelector(".category-body .child-body").dataset.id;
+
+  let catIdIsSame = catId != "2876543210" ? false : true;
+  if (catIdIsSame) {
+    let errorData = {
+      title : "Category Error",
+      message : "Please select category."
+    }
+    showMessage(errorData);
+    return false;
+  }
+}
+saveTransactionBtn.addEventListener("click", () => {
+  let isVerified = verification();
+});
+
+function showMessage(value) {
+  let title = document.querySelector(".message-box .message");
+  let text = document.querySelector(".message-box .text");
+  text.textContent = value.message;
+  title.textContent = value.title
+  //for tostal
+  let successWidth = 100;
+  document.querySelector(".success-tostal").style.display = "flex";
+  const successIntervalId = setInterval(() => {
+    document.querySelector(".success-line").style.width =
+      successWidth - 1 + "%";
+    if (successWidth <= -10) {
+      
+      document.querySelector(".success-tostal").style.display = "none";
+      document.querySelector(".success-line").style.width ="100%";
+      clearInterval(successIntervalId);
+      successWidth = 0;
+    }
+    successWidth--;
+  }, 50);
+}
