@@ -225,7 +225,7 @@ viewLi.forEach((li) => {
   });
 });
 function openDetailView(id) {
-  document.querySelector(".parent-detail-view").classList.add('active')
+  document.querySelector(".parent-detail-view").classList.add("active");
   let incomeName = document.querySelector(".category-name-detail");
   let amount = document.querySelector(".respective-amount");
   let notes = document.querySelector(".notes p");
@@ -246,7 +246,6 @@ function openDetailView(id) {
   let togetherData = [];
   transactionHistory.forEach((item) => {
     let { transactions } = item;
-
     transactions.forEach((i) => togetherData.push(i));
   });
   data.push(togetherData.filter((data) => data.id == id));
@@ -453,10 +452,12 @@ function verification() {
   return sturcturedData;
 }
 saveTransactionBtn.addEventListener("click", () => {
+  
   let isVerified = verification();
 
   if (isVerified) {
-    parentTemplate(isVerified.date, isVerified.transactions);
+    // transactionHistory.push(isVerified);
+    parentTemplate(isVerified.date,isVerified.transactions)
     document.querySelectorAll(".sub-content li").forEach((li) => {
       li.addEventListener("click", () => {
         let id = li.dataset.id;
@@ -464,8 +465,9 @@ saveTransactionBtn.addEventListener("click", () => {
         openDetailView(id);
       });
     });
-
+    document.querySelector(".input-containers").classList.remove("active");
   }
+  
 });
 
 function showMessage(value) {
