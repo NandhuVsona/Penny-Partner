@@ -31,7 +31,7 @@ data.forEach((item) => {
   let template = `<li data-id="${item.id}" class="bunch-account">
                   <div class="left-part">
                     <img src="${item.imageSrc}" alt="">
-                    <p class="semi-bold">Savings</p>
+                    <p class="semi-bold">${item.accountName}</p>
                   </div>
                   <p class="semi-bold green">₹${item.formatedAmount}</p>
                 </li>`;
@@ -395,15 +395,15 @@ function showMessage(value) {
   title.textContent = value.title
   //for tostal
   let successWidth = 100;
+
   document.querySelector(".success-tostal").style.display = "flex";
   const successIntervalId = setInterval(() => {
     document.querySelector(".success-line").style.width =
       successWidth - 1 + "%";
     if (successWidth <= -10) {
-      
+      clearInterval(successIntervalId);
       document.querySelector(".success-tostal").style.display = "none";
       document.querySelector(".success-line").style.width ="100%";
-      clearInterval(successIntervalId);
       successWidth = 0;
     }
     successWidth--;
