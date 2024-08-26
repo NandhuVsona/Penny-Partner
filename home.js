@@ -24,6 +24,9 @@ function exitFullscreen() {
   }
 }
 
+
+
+
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
 data.forEach((item) => {
@@ -277,6 +280,8 @@ document.addEventListener("click", (e) => {
 });
 
 addItem.addEventListener("click", () => {
+  selectAccountBody.classList.remove("active");
+  selectedCatBody.classList.remove("active");
   document.querySelector(".input-containers").classList.add("active");
   history.pushState({ cardOpened: true }, " ", "card");
 });
@@ -327,7 +332,7 @@ bunchAccounts.forEach((acc) => {
     let accountData = data.filter((d) => d.id == selectedAccount);
     addtransactonAccImg.setAttribute("src", accountData[0].imageSrc);
     addtransactonAccImg.style.filter = "invert(0)";
-    addtransactonAccName.textContent = accountData[0].accountName;
+    addtransactonAccName.textContent = accountData[0].accountName.length>6?accountData[0].accountName.slice(0,6)+"..":accountData[0].accountName;
   });
 });
 
@@ -356,7 +361,10 @@ bunchCategory.forEach((cat) => {
 
     selectedCatImg.setAttribute("src", accountData[0].image);
     selectedCatImg.style.filter = "invert(0)";
-    selectedCatName.textContent = accountData[0].name;
+    selectedCatName.textContent =
+      accountData[0].name.length > 8
+        ? accountData[0].name.slice(0, 8) + ".."
+        : accountData[0].name;
   });
 });
 
@@ -366,9 +374,9 @@ function verification() {
   let accIdIsSame = accId != "7876543310" ? false : true;
   if (accIdIsSame) {
     let errorData = {
-      title : "Account Error",
-      message : "Please select an account."
-    }
+      title: "Account Error",
+      message: "Please select an account.",
+    };
     showMessage(errorData);
     return false;
   }
@@ -377,9 +385,9 @@ function verification() {
   let catIdIsSame = catId != "2876543210" ? false : true;
   if (catIdIsSame) {
     let errorData = {
-      title : "Category Error",
-      message : "Please select category."
-    }
+      title: "Category Error",
+      message: "Please select category.",
+    };
     showMessage(errorData);
     return false;
   }
@@ -392,7 +400,7 @@ function showMessage(value) {
   let title = document.querySelector(".message-box .message");
   let text = document.querySelector(".message-box .text");
   text.textContent = value.message;
-  title.textContent = value.title
+  title.textContent = value.title;
   //for tostal
   let successWidth = 100;
 
@@ -403,7 +411,7 @@ function showMessage(value) {
     if (successWidth <= -10) {
       clearInterval(successIntervalId);
       document.querySelector(".success-tostal").style.display = "none";
-      document.querySelector(".success-line").style.width ="100%";
+      document.querySelector(".success-line").style.width = "100%";
       successWidth = 0;
     }
     successWidth--;
