@@ -117,7 +117,6 @@ main section.account.blur img.active {
   -o-transition: filter 1s ease;
 }
 
-
 main section.active {
   display: flex;
 }
@@ -153,7 +152,7 @@ main section.active {
 .penny-info .top .expense {
   border-right: 1px solid grey;
 }
-.penny-info .bottom{
+.penny-info .bottom {
   display: flex;
   gap: 10px;
 }
@@ -305,16 +304,47 @@ main section.active {
 }
 .sidebar .settings ul li {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
   gap: 20px;
-
+  animation: slide-left 0.3s ease;
   padding: 15px;
+  -webkit-animation: slide-left 0.3s ease 0.2s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  transform: translate(-100px);
+  -webkit-transform: translate(-100px);
+  -moz-transform: translate(-100px);
+  -ms-transform: translate(-100px);
+  -o-transform: translate(-100px);
 }
-.sidebar .settings ul li p {
+.sidebar .settings ul li.theme{
+  animation-delay: .4s;
+}
+.sidebar .settings ul li.view-mode{
+  animation-delay: .8s;
+}
+@keyframes slide-left {
+  to {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    opacity: 1;
+  }
+}
+s .sidebar .settings ul li p {
   font-size: 18px;
   font-weight: 600;
+}
+.sidebar .settings ul li .left-part {
+  display: flex;
+  gap: 20px;
+}
+.sidebar .settings ul li .arrow-right {
+  opacity: 0.4;
 }
 
 .sidebar .settings ul li:hover {

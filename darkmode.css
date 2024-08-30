@@ -214,3 +214,9 @@
 .app.dark main section.budgets .right-portion .budget-operations p:hover {
   background-color: rgb(80, 80, 80) !important;
 }
+
+.app.dark .sidebar .settings ul li .arrow-right{
+  opacity: 0.4;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+}
