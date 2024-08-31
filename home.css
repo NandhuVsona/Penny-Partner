@@ -91,6 +91,9 @@
 }
 .added-day-info {
   margin-bottom: 15px;
+  width: 100%;
+  padding-bottom: 5px;
+  border-bottom:  1px solid rgb(172, 172, 172);
 }
 .transaction-history {
   display: flex;
@@ -153,7 +156,7 @@
 }
 .little-bold {
   font-weight: 500;
-  font-size: 17px;
+  font-size: 18px;
 }
 .transaction-amount {
   padding-right: 10px;
