@@ -310,7 +310,7 @@ main section.active {
   gap: 20px;
   animation: slide-left 0.3s ease;
   padding: 15px;
-  -webkit-animation: slide-left 0.3s ease 0.2s;
+  -webkit-animation: slide-left 0.3s ease .6s; 
   animation-fill-mode: forwards;
   opacity: 0;
   transform: translate(-100px);
@@ -318,12 +318,33 @@ main section.active {
   -moz-transform: translate(-100px);
   -ms-transform: translate(-100px);
   -o-transform: translate(-100px);
-}
+}       
 .sidebar .settings ul li.theme{
-  animation-delay: .4s;
+  transform: translateX(100px);
+  animation-delay: .3s;
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  -ms-transform: translateX(100px);
+  -o-transform: translateX(100px);
 }
-.sidebar .settings ul li.view-mode{
-  animation-delay: .8s;
+.sidebar .settings ul li.invite-friends{
+  transform: translateX(100px);
+  animation-delay: .3s;
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  -ms-transform: translateX(100px);
+  -o-transform: translateX(100px);
+}
+.sidebar .settings ul li.view-mode{      
+  animation-delay: .6s;
+}
+.sidebar .settings ul li.rating-reviews{
+  transform: translateX(100px);  
+  animation-delay: .3s;
+  -webkit-transform: translateX(100px);
+  -moz-transform: translateX(100px);
+  -ms-transform: translateX(100px);
+  -o-transform: translateX(100px);
 }
 @keyframes slide-left {
   to {
@@ -335,7 +356,7 @@ main section.active {
     opacity: 1;
   }
 }
-s .sidebar .settings ul li p {
+ .sidebar .settings ul li .left-part p {
   font-size: 18px;
   font-weight: 600;
 }
