@@ -909,7 +909,12 @@
         </nav>
       </footer>
       <div class="sidebar">
-        <img src="icons/close.svg" alt="" class="close" style="filter: invert(1);"/>
+        <img
+          src="icons/close.svg"
+          alt=""
+          class="close"
+          style="filter: invert(1)"
+        />
         <header>
           <img class="user-profile" src="images/men.png" alt="" />
           <h2>Hello Ganesh</h2>
@@ -946,40 +951,40 @@
             <li class="view-mode">
               <div class="left-part">
                 <img class="svg" src="icons/fullscreen.svg" alt="" />
-              <div class="info">
-                <p>Full Screen</p>
-                <small>For better user experience</small>
-              </div>
+                <div class="info">
+                  <p>Full Screen</p>
+                  <small>For better user experience</small>
+                </div>
               </div>
               <img class="arrow-right" src="./icons/arrowright.svg" alt="" />
             </li>
             <li class="rating-reviews">
               <div class="left-part">
                 <img class="svg" src="icons/star.svg" alt="" />
-              <div class="info">
-                <p>Reviews Rating</p>
-                <small>For better user experience</small>
-              </div>
+                <div class="info">
+                  <p>Reviews Rating</p>
+                  <small>For better user experience</small>
+                </div>
               </div>
               <img class="arrow-right" src="./icons/arrowright.svg" alt="" />
             </li>
             <li class="total-users">
               <div class="left-part">
                 <img class="svg" src="icons/tusers.svg" alt="" />
-              <div class="info">
-                <p>Total Users</p>
-                <small>Penny Partner users</small>
-              </div>
+                <div class="info">
+                  <p>Total Users</p>
+                  <small>Penny Partner users</small>
+                </div>
               </div>
               <img class="arrow-right" src="./icons/arrowright.svg" alt="" />
             </li>
             <li class="invite-friends">
               <div class="left-part">
                 <img class="svg" src="icons/share.svg" alt="" />
-              <div class="info">
-                <p>Invite Frineds</p>
-                <small>Invite your friends & family</small>
-              </div>
+                <div class="info">
+                  <p>Invite Frineds</p>
+                  <small>Invite your friends & family</small>
+                </div>
               </div>
               <img class="arrow-right" src="./icons/arrowright.svg" alt="" />
             </li>
@@ -1015,6 +1020,17 @@
           </ul>
         </div>
       </div>
+      <div class="pp-users-container">
+        <div id="user-count-body" class="hide">
+          <h2>PENNY PARTNER</h2>
+          <div class="outer">
+            <h1 id="user-count">0</h1>
+            <p class="total">Total Users</p>
+          </div>
+          <div class="message-thank"></div>
+          <button class="close-button">CLOSE</button>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="home.js"></script>
@@ -1024,5 +1040,7 @@
     <script defer type="module" src="functions.js"></script>
     <script defer type="module" src="category.js"></script>
     <script defer type="module" src="budget.js"></script>
+    <script src="animation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </body>
 </html>

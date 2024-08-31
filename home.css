@@ -1085,3 +1085,123 @@ background: linear-gradient(135deg, #7a02c5 0%, #2397d1 100%);
   background-color: rgb(255, 0, 0);
   transition: all 0.3s ease;
 }
+
+/* Styling for celebrate user count */
+.pp-users-container {
+  width: 100%;
+  height: 100vh;
+  display:none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  background-color: #00000066;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: none;
+  -webkit-animation: none;
+}
+.pp-users-container.active {
+  display: flex;
+}
+
+#user-count-body {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: 0px 10px;
+  gap: 10px;
+  transition: all 0.3s ease;
+  animation: open 0.3s ease;
+  border-radius: 10px;
+  animation: none;
+  color: #000000;
+  -webkit-animation: none;
+}
+@keyframes open {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#user-count-body button {
+  width: 100%;
+  height: 40px;
+}
+#user-count {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(36, 208, 255);
+  font-size: 45px;
+  position: relative;
+  overflow: hidden;
+  transition: all 1s ease 0.6s;
+ 
+}
+
+#user-count.active::before {
+  content: "";
+  width: 8px;
+  left: -20px;
+  transform: rotate(-30deg);
+  height: 10rem;
+  background-color: rgb(236, 236, 236);
+  position: absolute;
+  animation: shine-line 0.5s ease-in-out 0.5s;
+}
+@keyframes shine-line {
+  to {
+    left: 100%;
+  }
+}
+.close-button {
+  width: 100%;
+  height: 50px !important;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  background-color: rgb(27, 184, 53);
+  color: #fff;
+}
+
+.message-thank {
+  font-size: 17px;
+  text-align: center;
+}
+.total {
+  background-color: white;
+  padding: 5px 18px;
+  background-color: rgb(255, 191, 0);
+  position: absolute;
+  width: 100%;
+  bottom: -20px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+  text-align: center;
+}
+.outer {
+  position: relative;
+  margin-bottom: 15px;
+}
+#result.hide {
+  display: flex;
+}
+
+#user-count.active {
+  font-size: 55px;
+}
