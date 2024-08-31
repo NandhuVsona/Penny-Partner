@@ -120,8 +120,13 @@
   background-color: rgb(80, 80, 80) !important;
 }
 
-.app.dark .sidebar .settings ul li:hover {
-  background-color: rgb(53, 53, 53);
+
+
+@media  screen and (min-width:1024px) {
+  .sidebar .settings ul li:hover {
+    background-color: rgb(53, 53, 53);
+  }
+  
 }
 /* .app.dark main section.account.blurbg, */
 .app.dark main section.categories.blur,
