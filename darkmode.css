@@ -225,3 +225,12 @@
   filter: invert(1);
   -webkit-filter: invert(1);
 }
+
+.app.dark .pp-users-container #user-count-body{
+  background-color: #2d2a2a;
+  color: #ffffff;
+}
+.app.dark .pp-users-container{
+  background-color: #191919b9;
+ 
+}
