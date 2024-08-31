@@ -1,6 +1,6 @@
 let countContainer = document.querySelector(".pp-users-container");
 let userCount = document.getElementById("user-count");
-let totalUsers = 100;
+let totalUsers = 20;
 let i = 0;
 let sideBar = document.querySelector(".sidebar")
 // Calculate the interval time inversely proportional to the total user count
