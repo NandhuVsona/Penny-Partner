@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Penny Partner</title>
+    <link rel="icon" href="images/app-logo.png" type="image/png" />
     <link rel="stylesheet" href="darkmode.css" />
     <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="category.css" />
     <link rel="stylesheet" href="budget.css" />
+    <link rel="stylesheet" href="review.css">
   </head>
   <body>
     <div class="app">
@@ -1032,6 +1034,97 @@
           <button class="close-button">CLOSE</button>
         </div>
       </div>
+      <div class="rr-container">
+        <div class="review-input-container">
+          <div class="review-input-body">
+            <div class="app-logo-review">
+              <div class="app-logo">
+                <img src="images/app-logo.png" alt="" />
+              </div>
+              <p>Rate this web app</p>
+              <!-- <small>Tell others what you think.</small> -->
+            </div>
+            <div class="rating-star-container">
+              <input hidden type="tel" value="0" id="rateValue" />
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+            </div>
+            <div class="review-write">
+              <textarea
+                placeholder="Describe your experience"
+                name=""
+                id="calculate-word-len"
+                maxlength="500"
+              ></textarea>
+              <div class="word-count-body">
+                <small class="word-count">0/500</small>
+              </div>
+            </div>
+            <div class="review-post-body">
+              <button disabled class="review-post-btn">POST</button>
+            </div>
+          </div>
+        </div>
+        <header>
+          <div class="left">
+            <div class="app-header">
+              <img class="svg" src="images/app-logo.png" alt="" />
+              <h2>Penny Partner</h2>
+            </div>
+          </div>
+          <img class="svg write-pen" src="icons/edit.svg" alt="" />
+        </header>
+  
+        <!-- <p>Ratings and reviews</p> -->
+  
+        <div class="rr-body">
+          <div class="rating-num-left">
+            <h1>4.5</h1>
+            <div class="obtained-star-container"></div>
+            <div class="overall-star-container"></div>
+            <small>134</small>
+          </div>
+          <div class="rating-bar-right">
+            <ul class="rr-bar-container">
+              <li class="li-bar">
+                <p>5</p>
+                <div class="rating-review-bar bar-rating-5">
+                  <div class="child-bar-line"></div>
+                </div>
+              </li>
+              <li class="li-bar">
+                <p>4</p>
+                <div class="rating-review-bar bar-rating-4">
+                  <div class="child-bar-line"></div>
+                </div>
+              </li>
+              <li class="li-bar">
+                <p>3</p>
+                <div class="rating-review-bar bar-rating-3">
+                  <div class="child-bar-line"></div>
+                </div>
+              </li>
+              <li class="li-bar">
+                <p>2</p>
+                <div class="rating-review-bar bar-rating-2">
+                  <div class="child-bar-line"></div>
+                </div>
+              </li>
+              <li class="li-bar">
+                <p>1</p>
+                <div class="rating-review-bar bar-rating-1">
+                  <div class="child-bar-line"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <ul class="user-feedback"></ul>
+      </div>
     </div>
 
     <script type="module" src="home.js"></script>
@@ -1041,6 +1134,7 @@
     <script defer type="module" src="functions.js"></script>
     <script defer type="module" src="category.js"></script>
     <script defer type="module" src="budget.js"></script>
+    <script type="module" src="review.js"></script>
     <script src="animation.js"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>

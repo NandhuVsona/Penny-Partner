@@ -84,6 +84,8 @@ let selectedCatName = document.querySelector(".category-body .child-body p");
 let saveTransactionBtn = document.querySelector(".add-transcation-save-btn");
 let deleteHis = document.getElementsByClassName("delete-history");
 let selectedCatBody = document.querySelector(".category-options-body");
+let showReviews = document.querySelector(".rating-reviews");
+let rrContainer = document.querySelector(".rr-container");
 let addtransactonAccImg = document.querySelector(
   ".account-body .child-body img"
 );
@@ -609,3 +611,10 @@ categoryTick.forEach((item, index) => {
     changeAndUpdate();
   });
 });
+
+
+//Functionality for review page
+showReviews.addEventListener("click",()=>{
+  document.querySelector(".sidebar").classList.remove("active")
+  rrContainer.classList.toggle("active")
+})
