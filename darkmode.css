@@ -237,3 +237,6 @@
   background-color: #161616e2;
  
 }
+.app.dark .rr-container, .app.dark .rr-container header,.app.dark .rr-container .review-input-container{
+  background-color: #000000;
+}
