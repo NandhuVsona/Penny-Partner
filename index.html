@@ -123,25 +123,26 @@
                     <p class="semi-bold">SAVE</p>
                   </div>
                 </div>
-                <div class="sub-head-one">
-                  <div class="income-body">
+                <input type="text" hidden value="1" id="category-ticked" />
+                <ul class="sub-head-one">
+                  <li class="income-body" value="0">
+                    <img style="filter: invert(1)" class="svg" src="" alt="" />
+                    <p class="semi-bold">INCOME</p>
+                  </li>
+                  <li class="expense-body" value="1">
                     <img
                       style="filter: invert(1)"
                       class="svg"
-                      src="icons/designtick.svg"
+                      src="icons/tick.svg"
                       alt=""
                     />
-                    <p class="semi-bold">INCOME</p>
-                  </div>
-                  <div class="expense-body">
-                    <img class="svg" src="" alt="" />
                     <p class="semi-bold">EXPENSE</p>
-                  </div>
-                  <div class="transfer-body">
-                    <img class="svg" src="" alt="" />
+                  </li>
+                  <li class="transfer-body" value="2">
+                    <img style="filter: invert(1)" class="svg" src="" alt="" />
                     <p class="semi-bold">TRANSFER</p>
-                  </div>
-                </div>
+                  </li>
+                </ul>
                 <div class="sub-head-two">
                   <div class="account-body">
                     <p class="change-font-style">Account</p>
@@ -1022,7 +1023,7 @@
       </div>
       <div class="pp-users-container">
         <div id="user-count-body" class="hide">
-          <h2>PENNY PARTNER</h2>
+          <h2>Penny Partner</h2>
           <div class="outer">
             <h1 id="user-count">0</h1>
             <p class="total">Total Users</p>
@@ -1041,6 +1042,7 @@
     <script defer type="module" src="category.js"></script>
     <script defer type="module" src="budget.js"></script>
     <script src="animation.js"></script>
+  
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </body>
 </html>

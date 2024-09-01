@@ -1,32 +1,39 @@
 export const incomeCategories = [
   {
+    id: 19,
     name: "Awards",
     image: "icons/Income-expense/awards.jpg",
   },
 
   {
+    id: 20,
     name: "Salary",
     image: "icons/Income-expense/salary.jpg",
   },
 
   {
+    id: 21,
     name: "Lottery",
     image: "icons/Income-expense/lottery.jpg",
   },
   {
+    id: 22,
     name: "Refunds",
     image: "icons/Income-expense/refunds.jpg",
   },
   {
+    id: 23,
     name: "Grants",
     image: "icons/Income-expense/gift.jpg",
   },
 
   {
+    id: 24,
     name: "Rent",
     image: "icons/Income-expense/rent.jpg",
   },
   {
+    id: 25,
     name: "Sale",
     image: "icons/Income-expense/sales.png",
   },
@@ -124,5 +131,3 @@ export const expenseCategories = [
     image: "icons/Income-expense/bus.jpg",
   },
 ];
-
- 

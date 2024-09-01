@@ -93,7 +93,7 @@
   margin-bottom: 15px;
   width: 100%;
   padding-bottom: 5px;
-  border-bottom:  1px solid rgb(172, 172, 172);
+  border-bottom: 1px solid rgb(172, 172, 172);
 }
 .transaction-history {
   display: flex;
@@ -603,6 +603,7 @@
   animation: topup 0.7s ease-out;
   -webkit-animation: topup 0.7s ease-out;
   animation-fill-mode: forwards;
+ 
 }
 .input-containers .top-portion .sub-head-one::before {
   position: absolute;
@@ -613,7 +614,7 @@
   top: 17%;
   left: 15px;
   right: 15px;
-  background: linear-gradient(135deg, #7a02c5 0%, #2397d1 100%);
+  /* background: linear-gradient(135deg, #7a02c5 0%, #2397d1 100%); */
   z-index: -1;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -873,7 +874,6 @@
 .main-input-box {
   width: 100%;
 }
-
 .sub-division {
   display: flex;
   height: 100px;
@@ -994,6 +994,20 @@
   flex-direction: column;
   width: 60px;
   flex-grow: 1;
+}
+.category-options-body ul li .left-part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.category-options-body ul li p {
+  font-size: 21px;
+  font-weight: 500;
+}
+.category-options-body ul.parent-box li .left-part img {
+  width: 50px;
+  height: 50px;
 }
 .category-options-body ul li img {
   width: 50px;
@@ -1151,7 +1165,6 @@
   position: relative;
   overflow: hidden;
   transition: all 1s ease 0.6s;
-  
 }
 
 #user-count.active::before {
@@ -1186,7 +1199,6 @@
   text-align: center;
 }
 .total {
- 
   padding: 5px 18px;
   background-color: rgb(255, 191, 0);
   position: absolute;

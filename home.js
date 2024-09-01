@@ -1,4 +1,4 @@
-import { expenseCategories } from "./data/categories.js";
+import { expenseCategories, incomeCategories } from "./data/categories.js";
 
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
@@ -24,9 +24,19 @@ function exitFullscreen() {
   }
 }
 
+let togetherCategories = [];
+expenseCategories.forEach((i) => togetherCategories.push(i));
+incomeCategories.forEach((i) => togetherCategories.push(i));
+
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
+
 data.forEach((item) => {
+  togetherCategories.push({
+    id: item.id,
+    name: item.accountName,
+    image: item.imageSrc,
+  });
   let existingAccounts = document.querySelector(".parent-box");
   let template = `<li data-id="${item.id}" class="bunch-account">
                   <div class="left-part">
@@ -57,6 +67,7 @@ import { transactionHistory } from "./data/homedata.js";
 
 let mainContent = document.querySelector(".main-content");
 
+let categoryTicked = document.getElementById("category-ticked");
 let dataAnalysContainer = document.querySelector(".data-container");
 let analysisOpt = document.querySelectorAll(".category-options p");
 let currentView = document.querySelector(".current-view");
@@ -67,6 +78,7 @@ let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
 let selectCatBtn = document.querySelector(".sub-head-two .category-body");
 let selectAccountBody = document.querySelector(".account-options-body");
 let bunchAccounts = document.querySelectorAll(".bunch-account");
+let categoryTick = document.querySelectorAll(".sub-head-one li");
 let selectedCatImg = document.querySelector(".category-body .child-body img");
 let selectedCatName = document.querySelector(".category-body .child-body p");
 let saveTransactionBtn = document.querySelector(".add-transcation-save-btn");
@@ -346,38 +358,66 @@ bunchAccounts.forEach((acc) => {
         : accountData[0].accountName;
   });
 });
-
-expenseCategories.forEach((cat) => {
-  let template = `<li data-id=${cat.id} class="bunch-category">
-                  <img src="${cat.image}" alt="" />
-                  <small>${cat.name}</small>
-                </li>`;
-  categoryOptions.innerHTML += template;
-});
+changeCategory(1);
+function changeCategory(num) {
+  categoryOptions.innerHTML = " ";
+  if (num == 1) {
+    expenseCategories.forEach((cat) => {
+      let template = `<li data-id=${cat.id} class="bunch-category">
+                      <img src="${cat.image}" alt="" />
+                      <small>${cat.name}</small>
+                    </li>`;
+      categoryOptions.innerHTML += template;
+    });
+  } else if (num == 0) {
+    incomeCategories.forEach((cat) => {
+      let template = `<li data-id=${cat.id} class="bunch-category">
+                      <img src="${cat.image}" alt="" />
+                      <small>${cat.name}</small>
+                    </li>`;
+      categoryOptions.innerHTML += template;
+    });
+  } else {
+    //function for localstorage
+    let data = JSON.parse(localStorage.getItem("data")) || [];
+    console.log(data);
+    data.forEach((cat) => {
+      let template = `<li data-id="${cat.id}" class="bunch-category">
+                      <img src="${cat.imageSrc}" alt="" />
+                      <small>${cat.accountName}</small>
+                    </li>`;
+      categoryOptions.innerHTML += template;
+    });
+    console.log("transefer");
+  }
+}
 
 selectCatBtn.addEventListener("click", () => {
   selectAccountBody.classList.remove("active");
   selectedCatBody.classList.toggle("active");
 });
+changeAndUpdate();
+function changeAndUpdate() {
+  let bunchCategory = document.querySelectorAll(".bunch-category");
 
-let bunchCategory = document.querySelectorAll(".bunch-category");
+  bunchCategory.forEach((cat) => {
+    cat.addEventListener("click", () => {
+      selectedCatBody.classList.remove("active");
+      let selectedCat = cat.dataset.id;
+      console.log(selectedCat);
+      let accountData = togetherCategories.filter((d) => d.id == selectedCat);
+      document.querySelector(".category-body .child-body").dataset.id =
+        selectedCat;
 
-bunchCategory.forEach((cat) => {
-  cat.addEventListener("click", () => {
-    selectedCatBody.classList.remove("active");
-    let selectedCat = cat.dataset.id;
-    let accountData = expenseCategories.filter((d) => d.id == selectedCat);
-    document.querySelector(".category-body .child-body").dataset.id =
-      selectedCat;
-
-    selectedCatImg.setAttribute("src", accountData[0].image);
-    selectedCatImg.style.filter = "invert(0)";
-    selectedCatName.textContent =
-      accountData[0].name.length > 8
-        ? accountData[0].name.slice(0, 8) + ".."
-        : accountData[0].name;
+      selectedCatImg.setAttribute("src", accountData[0].image);
+      selectedCatImg.style.filter = "invert(0)";
+      selectedCatName.textContent =
+        accountData[0].name.length > 8
+          ? accountData[0].name.slice(0, 8) + ".."
+          : accountData[0].name;
+    });
   });
-});
+}
 
 function verification() {
   let accId = document.querySelector(".account-body .child-body").dataset.id;
@@ -541,3 +581,31 @@ function deleteView() {
   }
 }
 deleteView();
+
+categoryTick.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    document.querySelector(
+      ".category-body .child-body"
+    ).dataset.id = 2876543210;
+
+    selectedCatImg.setAttribute("src", "icons/category.svg");
+    selectedCatImg.style.filter = "invert(1)";
+    selectedCatName.textContent = "Category";
+    categoryTick.forEach((cat) => cat.children[0].removeAttribute("src"));
+    categoryTick[index].children[0].setAttribute("src", "icons/tick.svg");
+    if (categoryTick[index].value == 0) {
+      categoryTicked.value = 0;
+      changeCategory(0);
+    } else if (categoryTick[index].value == 1) {
+      categoryTicked.value = 1;
+      changeCategory(1);
+    } else {
+      console.log("acc");
+      selectedCatImg.setAttribute("src", "icons/account.svg");
+      selectedCatImg.style.filter = "invert(1)";
+      selectedCatName.textContent = "Account";
+      changeCategory(2);
+    }
+    changeAndUpdate();
+  });
+});

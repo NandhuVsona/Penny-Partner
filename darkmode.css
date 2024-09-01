@@ -227,10 +227,13 @@
 }
 
 .app.dark .pp-users-container #user-count-body{
-  background-color: #2d2a2a;
+  background-color: #1e1e1e;
   color: #ffffff;
 }
+.app.dark .pp-users-container #user-count{
+  color: #000000 !important;
+}
 .app.dark .pp-users-container{
-  background-color: #191919b9;
+  background-color: #161616e2;
  
 }
