@@ -639,5 +639,10 @@ function goHomePage(){
 }
 
 myAccountBtn.addEventListener("click",()=>{
-  myAccount.classList.toggle("active")
+  myAccount.classList.add("active")
+})
+
+
+document.querySelector(".account-back-btn").addEventListener("click",()=>{
+  myAccount.classList.remove("active")
 })

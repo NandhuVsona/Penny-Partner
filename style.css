@@ -632,8 +632,11 @@ main section.active {
   display: none;
   flex-direction: column;
   justify-content: start;
-  padding: 10px 15px;
+  padding: 10px;
   background-color:#ffffff;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
   
 }
 .app.dark .my-account-container{
@@ -724,9 +727,7 @@ main section.active {
 .my-account-container .settings ul li .arrow-right {
   opacity: 0.4;
 }
- header .left img {
-  width: 30px;
-}
+
 
 .my-account-container .app-header {
   display: flex;
@@ -736,4 +737,6 @@ main section.active {
 }
 .my-account-container .app-header img {
   width: 25px;
+  filter:brightness(11);
+  -webkit-filter:brightness(11);
 }

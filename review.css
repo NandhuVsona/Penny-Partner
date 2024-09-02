@@ -383,7 +383,7 @@ li.li-bar {
 }
 
 
-.review-back-btn {
+.review-back-btn,.account-back-btn {
   position: fixed;
   bottom: 25px;
   right: 15px;
