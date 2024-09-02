@@ -11,6 +11,7 @@
   color: #ffffff;
 }
 
+
 .app.dark img.svg {
   filter: invert(1);
   -webkit-filter: invert(1);
@@ -239,4 +240,9 @@
 }
 .app.dark .rr-container, .app.dark .rr-container header,.app.dark .rr-container .review-input-container{
   background-color: #000000;
+}
+
+.app.dark .star-shadow{
+ filter: invert(1);
+ -webkit-filter: invert(1);
 }

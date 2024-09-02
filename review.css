@@ -398,4 +398,10 @@ li.li-bar {
   -o-border-radius: 50%;
   z-index: 1;
 }
-
+.review-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+}

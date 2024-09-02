@@ -24,7 +24,7 @@ function handleReviewStar(num) {
     if (i < num) {
       star += '<img src="icons/filledstar.svg" alt="" />';
     } else {
-      star += '<img src="icons/star.svg" alt="" />';
+      star += '<img class="star-shadow" src="icons/star.svg" alt="" />';
     }
   }
   return star;
@@ -36,7 +36,7 @@ function loadReviews() {
     let template = ` <li class="review-card">
       <div class="review-card-head">
         <div class="review-left-part">
-          <div style="background-color:${getRandomColor()}" class="img"></div>
+          <div style="background-color:${getRandomColor()}" class="img review-profile">${data.reviewer.charAt(0).toLocaleUpperCase()}</div>
           <p>${data.reviewer}</p>
         </div>
         <div class="review-operations">
@@ -114,7 +114,7 @@ postBtn.addEventListener("click", () => {
     reviewer: "Naveen V",
     rating: rateValue.value,
     comment: feedBack.value.trim(),
-    date: `${year}/${month}/${day}`,
+    date: `${year}-${month}-${day}`,
   };
 
   reviewData.unshift(reviewObj);
