@@ -374,11 +374,23 @@ li.li-bar {
 .rr-container header .left img {
   width: 30px;
 }
+ header .left .app-header img {
+  width: 25px;
+  user-select: none;
+  resize: none;
+}
 .app-header {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+.main .left .app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  
 }
 
 .review-back-btn{

@@ -5,6 +5,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   user-select: none;
+  -webkit-user-drag: none;
 }
 :root {
   --blur: rgb(160, 160, 160);
@@ -57,6 +58,19 @@ footer {
   background-color: #ffffff;
   width: 100%;
 }
+.slider {
+  position: absolute;
+  top: 0;
+left: 10px;
+  transition: left .3s ease;
+  width: 10%;
+  height: 5%;
+  background-color: rgb(0, 0, 0);
+  -webkit-transition: left .3s ease;
+  -moz-transition: left .3s ease;
+  -ms-transition: left .3s ease;
+  -o-transition: left .3s ease;
+}
 footer nav ul {
   list-style: none;
 }
@@ -73,6 +87,7 @@ footer nav ul li {
   align-items: center;
   font-size: 14px;
 }
+
 
 main {
   display: flex;
@@ -313,7 +328,6 @@ main section.active {
   -webkit-animation: slide-left 0.3s ease 0.6s;
   animation-fill-mode: forwards;
   opacity: 1;
-  
 }
 
 .sidebar .settings ul li .left-part p {
@@ -328,11 +342,10 @@ main section.active {
   opacity: 0.4;
 }
 
-@media  screen and (min-width:1024px) {
+@media screen and (min-width: 1024px) {
   .sidebar .settings ul li:hover {
     background-color: rgb(225, 225, 225);
   }
-  
 }
 /* accoutn add style */
 .box-body,
