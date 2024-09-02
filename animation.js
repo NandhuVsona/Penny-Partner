@@ -82,3 +82,23 @@ document.addEventListener("click", (e) => {
     countContainer.classList.remove("active");
   }
 });
+
+
+
+//SHARE FUNCTIONALITY 
+document.getElementById('invite-friends').addEventListener('click', async function() {
+  if (navigator.share) {
+      try {
+          await navigator.share({
+              title: 'Check this out!',
+              text: 'Here is something interesting I found.',
+              url: window.location.href
+          });
+         
+      } catch (error) {
+          console.error('Error sharing content:', error);
+      }
+  } else {
+      alert('Web Share API is not supported in your browser.');
+  }
+});
