@@ -86,6 +86,8 @@ let deleteHis = document.getElementsByClassName("delete-history");
 let selectedCatBody = document.querySelector(".category-options-body");
 let showReviews = document.querySelector(".rating-reviews");
 let rrContainer = document.querySelector(".rr-container");
+let myAccount = document.querySelector(".my-account-container");
+let myAccountBtn = document.querySelector(".show-my-account");
 let addtransactonAccImg = document.querySelector(
   ".account-body .child-body img"
 );
@@ -635,3 +637,7 @@ function goHomePage(){
     rrContainer.classList.remove("active")
   }
 }
+
+myAccountBtn.addEventListener("click",()=>{
+  myAccount.classList.toggle("active")
+})

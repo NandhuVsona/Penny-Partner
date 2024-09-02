@@ -381,12 +381,7 @@ li.li-bar {
   align-items: center;
   gap: 10px;
 }
-.main .left .app-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
+
 
 .review-back-btn {
   position: fixed;
