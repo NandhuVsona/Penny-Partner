@@ -154,11 +154,12 @@ function loadBars() {
       fiveStar++;
     }
   });
-  document.querySelector(".bar-rating-5 .child-bar-line").style.width = (fiveStar/5)*100 + "%";
-  document.querySelector(".bar-rating-4 .child-bar-line").style.width = (fourStar/5)*100 + "%";
-  document.querySelector(".bar-rating-3 .child-bar-line").style.width = (threeStar/5)*100 + "%";
-  document.querySelector(".bar-rating-2 .child-bar-line").style.width = (twoStar/5)*100 + "%";
-  document.querySelector(".bar-rating-1 .child-bar-line").style.width = (oneStar/5)*100 + "%";
+  let totalReviews = reviewData.length;
+  document.querySelector(".bar-rating-5 .child-bar-line").style.width = (fiveStar/totalReviews)*100 + "%";
+  document.querySelector(".bar-rating-4 .child-bar-line").style.width = (fourStar/totalReviews)*100 + "%";
+  document.querySelector(".bar-rating-3 .child-bar-line").style.width = (threeStar/totalReviews)*100 + "%";
+  document.querySelector(".bar-rating-2 .child-bar-line").style.width = (twoStar/totalReviews)*100 + "%";
+  document.querySelector(".bar-rating-1 .child-bar-line").style.width = (oneStar/totalReviews)*100 + "%";
 }
 
 loadBars();

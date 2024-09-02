@@ -618,3 +618,20 @@ showReviews.addEventListener("click",()=>{
   document.querySelector(".sidebar").classList.remove("active")
   rrContainer.classList.toggle("active")
 })
+
+
+// Back butn functionality
+
+let backBtn = document.querySelector(".review-back-btn")
+let reviewBox = document.querySelector(".review-input-container");
+
+backBtn.addEventListener("click",goHomePage)
+
+function goHomePage(){
+  if(reviewBox.classList.contains("active") && rrContainer.classList.contains("active")){
+    reviewBox.classList.remove("active")
+  }
+  else{
+    rrContainer.classList.remove("active")
+  }
+}
