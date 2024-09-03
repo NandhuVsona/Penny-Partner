@@ -1,4 +1,4 @@
-import { fakeReviews } from "./data/reviews.js";
+import { fakeReviews } from "../data/reviews.js";
 let reviewData = fakeReviews;
 
 let wordCount = document.querySelector(".word-count");

@@ -1,4 +1,4 @@
-import { expenseCategories, incomeCategories } from "./data/categories.js";
+import { expenseCategories, incomeCategories } from "../data/categories.js";
 
 
 

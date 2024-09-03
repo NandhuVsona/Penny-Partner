@@ -1,4 +1,4 @@
-import { expenseCategories, incomeCategories } from "./data/categories.js";
+import { expenseCategories, incomeCategories } from "../data/categories.js";
 
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
@@ -63,7 +63,7 @@ fullScreenMode.addEventListener("click", () => {
 
 //heme page functionality------------------------------------------------------------
 
-import { transactionHistory } from "./data/homedata.js";
+import { transactionHistory } from "../data/homedata.js";
 
 let mainContent = document.querySelector(".main-content");
 
@@ -97,11 +97,6 @@ let addtransactonAccName = document.querySelector(
 let categoryOptions = document.querySelector(
   ".category-options-body .parent-box"
 );
-
-transactionHistory.forEach((item) => {
-  let { date, transactions } = item;
-  parentTemplate(date, transactions);
-});
 
 const daysOfWeek = [
   "Monday",
@@ -159,25 +154,25 @@ let totalTags = document.querySelectorAll(".total-box p+p");
 let incomeAmount = 0;
 let expenseAmount = 0;
 
-//for incomes
-transactionHistory.forEach((data) => {
-  let { transactions } = data;
-  incomeAmount += transactions.reduce((accumulator, item) => {
-    if (item.category.type == "income") {
-      return accumulator + item.amount;
-    } else {
-      return accumulator + 0;
-    }
-  }, 0);
+// //for incomes
+// transactionHistory.forEach((data) => {
+//   let { transactions } = data;
+//   incomeAmount += transactions.reduce((accumulator, item) => {
+//     if (item.category.type == "income") {
+//       return accumulator + item.amount;
+//     } else {
+//       return accumulator + 0;
+//     }
+//   }, 0);
 
-  expenseAmount += transactions.reduce((accumulator, item) => {
-    if (item.category.type == "expense") {
-      return accumulator + item.amount;
-    } else {
-      return accumulator + 0;
-    }
-  }, 0);
-});
+//   expenseAmount += transactions.reduce((accumulator, item) => {
+//     if (item.category.type == "expense") {
+//       return accumulator + item.amount;
+//     } else {
+//       return accumulator + 0;
+//     }
+//   }, 0);
+// });
 
 incomeTags.forEach((tag) => {
   tag.innerHTML = "₹" + incomeAmount.toLocaleString();
@@ -209,24 +204,24 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
-overview("income");
+// overview("income");
 
-function overview(category) {
-  dataAnalysContainer.innerHTML = " ";
-  transactionHistory.forEach((data) => {
-    let { transactions } = data;
-    transactions.forEach((item) => {
-      if (item.category.type == category) {
-        let amount = item.amount;
-        let divideValue = category == "income" ? incomeAmount : expenseAmount;
-        let name = item.category.name;
-        let src = item.category.icon;
-        let percentage = ((amount / divideValue) * 100).toFixed("2");
-        analysis(src, name, amount, percentage);
-      }
-    });
-  });
-}
+// function overview(category) {
+//   dataAnalysContainer.innerHTML = " ";
+//   transactionHistory.forEach((data) => {
+//     let { transactions } = data;
+//     transactions.forEach((item) => {
+//       if (item.category.type == category) {
+//         let amount = item.amount;
+//         let divideValue = category == "income" ? incomeAmount : expenseAmount;
+//         let name = item.category.name;
+//         let src = item.category.icon;
+//         let percentage = ((amount / divideValue) * 100).toFixed("2");
+//         analysis(src, name, amount, percentage);
+//       }
+//     });
+//   });
+// }
 
 analysisOpt.forEach((opt) => {
   opt.addEventListener("click", (e) => {
@@ -687,9 +682,8 @@ function changeDate(increament) {
   document
     .querySelectorAll(".month")
     .forEach((head) => (head.innerHTML = `${months[month]} ${year}`));
+  loadHistory(`${months[month]} ${year}`)
 }
-
-
 
 // Initial date display
 
@@ -703,5 +697,28 @@ leftArrows.forEach((larrow) => {
 rightArrows.forEach((rarrow) => {
   rarrow.addEventListener("click", () => {
     changeDate(1);
+    
   });
 });
+
+function loadHistory(value){
+  let requestedData = transactionHistory.filter(record => record.month == value);
+  console.log(requestedData)
+ if(requestedData.length >0){
+  mainContent.innerHTML = '';
+  requestedData.forEach((item) => {
+    let { id, month, data } = item;
+    data.forEach((his) => {
+      let { date, transactions } = his;
+  
+      parentTemplate(date, transactions);
+    });
+  });
+ }else{
+  mainContent.innerHTML = '<h1>No data is there!</h1>';
+
+ }
+}
+
+loadHistory(`${months[month]} ${year}`)
+

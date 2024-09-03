@@ -1,4 +1,4 @@
-import { transactionHistory } from "./data/homedata.js";
+import { transactionHistory } from "../data/homedata.js";
 
 const ctx = document.getElementById("myChart");
 // let daa = [];

@@ -1,4 +1,4 @@
-import { expenseCategories } from "./data/categories.js";
+import { expenseCategories } from "../data/categories.js";
 let parent = document.querySelector(".budget-list");
 let budgetedCategories = [];
 let updatedArray = expenseCategories;
