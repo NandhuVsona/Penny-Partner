@@ -246,3 +246,7 @@
  filter: invert(1);
  -webkit-filter: invert(1);
 }
+.app.dark .arrow-right{
+  filter:  invert(.8);
+  -webkit-filter:  invert(.8);
+}
