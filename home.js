@@ -660,46 +660,48 @@ const months = [
   "November",
   "December",
 ];
-const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 const currentDate = new Date();
-let day = currentDate.getDate();
-let month = currentDate.getMonth(); // 0-indexed
+let x = currentDate.getMonth(); // 0-indexed
+let month = x;
+console.log(month);
 let year = currentDate.getFullYear();
+document
+  .querySelectorAll(".month")
+  .forEach((head) => (head.innerHTML = `${months[month]} ${year}`));
+
 // Function to update the date
-function changeDate() {
-  // Increment the day
-  day++;
+function changeDate(increament) {
+  month = month + increament;
 
-  // Check if we need to move to the next month
-  if (day > daysInMonth[month]) {
-    day = 1;
-    month++;
-
-    // Check if we need to move to the next year
-    if (month > 11) {
-      month = 0;
-      year++;
-    }
+  if (month > 11) {
+    month = 0;
+    year++;
+  }
+  if (month < 0) {
+    year--;
+    month = 11;
   }
 
   // Display the updated date
-  document.querySelectorAll(
-    ".month"
-  ).forEach(head => head.innerHTML = `${day} ${months[month]} ${year}`)
+  document
+    .querySelectorAll(".month")
+    .forEach((head) => (head.innerHTML = `${months[month]} ${year}`));
 }
 
-// Attach the click event to the button
-document
-  .querySelectorAll(".right-arrow")[0]
-  .addEventListener("click", changeDate);
+
 
 // Initial date display
-changeDate();
+
 let leftArrows = document.querySelectorAll(".left-arrow");
 let rightArrows = document.querySelectorAll(".right-arrow");
-leftArrows.forEach(larrow =>{
-  larrow.addEventListener("click",changeDate)
-})
-rightArrows.forEach(rarrow =>{
-  rarrow.addEventListener("click",changeDate)
-})
+leftArrows.forEach((larrow) => {
+  larrow.addEventListener("click", () => {
+    changeDate(-1);
+  });
+});
+rightArrows.forEach((rarrow) => {
+  rarrow.addEventListener("click", () => {
+    changeDate(1);
+  });
+});
