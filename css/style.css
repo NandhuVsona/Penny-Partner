@@ -661,7 +661,10 @@ main section.active {
   border-radius: 10px;
   animation: come-up .3s ease;
   -webkit-animation: come-up .3s ease;
-
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 .app.dark .account-container-body{
   background-color:#050505;

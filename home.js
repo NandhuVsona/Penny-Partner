@@ -614,35 +614,92 @@ categoryTick.forEach((item, index) => {
   });
 });
 
-
 //Functionality for review page
-showReviews.addEventListener("click",()=>{
-  document.querySelector(".sidebar").classList.remove("active")
-  rrContainer.classList.toggle("active")
-})
-
+showReviews.addEventListener("click", () => {
+  document.querySelector(".sidebar").classList.remove("active");
+  rrContainer.classList.toggle("active");
+});
 
 // Back butn functionality
 
-let backBtn = document.querySelector(".review-back-btn")
+let backBtn = document.querySelector(".review-back-btn");
 let reviewBox = document.querySelector(".review-input-container");
 
-backBtn.addEventListener("click",goHomePage)
+backBtn.addEventListener("click", goHomePage);
 
-function goHomePage(){
-  if(reviewBox.classList.contains("active") && rrContainer.classList.contains("active")){
-    reviewBox.classList.remove("active")
-  }
-  else{
-    rrContainer.classList.remove("active")
+function goHomePage() {
+  if (
+    reviewBox.classList.contains("active") &&
+    rrContainer.classList.contains("active")
+  ) {
+    reviewBox.classList.remove("active");
+  } else {
+    rrContainer.classList.remove("active");
   }
 }
 
-myAccountBtn.addEventListener("click",()=>{
-  myAccount.classList.add("active")
+myAccountBtn.addEventListener("click", () => {
+  myAccount.classList.add("active");
+});
+
+document.querySelector(".account-back-btn").addEventListener("click", () => {
+  myAccount.classList.remove("active");
+});
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const currentDate = new Date();
+let day = currentDate.getDate();
+let month = currentDate.getMonth(); // 0-indexed
+let year = currentDate.getFullYear();
+// Function to update the date
+function changeDate() {
+  // Increment the day
+  day++;
+
+  // Check if we need to move to the next month
+  if (day > daysInMonth[month]) {
+    day = 1;
+    month++;
+
+    // Check if we need to move to the next year
+    if (month > 11) {
+      month = 0;
+      year++;
+    }
+  }
+
+  // Display the updated date
+  document.querySelectorAll(
+    ".month"
+  ).forEach(head => head.innerHTML = `${day} ${months[month]} ${year}`)
+}
+
+// Attach the click event to the button
+document
+  .querySelectorAll(".right-arrow")[0]
+  .addEventListener("click", changeDate);
+
+// Initial date display
+changeDate();
+let leftArrows = document.querySelectorAll(".left-arrow");
+let rightArrows = document.querySelectorAll(".right-arrow");
+leftArrows.forEach(larrow =>{
+  larrow.addEventListener("click",changeDate)
 })
-
-
-document.querySelector(".account-back-btn").addEventListener("click",()=>{
-  myAccount.classList.remove("active")
+rightArrows.forEach(rarrow =>{
+  rarrow.addEventListener("click",changeDate)
 })
