@@ -715,7 +715,12 @@ function loadHistory(value){
     });
   });
  }else{
-  mainContent.innerHTML = '<h1>No data is there!</h1>';
+  mainContent.innerHTML = `<div class="no-content-container">
+                <img src="images/404.png" alt="" />
+                <p>
+                  No record in this month. Tap + to add new expense or income.
+                </p>
+              </div>`
 
  }
 }
