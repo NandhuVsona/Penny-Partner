@@ -267,8 +267,13 @@ function openDetailView(id) {
   let data = new Array();
   let togetherData = [];
   transactionHistory.forEach((item) => {
-    let { transactions } = item;
-    transactions.forEach((i) => togetherData.push(i));
+    item.data.forEach(i=>{
+     let { transactions} = i;
+      transactions.forEach((i) => togetherData.push(i));
+    })
+   
+   
+    
   });
   data.push(togetherData.filter((data) => data.id == id));
   let info = data[0][0];
@@ -282,6 +287,7 @@ function openDetailView(id) {
   cardOperations.dataset.id = info.id;
   card.classList.add(info.category.type + "Bg");
 }
+console.log(transactionHistory)
 
 document.addEventListener("click", (e) => {
   let viewLi = document.querySelectorAll(".sub-content li");
@@ -291,12 +297,17 @@ document.addEventListener("click", (e) => {
       isList = false;
     }
   });
+ try{
   if (
     !document.querySelector(".detail-view-container").contains(e.target) &&
     isList
   ) {
     detailView.classList.remove("active");
   }
+ }catch(err){
+ 
+  console.log(err)
+ }
 });
 
 addItem.addEventListener("click", () => {
@@ -659,7 +670,6 @@ const months = [
 const currentDate = new Date();
 let x = currentDate.getMonth(); // 0-indexed
 let month = x;
-console.log(month);
 let year = currentDate.getFullYear();
 document
   .querySelectorAll(".month")
@@ -682,7 +692,7 @@ function changeDate(increament) {
   document
     .querySelectorAll(".month")
     .forEach((head) => (head.innerHTML = `${months[month]} ${year}`));
-  loadHistory(`${months[month]} ${year}`)
+  loadHistory(`${months[month]} ${year}`);
 }
 
 // Initial date display
@@ -697,33 +707,43 @@ leftArrows.forEach((larrow) => {
 rightArrows.forEach((rarrow) => {
   rarrow.addEventListener("click", () => {
     changeDate(1);
-    
   });
 });
 
-function loadHistory(value){
-  let requestedData = transactionHistory.filter(record => record.month == value);
-  console.log(requestedData)
- if(requestedData.length >0){
-  mainContent.innerHTML = '';
-  requestedData.forEach((item) => {
-    let { id, month, data } = item;
-    data.forEach((his) => {
-      let { date, transactions } = his;
-  
-      parentTemplate(date, transactions);
+function reloadDetailveiw() {
+  let viewLi = document.querySelectorAll(".sub-content li");
+  let clickedView = viewLi.forEach((li) => {
+    li.addEventListener("click", () => {
+      let id = li.dataset.id;
+      openDetailView(id);
+      clickedView = li;
     });
   });
- }else{
-  mainContent.innerHTML = `<div class="no-content-container">
+}
+
+function loadHistory(value) {
+  let requestedData = transactionHistory.filter(
+    (record) => record.month == value
+  );
+  if (requestedData.length > 0) {
+    mainContent.innerHTML = "";
+    requestedData.forEach((item) => {
+      let { id, month, data } = item;
+      data.forEach((his) => {
+        let { date, transactions } = his;
+
+        parentTemplate(date, transactions);
+        reloadDetailveiw();
+      });
+    });
+  } else {
+    mainContent.innerHTML = `<div class="no-content-container">
                 <img src="images/404.png" alt="" />
                 <p>
                   No record in this month. Tap + to add new expense or income.
                 </p>
-              </div>`
-
- }
+              </div>`;
+  }
 }
 
-loadHistory(`${months[month]} ${year}`)
-
+loadHistory(`${months[month]} ${year}`);
