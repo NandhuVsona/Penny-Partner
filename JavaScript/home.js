@@ -66,7 +66,7 @@ fullScreenMode.addEventListener("click", () => {
 import { transactionHistory } from "../data/homedata.js";
 
 let mainContent = document.querySelector(".main-content");
-
+let clickedView;
 let categoryTicked = document.getElementById("category-ticked");
 let dataAnalysContainer = document.querySelector(".data-container");
 let analysisOpt = document.querySelectorAll(".category-options p");
@@ -99,16 +99,17 @@ let categoryOptions = document.querySelector(
 );
 
 const daysOfWeek = [
+  "Sunday",
   "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
   "Saturday",
-  "Sunday",
 ];
 
 function childTemplate(transactions) {
+  // console.log(transactions);
   let content = "";
   transactions.forEach((item) => {
     let template = `<li data-id="${item.id}">
@@ -238,7 +239,8 @@ analysisOpt.forEach((opt) => {
 
 //Detail view box
 let viewLi = document.querySelectorAll(".sub-content li");
-let clickedView = viewLi.forEach((li) => {
+
+viewLi.forEach((li) => {
   li.addEventListener("click", () => {
     let id = li.dataset.id;
     openDetailView(id);
@@ -267,13 +269,10 @@ function openDetailView(id) {
   let data = new Array();
   let togetherData = [];
   transactionHistory.forEach((item) => {
-    item.data.forEach(i=>{
-     let { transactions} = i;
+    item.data.forEach((i) => {
+      let { transactions } = i;
       transactions.forEach((i) => togetherData.push(i));
-    })
-   
-   
-    
+    });
   });
   data.push(togetherData.filter((data) => data.id == id));
   let info = data[0][0];
@@ -287,7 +286,6 @@ function openDetailView(id) {
   cardOperations.dataset.id = info.id;
   card.classList.add(info.category.type + "Bg");
 }
-console.log(transactionHistory)
 
 document.addEventListener("click", (e) => {
   let viewLi = document.querySelectorAll(".sub-content li");
@@ -297,17 +295,16 @@ document.addEventListener("click", (e) => {
       isList = false;
     }
   });
- try{
-  if (
-    !document.querySelector(".detail-view-container").contains(e.target) &&
-    isList
-  ) {
-    detailView.classList.remove("active");
+  try {
+    if (
+      !document.querySelector(".detail-view-container").contains(e.target) &&
+      isList
+    ) {
+      detailView.classList.remove("active");
+    }
+  } catch (err) {
+    console.log(err);
   }
- }catch(err){
- 
-  console.log(err)
- }
 });
 
 addItem.addEventListener("click", () => {
@@ -487,7 +484,20 @@ function verification() {
 
   let { accountName, imageSrc, id } = data.filter((d) => d.id == accId)[0];
 
-  let { name, image } = expenseCategories.filter((e) => e.id == catId)[0];
+  let { name, image } = togetherCategories.filter((e) => e.id == catId)[0];
+
+  let whatType = "";
+  categoryTick.forEach((cat) => {
+    if (cat.children[0].getAttribute("src")) {
+      if (cat.value == 0) {
+        whatType = "income";
+      } else if (cat.value == 1) {
+        whatType = "expense";
+      } else {
+        whatType = "transfer";
+      }
+    }
+  });
 
   let trans = [
     {
@@ -495,7 +505,7 @@ function verification() {
       category: {
         name,
         icon: image,
-        type: "income",
+        type: whatType,
       },
       account: {
         id,
@@ -516,31 +526,50 @@ function verification() {
   };
   return sturcturedData;
 }
+
 saveTransactionBtn.addEventListener("click", () => {
+  const date = new Date();
+  const options = { month: "long", year: "numeric" };
+  const currentMonthYear = date.toLocaleDateString("en-US", options);
+
   let isVerified = verification();
   let isthere = true;
   if (isVerified) {
     transactionHistory.forEach((item) => {
-      if (
-        item.date ==
-        new Date().toDateString().split(" ").slice(1, 3).join(" ") +
-          ", " +
-          daysOfWeek[new Date().getDay()]
-      ) {
-        item.transactions.unshift(isVerified.transactions[0]);
-        isthere = false;
+      if (item.month == currentMonthYear) {
+        let { data } = item;
+
+        data.forEach((item) => {
+          if (
+            item.date ==
+            new Date().toDateString().split(" ").slice(1, 3).join(" ") +
+              ", " +
+              daysOfWeek[new Date().getDay()]
+          ) {
+            item.transactions.unshift(isVerified.transactions[0]);
+            isthere = false;
+          }
+          //else {
+          //   data.push(isVerified);
+          //   isthere = false;
+          //   console.log("else part is woring")
+          // }
+        });
       }
     });
 
     if (isthere) {
-      transactionHistory.unshift(isVerified);
+      let id = Math.floor(Math.random() * 1000);
+      let month = currentMonthYear;
+      transactionHistory.unshift({ id, month, data: [isVerified] });
     }
 
-    mainContent.innerHTML = "";
-    transactionHistory.forEach((item) => {
-      let { date, transactions } = item;
-      parentTemplate(date, transactions);
-    });
+    mainContent.innerHTML = " ";
+
+    // let { date, transactions } = isVerified;
+    // parentTemplate(date, transactions);
+    console.log(`${months[month]} ${year}`);
+    loadHistory(`${months[month]} ${year}`);
 
     document.querySelectorAll(".sub-content li").forEach((li) => {
       li.addEventListener("click", () => {
@@ -581,7 +610,7 @@ function deleteView() {
     deleteHis[i].addEventListener("click", () => {
       let deleteId = deleteHis[i].parentElement.dataset.id;
       detailView.classList.remove("active");
-
+      console.log(clickedView);
       if (clickedView.parentElement.children.length == 1) {
         clickedView.parentElement.parentElement.remove();
       } else {
@@ -722,9 +751,11 @@ function reloadDetailveiw() {
 }
 
 function loadHistory(value) {
+  console.log();
   let requestedData = transactionHistory.filter(
     (record) => record.month == value
   );
+
   if (requestedData.length > 0) {
     mainContent.innerHTML = "";
     requestedData.forEach((item) => {
