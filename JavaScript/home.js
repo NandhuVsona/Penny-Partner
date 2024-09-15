@@ -669,7 +669,7 @@ function deleteView() {
   }
 }
 deleteView();
-
+let catLabel = document.querySelector(".category-body p")
 categoryTick.forEach((item, index) => {
   item.addEventListener("click", () => {
     document.querySelector(
@@ -677,20 +677,22 @@ categoryTick.forEach((item, index) => {
     ).dataset.id = 2876543210;
 
     selectedCatImg.setAttribute("src", "icons/category.svg");
-    selectedCatImg.style.filter = "invert(1)";
+    selectedCatImg.style.filter = "invert(0)";
     selectedCatName.textContent = "Category";
     categoryTick.forEach((cat) => cat.children[0].removeAttribute("src"));
     categoryTick[index].children[0].setAttribute("src", "icons/tick.svg");
     if (categoryTick[index].value == 0) {
+      catLabel.textContent = 'Category'
       categoryTicked.value = 0;
       changeCategory(0);
     } else if (categoryTick[index].value == 1) {
+      catLabel.textContent = 'Category'
       categoryTicked.value = 1;
       changeCategory(1);
     } else {
-      console.log("acc");
+      catLabel.textContent = 'Account'
       selectedCatImg.setAttribute("src", "icons/account.svg");
-      selectedCatImg.style.filter = "invert(1)";
+      selectedCatImg.style.filter = "invert(0)";
       selectedCatName.textContent = "Account";
       changeCategory(2);
     }

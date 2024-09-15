@@ -169,6 +169,8 @@
 }
 .amount.transfer {
   color: #64b5f6;
+  font-size: 18px;
+  font-weight: 600;
 }
 .incomeBg {
   background-color: green;
@@ -1259,7 +1261,7 @@
   bottom: -20px;
 }
 .category-options-body ul{
-  max-height: 300px;
+  max-height: 400px;
   width: 100%;
   height: auto;
 }
