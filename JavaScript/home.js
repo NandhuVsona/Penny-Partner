@@ -117,7 +117,6 @@ function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
     if (item.category.type == "transfer") {
-      console.log(item.category.type);
       let transferTemplate = `<li data-id="${item.id}">
                       <div class="transaction-info">
                         <img
@@ -417,7 +416,11 @@ function changeCategory(num) {
     expenseCategories.forEach((cat) => {
       let template = `<li data-id=${cat.id} class="bunch-category">
                       <img src="${cat.image}" alt="" />
-                      <small>${cat.name.length>8?cat.name.slice(0,6)+'..':cat.name}</small>
+                      <small>${
+                        cat.name.length > 8
+                          ? cat.name.slice(0, 6) + ".."
+                          : cat.name
+                      }</small>
                     </li>`;
       categoryOptions.innerHTML += template;
     });
@@ -444,7 +447,7 @@ function changeCategory(num) {
 
       categoryOptions.innerHTML += template;
     });
-    console.log("transefer");
+    
   }
 }
 
@@ -460,7 +463,7 @@ function changeAndUpdate() {
     cat.addEventListener("click", () => {
       selectedCatBody.classList.remove("active");
       let selectedCat = cat.dataset.id;
-      console.log(selectedCat);
+     
       let accountData = togetherCategories.filter((d) => d.id == selectedCat);
       document.querySelector(".category-body .child-body").dataset.id =
         selectedCat;
@@ -533,8 +536,7 @@ function verification() {
 
   let { accountName, imageSrc, id } = data.filter((d) => d.id == accId)[0];
 
-  let { name, image } = togetherCategories.filter((e) => e.id == catId)[0];
-
+  let { name, image, ...others } = togetherCategories.filter((e) => e.id == catId)[0];
   let whatType = "";
   categoryTick.forEach((cat) => {
     if (cat.children[0].getAttribute("src")) {
@@ -547,6 +549,15 @@ function verification() {
       }
     }
   });
+
+  if (whatType == "transfer" && others.id == id) {
+    let errorData = {
+      title: "Same Account",
+      message: "Choose different account",
+    };
+    showMessage(errorData);
+    return false;
+  }
 
   let trans = [
     {
@@ -669,7 +680,7 @@ function deleteView() {
   }
 }
 deleteView();
-let catLabel = document.querySelector(".category-body p")
+let catLabel = document.querySelector(".category-body p");
 categoryTick.forEach((item, index) => {
   item.addEventListener("click", () => {
     document.querySelector(
@@ -682,15 +693,15 @@ categoryTick.forEach((item, index) => {
     categoryTick.forEach((cat) => cat.children[0].removeAttribute("src"));
     categoryTick[index].children[0].setAttribute("src", "icons/tick.svg");
     if (categoryTick[index].value == 0) {
-      catLabel.textContent = 'Category'
+      catLabel.textContent = "Category";
       categoryTicked.value = 0;
       changeCategory(0);
     } else if (categoryTick[index].value == 1) {
-      catLabel.textContent = 'Category'
+      catLabel.textContent = "Category";
       categoryTicked.value = 1;
       changeCategory(1);
     } else {
-      catLabel.textContent = 'Account'
+      catLabel.textContent = "Account";
       selectedCatImg.setAttribute("src", "icons/account.svg");
       selectedCatImg.style.filter = "invert(0)";
       selectedCatName.textContent = "Account";
