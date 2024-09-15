@@ -50,6 +50,7 @@
       padding: 20px;
       padding-top: 40px;
       overflow: hidden;
+      overflow-y: scroll;
     }
 
     form .form-switch {
@@ -127,7 +128,7 @@
     }
     form main section button {
       width: 100%;
-      height: 55px;
+      min-height: 55px;
       font-size: 20px;
       font-weight: 500;
       border-radius: 5px;
@@ -151,7 +152,7 @@
     }
     #gSignInWrapper {
       width: 100%;
-      height: 55px;
+      min-height: 55px;
     }
     #customBtn {
       gap: 15px;
@@ -182,7 +183,7 @@
     #password {
       margin-bottom: 20px;
     }
-    .container h1 {
+    .container .title {
       color: #ffffff;
     }
     .active {
@@ -209,10 +210,18 @@
         transform: translateX(-200px);
       }
     }
+    .logo{
+      width: 70px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      padding: 10px;
+     
+    }
   </style>
   <body>
     <div class="container">
-      <h1 class="title">Sign In</h1>
+      <img class="logo" src="images/app-logo.png" alt="">
+      <h3 class="title">Welcome Back</h3>
       <form action="">
         <div class="form-switch">
           <div class="label"></div>
@@ -288,7 +297,7 @@
         label.style.left = "50%";
         labelColor[1].style.color = "#ffffff";
         labelColor[0].style.color = "#000000";
-        title.innerHTML = "Sign Up";
+        title.innerHTML = "Thanks for Joining us";
         manageSection(1);
         sections[0].classList.add("section-1");
       });
@@ -296,7 +305,7 @@
         label.style.left = "0%";
         labelColor[1].style.color = "#000000";
         labelColor[0].style.color = "#ffffff";
-        title.innerHTML = "Sign In";
+        title.innerHTML = "Welcome Back!";
         manageSection(0);
       });
 
