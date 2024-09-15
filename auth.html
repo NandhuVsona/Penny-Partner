@@ -48,7 +48,7 @@
       align-items: center;
       gap: 30px;
       padding: 20px;
-      padding-top: 40px;
+      padding-top: 25px;
       overflow: hidden;
       overflow-y: scroll;
     }
@@ -152,8 +152,12 @@
     }
     #gSignInWrapper {
       width: 100%;
-      min-height: 55px;
-    }
+     
+      display: flex;
+      justify-content: center;
+align-items: center;
+flex-direction: column;
+gap: 15px;    }
     #customBtn {
       gap: 15px;
       background: white;
@@ -166,6 +170,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 55px;
     }
     #customBtn:hover {
       cursor: pointer;
@@ -216,6 +221,11 @@
       border-radius: 50%;
       padding: 10px;
     }
+    .no-account{
+      width: 100%;
+      color: #515151d0;
+      text-align: center;
+    }
   </style>
   <body>
     <div class="container">
@@ -253,6 +263,7 @@
                 />
                 <span class="buttonText">Continue with Google</span>
               </div>
+              <small class="no-account">Don't have an account? signup</small>
             </div>
           </section>
           <section class="section-2">
