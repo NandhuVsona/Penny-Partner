@@ -1,4 +1,4 @@
-import { expenseCategories, incomeCategories } from "../data/categories.js";
+import { expenseCategories, incomeCategories, transferCategories } from "../data/categories.js";
 
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
@@ -27,6 +27,7 @@ function exitFullscreen() {
 let togetherCategories = [];
 expenseCategories.forEach((i) => togetherCategories.push(i));
 incomeCategories.forEach((i) => togetherCategories.push(i));
+transferCategories.forEach((i)=> togetherCategories.push(i))
 
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
@@ -109,33 +110,73 @@ const daysOfWeek = [
 ];
 
 function childTemplate(transactions) {
-  // console.log(transactions);
   let content = "";
   transactions.forEach((item) => {
-    let template = `<li data-id="${item.id}">
-                    <div class="transaction-info">
-                      <img
-                        src="${item.category.icon}"
-                        alt=""
-                        class="transaction-icon"
-                      />
-                      <div class="cat-account">
-                        <div class="category-name little-bold">${item.category.name}</div>
-                        <div class="transaction-account-info">
-                          <img
-                            src="${item.account.icon}"
-                            alt=""
-                            class="account-icon"
-                          />
-                          <small class="account-name">${item.account.name}</small>
+    if (item.category.type == "transfer") {
+      console.log(item.category.type)
+      let transferTemplate = `<li data-id="${item.id}">
+                      <div class="transaction-info">
+                        <img
+                          src="icons/Income-expense/transfer.jpg"
+                          alt=""
+                          class="transaction-icon"
+                        />
+                        <div class="cat-account">
+                          <div class="category-name little-bold">Transfer</div>
+                          <div class="transaction-account-info">
+                            <img
+                              src="${item.account.icon}"
+                              alt=""
+                              class="account-icon"
+                            />
+                             <small class="account-name">${item.account.name}</small>
+                              <img
+                              src="icons/tarrow.svg"
+                              alt=""
+                              class="account-icon"
+                            />
+                            <img
+                              src="${item.category.icon}"
+                              alt=""
+                              class="account-icon"
+                            />
+                             <small class="account-name">${item.category.name}</small>
+
+                           
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="transaction-amount">
-                      <p class="amount ${item.category.type}">₹${item.amount}</p>
-                    </div>
-                  </li>`;
-    content += template;
+                      <div class="transaction-amount">
+                        <p class="amount ${item.category.type}">₹${item.amount}</p>
+                      </div>
+                    </li>`;
+      content += transferTemplate;
+    } else {
+      let template = `<li data-id="${item.id}">
+                      <div class="transaction-info">
+                        <img
+                          src="${item.category.icon}"
+                          alt=""
+                          class="transaction-icon"
+                        />
+                        <div class="cat-account">
+                          <div class="category-name little-bold">${item.category.name}</div>
+                          <div class="transaction-account-info">
+                            <img
+                              src="${item.account.icon}"
+                              alt=""
+                              class="account-icon"
+                            />
+                            <small class="account-name">${item.account.name}</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="transaction-amount">
+                        <p class="amount ${item.category.type}">₹${item.amount}</p>
+                      </div>
+                    </li>`;
+      content += template;
+    }
   });
   return content;
 }
@@ -568,7 +609,7 @@ saveTransactionBtn.addEventListener("click", () => {
 
     // let { date, transactions } = isVerified;
     // parentTemplate(date, transactions);
-    console.log(`${months[month]} ${year}`);
+   
     loadHistory(`${months[month]} ${year}`);
 
     document.querySelectorAll(".sub-content li").forEach((li) => {

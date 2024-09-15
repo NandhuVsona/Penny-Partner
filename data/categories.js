@@ -131,3 +131,10 @@ export const expenseCategories = [
     image: "icons/Income-expense/bus.jpg",
   },
 ];
+
+export const transferCategories = [
+  {
+    id: 19,
+    name: "Transfer",
+    image: "icons/Income-expense/transfer.jpg",
+  }]

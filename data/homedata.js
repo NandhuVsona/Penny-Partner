@@ -211,8 +211,8 @@ export const transactionHistory = [
             id: "5",
             category: {
               name: "Books",
-              icon: "icons/Income-expense/books.jpg",
-              type: "expense",
+              icon: "icons/Income-expense/transfer.jpg",
+              type: "transfer",
             },
             account: {
               name: "Cash",
