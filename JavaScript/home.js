@@ -1,4 +1,8 @@
-import { expenseCategories, incomeCategories, transferCategories } from "../data/categories.js";
+import {
+  expenseCategories,
+  incomeCategories,
+  transferCategories,
+} from "../data/categories.js";
 
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
@@ -27,7 +31,7 @@ function exitFullscreen() {
 let togetherCategories = [];
 expenseCategories.forEach((i) => togetherCategories.push(i));
 incomeCategories.forEach((i) => togetherCategories.push(i));
-transferCategories.forEach((i)=> togetherCategories.push(i))
+transferCategories.forEach((i) => togetherCategories.push(i));
 
 //function for localstorage
 let data = JSON.parse(localStorage.getItem("data")) || [];
@@ -113,7 +117,7 @@ function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
     if (item.category.type == "transfer") {
-      console.log(item.category.type)
+      console.log(item.category.type);
       let transferTemplate = `<li data-id="${item.id}">
                       <div class="transaction-info">
                         <img
@@ -413,7 +417,7 @@ function changeCategory(num) {
     expenseCategories.forEach((cat) => {
       let template = `<li data-id=${cat.id} class="bunch-category">
                       <img src="${cat.image}" alt="" />
-                      <small>${cat.name}</small>
+                      <small>${cat.name.length>8?cat.name.slice(0,6)+'..':cat.name}</small>
                     </li>`;
       categoryOptions.innerHTML += template;
     });
@@ -428,12 +432,16 @@ function changeCategory(num) {
   } else {
     //function for localstorage
     let data = JSON.parse(localStorage.getItem("data")) || [];
-    console.log(data);
+
     data.forEach((cat) => {
-      let template = `<li data-id="${cat.id}" class="bunch-category">
-                      <img src="${cat.imageSrc}" alt="" />
-                      <small>${cat.accountName}</small>
-                    </li>`;
+      let template = `<li data-id="${cat.id}" class="bunch-category transfer">
+                                        <div class="left-part">
+                    <img src="${cat.imageSrc}" alt="">
+                    <p class="semi-bold">${cat.accountName}</p>
+                  </div>
+                  <p class="semi-bold green">₹${cat.formatedAmount}</p>
+                </li>`;
+
       categoryOptions.innerHTML += template;
     });
     console.log("transefer");
@@ -609,7 +617,7 @@ saveTransactionBtn.addEventListener("click", () => {
 
     // let { date, transactions } = isVerified;
     // parentTemplate(date, transactions);
-   
+
     loadHistory(`${months[month]} ${year}`);
 
     document.querySelectorAll(".sub-content li").forEach((li) => {

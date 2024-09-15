@@ -712,7 +712,7 @@
   justify-content: center;
   align-items: center;
   padding: 0px 10px;
-  color: #ffffff !important;
+ 
 }
 .income-body,
 .transfer-body {
@@ -722,7 +722,7 @@
   gap: 5px;
   justify-content: center;
   align-items: center;
-  color: #ffffff !important;
+  
 }
 .sub-head-two {
   display: flex;
@@ -752,7 +752,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 5px;
-  color: #ffffff !important;
+  
 }
 .sub-head-two .account-body .child-body::before,
 .sub-head-two .category-body .child-body::before {
@@ -797,7 +797,7 @@
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   overflow: hidden;
-  color: #ffffff !important;
+ 
 }
 .sub-head-two .account-body .child-body img,
 .sub-head-two .category-body .child-body img {
@@ -1257,4 +1257,16 @@
   text-align: center;
   position: absolute;
   bottom: -20px;
+}
+.category-options-body ul{
+  max-height: 300px;
+  width: 100%;
+  height: auto;
+}
+.category-options-body ul li.transfer{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
