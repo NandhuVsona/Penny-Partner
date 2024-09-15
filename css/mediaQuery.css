@@ -1,0 +1,21 @@
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 350px !important;
+    left: 73% !important;
+    animation: comeFromLeft 0.5s ease !important;
+    -webkit-animation: comeFromLeft 0.5s ease !important;
+  }
+  @keyframes comeFromLeft {
+    from {
+      transform: translateX(100px);
+      -webkit-transform: translateX(100px);
+      -moz-transform: translateX(100px);
+      -ms-transform: translateX(100px);
+      -o-transform: translateX(100px);
+    }
+  }
+  .sidebar .settings ul li:hover {
+    background-color: rgb(241, 241, 241) !important;
+    cursor: pointer;
+  }
+}

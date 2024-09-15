@@ -341,11 +341,6 @@ main section.active {
   opacity: 0.4;
 }
 
-@media screen and (min-width: 1024px) {
-  .sidebar .settings ul li:hover {
-    background-color: rgb(225, 225, 225);
-  }
-}
 /* accoutn add style */
 .box-body,
 .category-box-body,

@@ -140,7 +140,7 @@ export const transactionHistory = [
     month: "September 2024",
     data: [
       {
-        date: "Sep 15, Sunday",
+        date: "Sep 14, Saturday",
         transactions: [
           {
             id: "1",
