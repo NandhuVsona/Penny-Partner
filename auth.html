@@ -48,9 +48,10 @@
       align-items: center;
       gap: 30px;
       padding: 20px;
-      padding-top: 25px;
+      padding-top: 30px;
       overflow: hidden;
       overflow-y: scroll;
+      scrollbar-width: none;
     }
 
     form .form-switch {
@@ -125,6 +126,7 @@
     }
     form main section .form-group input:focus {
       outline: none;
+      border :1.5px solid #2972ff;
     }
     form main section button {
       width: 100%;
@@ -231,7 +233,7 @@ gap: 15px;    }
     <div class="container">
       <img class="logo" src="images/app-logo.png" alt="" />
       <h3 class="title">Welcome Back</h3>
-      <form action="">
+      <form action="" autocomplete="off">
         <div class="form-switch">
           <div class="label"></div>
           <p class="active signin">Sign In</p>
