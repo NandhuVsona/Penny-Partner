@@ -209,7 +209,7 @@
     .section-2 {
       animation: slideleft 0.3s ease;
     }
-    @keyframes slideleft {
+     @keyframes slideleft {
       0% {
         transform: translateX(200px);
       }
@@ -243,12 +243,12 @@
       background-color: rgb(255, 255, 255);
       z-index: 1;
       padding: 10px;
-      animation: otpbox 0.7s ease;
+      animation: otpbox 0.5s ease;
     }
     .otp-container.active {
       display: flex;
     }
-    @keyframes otpbox {
+     @keyframes otpbox {
       0% {
         transform: translate(400px);
       }
@@ -297,8 +297,14 @@
       align-items: center;
       text-align: center;
       font-size: 40px;
+      font-weight: 600;
       padding: 5px;
       text-align: center;
+    }
+    .otp-container .otp-body ul li input:valid {
+      border: 2px groove; /* Border width */
+      border-image: var(--primary-color); /* Gradient colors */
+      border-image-slice: 1; /* Ensures full border */
     }
     @media screen and (max-width: 476px) {
       .otp-container .otp-body ul li input {
@@ -417,13 +423,31 @@
                     >Enter the code below to confirm your email address.</small
                   >
                 </div>
-                <ul class="opt-input-boxs">
-                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
-                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
-                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
-                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
-                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
-                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                <ul class="otp-input-boxs">
+                  <li>
+                    <input
+                      autofocus
+                      type="tel"
+                      maxlength="1"
+                      placeholder="0"
+                      required
+                    />
+                  </li>
+                  <li>
+                    <input type="tel" maxlength="1" placeholder="0" required />
+                  </li>
+                  <li>
+                    <input type="tel" maxlength="1" placeholder="0" required />
+                  </li>
+                  <li>
+                    <input type="tel" maxlength="1" placeholder="0" required />
+                  </li>
+                  <li>
+                    <input type="tel" maxlength="1" placeholder="0" required />
+                  </li>
+                  <li>
+                    <input type="tel" maxlength="1" placeholder="0" required />
+                  </li>
                 </ul>
                 <div class="opt-btns">
                   <div id="cancelOtpBox">Cancel</div>
@@ -443,15 +467,18 @@
       let cancelBtn = document.getElementById("cancelOtpBox");
       let sendOtpBtn = document.getElementById("sendOtp");
       let labelColor = document.querySelectorAll("form .form-switch p");
+      let inputBoxes = document.querySelectorAll("input[type='tel']");
       let sections = document.querySelectorAll("section");
 
-      signUpLabel.addEventListener("click", () => {
+       signUpLabel.addEventListener("click", () => {
         label.style.left = "50%";
         labelColor[1].style.color = "#ffffff";
         labelColor[0].style.color = "#000000";
         title.innerHTML = "Thanks for Joining us";
         manageSection(1);
         sections[0].classList.add("section-1");
+        document.querySelector(".otp-container").classList.remove("remove");
+        document.querySelector(".otp-container").classList.remove("active");
       });
       signInLabel.addEventListener("click", () => {
         label.style.left = "0%";
@@ -468,10 +495,25 @@
       cancelBtn.addEventListener("click", () => {
         document.querySelector(".otp-container").classList.add("remove");
       });
-      sendOtpBtn.addEventListener("click", (e) => {
+        sendOtpBtn.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector(".otp-container").classList.remove("remove");
         document.querySelector(".otp-container").classList.add("active");
+      });
+
+      inputBoxes.forEach((box, i) => {
+        box.addEventListener("keydown", (e) => {
+          if (e.key >= 0 && e.key <= 10) {
+            if (i < inputBoxes.length - 1) {
+              setTimeout(() => inputBoxes[i + 1].focus(), 10);
+            }
+          } else if (e.key == "Backspace") {
+            if (i > 0) {
+              // Prevent moving before the first box
+              setTimeout(() => inputBoxes[i - 1].focus(), 10);
+            }
+          }
+        });
       });
     </script>
   </body>
