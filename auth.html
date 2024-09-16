@@ -38,6 +38,7 @@
       overflow: hidden;
     }
     form {
+      position: relative;
       border-radius: 30px 30px 0px 0px;
       width: 100%;
       height: 100vh;
@@ -126,7 +127,7 @@
     }
     form main section .form-group input:focus {
       outline: none;
-      border :1.5px solid #24f7ff;
+      border: 1.5px solid #24f7ff;
     }
     form main section button {
       width: 100%;
@@ -154,12 +155,13 @@
     }
     #gSignInWrapper {
       width: 100%;
-     
+
       display: flex;
       justify-content: center;
-align-items: center;
-flex-direction: column;
-gap: 15px;    }
+      align-items: center;
+      flex-direction: column;
+      gap: 15px;
+    }
     #customBtn {
       gap: 15px;
       background: white;
@@ -223,10 +225,123 @@ gap: 15px;    }
       border-radius: 50%;
       padding: 10px;
     }
-    .no-account{
+    .no-account {
       width: 100%;
       color: #515151d0;
       text-align: center;
+    }
+    /*OTP BOX STYLING*/
+    .otp-container {
+      display: none;
+
+      position: absolute;
+      color: #000000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(255, 255, 255);
+      z-index: 1;
+      padding: 10px;
+      animation: otpbox 0.7s ease;
+    }
+    .otp-container.active {
+      display: flex;
+    }
+    @keyframes otpbox {
+      0% {
+        transform: translate(400px);
+      }
+      100% {
+        transform: translate(0px);
+      }
+    }
+    .otp-container.remove {
+      animation: cancelOtpBox 0.5s ease;
+      animation-fill-mode: forwards;
+    }
+    @keyframes cancelOtpBox {
+      0% {
+        transform: translate(0);
+      }
+      100% {
+        transform: translate(100%);
+      }
+    }
+    .otp-container .otp-body {
+      margin-top: 20px;
+      display: flex;
+      gap: 30px;
+      justify-content: start;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    .otp-container .otp-body ul {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+    .otp-container .otp-body ul li {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .otp-container .otp-body ul li input {
+      width: 60px;
+      border: 1px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 40px;
+      padding: 5px;
+      text-align: center;
+    }
+    @media screen and (max-width: 476px) {
+      .otp-container .otp-body ul li input {
+        height: 60px;
+        padding: 5px;
+        width: 50px;
+        border: 1px solid gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .otp-container .otp-body ul li input:focus {
+      outline: none;
+    }
+    .opt-btns {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      gap: 20px;
+    }
+    .opt-btns div {
+      text-align: center;
+      background: var(--primary-color);
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+      color: #ffffff;
+      border-radius: 5px;
+      text-transform: uppercase;
+      width: 200px;
+    }
+    .text-msg {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      gap: 5px;
+      color: rgb(86, 86, 86);
     }
   </style>
   <body>
@@ -282,7 +397,7 @@ gap: 15px;    }
               <input type="text" placeholder="Enter your password" />
             </div>
 
-            <button>GET STARTED</button>
+            <button id="sendOtp">GET STARTED</button>
             <div id="gSignInWrapper">
               <div id="customBtn" class="customGPlusSignIn">
                 <img
@@ -291,6 +406,29 @@ gap: 15px;    }
                   alt=""
                 />
                 <span class="buttonText">Continue with Google</span>
+              </div>
+            </div>
+            <div class="otp-container">
+              <div class="otp-body">
+                <h1>Verify Your Account</h1>
+                <div class="text-msg">
+                  <small>We emailed you the six digit code to cool..</small>
+                  <small
+                    >Enter the code below to confirm your email address.</small
+                  >
+                </div>
+                <ul class="opt-input-boxs">
+                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                  <li><input type="tel" maxlength="1" placeholder="0" /></li>
+                </ul>
+                <div class="opt-btns">
+                  <div id="cancelOtpBox">Cancel</div>
+                  <div>Verify OTP</div>
+                </div>
               </div>
             </div>
           </section>
@@ -302,6 +440,8 @@ gap: 15px;    }
       let signUpLabel = document.querySelector(".signup");
       let label = document.querySelector(".label");
       let title = document.querySelector(".title");
+      let cancelBtn = document.getElementById("cancelOtpBox");
+      let sendOtpBtn = document.getElementById("sendOtp");
       let labelColor = document.querySelectorAll("form .form-switch p");
       let sections = document.querySelectorAll("section");
 
@@ -325,6 +465,14 @@ gap: 15px;    }
         sections.forEach((s) => s.classList.remove("active"));
         sections[num].classList.add("active");
       }
+      cancelBtn.addEventListener("click", () => {
+        document.querySelector(".otp-container").classList.add("remove");
+      });
+      sendOtpBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.querySelector(".otp-container").classList.remove("remove");
+        document.querySelector(".otp-container").classList.add("active");
+      });
     </script>
   </body>
 </html>
