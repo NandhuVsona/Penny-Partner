@@ -469,7 +469,7 @@ function changeAndUpdate() {
         selectedCat;
 
       selectedCatImg.setAttribute("src", accountData[0].image);
-      selectedCatImg.style.filter = "invert(0)";
+      selectedCatImg.classList.add("imgSvg")
       selectedCatName.textContent =
         accountData[0].name.length > 8
           ? accountData[0].name.slice(0, 8) + ".."
@@ -689,6 +689,7 @@ categoryTick.forEach((item, index) => {
 
     selectedCatImg.setAttribute("src", "icons/category.svg");
     selectedCatImg.style.filter = "invert(0)";
+    selectedCatImg.classList.add("imgSvg")
     selectedCatName.textContent = "Category";
     categoryTick.forEach((cat) => cat.children[0].removeAttribute("src"));
     categoryTick[index].children[0].setAttribute("src", "icons/tick.svg");
@@ -840,3 +841,15 @@ function loadHistory(value) {
 }
 
 loadHistory(`${months[month]} ${year}`);
+
+
+let navIcons = document.querySelectorAll(".side-footer .menu li");
+let pages = document.querySelectorAll("main section");
+navIcons.forEach((icon, index) => {
+  icon.addEventListener("click", () => changePage(icon, index));
+});
+
+function changePage(page, index) {
+  pages.forEach((page) => page.classList.remove("active"));
+  pages[index].classList.add("active");
+}

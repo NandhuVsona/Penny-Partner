@@ -1,9 +1,37 @@
 @media screen and (min-width: 768px) {
+  .app {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+  }
+  .change-font-style {
+    font-size: 16px !important;
+    font-weight: 500;
+  }
+
+  header.main {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+  }
+  footer {
+    display: none;
+  }
   .sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
     width: 350px !important;
-    left: 73% !important;
+    border-left: 1px solid rgb(209, 209, 209);
+
     animation: comeFromLeft 0.5s ease !important;
     -webkit-animation: comeFromLeft 0.5s ease !important;
+  }
+  .close {
+    display: none;
   }
   @keyframes comeFromLeft {
     from {
@@ -18,4 +46,64 @@
     background-color: rgb(241, 241, 241) !important;
     cursor: pointer;
   }
+  .side-footer {
+    display: block !important;
+    margin-top: 70px !important;
+  }
+  .home-container {
+    margin-top: 20px !important;
+  }
+  .app .main .left img {
+    display: none;
+  }
+  main {
+    overflow: hidden !important;
+    overflow-y: scroll !important;
+    scrollbar-width: none;
+  }
+  .category-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 20px;
+  }
+  .budget-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+  }
+  .budget-container header {
+    display: none !important;
+  }
+
+  .category-container .add-box {
+    display: none !important;
+  }
+  .expense-category {
+    margin-top: 0% !important;
+    border-left: 1px solid rgb(214, 214, 214);
+    padding-left: 20px;
+  }
+  .text-container{
+    font-size: 16px !important;
+  }
+  .spent-box,.remaining-box{
+font-size: 14px !important;
+  }
+  .change-font-style{
+    font-size: 16px;
+  }
+  .my-account-container{
+    width: 350px !important;
+    left: 73% !important;
+  }
+  .rr-container{
+    width: 40rem !important;
+    height: 30rem !important;
+    left:50% !important;
+    top: 50% !important;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
 }

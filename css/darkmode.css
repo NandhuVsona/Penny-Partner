@@ -250,3 +250,7 @@
   filter:  invert(.8);
   -webkit-filter:  invert(.8);
 }
+.app.dark .imgSvg{
+  filter: invert(1) !important;
+  -webkit-filter: invert(1) !important;
+}
