@@ -1,11 +1,37 @@
-@media screen and (min-width: 768px) {
+@media screen and (min-width:768px) {
   .app {
     width: 100%;
     height: 100vh;
     overflow: hidden;
     overflow-y: scroll;
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 1fr 3fr;
+  }
+  footer {
+    display: none;
+  }
+  .sidebar .settings ul li:hover {
+    background-color: rgb(241, 241, 241) !important;
+    cursor: pointer;
+  }
+  .side-footer {
+    display: block !important;
+    margin-top: 70px !important;
+  }
+  header.main {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .app {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr 4fr .5fr;
   }
   .change-font-style {
     font-size: 16px !important;
@@ -17,18 +43,20 @@
     top: 0;
     left: 0;
   }
-  footer {
-    display: none;
-  }
+ 
   .sidebar {
     display: flex !important;
     flex-direction: column !important;
     position: relative !important;
-    width: 350px !important;
+    width: 300px !important;
     border-left: 1px solid rgb(209, 209, 209);
 
     animation: comeFromLeft 0.5s ease !important;
     -webkit-animation: comeFromLeft 0.5s ease !important;
+  }
+  .sidebar .info p{
+    font-size: 16px !important;
+    font-weight: 500 !important;
   }
   .close {
     display: none;
@@ -96,6 +124,7 @@ font-size: 14px !important;
     left: 73% !important;
   }
   .rr-container{
+    background-color: red !important;
     width: 40rem !important;
     height: 30rem !important;
     left:50% !important;
@@ -105,5 +134,9 @@ font-size: 14px !important;
     -moz-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
+}
+.rr-container header{
+  color: #fff !important;
+  background-color: rebeccapurple !important;
 }
 }
