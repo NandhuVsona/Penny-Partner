@@ -1,17 +1,19 @@
 import { expenseCategories, incomeCategories } from "../data/categories.js";
 //Skeleton load effect
-let parentElement = document.querySelector(".income-list-skeketon");
-
-for (let i = 0; i < 10; i++) {
-  parentElement.innerHTML += ` <li>
-  <div class="left-portion">
-    <div class="img"></div>
-    <p class="change-font-style"></p>
-  </div>
-  <div class="right-portion">
-    <div class="dot svg img"></div>
-  </div>
+let incomeElement = document.querySelector(".income-list-skeketon");
+let expenseElement = document.querySelector(".expense-list-skeketon");
+let skeketon = ` <li>
+<div class="left-portion-skeleton">
+  <div class="img"></div>
+  <p class="change-font-style"></p>
+</div>
+<div class="right-portion-skeleton">
+  <div class="dot svg img"></div>
+</div>
 </li>`;
+for (let i = 0; i < 5; i++) {
+  incomeElement.innerHTML += skeketon;
+  expenseElement.innerHTML += skeketon;
 }
 
 let switchBtn = document.querySelector(".category");
@@ -31,22 +33,22 @@ let clickedItem = "";
 let incomeCategoryParent = document.querySelector(`.income-category ul`);
 let expenseCategoryParent = document.querySelector(`.expense-category ul`);
 
-function baseTemplate(name, image) {
-  let template = `  <li>
-  <div class="left-portion">
-    <img class="icon" src="${image}" alt="" />
-    <p class="change-font-style">${name}</p>
-  </div>
-  <div class="right-portion">
-    <img class="dot svg" src="icons/dot.svg" alt="" />
-    <div class="options">
-      <p class="edit-category-btn">Edit</p>
-      <p class="delete-account">Delete</p>
-    </div>
-  </div>
-</li>`;
-  return template;
-}
+// function baseTemplate(name, image) {
+//   let template = `  <li>
+//   <div class="left-portion">
+//     <img class="icon" src="${image}" alt="" />
+//     <p class="change-font-style">${name}</p>
+//   </div>
+//   <div class="right-portion">
+//     <img class="dot svg" src="icons/dot.svg" alt="" />
+//     <div class="options">
+//       <p class="edit-category-btn">Edit</p>
+//       <p class="delete-account">Delete</p>
+//     </div>
+//   </div>
+// </li>`;
+//   return template;
+// }
 
 // incomeCategories.forEach((category) => {
 //   incomeCategoryParent.innerHTML += baseTemplate(category.name, category.image);
@@ -58,7 +60,7 @@ function baseTemplate(name, image) {
 //   );
 // });
 
-reload();
+
 
 categories.forEach((categorie) => {
   categorie.addEventListener("click", () => {
@@ -86,6 +88,7 @@ cancelEditCategoryBox.addEventListener("click", () => {
 });
 
 function reload() {
+
   let editBtn = document.querySelectorAll(".edit-category-btn");
 
   let dots = document.querySelectorAll(".right-portion .dot");
@@ -190,6 +193,7 @@ function createCategory(name, icons, category) {
     return;
   }
   let parent = document.querySelector(`.${category}-category ul`);
+
   let template = `<li>
                   <div class="left-portion">
                     <img src="${icons}" alt="" />
@@ -204,8 +208,9 @@ function createCategory(name, icons, category) {
                   </div>
                 </li>`;
   parent.innerHTML += template;
+
   document.getElementById("category-name").value = "";
-  reload();
+ 
 }
 
 document.addEventListener("click", (e) => {
@@ -240,11 +245,16 @@ async function loadData() {
   );
   let res = await req.json();
   if (res.status == "success") {
+    incomeCategoryParent.innerHTML = "";
+    expenseCategoryParent.innerHTML = "";
     document.querySelector(".income-category-skeleton").style.display = "none";
+    document.querySelector(".expense-category-skeleton").style.display = "none";
+    showCategory();
     let categories = res.data.categories;
     categories.forEach((category) => {
       createCategory(category.name, category.image, category.type);
     });
+    reload();
   } else {
     document.querySelector(".income-category-skeleton").style.display = "flex";
   }
@@ -252,4 +262,14 @@ async function loadData() {
 
 document
   .querySelector(".skeleton-category")
-  .addEventListener("click", loadData);
+  .addEventListener("click", ()=>{
+    loadData()
+    reload();
+  });
+
+function showCategory() {
+  document
+    .querySelectorAll(".active-category h3")
+    .forEach((item) => (item.style.display = "flex"));
+    document.querySelector(".active-category  .add-box").style.display = "flex";
+}
