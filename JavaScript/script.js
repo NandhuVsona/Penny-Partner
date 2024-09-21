@@ -1,7 +1,17 @@
-import { reloadFunctionality, saveAccount, updateAccount } from "./functions.js";
+//--------------DARK MODE FUNCTIONALITY-----------------
+let isDark = JSON.parse(localStorage.getItem("Theme"));
 
-function renderAccounts(data){
- 
+if (isDark) {
+  document.querySelector(".app").classList.add("dark");
+}
+
+import {
+  reloadFunctionality,
+  saveAccount,
+  updateAccount,
+} from "./functions.js";
+let existingAccounts = document.querySelector(".accounts");
+function renderAccounts(data) {
   data.forEach((item) => {
     let existingAccounts = document.querySelector(".accounts");
     let template = `<li class="card">
@@ -22,13 +32,17 @@ function renderAccounts(data){
                 </li>`;
     existingAccounts.innerHTML += template;
   });
-  
 }
-let isDark = JSON.parse(localStorage.getItem("Theme"));
 
-if (isDark) {
-  document.querySelector(".app").classList.add("dark");
+// ---------  SKELETON LOADING EFFECT-----------------
+for (let i = 0; i < 7; i++) {
+  existingAccounts.innerHTML += `<li class="skeleton-card"></li>`;
 }
+
+document
+  .querySelector(".skeleton-account")
+  .addEventListener("click", loadAccountsData);
+
 let navIcons = document.querySelectorAll("footer nav ul li");
 let pages = document.querySelectorAll("main section");
 let closeSideBar = document.querySelector(".close");
@@ -160,8 +174,6 @@ accountsList.forEach((account) => {
   });
 });
 
-
-
 dots.forEach((dot, index) => {
   dot.addEventListener("click", () => {
     if (options[index].classList.contains("active")) {
@@ -216,10 +228,14 @@ async function loadAccountsData() {
   const res = await req.json();
   if (res.status === "success") {
     let { data } = res;
-    renderAccounts(data)
-    reloadFunctionality()
-
-    
+    document.querySelector(".skeleton-penny-info").style.display = "none";
+    document.querySelector(".penny-info").style.display = "flex";
+    document.querySelector(".skeleton-title").style.display = "none";
+    document
+      .querySelectorAll(".deactivate")
+      .forEach((i) => (i.style.display = "flex"));
+    existingAccounts.innerHTML = " ";
+    renderAccounts(data);
+    reloadFunctionality();
   }
 }
-loadAccountsData();

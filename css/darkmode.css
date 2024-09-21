@@ -11,7 +11,6 @@
   color: #ffffff;
 }
 
-
 .app.dark img.svg {
   filter: invert(1);
   -webkit-filter: invert(1);
@@ -107,7 +106,8 @@
   li
   .right-portion
   .options
-  p:hover,.app.dark .category-options p:hover,
+  p:hover,
+.app.dark .category-options p:hover,
 .app.dark
   main
   section.categories
@@ -121,13 +121,10 @@
   background-color: rgb(80, 80, 80) !important;
 }
 
-
-
-@media  screen and (min-width:1024px) {
+@media screen and (min-width: 1024px) {
   .sidebar .settings ul li:hover {
     background-color: rgb(53, 53, 53);
   }
-  
 }
 /* .app.dark main section.account.blurbg, */
 .app.dark main section.categories.blur,
@@ -177,63 +174,109 @@
   background-color: rgb(80, 80, 80) !important;
 }
 
-.app.dark .sidebar .settings ul li .arrow-right{
+.app.dark .sidebar .settings ul li .arrow-right {
   opacity: 0.4;
   filter: invert(1);
   -webkit-filter: invert(1);
 }
 
-.app.dark .pp-users-container #user-count-body{
+.app.dark .pp-users-container #user-count-body {
   background-color: #1e1e1e;
   color: #ffffff;
 }
-.app.dark .pp-users-container #user-count{
+.app.dark .pp-users-container #user-count {
   color: #000000 !important;
 }
-.app.dark .pp-users-container{
+.app.dark .pp-users-container {
   background-color: #161616e2;
- 
 }
-.app.dark .rr-container, .app.dark .rr-container header,.app.dark .rr-container .review-input-container{
+.app.dark .rr-container,
+.app.dark .rr-container header,
+.app.dark .rr-container .review-input-container {
   background-color: #000000;
 }
 
-.app.dark .star-shadow{
- filter: invert(1);
- -webkit-filter: invert(1);
+.app.dark .star-shadow {
+  filter: invert(1);
+  -webkit-filter: invert(1);
 }
-.app.dark .arrow-right{
-  filter:  invert(.8);
-  -webkit-filter:  invert(.8);
+.app.dark .arrow-right {
+  filter: invert(0.8);
+  -webkit-filter: invert(0.8);
 }
-.app.dark .imgSvg{
+.app.dark .imgSvg {
   filter: invert(1) !important;
   -webkit-filter: invert(1) !important;
 }
 
-.app.dark .category-container .expense-category-skeleton ul li .left-portion-skeleton p,
-.app.dark .category-container
+/*  --------SKELETON LOADING EFFECT FOR CATEGORY PAGE------------- */
+
+.app.dark
+  .category-container
+  .expense-category-skeleton
+  ul
+  li
+  .left-portion-skeleton
+  p,
+.app.dark
+  .category-container
   .expense-category-skeleton
   ul
   li
   .left-portion-skeleton
   .img,
-.app.app.dark .category-container
+.app.app.dark
+  .category-container
   .income-category-skeleton
   ul
   li
   .left-portion-skeleton
   .img,
-.app.dark .category-container .expense-category-skeleton ul li .right-portion-skeleton .img,
-.app.dark .category-container .income-category-skeleton ul li .right-portion-skeleton .img,
+.app.dark
+  .category-container
+  .expense-category-skeleton
+  ul
+  li
+  .right-portion-skeleton
+  .img,
+.app.dark
+  .category-container
+  .income-category-skeleton
+  ul
+  li
+  .right-portion-skeleton
+  .img,
 .app.dark .category-container .income-category-skeleton h3,
-
 .app.dark .category-container .expense-category-skeleton h3,
-.app.dark .category-container .income-category-skeleton ul li .left-portion-skeleton p
-{
+.app.dark
+  .category-container
+  .income-category-skeleton
+  ul
+  li
+  .left-portion-skeleton
+  p {
   background: linear-gradient(90deg, #1a1a1a 25%, #222222 50%, #1a1a1a 75%);
   background-size: 200% 100%;
   animation: skeleton-loading 2s ease-in-out infinite;
-  border-radius: 4px;
+  border-radius: 5px;
   -webkit-animation: skeleton-loading 2s ease-in-out infinite;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+/* -------------SKELETON LOADING EFFECT FOR ACCOUNT PAGE-------------------- */
+.app.dark .skeleton-penny-info,
+.app.dark .skeleton-card,
+.app.dark .skeleton-title {
+  background: linear-gradient(90deg, #1a1a1a 25%, #222222 50%, #1a1a1a 75%);
+  -webkit-border-radius: 5px;
+  animation: skeleton-loading 2s ease-in-out infinite;
+  background-size: 200% 100%;
+  border-radius: 5px;
+  -webkit-animation: skeleton-loading 2s ease-in-out infinite;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }

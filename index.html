@@ -424,7 +424,8 @@
         <section class="account">
           <div class="account-container">
             <header class="account-header">
-              <h3>Overall</h3>
+              <h3 class="deactivate">Overall</h3>
+              <h3 class="skeleton-title"></h3>
               <div class="penny-info">
                 <div class="top">
                   <div class="expense expense-box">
@@ -441,13 +442,14 @@
                   <p class="bold">₹23,323</p>
                 </div>
               </div>
+              <div class="skeleton-penny-info"></div>
             </header>
             <div class="account-container">
               <ul class="accounts">
-                <h3>Accounts</h3>
+                <h3 class="deactivate">Accounts</h3>
               </ul>
             </div>
-            <div class="add-account">
+            <div class="add-account deactivate">
               <div class="add-box">
                 <img class="svg" src="icons/plus.svg" alt="" />
                 <p>ADD NEW ACCOUNT</p>
@@ -928,7 +930,7 @@
               <img class="svg" src="icons/calculator.svg" alt="" />
               <small>Budgets</small>
             </li>
-            <li>
+            <li class="skeleton-account">
               <img class="svg" src="icons/account.svg" alt="" />
               <small>Accounts</small>
             </li>
