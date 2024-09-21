@@ -156,6 +156,15 @@ export function updateAccount() {
 
   selectedCard.children[0].children[1].children[1].children[0].innerHTML =
     formatedAmount == 0 ? "₹0" : "₹" + formatedAmount.toLocaleString("en-IN");
+
+  const accountId = selectedCard.lastElementChild.lastElementChild.dataset.accountId;
+  let updatedData = {
+    icon: imageSrc,
+    accountName: updatedAccountName,
+    balance: updatedAmount,
+  };
+  
+  updateAccountDb(updatedData,accountId);
 }
 
 //edit account functainolity
@@ -188,6 +197,7 @@ editBtns.forEach((btn, index) => {
 });
 
 function openEditPanael(account, amount) {
+  console.log(account, amount);
   accountPage.classList.add("blur");
 
   let acutalAmount = amount.split(",").join("");
