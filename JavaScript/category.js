@@ -263,7 +263,7 @@ async function loadData() {
 document
   .querySelector(".skeleton-category")
   .addEventListener("click", ()=>{
-    loadData()
+    // loadData()
     reload();
   });
 

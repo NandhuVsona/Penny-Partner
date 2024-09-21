@@ -144,36 +144,7 @@
 .app.dark footer {
   background-color: var(--dark);
 }
-/* .app.dark main section.categories.blur img.icon,
-.app.dark main section.account.blurbg img.icon,
-.app.dark main section.account.blurbg img.svg,
-.app.dark main section.account.blur img.svg,
-.app.dark main section.account.blur img.icon,
-.app.dark main section.categories.blurbg img.icon,
-.app.dark main section.budgets .budget-container.blur img.svg,
-.app.dark main section.budgets .budget-container.blur img,
-.app.dark main section.budgets .budget-container.blur button,
-.app.dark main section.categories.blurbg img.svg,
-.app.dark main section.categories.blur img.svg {
-  filter: brightness(0.3);
-  -webkit-filter: brightness(0.2);
-} */
-/* .app main section.categories.blur img.icon,
-.app main section.account.blurbg img.icon,
-.app main section.account.blurbg img.svg,
-.app main section.account.blur img.svg,
-.app main section.account.blur img.icon,
-.app main section.categories.blurbg img.icon,
-.app main section.categories.blurbg img.svg,
-.app main section.categories.blur img.svg {
-  transition: all 0.5s ease;
-  filter: brightness(0.7);
-  -webkit-filter: brightness(0.7);
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-} */
+
 .app.dark main section.account.blur .card,
 .app.dark main section.account.blur .penny-info,
 .app.dark main section.account.blurbg .penny-info,
@@ -197,22 +168,7 @@
   background-color: rgb(0, 0, 0);
   border: none;
 }
-/* .app.dark main section.budgets .budget-container.blur .green {
-  opacity: 0.2;
-}
-.app.dark main section.budgets .budget-container.blur .red {
-  opacity: 0.1;
-}
-.app.dark
-  main
-  section.budgets
-  .budget-container.blur
-  .set-budgeted-list
-  li
-  .bar-container
-  .label-content {
-  opacity: 0.1;
-} */
+
 .app.dark main section.budgets .right-portion .budget-operations {
   background-color: var(--lightDark);
   color: #ffffff;
@@ -253,4 +209,31 @@
 .app.dark .imgSvg{
   filter: invert(1) !important;
   -webkit-filter: invert(1) !important;
+}
+
+.app.dark .category-container .expense-category-skeleton ul li .left-portion-skeleton p,
+.app.dark .category-container
+  .expense-category-skeleton
+  ul
+  li
+  .left-portion-skeleton
+  .img,
+.app.app.dark .category-container
+  .income-category-skeleton
+  ul
+  li
+  .left-portion-skeleton
+  .img,
+.app.dark .category-container .expense-category-skeleton ul li .right-portion-skeleton .img,
+.app.dark .category-container .income-category-skeleton ul li .right-portion-skeleton .img,
+.app.dark .category-container .income-category-skeleton h3,
+
+.app.dark .category-container .expense-category-skeleton h3,
+.app.dark .category-container .income-category-skeleton ul li .left-portion-skeleton p
+{
+  background: linear-gradient(90deg, #1a1a1a 25%, #222222 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s ease-in-out infinite;
+  border-radius: 4px;
+  -webkit-animation: skeleton-loading 2s ease-in-out infinite;
 }
