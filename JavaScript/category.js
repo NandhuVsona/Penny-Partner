@@ -209,8 +209,10 @@ function createCategory(name, icons, category) {
 }
 
 document.addEventListener("click", (e) => {
-  let dots = document.querySelectorAll(".right-portion .dot");
-  let options = document.querySelectorAll(".right-portion .options");
+  let dots = document.querySelectorAll(".income-list li .right-portion .dot");
+  let options = document.querySelectorAll(
+    ".income-list li .right-portion .options"
+  );
 
   dots.forEach((dot, i) => {
     if (!dot.contains(e.target)) {
@@ -236,18 +238,18 @@ async function loadData() {
   let req = await fetch(
     "https://penny-partner-api.onrender.com/api/v1/users/66ee1c362985182393a2eced"
   );
-  let res= await req.json();
-if(res.status=='success'){
-  document.querySelector(".income-category-skeleton").style.display= 'none'
-  let categories = res.data.categories;
-  categories.forEach(category =>{
-    createCategory(category.name,category.image,category.type)
-  })
-}
-else{
-document.querySelector(".income-category-skeleton").style.display= 'flex'
-}
-  
+  let res = await req.json();
+  if (res.status == "success") {
+    document.querySelector(".income-category-skeleton").style.display = "none";
+    let categories = res.data.categories;
+    categories.forEach((category) => {
+      createCategory(category.name, category.image, category.type);
+    });
+  } else {
+    document.querySelector(".income-category-skeleton").style.display = "flex";
+  }
 }
 
-// loadData()
+document
+  .querySelector(".skeleton-category")
+  .addEventListener("click", loadData);

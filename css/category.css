@@ -185,12 +185,12 @@ main section.categories .category-container,
 }
 @keyframes pulse {
   0% {
-    background-color: #e0e0e0;
+    background-color: #f0f0f0; /* Light gray */
   }
   50% {
-    background-color: #d0d0d0;
+    background-color: #e0e0e0; /* Slightly darker gray */
   }
   100% {
-    background-color: #e0e0e0;
+    background-color: #f0f0f0; /* Light gray */
   }
 }
