@@ -9,7 +9,6 @@ let accountPage = document.querySelector(".account");
 //Global variables
 let selectedCard = "";
 let accountImg = "";
-
 export function reloadFunctionality() {
   let dots = document.querySelectorAll(".operations .dot");
   let options = document.querySelectorAll(".operations .options");
@@ -29,8 +28,9 @@ export function reloadFunctionality() {
   //delete account
   accountDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
-      console.log("ho");
       account.parentElement.parentElement.parentElement.remove();
+      console.log(account.parentElement.dataset.accountId);
+      deleteAccountDb(account.parentElement.dataset.accountId);
     });
   });
 
@@ -213,6 +213,12 @@ async function saveAccountDb(data, userId) {
   );
   let res = await req.json();
   console.log(res);
+  if (res.status === "success") {
+    document.querySelector(
+      ".accounts"
+    ).lastElementChild.lastElementChild.lastElementChild.dataset.accountId =
+      res.data._id;
+  }
 }
 
 // 2) UPDATE FUCTIONALITY
@@ -232,7 +238,7 @@ async function updateAccountDb(data, accountId) {
 
 // 3) DELETE FUCTIONALITY
 
-async function deleteAccountDb(data, accountId) {
+async function deleteAccountDb(accountId) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/accounts/${accountId}`,
     {
@@ -240,6 +246,5 @@ async function deleteAccountDb(data, accountId) {
       headers: { "Content-Type": "application/json" },
     }
   );
-  let res = await req.json();
-  console.log(res);
+  console.log("Successfully Deleted");
 }

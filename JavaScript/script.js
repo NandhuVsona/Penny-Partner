@@ -160,31 +160,7 @@ accountsList.forEach((account) => {
   });
 });
 
-//delete account
-accountDelBtn.forEach((account) => {
-  account.addEventListener("click", () => {
-    account.parentElement.parentElement.parentElement.remove();
 
-    //local Storage functionality
-    let data = JSON.parse(localStorage.getItem("data")) || [];
-
-    let updatedArray = [];
-    let accountName =
-      account.parentElement.parentElement.parentElement.children[0].children[1]
-        .children[0].textContent;
-    let amount =
-      account.parentElement.parentElement.parentElement.children[0].children[1].children[1].children[0].textContent.slice(
-        1
-      );
-    data.forEach((item) => {
-      if (item.accountName != accountName && item.amount != amount) {
-        updatedArray.push(item);
-      }
-
-      localStorage.setItem("data", JSON.stringify(updatedArray));
-    });
-  });
-});
 
 dots.forEach((dot, index) => {
   dot.addEventListener("click", () => {
