@@ -1,14 +1,14 @@
 import { expenseCategories, incomeCategories } from "../data/categories.js";
 
-
-
 let switchBtn = document.querySelector(".category");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
 let categoryBox = document.querySelector(".category-box-body");
 let editcategoryBox = document.querySelector(".edit-category-box-body");
 let cancelCategoryBox = document.querySelector(".cancel-add-category");
 let cancelEditCategoryBox = document.querySelector(".cancel-edit-category");
-let categoryContainer = document.querySelector(".categories .category-container");
+let categoryContainer = document.querySelector(
+  ".categories .category-container"
+);
 let categories = document.querySelectorAll(
   ".category-container .category-list li"
 );
@@ -34,15 +34,15 @@ function baseTemplate(name, image) {
   return template;
 }
 
-incomeCategories.forEach((category) => {
-  incomeCategoryParent.innerHTML += baseTemplate(category.name, category.image);
-});
-expenseCategories.forEach((category) => {
-  expenseCategoryParent.innerHTML += baseTemplate(
-    category.name,
-    category.image
-  );
-});
+// incomeCategories.forEach((category) => {
+//   incomeCategoryParent.innerHTML += baseTemplate(category.name, category.image);
+// });
+// expenseCategories.forEach((category) => {
+//   expenseCategoryParent.innerHTML += baseTemplate(
+//     category.name,
+//     category.image
+//   );
+// });
 
 reload();
 
@@ -206,14 +206,27 @@ document.addEventListener("click", (e) => {
 
   let isClicked = true;
 
-  options.forEach(opt =>{
-    if(opt.contains(e.target)){
+  options.forEach((opt) => {
+    if (opt.contains(e.target)) {
       isClicked = false;
     }
-  })
+  });
 
-  if(!editcategoryBox.contains(e.target) && isClicked ){
-    editcategoryBox.classList.remove('active')
-    categoryContainer.classList.remove("blur")
+  if (!editcategoryBox.contains(e.target) && isClicked) {
+    editcategoryBox.classList.remove("active");
+    categoryContainer.classList.remove("blur");
   }
 });
+
+async function loadData() {
+  let req = await fetch(
+    "https://penny-partner-api.onrender.com/api/v1/users/66ee1c362985182393a2eced"
+  );
+  let {data} = await req.json();
+  let categories = data.categories;
+  categories.forEach(category =>{
+    createCategory(category.name,category.image,category.type)
+  })
+}
+
+loadData()
