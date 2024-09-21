@@ -1,7 +1,5 @@
-import { saveAccount, updateAccount } from "./functions.js";
+import { reloadFunctionality, saveAccount, updateAccount } from "./functions.js";
 
-//function for localstorage
-// let data = JSON.parse(localStorage.getItem("data")) || [];
 function renderAccounts(data){
  
   data.forEach((item) => {
@@ -16,7 +14,7 @@ function renderAccounts(data){
                   </div>
                   <div class="operations">
                     <img class="dot svg" src="icons/dot.svg" alt="" />
-                    <div class="options" data-id="${item._id}">
+                    <div class="options" data-account-id="${item._id}">
                       <p class="edit-btn">Edit</p>
                       <p class="delete-account">Delete</p>
                     </div>
@@ -243,6 +241,8 @@ async function loadAccountsData() {
   if (res.status === "success") {
     let { data } = res;
     renderAccounts(data)
+    reloadFunctionality()
+
     
   }
 }

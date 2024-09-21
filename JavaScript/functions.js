@@ -10,7 +10,7 @@ let accountPage = document.querySelector(".account");
 let selectedCard = "";
 let accountImg = "";
 
-function reloadFunctionality() {
+export function reloadFunctionality() {
   let dots = document.querySelectorAll(".operations .dot");
   let options = document.querySelectorAll(".operations .options");
   let editBtns = document.querySelectorAll(".edit-btn");
@@ -31,26 +31,6 @@ function reloadFunctionality() {
     account.addEventListener("click", () => {
       console.log("ho");
       account.parentElement.parentElement.parentElement.remove();
-
-      //local Storage functionality
-      let data = JSON.parse(localStorage.getItem("data")) || [];
-      console.log(data);
-      let updatedArray = [];
-      data.forEach((item) => {
-        console.log(
-          account.parentElement.parentElement.parentElement.contains(
-            item.accountName
-          )
-        );
-        if (
-          !account.parentElement.parentElement.parentElement.contains(
-            item.accountName
-          )
-        ) {
-          updateAccount.push(data);
-        }
-        localStorage.setItem("data", JSON.stringify(updatedArray));
-      });
     });
   });
 
@@ -102,7 +82,7 @@ export function saveAccount() {
   closeAccountBox();
   let initialAmount =
     document.getElementById("initial-amount").value.trim() || 0;
-  let formatedAmount = initialAmount;
+  let balance = initialAmount;
   let accountName = document.getElementById("account-name").value.trim();
   if (isNaN(initialAmount)) {
     initialAmount = 0;
@@ -110,22 +90,20 @@ export function saveAccount() {
   if (accountName === "" || accountName.lenght < 0) {
     return;
   }
-  let imageSrc = "";
+  let icon = "";
   accountsList.forEach((account) => {
     if (account.classList.contains("active")) {
-      imageSrc = account.children[0].getAttribute("src");
+      icon = account.children[0].getAttribute("src");
     }
   });
   let existingAccounts = document.querySelector(".accounts");
   let template = `<li class="card">
                 <div class="card-body">
-                  <img class='active' src="${imageSrc}" alt="" />
+                  <img class='active' src="${icon}" alt="" />
                   <div class="card-info">
                     <p class="bold">${accountName}</p>
                     <p>Balance: <span class="green bold">₹${
-                      formatedAmount == 0
-                        ? "0"
-                        : formatedAmount.toLocaleString("en-IN")
+                      balance == 0 ? "0" : balance.toLocaleString("en-IN")
                     }</span></p>
                   </div>
                 </div>
@@ -141,26 +119,15 @@ export function saveAccount() {
   document.getElementById("initial-amount").value = "";
   document.getElementById("account-name").value = "";
   reloadFunctionality();
-
-  //function for generating ids
-function generateId(){
-  let id = ''
-  for(let i =0 ; i<10;i++){
-    id+=Math.floor(Math.random()*9)
-  }
-  return id
-}
-console.log(generateId())
-  //local storage
-  let array = JSON.parse(localStorage.getItem("data")) || [];
+  let userId = "66eda54993eb73490edfa62d";
   let data = {
     accountName,
-    formatedAmount,
-    imageSrc,
-    id:generateId()
+    balance,
+    icon,
+    userId,
   };
-  array.push(data);
-  localStorage.setItem("data", JSON.stringify(array));
+
+  saveAccountDb(data, userId);
 }
 
 //update functionality---------------------------------------------
@@ -230,4 +197,49 @@ function openEditPanael(account, amount) {
   editAccountName.value = account;
   document.querySelector(".edit-box-body").classList.add("active");
   editAmount.focus();
+}
+
+//-------DATABASE OPERATIONS ----------------------------------
+
+// 1) SAVE FUNCTIONALITY
+async function saveAccountDb(data, userId) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/accounts/${userId}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
+}
+
+// 2) UPDATE FUCTIONALITY
+
+async function updateAccountDb(data, accountId) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/accounts/${accountId}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
+}
+
+// 3) DELETE FUCTIONALITY
+
+async function deleteAccountDb(data, accountId) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/accounts/${accountId}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  let res = await req.json();
+  console.log(res);
 }
