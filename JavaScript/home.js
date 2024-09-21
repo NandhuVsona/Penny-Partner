@@ -447,7 +447,6 @@ function changeCategory(num) {
 
       categoryOptions.innerHTML += template;
     });
-    
   }
 }
 
@@ -463,13 +462,13 @@ function changeAndUpdate() {
     cat.addEventListener("click", () => {
       selectedCatBody.classList.remove("active");
       let selectedCat = cat.dataset.id;
-     
+
       let accountData = togetherCategories.filter((d) => d.id == selectedCat);
       document.querySelector(".category-body .child-body").dataset.id =
         selectedCat;
 
       selectedCatImg.setAttribute("src", accountData[0].image);
-      selectedCatImg.classList.add("imgSvg")
+      selectedCatImg.classList.add("imgSvg");
       selectedCatName.textContent =
         accountData[0].name.length > 8
           ? accountData[0].name.slice(0, 8) + ".."
@@ -536,7 +535,9 @@ function verification() {
 
   let { accountName, imageSrc, id } = data.filter((d) => d.id == accId)[0];
 
-  let { name, image, ...others } = togetherCategories.filter((e) => e.id == catId)[0];
+  let { name, image, ...others } = togetherCategories.filter(
+    (e) => e.id == catId
+  )[0];
   let whatType = "";
   categoryTick.forEach((cat) => {
     if (cat.children[0].getAttribute("src")) {
@@ -689,7 +690,7 @@ categoryTick.forEach((item, index) => {
 
     selectedCatImg.setAttribute("src", "icons/category.svg");
     selectedCatImg.style.filter = "invert(0)";
-    selectedCatImg.classList.add("imgSvg")
+    selectedCatImg.classList.add("imgSvg");
     selectedCatName.textContent = "Category";
     categoryTick.forEach((cat) => cat.children[0].removeAttribute("src"));
     categoryTick[index].children[0].setAttribute("src", "icons/tick.svg");
@@ -841,7 +842,6 @@ function loadHistory(value) {
 }
 
 loadHistory(`${months[month]} ${year}`);
-
 
 let navIcons = document.querySelectorAll(".side-footer .menu li");
 let pages = document.querySelectorAll("main section");
