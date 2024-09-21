@@ -11,7 +11,7 @@ let skeketon = ` <li>
   <div class="dot svg img"></div>
 </div>
 </li>`;
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 6; i++) {
   incomeElement.innerHTML += skeketon;
   expenseElement.innerHTML += skeketon;
 }

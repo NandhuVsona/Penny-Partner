@@ -1,28 +1,31 @@
 import { saveAccount, updateAccount } from "./functions.js";
 
 //function for localstorage
-let data = JSON.parse(localStorage.getItem("data")) || [];
-data.forEach((item) => {
-  let existingAccounts = document.querySelector(".accounts");
-  let template = `<li class="card" data-id="${item.id}">
-                <div class="card-body">
-                  <img class="icon" src="${item.imageSrc}" alt="" />
-                  <div class="card-info">
-                    <p class="bold">${item.accountName}</p>
-                    <p>Balance: <span class="green bold">₹${item.formatedAmount}</span></p>
+// let data = JSON.parse(localStorage.getItem("data")) || [];
+function renderAccounts(data){
+ 
+  data.forEach((item) => {
+    let existingAccounts = document.querySelector(".accounts");
+    let template = `<li class="card">
+                  <div class="card-body">
+                    <img class="icon" src="${item.icon}" alt="" />
+                    <div class="card-info">
+                      <p class="bold">${item.accountName}</p>
+                      <p>Balance: <span class="green bold">₹${item.balance.toLocaleString()}</span></p>
+                    </div>
                   </div>
-                </div>
-                <div class="operations">
-                  <img class="dot svg" src="icons/dot.svg" alt="" />
-                  <div class="options">
-                    <p class="edit-btn">Edit</p>
-                    <p class="delete-account">Delete</p>
+                  <div class="operations">
+                    <img class="dot svg" src="icons/dot.svg" alt="" />
+                    <div class="options" data-id="${item._id}">
+                      <p class="edit-btn">Edit</p>
+                      <p class="delete-account">Delete</p>
+                    </div>
                   </div>
-                </div>
-              </li>`;
-  existingAccounts.innerHTML += template;
-});
-
+                </li>`;
+    existingAccounts.innerHTML += template;
+  });
+  
+}
 let isDark = JSON.parse(localStorage.getItem("Theme"));
 
 if (isDark) {
@@ -48,7 +51,9 @@ let editBox = document.querySelector(".edit-box-body");
 let preference = document.querySelector(".theme");
 let categoryBox = document.querySelector(".category-box-body");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
-let categoryContainer = document.querySelector(".categories .category-container");
+let categoryContainer = document.querySelector(
+  ".categories .category-container"
+);
 let accountContainer = document.querySelector(".account-container");
 
 preference.addEventListener("click", () => {
@@ -88,7 +93,7 @@ document.addEventListener("click", (e) => {
     accountContainer.classList.remove("blurbg");
   }
 
-  if(!categoryBox.contains(e.target) && !addCategoryBtn.contains(e.target)){
+  if (!categoryBox.contains(e.target) && !addCategoryBtn.contains(e.target)) {
     categoryBox.classList.remove("active");
     categoryContainer.classList.remove("blurbg");
   }
@@ -207,7 +212,8 @@ document.addEventListener("touchstart", (e) => {
 document.addEventListener("touchmove", (e) => {
   if (
     accountBox.classList.contains("active") ||
-    editBox.classList.contains("active") || categoryBox.classList.contains("active")
+    editBox.classList.contains("active") ||
+    categoryBox.classList.contains("active")
   )
     a = true;
   moveX = e.touches[0].clientX;
@@ -228,3 +234,16 @@ document.addEventListener("touchend", (e) => {
   moveX = undefined;
   a = false;
 });
+
+async function loadAccountsData() {
+  const req = await fetch(
+    "https://penny-partner-api.onrender.com/api/v1/users/accounts/66eda54993eb73490edfa62d"
+  );
+  const res = await req.json();
+  if (res.status === "success") {
+    let { data } = res;
+    renderAccounts(data)
+    
+  }
+}
+loadAccountsData();
