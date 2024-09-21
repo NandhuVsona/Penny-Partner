@@ -2,7 +2,8 @@ main section.categories {
   height: 100%;
 }
 
-main section.categories .category-container,.set-budgeted-container,
+main section.categories .category-container,
+.set-budgeted-container,
 .category-budgets {
   display: flex;
   gap: 15px;
@@ -13,6 +14,7 @@ main section.categories .category-container,.set-budgeted-container,
   padding: 15px;
 }
 .category-container .income-category,
+.category-container .income-category-skeleton,
 .category-container .expense-category {
   display: flex;
   flex-direction: column;
@@ -23,6 +25,7 @@ main section.categories .category-container,.set-budgeted-container,
   margin-top: 10px;
 }
 .category-container .income-category ul,
+.category-container .income-category-skeleton ul,
 .category-budgets .budget-list,
 .set-budgeted-container .set-budgeted-list,
 .category-container .expense-category ul {
@@ -34,14 +37,15 @@ main section.categories .category-container,.set-budgeted-container,
   gap: 15px;
 }
 .category-container .income-category ul li,
+.category-container .income-category-skeleton ul li,
 .category-budgets .budget-list li,
 .set-budgeted-container .set-budgeted-list li,
 .category-container .expense-category ul li {
   display: flex;
   width: 100%;
- 
 }
 .category-container .income-category ul li,
+.category-container .income-category-skeleton ul li,
 .set-budgeted-container .set-budgeted-list li,
 .category-budgets .budget-list li,
 .category-container .expense-category ul li {
@@ -51,6 +55,7 @@ main section.categories .category-container,.set-budgeted-container,
   width: 100%;
 }
 .category-container .income-category ul li .left-portion,
+.category-container .income-category-skeleton ul li .left-portion,
 .set-budgeted-container .set-budgeted-list li .left-portion,
 .category-budgets .budget-list li .left-portion,
 .category-container .expense-category ul li .left-portion {
@@ -60,6 +65,7 @@ main section.categories .category-container,.set-budgeted-container,
   gap: 15px;
 }
 .category-container .income-category ul li .left-portion img,
+.category-container .income-category-skeleton ul li .left-portion img,
 .category-budgets .budget-list li .left-portion img,
 .set-budgeted-container .set-budgeted-list li .left-portion img,
 .category-container .expense-category ul li .left-portion img {
@@ -73,6 +79,7 @@ main section.categories .category-container,.set-budgeted-container,
 }
 
 .category-container .income-category ul li .right-portion,
+.category-container .income-category-skeleton ul li .right-portion,
 .category-budgets .budget-list li .right-portion,
 .set-budgeted-container .set-budgeted-list li .right-portion,
 .category-container .expense-category ul li .right-portion {
@@ -127,4 +134,63 @@ main section.categories .category-container,.set-budgeted-container,
 .change-font-style {
   font-size: 17px;
   font-weight: 500;
+}
+
+.category-container .income-category-skeleton h3 {
+  width: 50%;
+  height: 30px;
+  border-radius: 5px;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  animation: pulse 1.5s infinite;
+}
+.category-container .income-category-skeleton ul li .left-portion .img {
+  width: 40px;
+  padding: 3px;
+  height: 40px;
+  border-radius: 5px;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  animation: pulse 1.5s infinite;
+}
+.category-container .income-category-skeleton ul li .right-portion .img {
+  width: 40px;
+  padding: 3px;
+  height: 40px;
+  border-radius: 5px;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  animation: pulse 1.5s infinite;
+}
+.category-container .income-category-skeleton ul li .left-portion p {
+  width: 12rem;
+  padding: 3px;
+  height: 40px;
+  border-radius: 5px;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #d0d0d0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
 }

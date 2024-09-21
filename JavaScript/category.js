@@ -1,4 +1,18 @@
 import { expenseCategories, incomeCategories } from "../data/categories.js";
+//Skeleton load effect
+let parentElement = document.querySelector(".income-list-skeketon");
+
+for (let i = 0; i < 10; i++) {
+  parentElement.innerHTML += ` <li>
+  <div class="left-portion">
+    <div class="img"></div>
+    <p class="change-font-style"></p>
+  </div>
+  <div class="right-portion">
+    <div class="dot svg img"></div>
+  </div>
+</li>`;
+}
 
 let switchBtn = document.querySelector(".category");
 let addCategoryBtn = document.querySelector(".add-category .add-box");
@@ -222,11 +236,18 @@ async function loadData() {
   let req = await fetch(
     "https://penny-partner-api.onrender.com/api/v1/users/66ee1c362985182393a2eced"
   );
-  let {data} = await req.json();
-  let categories = data.categories;
+  let res= await req.json();
+if(res.status=='success'){
+  document.querySelector(".income-category-skeleton").style.display= 'none'
+  let categories = res.data.categories;
   categories.forEach(category =>{
     createCategory(category.name,category.image,category.type)
   })
 }
+else{
+document.querySelector(".income-category-skeleton").style.display= 'flex'
+}
+  
+}
 
-loadData()
+// loadData()
