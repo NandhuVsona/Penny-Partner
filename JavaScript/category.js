@@ -254,6 +254,7 @@ async function loadData() {
     "https://penny-partner-api.onrender.com/api/v1/users/categories/66efbc38dadf2a87f3644e04"
   );
   let res = await req.json();
+  console.log(res)
   console.log(res);
   if (res.status == "success") {
     incomeCategoryParent.innerHTML = "";
