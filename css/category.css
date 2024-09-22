@@ -231,7 +231,7 @@ main section.categories .category-container,
   display: none;
 }
 
-.category-container .income-category h3,.category-container .expense-category h3{
+/* .category-container .income-category h3,.category-container .expense-category h3{
   background: linear-gradient(to right, #00f2fe, #4facfe);
   clip-path: polygon(0 0, 100% 0, 96% 50%, 100% 100%, 0 100%);
   width: 15rem;
@@ -239,4 +239,4 @@ main section.categories .category-container,
 }
 .app.dark .category-container .income-category h3,.app.dark .category-container .expense-category h3{
  color: #000000;
-}
+} */
