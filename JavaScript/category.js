@@ -1,4 +1,6 @@
-import { expenseCategories, incomeCategories } from "../data/categories.js";
+const globalId = '66efd1552e03ec45ce74d5fd'
+
+
 //Skeleton load effect
 let incomeElement = document.querySelector(".income-list-skeketon");
 let expenseElement = document.querySelector(".expense-list-skeketon");
@@ -32,33 +34,6 @@ let saveCategoryBtn = document.querySelector(".save-category-btn");
 let clickedItem = "";
 let incomeCategoryParent = document.querySelector(`.income-category ul`);
 let expenseCategoryParent = document.querySelector(`.expense-category ul`);
-
-// function baseTemplate(name, image) {
-//   let template = `  <li>
-//   <div class="left-portion">
-//     <img class="icon" src="${image}" alt="" />
-//     <p class="change-font-style">${name}</p>
-//   </div>
-//   <div class="right-portion">
-//     <img class="dot svg" src="icons/dot.svg" alt="" />
-//     <div class="options">
-//       <p class="edit-category-btn">Edit</p>
-//       <p class="delete-account">Delete</p>
-//     </div>
-//   </div>
-// </li>`;
-//   return template;
-// }
-
-// incomeCategories.forEach((category) => {
-//   incomeCategoryParent.innerHTML += baseTemplate(category.name, category.image);
-// });
-// expenseCategories.forEach((category) => {
-//   expenseCategoryParent.innerHTML += baseTemplate(
-//     category.name,
-//     category.image
-//   );
-// });
 
 categories.forEach((categorie) => {
   categorie.addEventListener("click", () => {
@@ -177,7 +152,7 @@ function updateCategory() {
     name: updatedName.value,
     image: updatedIcon,
   };
-  updateCategoryDb(data,categoryId)
+  updateCategoryDb(data, categoryId);
 }
 
 saveCategoryBtn.addEventListener("click", () => {
@@ -202,7 +177,7 @@ saveCategoryBtn.addEventListener("click", () => {
       type: category,
       userId,
     };
-    saveCategoryDb(data, userId);
+    saveCategoryDb(data, globalId);
   } else {
     return;
   }
@@ -261,7 +236,7 @@ document.addEventListener("click", (e) => {
 
 async function loadData() {
   let req = await fetch(
-    "https://penny-partner-api.onrender.com/api/v1/users/categories/66efbc38dadf2a87f3644e04"
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${globalId}`
   );
   let res = await req.json();
 
