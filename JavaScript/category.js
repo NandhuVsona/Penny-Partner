@@ -156,6 +156,7 @@ document
 
 function updateCategory() {
   editcategoryBox.classList.remove("active");
+  categoryContainer.classList.remove("blur");
   let updatedName = document.getElementById("edit-category-name");
   if (updatedName.value.trim().lenght < 0) return;
 
