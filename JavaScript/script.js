@@ -235,7 +235,7 @@ async function loadAccountsData() {
       .querySelectorAll(".deactivate")
       .forEach((i) => (i.style.display = "flex"));
     existingAccounts.innerHTML = " ";
-    existingAccounts.innerHTML = "<h3>Accounts</h3>"
+    existingAccounts.innerHTML = "<h3>Accounts</h3>";
     renderAccounts(data);
     reloadFunctionality();
   }

@@ -1302,15 +1302,25 @@
   font-size: 15px;
   font-weight: 500;
 }
+.side-footer ul.menu li:hover img,
+.side-footer ul.menu li.active img{
+  filter: invert(0) !important;
+  -webkit-filter: invert(0) !important;
+}
 .side-footer ul.menu li:hover,
 .side-footer ul.menu li.active {
-  background-color: rgb(138, 5, 239);
+  
+  background: linear-gradient(to right, #00f2fe, #4facfe);
   color: #ffffff;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+.side-footer ul.menu li:hover p,.side-footer ul.menu li.active p{
+  font-weight: bold !important;
+  color: #000000 !important;
 }
 .side-footer ul.menu li:hover img,
 .side-footer ul.menu li.active img {

@@ -60,8 +60,6 @@ let expenseCategoryParent = document.querySelector(`.expense-category ul`);
 //   );
 // });
 
-
-
 categories.forEach((categorie) => {
   categorie.addEventListener("click", () => {
     categories.forEach((categorie) => categorie.classList.remove("active"));
@@ -88,7 +86,6 @@ cancelEditCategoryBox.addEventListener("click", () => {
 });
 
 function reload() {
-
   let editBtn = document.querySelectorAll(".edit-category-btn");
 
   let dots = document.querySelectorAll(".right-portion .dot");
@@ -111,6 +108,10 @@ function reload() {
   categoryDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
       account.parentElement.parentElement.parentElement.remove();
+      deleteCategoryDb(
+        account.parentElement.dataset.userId,
+        account.parentElement.dataset.categoryId
+      );
     });
   });
   //edit btn
@@ -174,7 +175,7 @@ function updateCategory() {
 saveCategoryBtn.addEventListener("click", () => {
   categoryBox.classList.remove("active");
   categoryContainer.classList.remove("blurbg");
-  let categoryName = document.getElementById("category-name");
+  let categoryName = document.getElementById("category-name").value.trim();
   let selectedIcon = "";
   categories.forEach((categorie) => {
     if (categorie.classList.contains("active")) {
@@ -184,24 +185,35 @@ saveCategoryBtn.addEventListener("click", () => {
   let category = document.querySelector(".switch").classList.contains("active")
     ? "income"
     : "expense";
-
-  createCategory(categoryName.value.trim(), selectedIcon, category);
-});
-
-function createCategory(name, icons, category) {
-  if (name == "" || name.lenght < 0) {
+  if (categoryName != "") {
+    createCategory(categoryName, selectedIcon, category);
+    let userId = "66ee1c362985182393a2eced";
+    let data = {
+      image: selectedIcon,
+      name: categoryName,
+      type: category,
+    };
+    saveCategoryDb(data, userId);
+  } else {
     return;
   }
+});
+
+function createCategory(name, icon, category, userId, categoryId) {
+  if (name == " " || name.lenght < 0) {
+    return;
+  }
+
   let parent = document.querySelector(`.${category}-category ul`);
 
   let template = `<li>
                   <div class="left-portion">
-                    <img src="${icons}" alt="" />
+                    <img src="${icon}" alt="" />
                     <p class="change-font-style">${name}</p>
                   </div>
                   <div class="right-portion">
                     <img class="dot svg" src="icons/dot.svg" alt="" />
-                    <div class="options">
+                    <div class="options" data-category-id="${categoryId}" data-user-id ="${userId}">
                       <p class="edit-category-btn">Edit</p>
                       <p class="delete-account">Delete</p>
                     </div>
@@ -210,7 +222,6 @@ function createCategory(name, icons, category) {
   parent.innerHTML += template;
 
   document.getElementById("category-name").value = "";
- 
 }
 
 document.addEventListener("click", (e) => {
@@ -244,15 +255,23 @@ async function loadData() {
     "https://penny-partner-api.onrender.com/api/v1/users/66ee1c362985182393a2eced"
   );
   let res = await req.json();
+
   if (res.status == "success") {
     incomeCategoryParent.innerHTML = "";
     expenseCategoryParent.innerHTML = "";
     document.querySelector(".income-category-skeleton").style.display = "none";
     document.querySelector(".expense-category-skeleton").style.display = "none";
     showCategory();
+    let id = res.data._id;
     let categories = res.data.categories;
     categories.forEach((category) => {
-      createCategory(category.name, category.image, category.type);
+      createCategory(
+        category.name,
+        category.image,
+        category.type,
+        id,
+        category.id
+      );
     });
     reload();
   } else {
@@ -260,16 +279,54 @@ async function loadData() {
   }
 }
 
-document
-  .querySelector(".skeleton-category")
-  .addEventListener("click", ()=>{
-    loadData()
-    reload();
-  });
+document.querySelector(".skeleton-category").addEventListener("click", () => {
+  loadData();
+  reload();
+});
 
 function showCategory() {
   document
     .querySelectorAll(".active-category h3")
     .forEach((item) => (item.style.display = "flex"));
-    document.querySelector(".active-category  .add-box").style.display = "flex";
+  document.querySelector(".active-category  .add-box").style.display = "flex";
+}
+
+// -----------------CREATE CATEGORY TO DB ----------------------------
+async function saveCategoryDb(data, userId) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
+}
+
+// -----------------UPDATE CATEGORY TO DB ----------------------------
+async function updateCategoryDb(userId) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+}
+
+// -----------------DELETE CATEGORY TO DB ----------------------------
+async function deleteCategoryDb(userId, categoryId) {
+  console.log(userId,categoryId)
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: categoryId }),
+    }
+  );
+  console.log("Successfully deleted");
 }
