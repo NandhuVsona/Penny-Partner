@@ -16,12 +16,8 @@ function baseTemplate(name, image, id) {
                     <button class="set-budget-btn" data-category-id="${id}">SET BUDGET</button>
                   </div>
                 </li>`;
-
   parent.innerHTML += template;
 }
-expenseCategories.forEach((category) => {
-  baseTemplate(category.name, category.image, category.id);
-});
 
 let cancelBudget = document.querySelector(".cancel-budget-box");
 let cancelEdit = document.querySelector(".cancel-edit-box");
@@ -68,7 +64,7 @@ function reloadtwo() {
     });
   });
 }
-reload();
+
 function reload() {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
   let threeDots = document.querySelectorAll(".three-dot");
@@ -114,7 +110,6 @@ function reload() {
 }
 
 function openEditBox(btn) {
-  
   let id = btn.parentElement.dataset.categoryId;
   let isFound = budgetedCategories.filter((item) => item.id == id);
   let data = isFound[0];
@@ -160,10 +155,11 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate() {
+function setBudgetTemplate(budgetedCategories) {
   ulParent.innerHTML = " ";
   budgetedCategories.forEach((data) => {
-    let { image, name, budget, id } = data;
+    let { budget, id } = data;
+    let { image, name } = data.categoryId;
 
     let template = `<li>
                       <div class="text-container">
@@ -203,7 +199,7 @@ function setBudgetTemplate() {
                     </li>`;
     ulParent.innerHTML += template;
   });
-  reload();
+ 
 }
 
 setBudgetLimitBtn.addEventListener("click", () => {
@@ -221,7 +217,7 @@ setBudgetLimitBtn.addEventListener("click", () => {
   updatedArray.forEach((item) => {
     baseTemplate(item.name, item.image, item.id);
   });
-  document.getElementById("budget-value").value = ' '
+  document.getElementById("budget-value").value = " ";
   reload();
 
   try {
@@ -239,16 +235,16 @@ document.addEventListener("click", (e) => {
   let isBtnClick = true;
   let dots = true;
   let opt = true;
-  threeDots.forEach(dot =>{
-    if(dot.contains(e.target)){
+  threeDots.forEach((dot) => {
+    if (dot.contains(e.target)) {
       dots = false;
     }
-  })
-  options.forEach(opt =>{
-    if(opt.contains(e.target)){
+  });
+  options.forEach((opt) => {
+    if (opt.contains(e.target)) {
       opt = false;
     }
-  })
+  });
   setBudgetBtns.forEach((btn) => {
     if (btn.contains(e.target)) {
       isBtnClick = false;
@@ -258,15 +254,53 @@ document.addEventListener("click", (e) => {
     closeBudgetBox();
   }
 
-  changeLimitBtn.forEach(dot =>{
-    if(dot.contains(e.target)){
-      isBtnClick = false
+  changeLimitBtn.forEach((dot) => {
+    if (dot.contains(e.target)) {
+      isBtnClick = false;
     }
-  })
-  if(!editBudgetBox.contains(e.target) && isBtnClick){
-    closeEditBox()
+  });
+  if (!editBudgetBox.contains(e.target) && isBtnClick) {
+    closeEditBox();
   }
-  if(dots && opt){
-    options.forEach(option => option.classList.remove("active"))
+  if (dots && opt) {
+    options.forEach((option) => option.classList.remove("active"));
   }
 });
+
+//-------------READ BUDGETS -----------------------
+async function loadDataBudgets() {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/66efd1552e03ec45ce74d5fd`
+  );
+  let res = await req.json();
+
+  if (res.status == "success") {
+    let { data } = res;
+
+    let unBudgeted = data[0].unBudgeted;
+    let budgeted = data[0].budgeted;
+
+    setBudgetTemplate(budgeted);
+
+    unBudgeted.forEach((item) => {
+      baseTemplate(item.name, item.image, item.id);
+    });
+    reload()
+  }
+}
+loadDataBudgets();
+
+
+//--------------------CREATE BUDGETS---------------------
+async function createBudgetDb(userId,data) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
+}

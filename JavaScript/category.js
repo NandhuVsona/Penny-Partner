@@ -1,5 +1,4 @@
-const globalId = '66efd1552e03ec45ce74d5fd'
-
+const globalId = "66efd1552e03ec45ce74d5fd";
 
 //Skeleton load effect
 let incomeElement = document.querySelector(".income-list-skeketon");
@@ -206,17 +205,28 @@ function createCategory(name, icon, category, categoryId) {
   parent.innerHTML += template;
 
   document.getElementById("category-name").value = "";
+  reload();
 }
 
 document.addEventListener("click", (e) => {
   let dots = document.querySelectorAll(".income-list li .right-portion .dot");
+  let edots = document.querySelectorAll(".expense-list li .right-portion .dot");
+
   let options = document.querySelectorAll(
     ".income-list li .right-portion .options"
+  );
+  let eoptions = document.querySelectorAll(
+    ".expense-list li .right-portion .options"
   );
 
   dots.forEach((dot, i) => {
     if (!dot.contains(e.target)) {
       options[i].classList.remove("active");
+    }
+  });
+  edots.forEach((dot, i) => {
+    if (!dot.contains(e.target)) {
+      eoptions[i].classList.remove("active");
     }
   });
 
@@ -255,15 +265,14 @@ async function loadData() {
         category._id
       );
     });
-    reload();
   } else {
     document.querySelector(".income-category-skeleton").style.display = "flex";
   }
+  reload();
 }
 
 document.querySelector(".skeleton-category").addEventListener("click", () => {
   loadData();
-  reload();
 });
 
 function showCategory() {
