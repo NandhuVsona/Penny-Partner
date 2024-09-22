@@ -1,5 +1,6 @@
 import { closeEditBox, closeAccountBox } from "./script.js";
 
+const globalId = "66efd1552e03ec45ce74d5fd";
 let accountsList = document.querySelectorAll(".account-list li");
 let editBtns = document.querySelectorAll(".edit-btn");
 
@@ -99,7 +100,7 @@ export function saveAccount() {
   let existingAccounts = document.querySelector(".accounts");
   let template = `<li class="card">
                 <div class="card-body">
-                  <img class='active' src="${icon}" alt="" />
+                  <img class='icon' src="${icon}" alt="" />
                   <div class="card-info">
                     <p class="bold">${accountName}</p>
                     <p>Balance: <span class="green bold">₹${
@@ -127,7 +128,7 @@ export function saveAccount() {
     userId,
   };
 
-  saveAccountDb(data, userId);
+  saveAccountDb(data, globalId);
 }
 
 //update functionality---------------------------------------------
@@ -157,14 +158,15 @@ export function updateAccount() {
   selectedCard.children[0].children[1].children[1].children[0].innerHTML =
     formatedAmount == 0 ? "₹0" : "₹" + formatedAmount.toLocaleString("en-IN");
 
-  const accountId = selectedCard.lastElementChild.lastElementChild.dataset.accountId;
+  const accountId =
+    selectedCard.lastElementChild.lastElementChild.dataset.accountId;
   let updatedData = {
     icon: imageSrc,
     accountName: updatedAccountName,
     balance: updatedAmount,
   };
-  
-  updateAccountDb(updatedData,accountId);
+
+  updateAccountDb(updatedData, accountId);
 }
 
 //edit account functainolity
@@ -197,8 +199,7 @@ editBtns.forEach((btn, index) => {
 });
 
 function openEditPanael(account, amount) {
-  console.log(account, amount);
-  accountPage.classList.add("blur");
+  document.querySelector(".account-container").classList.add("blur");
 
   let acutalAmount = amount.split(",").join("");
   let editAmount = document.getElementById("edit-amount");
