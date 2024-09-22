@@ -108,8 +108,7 @@ function reload() {
   categoryDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
       account.parentElement.parentElement.parentElement.remove();
-      // deleteCategoryDb(account.parentElement.dataset.categoryId);
-      console.log(account.parentElement.dataset.categoryId)
+      deleteCategoryDb(account.parentElement.dataset.categoryId);
     });
   });
   //edit btn
@@ -190,7 +189,7 @@ saveCategoryBtn.addEventListener("click", () => {
       image: selectedIcon,
       name: categoryName,
       type: category,
-      userId
+      userId,
     };
     saveCategoryDb(data, userId);
   } else {
@@ -254,8 +253,7 @@ async function loadData() {
     "https://penny-partner-api.onrender.com/api/v1/users/categories/66efbc38dadf2a87f3644e04"
   );
   let res = await req.json();
-  console.log(res)
-  console.log(res);
+
   if (res.status == "success") {
     incomeCategoryParent.innerHTML = "";
     expenseCategoryParent.innerHTML = "";
@@ -268,7 +266,7 @@ async function loadData() {
         category.name,
         category.image,
         category.type,
-        category.id
+        category._id
       );
     });
     reload();
@@ -304,7 +302,7 @@ async function saveCategoryDb(data, userId) {
 }
 
 // -----------------UPDATE CATEGORY TO DB ----------------------------
-async function updateCategoryDb(data,categoryId) {
+async function updateCategoryDb(data, categoryId) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/categories/${categoryId}`,
     {
