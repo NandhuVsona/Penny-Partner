@@ -153,6 +153,7 @@ function openEditPanel(name, src) {
 document
   .querySelector(".save-edit-category-btn")
   .addEventListener("click", updateCategory);
+
 function updateCategory() {
   editcategoryBox.classList.remove("active");
   let updatedName = document.getElementById("edit-category-name");
@@ -167,6 +168,15 @@ function updateCategory() {
 
   clickedItem.children[0].children[0].setAttribute("src", updatedIcon);
   clickedItem.children[0].children[1].textContent = updatedName.value;
+
+  let categoryId =
+    clickedItem.lastElementChild.lastElementChild.dataset.categoryId;
+
+  let data = {
+    name: updatedName.value,
+    image: updatedIcon,
+  };
+  updateCategoryDb(data,categoryId)
 }
 
 saveCategoryBtn.addEventListener("click", () => {
