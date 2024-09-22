@@ -223,7 +223,7 @@ document.addEventListener("touchend", (e) => {
 
 async function loadAccountsData() {
   const req = await fetch(
-    "https://penny-partner-api.onrender.com/api/v1/users/accounts/66eda54993eb73490edfa62d"
+    "https://penny-partner-api.onrender.com/api/v1/users/accounts/66efd1552e03ec45ce74d5fd"
   );
   const res = await req.json();
   if (res.status === "success") {
