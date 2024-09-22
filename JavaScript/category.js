@@ -108,10 +108,8 @@ function reload() {
   categoryDelBtn.forEach((account) => {
     account.addEventListener("click", () => {
       account.parentElement.parentElement.parentElement.remove();
-      deleteCategoryDb(
-        account.parentElement.dataset.userId,
-        account.parentElement.dataset.categoryId
-      );
+      // deleteCategoryDb(account.parentElement.dataset.categoryId);
+      console.log(account.parentElement.dataset.categoryId)
     });
   });
   //edit btn
@@ -187,11 +185,12 @@ saveCategoryBtn.addEventListener("click", () => {
     : "expense";
   if (categoryName != "") {
     createCategory(categoryName, selectedIcon, category);
-    let userId = "66ee1c362985182393a2eced";
+    let userId = "66efbc38dadf2a87f3644e04";
     let data = {
       image: selectedIcon,
       name: categoryName,
       type: category,
+      userId
     };
     saveCategoryDb(data, userId);
   } else {
@@ -199,7 +198,7 @@ saveCategoryBtn.addEventListener("click", () => {
   }
 });
 
-function createCategory(name, icon, category, userId, categoryId) {
+function createCategory(name, icon, category, categoryId) {
   if (name == " " || name.lenght < 0) {
     return;
   }
@@ -213,7 +212,7 @@ function createCategory(name, icon, category, userId, categoryId) {
                   </div>
                   <div class="right-portion">
                     <img class="dot svg" src="icons/dot.svg" alt="" />
-                    <div class="options" data-category-id="${categoryId}" data-user-id ="${userId}">
+                    <div class="options" data-category-id="${categoryId}">
                       <p class="edit-category-btn">Edit</p>
                       <p class="delete-account">Delete</p>
                     </div>
@@ -252,24 +251,22 @@ document.addEventListener("click", (e) => {
 
 async function loadData() {
   let req = await fetch(
-    "https://penny-partner-api.onrender.com/api/v1/users/66ee1c362985182393a2eced"
+    "https://penny-partner-api.onrender.com/api/v1/users/categories/66efbc38dadf2a87f3644e04"
   );
   let res = await req.json();
-
+  console.log(res);
   if (res.status == "success") {
     incomeCategoryParent.innerHTML = "";
     expenseCategoryParent.innerHTML = "";
     document.querySelector(".income-category-skeleton").style.display = "none";
     document.querySelector(".expense-category-skeleton").style.display = "none";
     showCategory();
-    let id = res.data._id;
-    let categories = res.data.categories;
+    let categories = res.data;
     categories.forEach((category) => {
       createCategory(
         category.name,
         category.image,
         category.type,
-        id,
         category.id
       );
     });
@@ -306,9 +303,9 @@ async function saveCategoryDb(data, userId) {
 }
 
 // -----------------UPDATE CATEGORY TO DB ----------------------------
-async function updateCategoryDb(userId) {
+async function updateCategoryDb(data,categoryId) {
   let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${categoryId}`,
     {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -318,14 +315,12 @@ async function updateCategoryDb(userId) {
 }
 
 // -----------------DELETE CATEGORY TO DB ----------------------------
-async function deleteCategoryDb(userId, categoryId) {
-  console.log(userId,categoryId)
+async function deleteCategoryDb(categoryId) {
   let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${categoryId}`,
     {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: categoryId }),
     }
   );
   console.log("Successfully deleted");
