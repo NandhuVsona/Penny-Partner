@@ -2,6 +2,7 @@ import { expenseCategories } from "../data/categories.js";
 let parent = document.querySelector(".budget-list");
 let budgetedCategories = [];
 let clickedBudget = ""; //this for knowing user which category is clicked
+
 let updatedArray = expenseCategories;
 function baseTemplate(name, image, id) {
   let template = `<li>
@@ -108,31 +109,26 @@ function reload() {
 }
 
 function openEditBox(btn) {
+  let parent = btn.parentElement.parentElement.parentElement;
   let id = btn.parentElement.dataset.categoryId;
-  let isFound = budgetedCategories.filter((item) => item.id == id);
-  let data = isFound[0];
+  let image = parent.children[0].children[0].getAttribute("src");
+  let text = parent.children[0].children[1].children[0].textContent
+  let budget = parent.parentElement.children[1].children[0].children[0].textContent
+ 
+  
   let itemName = document.querySelector(".edit-category-name");
   let itemImage = document.querySelector(".edit-budget-icon");
-
-  updatedLimitinput.value = data.budget;
-  updateLimitBtn.dataset.categoryId = data.id;
-  itemName.innerHTML = data.name;
-  itemImage.setAttribute("src", data.image);
+  updatedLimitinput.value = budget.slice(1);
+  
+  itemName.innerHTML = text;
+  itemImage.setAttribute("src", image);
   editBudgetBox.classList.add("active");
   budgetContainer.classList.add("blurbg");
 
   updateLimitBtn.addEventListener("click", () => {
     closeEditBox();
-    let id = updateLimitBtn.dataset.categoryId;
-    budgetedCategories = budgetedCategories.map((bud) => {
-      if (bud.id == id) {
-        return { ...bud, budget: updatedLimitinput.value }; // Update the budget for the matching id
-      } else {
-        return bud; // Return the original object for non-matching ids
-      }
-    });
 
-    setBudgetTemplate();
+    // setBudgetTemplate();
   });
 }
 
