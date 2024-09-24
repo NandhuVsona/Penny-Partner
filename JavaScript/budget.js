@@ -30,11 +30,10 @@ let updateLimitBtn = document.querySelector(".updated-limit");
 let setBudgetLimitBtn = document.querySelector(".set-limit");
 let ulParent = document.querySelector(".set-budgeted-list");
 function removeBudget(btn) {
+  reloadDots();
   let btnId = btn.parentElement.dataset.categoryId;
-  removeBudgetDb(btnId);
+  removeBudgetDb(btnId, loadBudgeted);
   btn.parentElement.parentElement.parentElement.parentElement.remove();
-  loadDataBudgets(false, true);
-  reload();
 }
 cancelEdit.addEventListener("click", closeEditBox);
 
@@ -68,7 +67,10 @@ function reload() {
   let changeLimitBtn = document.querySelectorAll(".change-limit");
 
   removeBtns.forEach((btn) => {
-    btn.addEventListener("click", () => removeBudget(btn));
+    btn.addEventListener("click", () => {
+      reload();
+      removeBudget(btn);
+    });
   });
 
   threeDots.forEach((dot, index) => {
@@ -202,7 +204,6 @@ setBudgetLimitBtn.addEventListener("click", () => {
   // parent.innerHTML = "";
 
   document.getElementById("budget-value").value = " ";
-  reload();
 
   try {
     if (Number(budget) > 0) {
@@ -259,7 +260,7 @@ document.addEventListener("click", (e) => {
 });
 
 //-------------READ BUDGETS -----------------------
-async function loadDataBudgets(budget, unBudget) {
+async function loadDataBudgets() {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/budgets/66efd1552e03ec45ce74d5fd`
   );
@@ -267,32 +268,25 @@ async function loadDataBudgets(budget, unBudget) {
 
   if (res.status == "success") {
     let { data } = res;
-    if (budget && unBudget) {
-      ulParent.innerHTML = " ";
 
-      let unBudgeted = data[0].unBudgeted;
-      let budgeted = data[0].budgeted;
+    ulParent.innerHTML = " ";
 
-      budgeted.forEach((data) => {
-        let { budget, _id } = data;
-        let { image, name } = data.categoryId;
-        setBudgetTemplate(_id, name, image, budget);
-      });
-      unBudgeted.forEach((item) => {
-        baseTemplate(item.name, item.image, item._id);
-      });
-    } else {
-      parent.innerHTML = "";
+    let unBudgeted = data[0].unBudgeted;
+    let budgeted = data[0].budgeted;
 
-      let unBudgeted = data[0].unBudgeted;
-      unBudgeted.forEach((item) => {
-        baseTemplate(item.name, item.image, item._id);
-      });
-    }
+    budgeted.forEach((data) => {
+      let { budget, _id } = data;
+      let { image, name } = data.categoryId;
+      setBudgetTemplate(_id, name, image, budget);
+    });
+    unBudgeted.forEach((item) => {
+      baseTemplate(item.name, item.image, item._id);
+    });
+
     reload();
   }
 }
-loadDataBudgets(true, true);
+loadDataBudgets();
 
 //--------------------CREATE BUDGETS---------------------
 async function createBudgetDb(userId, data) {
@@ -311,11 +305,15 @@ async function createBudgetDb(userId, data) {
     }
   );
   let res = await req.json();
-  console.log(res);
+
+  document.querySelector(
+    ".set-budgeted-list"
+  ).lastElementChild.children[0].lastElementChild.lastElementChild.dataset.categoryId =
+    res.data._id;
 }
 
 //--------------------REMOVE BUDGETS---------------------
-async function removeBudgetDb(budgetId) {
+async function removeBudgetDb(budgetId, callBack) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/budgets/${budgetId}`,
     {
@@ -323,6 +321,54 @@ async function removeBudgetDb(budgetId) {
       headers: { "Content-Type": "application/json" },
     }
   );
+  callBack();
+}
 
-  console.log("Successfully remoed");
+async function loadBudgeted() {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/66efd1552e03ec45ce74d5fd`
+  );
+  let res = await req.json();
+  if (res.status == "success") {
+    let { data } = res;
+
+    let unBudgeted = data[0].unBudgeted;
+    parent.innerHTML = "";
+    unBudgeted.forEach((item) => {
+      baseTemplate(item.name, item.image, item._id);
+    });
+  }
+  reloadtwo();
+}
+
+function reloadDots() {
+  let threeDots = document.querySelectorAll(".three-dot");
+  let options = document.querySelectorAll(".budget-operations");
+  let removeBtns = document.querySelectorAll(".remove-budget");
+  let changeLimitBtn = document.querySelectorAll(".change-limit");
+
+  removeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      reload();
+      removeBudget(btn);
+    });
+  });
+
+  threeDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      if (options[index].classList.contains("active")) {
+        options[index].classList.remove("active");
+      } else {
+        options.forEach((opt) => opt.classList.remove("active"));
+
+        options[index].classList.toggle("active");
+      }
+    });
+  });
+  changeLimitBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      options.forEach((opt) => opt.classList.remove("active"));
+      openEditBox(btn);
+    });
+  });
 }
