@@ -1,6 +1,7 @@
 import { expenseCategories } from "../data/categories.js";
 let parent = document.querySelector(".budget-list");
 let budgetedCategories = [];
+let clickedBudget = ""; //this for knowing user which category is clicked
 let updatedArray = expenseCategories;
 function baseTemplate(name, image, id) {
   let template = `<li>
@@ -30,16 +31,9 @@ let setBudgetLimitBtn = document.querySelector(".set-limit");
 let ulParent = document.querySelector(".set-budgeted-list");
 function removeBudget(btn) {
   let btnId = btn.parentElement.dataset.categoryId;
-
-  let data = budgetedCategories.filter((bud) => bud.id == btnId);
-  budgetedCategories = budgetedCategories.filter((bud) => bud.id != btnId);
-
+  removeBudgetDb(btnId);
   btn.parentElement.parentElement.parentElement.parentElement.remove();
-  updatedArray.push(data[0]);
-  parent.innerHTML = "";
-  updatedArray.forEach((item) => {
-    baseTemplate(item.name, item.image, item.id);
-  });
+  loadDataBudgets(false, true);
   reloadtwo();
 }
 cancelEdit.addEventListener("click", closeEditBox);
@@ -53,6 +47,7 @@ function reloadtwo() {
   let setBudgetBtns = document.querySelectorAll(".set-budget-btn");
   setBudgetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      clickedBudget = btn.parentElement.parentElement;
       let image =
         btn.parentElement.parentElement.children[0].children[0].getAttribute(
           "src"
@@ -90,6 +85,7 @@ function reload() {
 
   setBudgetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      clickedBudget = btn.parentElement.parentElement;
       let image =
         btn.parentElement.parentElement.children[0].children[0].getAttribute(
           "src"
@@ -155,13 +151,9 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate(budgetedCategories) {
-  ulParent.innerHTML = " ";
-  budgetedCategories.forEach((data) => {
-    let { budget, id } = data;
-    let { image, name } = data.categoryId;
-
-    let template = `<li>
+function setBudgetTemplate(id, name, image, budget) {
+  // ulParent.innerHTML = " ";
+  let template = `<li>
                       <div class="text-container">
                         <div class="left-portion">
                           <img
@@ -197,31 +189,30 @@ function setBudgetTemplate(budgetedCategories) {
                         <div class="bar-status"></div>
                       </div>
                     </li>`;
-    ulParent.innerHTML += template;
-  });
- 
+  ulParent.innerHTML += template;
 }
 
 setBudgetLimitBtn.addEventListener("click", () => {
-  let budget = document.getElementById("budget-value").value.trim();
   closeBudgetBox();
-
   let id = setBudgetLimitBtn.dataset.categoryId;
-  let data = expenseCategories.filter((item) => item.id == id);
+  let name = document.querySelector(".budget-category-name").textContent;
+  let image = document.querySelector(".set-budget-icon").getAttribute("src");
+  let budget = document.getElementById("budget-value").value.trim();
 
-  data[0].budget = budget;
-  budgetedCategories.push(data[0]);
+  // parent.innerHTML = "";
 
-  parent.innerHTML = "";
-  updatedArray = updatedArray.filter((item) => item.id != id);
-  updatedArray.forEach((item) => {
-    baseTemplate(item.name, item.image, item.id);
-  });
   document.getElementById("budget-value").value = " ";
   reload();
 
   try {
-    if (Number(budget) > 0) setBudgetTemplate();
+    if (Number(budget) > 0) {
+      let userId = "66efd1552e03ec45ce74d5fd";
+      let data = { categoryId: id, budget, userId };
+      createBudgetDb(userId, data);
+      setBudgetTemplate(id, name, image, budget);
+
+      clickedBudget.remove();
+    }
   } catch (err) {
     console.log(err);
   }
@@ -268,7 +259,7 @@ document.addEventListener("click", (e) => {
 });
 
 //-------------READ BUDGETS -----------------------
-async function loadDataBudgets() {
+async function loadDataBudgets(budget, unBudget) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/budgets/66efd1552e03ec45ce74d5fd`
   );
@@ -276,25 +267,44 @@ async function loadDataBudgets() {
 
   if (res.status == "success") {
     let { data } = res;
+    if (budget && unBudget) {
+      ulParent.innerHTML = " ";
 
-    let unBudgeted = data[0].unBudgeted;
-    let budgeted = data[0].budgeted;
+      let unBudgeted = data[0].unBudgeted;
+      let budgeted = data[0].budgeted;
 
-    setBudgetTemplate(budgeted);
-
-    unBudgeted.forEach((item) => {
-      baseTemplate(item.name, item.image, item.id);
-    });
-    reload()
+      budgeted.forEach((data) => {
+        let { budget, _id } = data;
+        let { image, name } = data.categoryId;
+        setBudgetTemplate(_id, name, image, budget);
+      });
+      unBudgeted.forEach((item) => {
+        baseTemplate(item.name, item.image, item._id);
+      });
+      reload();
+    } else {
+      console.log("else block is working")
+      ulParent.innerHTML = " ";
+      let unBudgeted = data[0].unBudgeted;
+      unBudgeted.forEach((item) => {
+        baseTemplate(item.name, item.image, item._id);
+      });
+      reload();
+    }
   }
 }
-loadDataBudgets();
-
+loadDataBudgets(true, true);
 
 //--------------------CREATE BUDGETS---------------------
-async function createBudgetDb(userId,data) {
+async function createBudgetDb(userId, data) {
+  const date = new Date();
+  const formattedMonth = date.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+  data.month = formattedMonth;
   let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/categories/${userId}`,
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/${userId}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -303,4 +313,17 @@ async function createBudgetDb(userId,data) {
   );
   let res = await req.json();
   console.log(res);
+}
+
+//--------------------REMOVE BUDGETS---------------------
+async function removeBudgetDb(budgetId) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/${budgetId}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+
+  console.log("Successfully remoed");
 }

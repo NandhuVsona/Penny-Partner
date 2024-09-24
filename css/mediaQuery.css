@@ -80,6 +80,12 @@
   }
   .home-container {
     margin-top: 20px !important;
+    position:  relative !important;
+  }
+  .home-container .add-item{
+    position: fixed !important;
+    bottom: 70px !important;
+  right: 20rem !important;
   }
   .app .main .left img {
     display: none;
