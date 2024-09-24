@@ -34,6 +34,7 @@ function removeBudget(btn) {
   removeBudgetDb(btnId);
   btn.parentElement.parentElement.parentElement.parentElement.remove();
   loadDataBudgets(false, true);
+  reload();
 }
 cancelEdit.addEventListener("click", closeEditBox);
 
@@ -280,7 +281,6 @@ async function loadDataBudgets(budget, unBudget) {
       unBudgeted.forEach((item) => {
         baseTemplate(item.name, item.image, item._id);
       });
-      reload();
     } else {
       parent.innerHTML = "";
 
@@ -289,6 +289,7 @@ async function loadDataBudgets(budget, unBudget) {
         baseTemplate(item.name, item.image, item._id);
       });
     }
+    reload();
   }
 }
 loadDataBudgets(true, true);
