@@ -112,14 +112,14 @@ function openEditBox(btn) {
   let parent = btn.parentElement.parentElement.parentElement;
   let id = btn.parentElement.dataset.categoryId;
   let image = parent.children[0].children[0].getAttribute("src");
-  let text = parent.children[0].children[1].children[0].textContent
-  let budget = parent.parentElement.children[1].children[0].children[0].textContent
- 
-  
+  let text = parent.children[0].children[1].children[0].textContent;
+  let budget =
+    parent.parentElement.children[1].children[0].children[0].textContent;
+
   let itemName = document.querySelector(".edit-category-name");
   let itemImage = document.querySelector(".edit-budget-icon");
   updatedLimitinput.value = budget.slice(1);
-  
+
   itemName.innerHTML = text;
   itemImage.setAttribute("src", image);
   editBudgetBox.classList.add("active");
@@ -127,6 +127,16 @@ function openEditBox(btn) {
 
   updateLimitBtn.addEventListener("click", () => {
     closeEditBox();
+    let updatedLimit = document.getElementById("budget-updated-value").value;
+    try {
+      if (!isNaN(Number(updatedLimit))) {
+        parent.parentElement.children[1].children[0].children[0].innerHTML =
+          updatedLimit;
+        updateBudgetDb(id, { budget: updatedLimit });
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
 
     // setBudgetTemplate();
   });
@@ -318,6 +328,20 @@ async function removeBudgetDb(budgetId, callBack) {
     }
   );
   callBack();
+}
+
+//--------------------UPDATE BUDGETS---------------------
+async function updateBudgetDb(budgetId, data) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/${budgetId}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
 }
 
 async function loadBudgeted() {
