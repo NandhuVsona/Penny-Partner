@@ -34,7 +34,6 @@ function removeBudget(btn) {
   removeBudgetDb(btnId);
   btn.parentElement.parentElement.parentElement.parentElement.remove();
   loadDataBudgets(false, true);
-  reloadtwo();
 }
 cancelEdit.addEventListener("click", closeEditBox);
 
@@ -210,7 +209,7 @@ setBudgetLimitBtn.addEventListener("click", () => {
       let data = { categoryId: id, budget, userId };
       createBudgetDb(userId, data);
       setBudgetTemplate(id, name, image, budget);
-
+      reload();
       clickedBudget.remove();
     }
   } catch (err) {
@@ -283,13 +282,12 @@ async function loadDataBudgets(budget, unBudget) {
       });
       reload();
     } else {
-      console.log("else block is working")
-      ulParent.innerHTML = " ";
+      parent.innerHTML = "";
+
       let unBudgeted = data[0].unBudgeted;
       unBudgeted.forEach((item) => {
         baseTemplate(item.name, item.image, item._id);
       });
-      reload();
     }
   }
 }
