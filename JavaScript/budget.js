@@ -159,7 +159,7 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate(id, name, image, budget) {
+function setBudgetTemplate(id, name, image, budget,remaining=0) {
   // ulParent.innerHTML = " ";
   let template = `<li>
                       <div class="text-container">
@@ -194,7 +194,7 @@ function setBudgetTemplate(id, name, image, budget) {
                         <div class="label-content">
                           <div class="label">₹${budget}</div>
                         </div>
-                        <div class="bar-status"></div>
+                        <div class="bar-status" style="width:${(remaining/budget)*100}%;"></div>
                       </div>
                     </li>`;
   ulParent.innerHTML += template;
@@ -281,9 +281,10 @@ async function loadDataBudgets() {
     let budgeted = data[0].budgeted;
 
     budgeted.forEach((data) => {
-      let { budget, _id } = data;
+     
+      let { budget, _id,remaining } = data;
       let { image, name } = data.categoryId;
-      setBudgetTemplate(_id, name, image, budget);
+      setBudgetTemplate(_id, name, image, budget,remaining);
     });
     unBudgeted.forEach((item) => {
       baseTemplate(item.name, item.image, item._id);
