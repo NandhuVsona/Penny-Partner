@@ -13,6 +13,9 @@ main section.categories .category-container,
   scrollbar-width: none;
   padding: 15px;
 }
+.category-budgets{
+  padding: 10px;
+}
 .set-budgeted-container{
   padding: 5px;
 }

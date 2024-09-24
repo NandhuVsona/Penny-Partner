@@ -11,6 +11,7 @@ main section.budgets {
 .budgets header {
   width: 100%;
 }
+
 .budgets header .head-content {
   display: flex;
   width: 100%;
@@ -19,7 +20,7 @@ main section.budgets {
   justify-content: center;
   gap: 15px;
 }
-.budgets header .head-content .month-info{
+.budgets header .head-content .month-info {
   padding: 10px 0px 0px 0px;
 }
 .budgets header .head-content .budget-info {
@@ -120,9 +121,9 @@ main section.budgets {
   align-items: center !important;
 }
 /* ------------------------------------------------ */
-.text-container .left-portion img{
+.text-container .left-portion img {
   width: 60px !important;
-  height:60px;
+  height: 60px;
 }
 
 .set-budgeted-container .set-budgeted-list li {
@@ -144,6 +145,9 @@ main section.budgets {
 .budgeted-categories {
   padding: 10px;
 }
+.budgeted-categories h3{
+  margin: 10px 5px 20px 5px;
+}
 
 .budget-container {
   padding-bottom: 8rem;
@@ -153,16 +157,16 @@ main section.budgets {
 }
 .spent-categories h3 {
   padding-left: 10px;
+  margin: 5px 5px 15px 5px;
 }
 .opacity {
   opacity: 0.7;
 }
-.budget-input-container header{
-padding: 15px;
+.budget-input-container header {
+  padding: 15px;
 }
 .budget-input-container,
 .budget-edit-container {
- 
   position: absolute;
   display: none;
   flex-direction: column;
@@ -226,8 +230,7 @@ padding: 15px;
   margin-top: 5px;
   flex-direction: column;
   gap: 10px;
- width: 100%;
-
+  width: 100%;
 }
 
 .budget-container.blur,
@@ -338,7 +341,7 @@ padding: 15px;
     -o-transform: translateY(-20px) scale(0);
   }
 }
-.head-content .month-info{
+.head-content .month-info {
   display: flex;
   justify-content: center;
   align-items: center;
