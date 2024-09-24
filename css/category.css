@@ -13,6 +13,9 @@ main section.categories .category-container,
   scrollbar-width: none;
   padding: 15px;
 }
+.set-budgeted-container{
+  padding: 5px;
+}
 .category-container .income-category,
 .category-container .income-category-skeleton,
 .category-container .expense-category-skeleton,
