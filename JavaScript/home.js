@@ -250,7 +250,7 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
- overview("income");
+//  overview("income");
 
 function overview(category) {
   dataAnalysContainer.innerHTML = " ";
