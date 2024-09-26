@@ -116,6 +116,7 @@ const daysOfWeek = [
 function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
+  
     if (item.category.type == "transfer") {
       let transferTemplate = `<li data-id="${item.id}">
                       <div class="transaction-info">
@@ -128,29 +129,29 @@ function childTemplate(transactions) {
                           <div class="category-name little-bold">Transfer</div>
                           <div class="transaction-account-info">
                             <img
-                              src="${item.account.icon}"
+                              src="${item.account[0].icon}"
                               alt=""
                               class="account-icon"
                             />
-                             <small class="account-name">${item.account.name}</small>
+                             <small class="account-name">${item.account[0].accountName}</small>
                               <img
                               src="icons/tarrow.svg"
                               alt=""
                               class="account-icon"
                             />
                             <img
-                              src="${item.category.icon}"
+                              src="${item.category[0].image}"
                               alt=""
                               class="account-icon"
                             />
-                             <small class="account-name">${item.category.name}</small>
+                             <small class="account-name">${item.category[0].name}</small>
 
                            
                           </div>
                         </div>
                       </div>
                       <div class="transaction-amount">
-                        <p class="amount ${item.category.type}">₹${item.amount}</p>
+                        <p class="amount ${item.category[0].type}">₹${item.amount}</p>
                       </div>
                     </li>`;
       content += transferTemplate;
@@ -158,24 +159,24 @@ function childTemplate(transactions) {
       let template = `<li data-id="${item.id}">
                       <div class="transaction-info">
                         <img
-                          src="${item.category.icon}"
+                          src="${item.category[0].image}"
                           alt=""
                           class="transaction-icon"
                         />
                         <div class="cat-account">
-                          <div class="category-name little-bold">${item.category.name}</div>
+                          <div class="category-name little-bold">${item.category[0].name}</div>
                           <div class="transaction-account-info">
                             <img
-                              src="${item.account.icon}"
+                              src="${item.account[0].icon}"
                               alt=""
                               class="account-icon"
                             />
-                            <small class="account-name">${item.account.name}</small>
+                            <small class="account-name">${item.account[0].accountName}</small>
                           </div>
                         </div>
                       </div>
                       <div class="transaction-amount">
-                        <p class="amount ${item.category.type}">₹${item.amount}</p>
+                        <p class="amount ${item.category[0].type}">₹${item.amount}</p>
                       </div>
                     </li>`;
       content += template;
@@ -815,7 +816,6 @@ function reloadDetailveiw() {
 }
 
 function loadHistory(value) {
-  console.log();
   let requestedData = transactionHistory.filter(
     (record) => record.month == value
   );
@@ -827,7 +827,7 @@ function loadHistory(value) {
       data.forEach((his) => {
         let { date, transactions } = his;
 
-        parentTemplate(date, transactions);
+        // parentTemplate(date, transactions);
         reloadDetailveiw();
       });
     });
@@ -853,3 +853,20 @@ function changePage(page, index) {
   pages.forEach((page) => page.classList.remove("active"));
   pages[index].classList.add("active");
 }
+
+//--------------READ RECORDS--------------------------
+async function loadData(userId, month) {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}`
+  );
+  let res = await req.json();
+  if (res.status === "success") {
+    let { data } = res;
+    console.log(data);
+    data.forEach((record) => {
+      parentTemplate(record._id, record.transactions);
+      reloadDetailveiw();
+    });
+  }
+}
+loadData("66efd1552e03ec45ce74d5fd");
