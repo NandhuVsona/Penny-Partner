@@ -249,24 +249,24 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
-// overview("income");
+ overview("income");
 
-// function overview(category) {
-//   dataAnalysContainer.innerHTML = " ";
-//   transactionHistory.forEach((data) => {
-//     let { transactions } = data;
-//     transactions.forEach((item) => {
-//       if (item.category.type == category) {
-//         let amount = item.amount;
-//         let divideValue = category == "income" ? incomeAmount : expenseAmount;
-//         let name = item.category.name;
-//         let src = item.category.icon;
-//         let percentage = ((amount / divideValue) * 100).toFixed("2");
-//         analysis(src, name, amount, percentage);
-//       }
-//     });
-//   });
-// }
+function overview(category) {
+  dataAnalysContainer.innerHTML = " ";
+  transactionHistory.forEach((data) => {
+     let { transactions } = data;
+    transactions.forEach((item) => {
+       if (item.category.type == category) {
+         let amount = item.amount;
+         let divideValue = category == "income" ? incomeAmount : expenseAmount;
+        let name = item.category.name;
+         let src = item.category.icon;
+         let percentage = ((amount / divideValue) * 100).toFixed("2");
+        analysis(src, name, amount, percentage);
+      }
+    });
+  });
+}
 
 analysisOpt.forEach((opt) => {
   opt.addEventListener("click", (e) => {
