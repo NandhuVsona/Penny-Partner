@@ -766,7 +766,7 @@ function changeDate(increament) {
   document
     .querySelectorAll(".month")
     .forEach((head) => (head.innerHTML = `${months[month]} ${year}`));
-  loadHistory(`${months[month]} ${year}`);
+  loadData("66efd1552e03ec45ce74d5fd", `${months[month]} ${year}`);
 }
 
 // Initial date display
@@ -796,34 +796,6 @@ function reloadDetailveiw() {
   });
 }
 
-function loadHistory(value) {
-  let requestedData = transactionHistory.filter(
-    (record) => record.month == value
-  );
-
-  if (requestedData.length > 0) {
-    mainContent.innerHTML = "";
-    requestedData.forEach((item) => {
-      let { id, month, data } = item;
-      data.forEach((his) => {
-        let { date, transactions } = his;
-
-        // parentTemplate(date, transactions);
-        // reloadDetailveiw();
-      });
-    });
-  } else {
-    mainContent.innerHTML = `<div class="no-content-container">
-                <img src="images/404.png" alt="" />
-                <p>
-                  No record in this month. Tap + to add new expense or income.
-                </p>
-              </div>`;
-  }
-}
-
-loadHistory(`${months[month]} ${year}`);
-
 let navIcons = document.querySelectorAll(".side-footer .menu li");
 let pages = document.querySelectorAll("main section");
 navIcons.forEach((icon, index) => {
@@ -837,9 +809,13 @@ function changePage(page, index) {
 
 //--------------READ RECORDS--------------------------
 async function loadData(userId, month) {
+  document
+    .querySelectorAll(".home-skeleton-effect")
+    .forEach((i) => (i.style.display = "block"));
+   
   try {
     let req = await fetch(
-      `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}`
+      `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}/?month=${month}`
     );
     let res = await req.json();
     if (res.status === "success") {
@@ -849,16 +825,31 @@ async function loadData(userId, month) {
       document.querySelector(".home-container header").style.display = "flex";
       let { data } = res;
       console.log(data);
-      data.forEach((record) => {
-        parentTemplate(record._id, record.transactions);
-        reloadDetailveiw();
-      });
+      if (data.length > 0) {
+        mainContent.innerHTML = " ";
+        data.forEach((record) => {
+          parentTemplate(record._id, record.transactions);
+          reloadDetailveiw();
+        });
+      } else {
+        mainContent.innerHTML = `<div class="no-content-container">
+        <img src="images/404.png" alt="" />
+        <p>
+          No record in this month. Tap + to add new expense or income.
+        </p>
+      </div>`;
+      }
     }
   } catch (err) {
     console.log(err.message);
   }
 }
-loadData("66efd1552e03ec45ce74d5fd");
+const date = new Date();
+const options = { month: "long", year: "numeric" };
+const formatedMonth = date
+  .toLocaleDateString("en-US", options)
+  .replace(" ", "%20");
+loadData("66efd1552e03ec45ce74d5fd", formatedMonth);
 
 //--------------DELETE RECORDS--------------------------
 async function deleteRecordToDb(transactionId) {
