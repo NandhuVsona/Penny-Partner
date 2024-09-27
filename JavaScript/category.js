@@ -79,10 +79,12 @@ function reload() {
   });
 
   //delete category
-  categoryDelBtn.forEach((account) => {
-    account.addEventListener("click", () => {
-      account.parentElement.parentElement.parentElement.remove();
-      deleteCategoryDb(account.parentElement.dataset.categoryId);
+  categoryDelBtn.forEach((catItem) => {
+    catItem.addEventListener("click", () => {
+      let userId =
+        catItem.parentElement.parentElement.parentElement.dataset.userId;
+      catItem.parentElement.parentElement.parentElement.remove();
+      deleteCategoryDb(userId, catItem.parentElement.dataset.categoryId);
     });
   });
   //edit btn
@@ -182,14 +184,14 @@ saveCategoryBtn.addEventListener("click", () => {
   }
 });
 
-function createCategory(name, icon, category, categoryId) {
+function createCategory(name, icon, category, categoryId, userId) {
   if (name == " " || name.lenght < 0) {
     return;
   }
 
   let parent = document.querySelector(`.${category}-category ul`);
 
-  let template = `<li>
+  let template = `<li data-user-id="${userId}">
                   <div class="left-portion">
                     <img src="${icon}" alt="" />
                     <p class="change-font-style">${name}</p>
@@ -262,7 +264,8 @@ async function loadData() {
         category.name,
         category.image,
         category.type,
-        category._id
+        category._id,
+        category.userId
       );
     });
   } else {
@@ -309,12 +312,13 @@ async function updateCategoryDb(data, categoryId) {
 }
 
 // -----------------DELETE CATEGORY TO DB ----------------------------
-async function deleteCategoryDb(categoryId) {
+async function deleteCategoryDb(userId, categoryId) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/categories/${categoryId}`,
     {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId }),
     }
   );
   console.log("Successfully deleted");
