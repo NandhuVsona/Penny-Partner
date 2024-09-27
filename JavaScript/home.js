@@ -646,16 +646,19 @@ function deleteView() {
       let deleteId = deleteHis[i].parentElement.dataset.id;
       detailView.classList.remove("active");
 
-      if (clickedView.parentElement.children.length == 1) {
-        clickedView.parentElement.parentElement.remove();
-      } else {
+      try {
+        if (clickedView.parentElement.children.length == 1) {
+          clickedView.parentElement.parentElement.remove();
+        }
+      } catch (err) {
         clickedView.remove();
+      } finally {
+        deleteRecordToDb(clickedView.dataset.transactionId);
       }
-      deleteRecordToDb(clickedView.dataset.transactionId);
     });
   }
 }
-deleteView();
+
 let catLabel = document.querySelector(".category-body p");
 categoryTick.forEach((item, index) => {
   item.addEventListener("click", () => {
@@ -824,6 +827,7 @@ async function loadData(userId, month) {
         data.forEach((record) => {
           parentTemplate(record._id, record.transactions);
           reloadDetailveiw();
+          deleteView();
         });
       } else {
         mainContent.innerHTML = `<div class="no-content-container">
@@ -880,6 +884,10 @@ async function saveRecordToDb(userId, data) {
     );
 
     if (response.status === 201) {
+      let { newTransaction } = await response.json();
+      document.getElementById("recently-added").dataset.transactionId =
+        newTransaction._id;
+
       console.log("Successfully created 🎉");
     } else {
       const errorData = await response.json();
@@ -966,6 +974,7 @@ function temporaryDisplay(data) {
     const li = document.createElement("li");
     li.dataset.transactionId = "<pending>";
     li.innerHTML = template;
+    li.id = "recently-added";
 
     mainContent.firstElementChild.lastElementChild.insertBefore(
       li,
