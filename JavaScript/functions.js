@@ -259,3 +259,9 @@ async function deleteAccountDb(accountId) {
   );
   console.log("Successfully Deleted");
 }
+
+//Account page functionality
+let editNameBtn = document.querySelector(".edit-username");
+editNameBtn.addEventListener("click", () => {
+  document.querySelector(".edit-box").classList.add("active");
+});

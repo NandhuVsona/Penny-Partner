@@ -814,7 +814,7 @@ const options = { month: "long", year: "numeric" };
 const formatedMonth = date
   .toLocaleDateString("en-US", options)
   .replace(" ", "%20");
-loadData("66efd1552e03ec45ce74d5fd", formatedMonth);
+// loadData("66efd1552e03ec45ce74d5fd", formatedMonth);
 
 //--------------DELETE RECORDS--------------------------
 async function deleteRecordToDb(transactionId) {

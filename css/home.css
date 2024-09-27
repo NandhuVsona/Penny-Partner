@@ -19,7 +19,7 @@
   align-items: center;
   gap: 20px;
 }
-.home-container header{
+.home-container header {
   display: none;
 }
 .home-container header .left-arrow,
@@ -1356,7 +1356,6 @@
   background: linear-gradient(to right, #4facfe, #00f2fe);
 } */
 
-
 .home-container .skeleton {
   padding: 0px 10px;
 }
@@ -1391,10 +1390,94 @@
   background-color: #000000;
 }
 .app.dark .home-container .skeleton .skeleton-month-body,
-.app.dark .home-container .skeleton-outer .skeleton-inner li{
+.app.dark .home-container .skeleton-outer .skeleton-inner li {
   background: linear-gradient(90deg, #1a1a1a 25%, #222222 50%, #1a1a1a 75%);
   -webkit-border-radius: 5px;
   animation: skeleton-loading 2s ease-in-out infinite;
   background-size: 200% 100%;
   border-radius: 5px;
+}
+
+.account-container-body {
+  position: relative;
+  overflow: hidden;
+}
+.account-container-body .edit-box.active{
+  display: flex;
+  animation: boxDown 0.5s ease;
+  -webkit-animation: boxDown 0.5s ease;
+}
+.account-container-body .edit-box {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  height: 120%;
+  display: none;
+  background-color: inherit;
+ 
+}
+.account-container-body .edit-box .input-container {
+  width: 100%;
+  height: 215px;
+  padding: 0px 15px;
+  background-color: rgb(44, 43, 43);
+}
+@keyframes boxDown {
+  0% {
+    transform: translateY(-500px);
+    -webkit-transform: translateY(-500px);
+    -moz-transform: translateY(-500px);
+    -ms-transform: translateY(-500px);
+    -o-transform: translateY(-500px);
+}
+}
+
+.account-container-body .edit-box .input-container form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  gap: 25px;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+}
+.account-container-body .edit-box .input-container form label {
+  width: 100%;
+  padding-top: 15px;
+  font-weight: 500;
+  font-size: 18px;
+}
+.account-container-body .edit-box .input-container form input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+.account-container-body .edit-box .input-container form input:focus {
+  outline: none;
+}
+.account-container-body .edit-box .input-container form .aBtns {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.account-container-body .edit-box .input-container form .aBtns button {
+  width: 50%;
+  height: 50px;
+  font-weight: 600;
+  border: none;
+  font-size: 17px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
