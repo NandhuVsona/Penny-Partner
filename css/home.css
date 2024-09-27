@@ -8,9 +8,7 @@
   scrollbar-width: none;
   padding-bottom: 140px;
 }
-.home-container{
-  position: relative;
-}
+
 .home-container header,
 .analysis-container header {
   width: 100%;
@@ -1093,12 +1091,12 @@
   width: 100%;
   font-size: 15px;
   font-weight: 700;
-  color: inherit;
+  color: #000000;
 }
 .message-box .text {
   width: 100%;
   font-size: 14px;
-  color: inherit;
+  color:#000000;
 }
 .success-line {
   position: absolute;

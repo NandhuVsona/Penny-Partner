@@ -1,8 +1,8 @@
-import {
-  expenseCategories,
-  incomeCategories,
-  transferCategories,
-} from "../data/categories.js";
+// import {
+//   expenseCategories,
+//   incomeCategories,
+//   transferCategories,
+// } from "../data/categories.js";
 
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
@@ -28,30 +28,45 @@ function exitFullscreen() {
   }
 }
 
-let togetherCategories = [];
-expenseCategories.forEach((i) => togetherCategories.push(i));
-incomeCategories.forEach((i) => togetherCategories.push(i));
-transferCategories.forEach((i) => togetherCategories.push(i));
+// let togetherCategories = [];
+// expenseCategories.forEach((i) => togetherCategories.push(i));
+// incomeCategories.forEach((i) => togetherCategories.push(i));
+// transferCategories.forEach((i) => togetherCategories.push(i));
 
-//function for localstorage
-let data = JSON.parse(localStorage.getItem("data")) || [];
+// ==============================================
+let expenseCategories;
+let incomeCategories;
+let accounts;
+async function getAccountsAndCategories() {
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/data/66efd1552e03ec45ce74d5fd`
+  );
+  let res = await req.json();
 
-data.forEach((item) => {
-  togetherCategories.push({
-    id: item.id,
-    name: item.accountName,
-    image: item.imageSrc,
-  });
-  let existingAccounts = document.querySelector(".parent-box");
-  let template = `<li data-id="${item.id}" class="bunch-account">
+  if (res.status === "success") {
+    expenseCategories = res.expenseCategories;
+    incomeCategories = res.incomeCategories;
+    accounts = res.accounts;
+    changeCategory(1);
+    loadUserAccounts(accounts);
+  }
+}
+getAccountsAndCategories();
+
+function loadUserAccounts(data) {
+  data.forEach((item) => {
+    let existingAccounts = document.querySelector(".parent-box");
+    let template = `<li data-account-id="${item._id}" class="bunch-account">
                   <div class="left-part">
-                    <img src="${item.imageSrc}" alt="">
+                    <img src="${item.icon}" alt="">
                     <p class="semi-bold">${item.accountName}</p>
                   </div>
-                  <p class="semi-bold green">₹${item.formatedAmount}</p>
+                  <p class="semi-bold green">₹${item.balance}</p>
                 </li>`;
-  existingAccounts.innerHTML += template;
-});
+    existingAccounts.innerHTML += template;
+    accountEventListener();
+  });
+}
 
 let fullScreenMode = document.querySelector(".view-mode");
 fullScreenMode.addEventListener("click", () => {
@@ -82,7 +97,7 @@ let InputBoxClose = document.querySelector(".input-box-close");
 let selectAccountBtn = document.querySelector(".sub-head-two .account-body");
 let selectCatBtn = document.querySelector(".sub-head-two .category-body");
 let selectAccountBody = document.querySelector(".account-options-body");
-let bunchAccounts = document.querySelectorAll(".bunch-account");
+
 let categoryTick = document.querySelectorAll(".sub-head-one li");
 let selectedCatImg = document.querySelector(".category-body .child-body img");
 let selectedCatName = document.querySelector(".category-body .child-body p");
@@ -144,8 +159,6 @@ function childTemplate(transactions) {
                               class="account-icon"
                             />
                              <small class="account-name">${item.category[0].name}</small>
-
-                           
                           </div>
                         </div>
                       </div>
@@ -396,62 +409,26 @@ selectAccountBtn.addEventListener("click", () => {
   selectAccountBody.classList.toggle("active");
 });
 
-bunchAccounts.forEach((acc) => {
-  acc.addEventListener("click", () => {
-    selectAccountBody.classList.remove("active");
-    let selectedAccount = acc.dataset.id;
+function accountEventListener() {
+  let bunchAccounts = document.querySelectorAll(".bunch-account");
+  bunchAccounts.forEach((acc) => {
+    acc.addEventListener("click", () => {
+      selectAccountBody.classList.remove("active");
+      let selectedAccountId = acc.dataset.accountId;
 
-    document.querySelector(".account-body .child-body").dataset.id =
-      selectedAccount;
+      document.querySelector(".account-body .child-body").dataset.id =
+        selectedAccountId;
 
-    let accountData = data.filter((d) => d.id == selectedAccount);
-    addtransactonAccImg.setAttribute("src", accountData[0].imageSrc);
-    addtransactonAccImg.style.filter = "invert(0)";
-    addtransactonAccName.textContent =
-      accountData[0].accountName.length > 6
-        ? accountData[0].accountName.slice(0, 6) + ".."
-        : accountData[0].accountName;
+      let accountName = acc.firstElementChild.children[1].textContent;
+      addtransactonAccImg.setAttribute(
+        "src",
+        acc.firstElementChild.children[0].getAttribute("src")
+      );
+      addtransactonAccImg.style.filter = "invert(0)";
+      addtransactonAccName.textContent =
+        accountName.length > 6 ? accountName.slice(0, 6) + ".." : accountName;
+    });
   });
-});
-changeCategory(1);
-function changeCategory(num) {
-  categoryOptions.innerHTML = " ";
-  if (num == 1) {
-    expenseCategories.forEach((cat) => {
-      let template = `<li data-id=${cat.id} class="bunch-category">
-                      <img src="${cat.image}" alt="" />
-                      <small>${
-                        cat.name.length > 8
-                          ? cat.name.slice(0, 6) + ".."
-                          : cat.name
-                      }</small>
-                    </li>`;
-      categoryOptions.innerHTML += template;
-    });
-  } else if (num == 0) {
-    incomeCategories.forEach((cat) => {
-      let template = `<li data-id=${cat.id} class="bunch-category">
-                      <img src="${cat.image}" alt="" />
-                      <small>${cat.name}</small>
-                    </li>`;
-      categoryOptions.innerHTML += template;
-    });
-  } else {
-    //function for localstorage
-    let data = JSON.parse(localStorage.getItem("data")) || [];
-
-    data.forEach((cat) => {
-      let template = `<li data-id="${cat.id}" class="bunch-category transfer">
-                                        <div class="left-part">
-                    <img src="${cat.imageSrc}" alt="">
-                    <p class="semi-bold">${cat.accountName}</p>
-                  </div>
-                  <p class="semi-bold green">₹${cat.formatedAmount}</p>
-                </li>`;
-
-      categoryOptions.innerHTML += template;
-    });
-  }
 }
 
 selectCatBtn.addEventListener("click", () => {
@@ -465,18 +442,23 @@ function changeAndUpdate() {
   bunchCategory.forEach((cat) => {
     cat.addEventListener("click", () => {
       selectedCatBody.classList.remove("active");
-      let selectedCat = cat.dataset.id;
+      let selectedCatId = cat.dataset.categoryId;
 
-      let accountData = togetherCategories.filter((d) => d.id == selectedCat);
       document.querySelector(".category-body .child-body").dataset.id =
-        selectedCat;
+        selectedCatId;
+      console.log();
+      console.log();
 
-      selectedCatImg.setAttribute("src", accountData[0].image);
+      selectedCatImg.setAttribute(
+        "src",
+        cat.firstElementChild.getAttribute("src")
+      );
       selectedCatImg.classList.add("imgSvg");
+      let categoryName = cat.lastElementChild.textContent;
       selectedCatName.textContent =
-        accountData[0].name.length > 8
-          ? accountData[0].name.slice(0, 8) + ".."
-          : accountData[0].name;
+        categoryName.length > 8
+          ? categoryName.slice(0, 8) + ".."
+          : categoryName;
     });
   });
 }
@@ -537,11 +519,22 @@ function verification() {
   let description =
     document.getElementById("description-notes").value.trim() || "No notes";
 
-  let { accountName, imageSrc, id } = data.filter((d) => d.id == accId)[0];
+  let accountName = document.querySelector(
+    ".account-body .child-body p"
+  ).textContent;
+  let accountIcon = document
+    .querySelector(".child-body img")
+    .getAttribute("src");
+  let accountId = accId;
 
-  let { name, image, ...others } = togetherCategories.filter(
-    (e) => e.id == catId
-  )[0];
+  let categoryName = document.querySelector(
+    ".category-body .child-body p"
+  ).textContent;
+  let categoryIcon = document
+    .querySelector(".category-body .child-body img")
+    .getAttribute("src");
+  let categoryId;
+
   let whatType = "";
   categoryTick.forEach((cat) => {
     if (cat.children[0].getAttribute("src")) {
@@ -563,56 +556,39 @@ function verification() {
     showMessage(errorData);
     return false;
   }
+  const date = new Date();
+  const options = { month: "long", year: "numeric" };
+  const month = date.toLocaleDateString("en-US", options);
 
-  let trans = [
-    {
-      id: Math.ceil(Math.random() * 10000000),
-      category: {
-        name,
-        icon: image,
-        type: whatType,
-      },
-      account: {
-        id,
-        name: accountName,
-        icon: imageSrc,
-      },
-      amount,
-      date: "2024-08-01",
-      description,
-    },
-  ];
+  const dateOptions = { month: "short", day: "numeric" };
+  const formattedDate = new Intl.DateTimeFormat("en-US", dateOptions).format(
+    date
+  );
+
+  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
+    date
+  );
+
+  const finalFormattedDate = `${formattedDate}, ${weekday}`;
+  let userId = "66efd1552e03ec45ce74d5fd";
   let sturcturedData = {
-    date:
-      new Date().toDateString().split(" ").slice(1, 3).join(" ") +
-      ", " +
-      daysOfWeek[new Date().getDay()],
-    transactions: trans,
+    month,
+    category: catId,
+    account: accId,
+    amount,
+    date: finalFormattedDate,
+    description,
+    userId
   };
   return sturcturedData;
 }
 
 saveTransactionBtn.addEventListener("click", () => {
-  const date = new Date();
-  const options = { month: "long", year: "numeric" };
-  const currentMonthYear = date.toLocaleDateString("en-US", options);
-
   let isVerified = verification();
-  let isthere = true;
+  let userId = "66efd1552e03ec45ce74d5fd";
   if (isVerified) {
-    transactionHistory.forEach((item) => {
-      if (item.month == currentMonthYear) {
-        let { data } = item;
-      }
-    });
-
-    if (isthere) {
-      let id = Math.floor(Math.random() * 1000);
-      let month = currentMonthYear;
-      transactionHistory.unshift({ id, month, data: [isVerified] });
-    }
-
-    mainContent.innerHTML = " ";
+    saveRecordToDb(userId, isVerified);
+    // mainContent.innerHTML = " ";
 
     // let { date, transactions } = isVerified;
     // parentTemplate(date, transactions);
@@ -882,5 +858,65 @@ async function deleteRecordToDb(transactionId) {
     }
   } catch (error) {
     console.error("An error occurred:", error);
+  }
+}
+
+//--------------SAVE RECORDS--------------------------
+async function saveRecordToDb(userId, data) {
+  try {
+    let response = await fetch(
+      `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (response.status === 201) {
+      console.log("Successfully created 🎉");
+    } else {
+      const errorData = await response.json();
+      console.error("Failed to delete:", errorData);
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
+
+function changeCategory(num) {
+  categoryOptions.innerHTML = " ";
+  if (num == 1) {
+    expenseCategories.forEach((cat) => {
+      let template = `<li data-category-id=${cat._id} class="bunch-category">
+                        <img src="${cat.image}" alt="" />
+                        <small>${
+                          cat.name.length > 8
+                            ? cat.name.slice(0, 6) + ".."
+                            : cat.name
+                        }</small>
+                      </li>`;
+      categoryOptions.innerHTML += template;
+    });
+  } else if (num == 0) {
+    incomeCategories.forEach((cat) => {
+      let template = `<li data-category-id=${cat._id} class="bunch-category">
+                        <img src="${cat.image}" alt="" />
+                        <small>${cat.name}</small>
+                      </li>`;
+      categoryOptions.innerHTML += template;
+    });
+  } else {
+    accounts.forEach((cat) => {
+      let template = `<li data-category-id="${cat._id}" class="bunch-category transfer">
+                                          <div class="left-part">
+                      <img src="${cat.icon}" alt="">
+                      <p class="semi-bold">${cat.accountName}</p>
+                    </div>
+                    <p class="semi-bold green">₹${cat.balance}</p>
+                  </li>`;
+
+      categoryOptions.innerHTML += template;
+    });
   }
 }
