@@ -116,9 +116,8 @@ const daysOfWeek = [
 function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
-  
     if (item.category.type == "transfer") {
-      let transferTemplate = `<li data-id="${item.id}">
+      let transferTemplate = `<li data-transaction-id="${item._id}">
                       <div class="transaction-info">
                         <img
                           src="icons/Income-expense/transfer.jpg"
@@ -150,13 +149,15 @@ function childTemplate(transactions) {
                           </div>
                         </div>
                       </div>
+                     
                       <div class="transaction-amount">
                         <p class="amount ${item.category[0].type}">₹${item.amount}</p>
                       </div>
+                       <small style="display: none;" >${item.description}</small>
                     </li>`;
       content += transferTemplate;
     } else {
-      let template = `<li data-id="${item.id}">
+      let template = `<li data-transaction-id="${item._id}">
                       <div class="transaction-info">
                         <img
                           src="${item.category[0].image}"
@@ -175,9 +176,11 @@ function childTemplate(transactions) {
                           </div>
                         </div>
                       </div>
+                    
                       <div class="transaction-amount">
                         <p class="amount ${item.category[0].type}">₹${item.amount}</p>
                       </div>
+                      <small style="display: none;" >${item.description}</small>
                     </li>`;
       content += template;
     }
@@ -255,14 +258,14 @@ function analysis(src, name, amount, percentage) {
 function overview(category) {
   dataAnalysContainer.innerHTML = " ";
   transactionHistory.forEach((data) => {
-     let { transactions } = data;
+    let { transactions } = data;
     transactions.forEach((item) => {
-       if (item.category.type == category) {
-         let amount = item.amount;
-         let divideValue = category == "income" ? incomeAmount : expenseAmount;
+      if (item.category.type == category) {
+        let amount = item.amount;
+        let divideValue = category == "income" ? incomeAmount : expenseAmount;
         let name = item.category.name;
-         let src = item.category.icon;
-         let percentage = ((amount / divideValue) * 100).toFixed("2");
+        let src = item.category.icon;
+        let percentage = ((amount / divideValue) * 100).toFixed("2");
         analysis(src, name, amount, percentage);
       }
     });
@@ -282,16 +285,6 @@ analysisOpt.forEach((opt) => {
   });
 });
 
-//Detail view box
-let viewLi = document.querySelectorAll(".sub-content li");
-
-viewLi.forEach((li) => {
-  li.addEventListener("click", () => {
-    let id = li.dataset.id;
-    openDetailView(id);
-    clickedView = li;
-  });
-});
 function openDetailView(id) {
   document.querySelector(".parent-detail-view").classList.add("active");
   let incomeName = document.querySelector(".category-name-detail");
@@ -303,6 +296,7 @@ function openDetailView(id) {
   let cInfo = document.querySelector(".c-info");
   let aInfo = document.querySelector(".a-info");
   let cardOperations = document.querySelector(".card-operations");
+  let type = document.querySelector(".category-name-detail");
   if (
     card.classList.contains("incomeBg") ||
     card.classList.contains("expenseBg")
@@ -311,25 +305,34 @@ function openDetailView(id) {
     card.classList.remove("expenseBg");
   }
 
-  let data = new Array();
-  let togetherData = [];
-  transactionHistory.forEach((item) => {
-    item.data.forEach((i) => {
-      let { transactions } = i;
-      transactions.forEach((i) => togetherData.push(i));
-    });
-  });
-  data.push(togetherData.filter((data) => data.id == id));
-  let info = data[0][0];
-  notes.textContent = info.description;
-  amount.textContent = "₹" + info.amount;
-  incomeName.textContent = info.category.type;
-  accountImg.setAttribute("src", info.account.icon);
-  categoryImg.setAttribute("src", info.category.icon);
-  aInfo.textContent = info.account.name;
-  cInfo.textContent = info.category.name;
-  cardOperations.dataset.id = info.id;
-  card.classList.add(info.category.type + "Bg");
+  notes.textContent = clickedView.lastElementChild.textContent;
+  amount.textContent = clickedView.children[1].children[0].textContent;
+  incomeName.textContent = "";
+  accountImg.setAttribute(
+    "src",
+    clickedView.children[0].children[1].lastElementChild.children[0].getAttribute(
+      "src"
+    )
+  );
+  categoryImg.setAttribute(
+    "src",
+    clickedView.children[0].children[0].getAttribute("src")
+  );
+  aInfo.textContent =
+    clickedView.children[0].children[1].lastElementChild.children[1].textContent;
+  cInfo.textContent =
+    clickedView.children[0].children[1].children[0].textContent;
+  cardOperations.dataset.transactionId = clickedView.dataset.transactionId;
+  card.classList.add(
+    `${clickedView.children[1].children[0]
+      .getAttribute("class")
+      .split(" ")
+      .slice(1)}` + "Bg"
+  );
+  type.textContent = `${clickedView.children[1].children[0]
+    .getAttribute("class")
+    .split(" ")
+    .slice(1)}`;
 }
 
 document.addEventListener("click", (e) => {
@@ -600,23 +603,6 @@ saveTransactionBtn.addEventListener("click", () => {
     transactionHistory.forEach((item) => {
       if (item.month == currentMonthYear) {
         let { data } = item;
-
-        data.forEach((item) => {
-          if (
-            item.date ==
-            new Date().toDateString().split(" ").slice(1, 3).join(" ") +
-              ", " +
-              daysOfWeek[new Date().getDay()]
-          ) {
-            item.transactions.unshift(isVerified.transactions[0]);
-            isthere = false;
-          }
-          //else {
-          //   data.push(isVerified);
-          //   isthere = false;
-          //   console.log("else part is woring")
-          // }
-        });
       }
     });
 
@@ -633,13 +619,13 @@ saveTransactionBtn.addEventListener("click", () => {
 
     loadHistory(`${months[month]} ${year}`);
 
-    document.querySelectorAll(".sub-content li").forEach((li) => {
-      li.addEventListener("click", () => {
-        let id = li.dataset.id;
-        clickedView = li;
-        openDetailView(id);
-      });
-    });
+    // document.querySelectorAll(".sub-content li").forEach((li) => {
+    //   li.addEventListener("click", () => {
+    //     let id = li.dataset.transactionId;
+    //     clickedView = li;
+    //     openDetailView(id);
+    //   });
+    // });
     deleteView();
     document.querySelector(".input-containers").classList.remove("active");
   }
@@ -672,12 +658,13 @@ function deleteView() {
     deleteHis[i].addEventListener("click", () => {
       let deleteId = deleteHis[i].parentElement.dataset.id;
       detailView.classList.remove("active");
-      console.log(clickedView);
+
       if (clickedView.parentElement.children.length == 1) {
         clickedView.parentElement.parentElement.remove();
       } else {
         clickedView.remove();
       }
+      deleteRecordToDb(clickedView.dataset.transactionId);
     });
   }
 }
@@ -805,12 +792,13 @@ rightArrows.forEach((rarrow) => {
 });
 
 function reloadDetailveiw() {
-  let viewLi = document.querySelectorAll(".sub-content li");
-  let clickedView = viewLi.forEach((li) => {
+  let viewLi = document.querySelectorAll(".transaction-history li");
+
+  viewLi.forEach((li) => {
     li.addEventListener("click", () => {
-      let id = li.dataset.id;
-      openDetailView(id);
       clickedView = li;
+      let id = li.dataset.transactionId;
+      openDetailView(id);
     });
   });
 }
@@ -828,7 +816,7 @@ function loadHistory(value) {
         let { date, transactions } = his;
 
         // parentTemplate(date, transactions);
-        reloadDetailveiw();
+        // reloadDetailveiw();
       });
     });
   } else {
@@ -856,17 +844,43 @@ function changePage(page, index) {
 
 //--------------READ RECORDS--------------------------
 async function loadData(userId, month) {
-  let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}`
-  );
-  let res = await req.json();
-  if (res.status === "success") {
-    let { data } = res;
-    console.log(data);
-    data.forEach((record) => {
-      parentTemplate(record._id, record.transactions);
-      reloadDetailveiw();
-    });
+  try {
+    let req = await fetch(
+      `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}`
+    );
+    let res = await req.json();
+    if (res.status === "success") {
+      let { data } = res;
+      console.log(data);
+      data.forEach((record) => {
+        parentTemplate(record._id, record.transactions);
+        reloadDetailveiw();
+      });
+    }
+  } catch (err) {
+    console.log(err.message);
   }
 }
 loadData("66efd1552e03ec45ce74d5fd");
+
+//--------------DELETE RECORDS--------------------------
+async function deleteRecordToDb(transactionId) {
+  try {
+    let response = await fetch(
+      `https://penny-partner-api.onrender.com/api/v1/users/transactions/${transactionId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    // Check if deletion was successful
+    if (response.status === 204) {
+      console.log("Successfully deleted 💥");
+    } else {
+      const errorData = await response.json();
+      console.error("Failed to delete:", errorData);
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
