@@ -314,11 +314,11 @@ async function updateCategoryDb(data, categoryId) {
 // -----------------DELETE CATEGORY TO DB ----------------------------
 async function deleteCategoryDb(userId, categoryId) {
   let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/categories/${categoryId}`,
+    `https://penny-partner-api.onrender.com/api/v1/users/categories/${categoryId}?userId=${userId}`,
     {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId }),
+      
     }
   );
   console.log("Successfully deleted");
