@@ -929,10 +929,13 @@ function changeCategory(num) {
 
 function temporaryDisplay(data) {
   console.log(data);
+  let isCurrentMonth = document.querySelectorAll(".month")[0].textContent;
+
   let mainContent = document.querySelector(".main-content");
   if (
     mainContent.children.length > 0 &&
-    mainContent.firstElementChild.firstElementChild.textContent == data.date
+    mainContent.firstElementChild.firstElementChild.textContent == data.date &&
+    isCurrentMonth == formatedMonth.replace("%20", " ")
   ) {
     let template = `
                   <div class="transaction-info">
