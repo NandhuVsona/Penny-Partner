@@ -1,5 +1,5 @@
 .home-container,
-.analysis-container {
+.home-container .skeleton .analysis-container {
   width: 100%;
   height: 100%;
   padding-top: 15px;
@@ -10,6 +10,7 @@
 }
 
 .home-container header,
+.home-container .skeleton,
 .analysis-container header {
   width: 100%;
   display: flex;
@@ -17,6 +18,9 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+.home-container header{
+  display: none;
 }
 .home-container header .left-arrow,
 .analysis-container header .left-arrow,
@@ -1329,19 +1333,60 @@
   -webkit-filter: invert(1);
 }
 
-.added-day-info {
-  width: 170px;
-  padding: 2px 10px 2px 10px;
+/* .added-day-info {
+  width: 150px;
+  padding: 1px 10px 1px 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   color: #000000;
   border: none;
   background: linear-gradient(to right, #00f2fe, #4facfe);
+  border-radius: 50px;
   clip-path: polygon(0 0, 100% 0, 96% 50%, 100% 100%, 0 100%);
+ 
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
 }
 
 .app.dark .added-day-info {
   color: #000000;
   background: linear-gradient(to right, #4facfe, #00f2fe);
+} */
+
+
+.home-container .skeleton {
+  padding: 0px 10px;
+}
+.home-container .skeleton .skeleton-month-body {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(90deg, #f5f5f5 25%, #ececec 50%, #f5f5f5 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s ease-in-out infinite;
+  border-radius: 5px;
+}
+
+.home-container .skeleton-outer {
+  width: 100%;
+  height: 100%;
+  padding: 0px 10px;
+}
+.home-container .skeleton-outer .skeleton-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.home-container .skeleton-outer .skeleton-inner li {
+  background: linear-gradient(90deg, #f5f5f5 25%, #ececec 50%, #f5f5f5 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 2s ease-in-out infinite;
+  border-radius: 5px;
+  width: 100%;
+  height: 70px;
+  background-color: #000000;
 }

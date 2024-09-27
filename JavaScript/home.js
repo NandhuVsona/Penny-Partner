@@ -131,7 +131,7 @@ const daysOfWeek = [
 function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
-    if (item.category.type == "transfer") {
+    if (item.type == "transfer") {
       let transferTemplate = `<li data-transaction-id="${item._id}">
                       <div class="transaction-info">
                         <img
@@ -441,24 +441,42 @@ function changeAndUpdate() {
 
   bunchCategory.forEach((cat) => {
     cat.addEventListener("click", () => {
-      selectedCatBody.classList.remove("active");
-      let selectedCatId = cat.dataset.categoryId;
+      let selectedCatId;
+      if (cat.classList.contains("transfer")) {
+        console.log(cat);
+        selectedCatBody.classList.remove("active");
+        selectedCatId = cat.dataset.accountId;
 
-      document.querySelector(".category-body .child-body").dataset.id =
-        selectedCatId;
-      console.log();
-      console.log();
+        document.querySelector(".category-body .child-body").dataset.id =
+          selectedCatId;
+        selectedCatImg.setAttribute(
+          "src",
+          cat.firstElementChild.children[0].getAttribute("src")
+        );
 
-      selectedCatImg.setAttribute(
-        "src",
-        cat.firstElementChild.getAttribute("src")
-      );
-      selectedCatImg.classList.add("imgSvg");
-      let categoryName = cat.lastElementChild.textContent;
-      selectedCatName.textContent =
-        categoryName.length > 8
-          ? categoryName.slice(0, 8) + ".."
-          : categoryName;
+        selectedCatImg.classList.add("imgSvg");
+        let categoryName = cat.firstElementChild.children[1].textContent;
+        selectedCatName.textContent =
+          categoryName.length > 8
+            ? categoryName.slice(0, 8) + ".."
+            : categoryName;
+      } else {
+        selectedCatBody.classList.remove("active");
+        selectedCatId = cat.dataset.categoryId;
+
+        document.querySelector(".category-body .child-body").dataset.id =
+          selectedCatId;
+        selectedCatImg.setAttribute(
+          "src",
+          cat.firstElementChild.getAttribute("src")
+        );
+        selectedCatImg.classList.add("imgSvg");
+        let categoryName = cat.lastElementChild.textContent;
+        selectedCatName.textContent =
+          categoryName.length > 8
+            ? categoryName.slice(0, 8) + ".."
+            : categoryName;
+      }
     });
   });
 }
@@ -547,8 +565,7 @@ function verification() {
       }
     }
   });
-
-  if (whatType == "transfer" && others.id == id) {
+  if (whatType == "transfer" && accId === catIds) {
     let errorData = {
       title: "Same Account",
       message: "Choose different account",
@@ -578,7 +595,7 @@ function verification() {
     amount,
     date: finalFormattedDate,
     description,
-    userId
+    userId,
   };
   return sturcturedData;
 }
@@ -826,6 +843,10 @@ async function loadData(userId, month) {
     );
     let res = await req.json();
     if (res.status === "success") {
+      document
+        .querySelectorAll(".home-skeleton-effect")
+        .forEach((i) => (i.style.display = "none"));
+      document.querySelector(".home-container header").style.display = "flex";
       let { data } = res;
       console.log(data);
       data.forEach((record) => {
@@ -908,7 +929,7 @@ function changeCategory(num) {
     });
   } else {
     accounts.forEach((cat) => {
-      let template = `<li data-category-id="${cat._id}" class="bunch-category transfer">
+      let template = `<li data-account-id="${cat._id}" class="bunch-category transfer">
                                           <div class="left-part">
                       <img src="${cat.icon}" alt="">
                       <p class="semi-bold">${cat.accountName}</p>

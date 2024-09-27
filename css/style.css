@@ -750,6 +750,7 @@ main section.active {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  -webkit-animation: skeleton-loading 2s ease-in-out infinite;
 }
 .skeleton-card {
   height: 70px;
@@ -761,7 +762,6 @@ main section.active {
   width: 150px;
   height: 35px;
 }
-
 
 /* .accounts h3 {
   background: linear-gradient(to right, #00f2fe, #4facfe);
