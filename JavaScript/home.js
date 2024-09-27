@@ -73,8 +73,6 @@ fullScreenMode.addEventListener("click", () => {
 
 //heme page functionality------------------------------------------------------------
 
-import { transactionHistory } from "../data/homedata.js";
-
 let mainContent = document.querySelector(".main-content");
 let clickedView;
 let categoryTicked = document.getElementById("category-ticked");
@@ -205,38 +203,6 @@ let incomeTags = document.querySelectorAll(".income-box p+p");
 let totalTags = document.querySelectorAll(".total-box p+p");
 let incomeAmount = 0;
 let expenseAmount = 0;
-
-// //for incomes
-// transactionHistory.forEach((data) => {
-//   let { transactions } = data;
-//   incomeAmount += transactions.reduce((accumulator, item) => {
-//     if (item.category.type == "income") {
-//       return accumulator + item.amount;
-//     } else {
-//       return accumulator + 0;
-//     }
-//   }, 0);
-
-//   expenseAmount += transactions.reduce((accumulator, item) => {
-//     if (item.category.type == "expense") {
-//       return accumulator + item.amount;
-//     } else {
-//       return accumulator + 0;
-//     }
-//   }, 0);
-// });
-
-incomeTags.forEach((tag) => {
-  tag.innerHTML = "₹" + incomeAmount.toLocaleString();
-});
-
-expenseTags.forEach((tag) => {
-  tag.innerHTML = "₹" + expenseAmount.toLocaleString();
-});
-
-totalTags.forEach((tag) => {
-  tag.innerHTML = "₹" + (incomeAmount - expenseAmount).toLocaleString();
-});
 
 function analysis(src, name, amount, percentage) {
   let template = `<li>
@@ -446,10 +412,10 @@ function changeAndUpdate() {
 
         selectedCatImg.classList.add("imgSvg");
         let categoryName = cat.firstElementChild.children[1].textContent;
-        selectedCatName.textContent = categoryName;
-        // .length > 8
-        //   ? categoryName.slice(0, 8) + ".."
-        //   : categoryName;
+        selectedCatName.textContent =
+          categoryName.length > 8
+            ? categoryName.slice(0, 8) + ".."
+            : categoryName;
       } else {
         selectedCatBody.classList.remove("active");
         selectedCatId = cat.dataset.categoryId;
@@ -462,10 +428,10 @@ function changeAndUpdate() {
         );
         selectedCatImg.classList.add("imgSvg");
         let categoryName = cat.lastElementChild.textContent;
-        selectedCatName.textContent = categoryName;
-        // .length > 8
-        //   ? categoryName.slice(0, 8) + ".."
-        //   : categoryName;
+        selectedCatName.textContent =
+          categoryName.length > 8
+            ? categoryName.slice(0, 8) + ".."
+            : categoryName;
       }
     });
   });
@@ -605,13 +571,13 @@ function verification() {
 
 saveTransactionBtn.addEventListener("click", () => {
   try {
-    document.querySelector(".input-containers").classList.remove("active");
     let { sturcturedData, displayData } = verification();
     let userId = "66efd1552e03ec45ce74d5fd";
     if (sturcturedData) {
       saveRecordToDb(userId, sturcturedData);
       temporaryDisplay(displayData);
       deleteView();
+      document.querySelector(".input-containers").classList.remove("active");
     }
   } catch (err) {
     console.log(err.message);
@@ -653,6 +619,7 @@ function deleteView() {
       } catch (err) {
         clickedView.remove();
       } finally {
+        clickedView.remove();
         deleteRecordToDb(clickedView.dataset.transactionId);
       }
     });
@@ -983,3 +950,76 @@ function temporaryDisplay(data) {
     reloadDetailveiw();
   }
 }
+
+document.querySelector(".edit-history").addEventListener("click", () => {
+  let saveBtn = document.querySelector(".add-transcation-save-btn");
+  saveBtn.lastElementChild.textContent = "UPDATE";
+  // saveBtn.removeEventListener("click")
+
+  const cardElement = document
+    .querySelector(".edit-history")
+    .closest(".detail-view-container");
+
+  // Extract the category image source
+  const categoryImg = cardElement
+    .querySelector(".categoryImg")
+    .getAttribute("src");
+
+  // Extract the category name text
+  const categoryName = cardElement.querySelector(".c-info").textContent.trim();
+
+  // Extract the notes/description
+  const description = cardElement.querySelector(".notes p").textContent.trim();
+
+  // Extract the account name
+  const accountName = cardElement.querySelector(".a-info").textContent.trim();
+
+  // Extract the amount
+  const amount = cardElement
+    .querySelector(".respective-amount")
+    .textContent.trim();
+
+  // Extract the account image source
+  const accountImg = cardElement
+    .querySelector(".accountImg")
+    .getAttribute("src");
+  const type = document.querySelector(".category-name-detail").textContent;
+
+  document.getElementById("description-notes").value = description;
+  document
+    .querySelector(".account-body .child-body img")
+    .setAttribute("src", accountImg);
+  document.querySelector(".account-body .child-body p").textContent =
+    accountName.length > 8 ? accountName.slice(0, 8) + ".." : accountName;
+  document
+    .querySelector(".category-body .child-body img")
+    .setAttribute("src", categoryImg);
+  document.querySelector(".category-body .child-body p").textContent =
+    categoryName.length > 8 ? categoryName.slice(0, 8) + ".." : categoryName;
+  document.querySelector(".calc-answer").textContent = amount.slice(1);
+
+  if (type == "income") {
+    document
+      .querySelector(".income-body img")
+      .setAttribute("src", "icons/tick.svg");
+  } else if (type == "expense") {
+    document
+      .querySelector(".expense-body img")
+      .setAttribute("src", "icons/tick.svg");
+  } else {
+    document
+      .querySelector(".transfer-body img")
+      .setAttribute("src", "icons/tick.svg");
+  }
+  document.querySelector(".parent-detail-view").classList.remove("active");
+  document.querySelector(".input-containers").classList.add("active");
+  console.log({
+    categoryImg,
+    categoryName,
+    description,
+    accountName,
+    amount,
+    accountImg,
+    type,
+  });
+});
