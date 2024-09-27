@@ -1,9 +1,3 @@
-// import {
-//   expenseCategories,
-//   incomeCategories,
-//   transferCategories,
-// } from "../data/categories.js";
-
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
     document.documentElement.requestFullscreen();
@@ -27,11 +21,6 @@ function exitFullscreen() {
     document.msExitFullscreen();
   }
 }
-
-// let togetherCategories = [];
-// expenseCategories.forEach((i) => togetherCategories.push(i));
-// incomeCategories.forEach((i) => togetherCategories.push(i));
-// transferCategories.forEach((i) => togetherCategories.push(i));
 
 // ==============================================
 let expenseCategories;
@@ -65,6 +54,7 @@ function loadUserAccounts(data) {
                 </li>`;
     existingAccounts.innerHTML += template;
     accountEventListener();
+    changeAndUpdate();
   });
 }
 
@@ -268,22 +258,22 @@ function analysis(src, name, amount, percentage) {
 }
 //  overview("income");
 
-function overview(category) {
-  dataAnalysContainer.innerHTML = " ";
-  transactionHistory.forEach((data) => {
-    let { transactions } = data;
-    transactions.forEach((item) => {
-      if (item.category.type == category) {
-        let amount = item.amount;
-        let divideValue = category == "income" ? incomeAmount : expenseAmount;
-        let name = item.category.name;
-        let src = item.category.icon;
-        let percentage = ((amount / divideValue) * 100).toFixed("2");
-        analysis(src, name, amount, percentage);
-      }
-    });
-  });
-}
+// function overview(category) {
+//   dataAnalysContainer.innerHTML = " ";
+//   transactionHistory.forEach((data) => {
+//     let { transactions } = data;
+//     transactions.forEach((item) => {
+//       if (item.category.type == category) {
+//         let amount = item.amount;
+//         let divideValue = category == "income" ? incomeAmount : expenseAmount;
+//         let name = item.category.name;
+//         let src = item.category.icon;
+//         let percentage = ((amount / divideValue) * 100).toFixed("2");
+//         analysis(src, name, amount, percentage);
+//       }
+//     });
+//   });
+// }
 
 analysisOpt.forEach((opt) => {
   opt.addEventListener("click", (e) => {
@@ -298,7 +288,7 @@ analysisOpt.forEach((opt) => {
   });
 });
 
-function openDetailView(id) {
+function openDetailView() {
   document.querySelector(".parent-detail-view").classList.add("active");
   let incomeName = document.querySelector(".category-name-detail");
   let amount = document.querySelector(".respective-amount");
@@ -435,7 +425,7 @@ selectCatBtn.addEventListener("click", () => {
   selectAccountBody.classList.remove("active");
   selectedCatBody.classList.toggle("active");
 });
-changeAndUpdate();
+
 function changeAndUpdate() {
   let bunchCategory = document.querySelectorAll(".bunch-category");
 
@@ -456,10 +446,10 @@ function changeAndUpdate() {
 
         selectedCatImg.classList.add("imgSvg");
         let categoryName = cat.firstElementChild.children[1].textContent;
-        selectedCatName.textContent =
-          categoryName.length > 8
-            ? categoryName.slice(0, 8) + ".."
-            : categoryName;
+        selectedCatName.textContent = categoryName;
+        // .length > 8
+        //   ? categoryName.slice(0, 8) + ".."
+        //   : categoryName;
       } else {
         selectedCatBody.classList.remove("active");
         selectedCatId = cat.dataset.categoryId;
@@ -472,10 +462,10 @@ function changeAndUpdate() {
         );
         selectedCatImg.classList.add("imgSvg");
         let categoryName = cat.lastElementChild.textContent;
-        selectedCatName.textContent =
-          categoryName.length > 8
-            ? categoryName.slice(0, 8) + ".."
-            : categoryName;
+        selectedCatName.textContent = categoryName;
+        // .length > 8
+        //   ? categoryName.slice(0, 8) + ".."
+        //   : categoryName;
       }
     });
   });
@@ -588,6 +578,19 @@ function verification() {
 
   const finalFormattedDate = `${formattedDate}, ${weekday}`;
   let userId = "66efd1552e03ec45ce74d5fd";
+  //Display data
+  let displayData = {
+    accountName,
+    accountIcon,
+    categoryName,
+    categoryIcon,
+    amount,
+    description,
+    whatType,
+    date: finalFormattedDate,
+  };
+
+  //StucturedData to store dataBase
   let sturcturedData = {
     month,
     category: catId,
@@ -597,30 +600,21 @@ function verification() {
     description,
     userId,
   };
-  return sturcturedData;
+  return { sturcturedData, displayData };
 }
 
 saveTransactionBtn.addEventListener("click", () => {
-  let isVerified = verification();
-  let userId = "66efd1552e03ec45ce74d5fd";
-  if (isVerified) {
-    saveRecordToDb(userId, isVerified);
-    // mainContent.innerHTML = " ";
-
-    // let { date, transactions } = isVerified;
-    // parentTemplate(date, transactions);
-
-    loadHistory(`${months[month]} ${year}`);
-
-    // document.querySelectorAll(".sub-content li").forEach((li) => {
-    //   li.addEventListener("click", () => {
-    //     let id = li.dataset.transactionId;
-    //     clickedView = li;
-    //     openDetailView(id);
-    //   });
-    // });
-    deleteView();
+  try {
     document.querySelector(".input-containers").classList.remove("active");
+    let { sturcturedData, displayData } = verification();
+    let userId = "66efd1552e03ec45ce74d5fd";
+    if (sturcturedData) {
+      saveRecordToDb(userId, sturcturedData);
+      temporaryDisplay(displayData);
+      deleteView();
+    }
+  } catch (err) {
+    console.log(err.message);
   }
 });
 
@@ -812,7 +806,7 @@ async function loadData(userId, month) {
   document
     .querySelectorAll(".home-skeleton-effect")
     .forEach((i) => (i.style.display = "block"));
-   
+
   try {
     let req = await fetch(
       `https://penny-partner-api.onrender.com/api/v1/users/transactions/${userId}/?month=${month}`
@@ -930,5 +924,50 @@ function changeCategory(num) {
 
       categoryOptions.innerHTML += template;
     });
+  }
+}
+
+function temporaryDisplay(data) {
+  console.log(data);
+  let mainContent = document.querySelector(".main-content");
+  if (
+    mainContent.children.length > 0 &&
+    mainContent.firstElementChild.firstElementChild.textContent == data.date
+  ) {
+    let template = `
+                  <div class="transaction-info">
+                    <img
+                      src="${data.categoryIcon}"
+                      alt=""
+                      class="transaction-icon"
+                    />
+                    <div class="cat-account">
+                      <div class="category-name little-bold">${data.categoryName}</div>
+                      <div class="transaction-account-info">
+                        <img
+                          src="${data.accountIcon}"
+                          alt=""
+                          class="account-icon"
+                        />
+                        <small class="account-name">${data.accountName}</small>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="transaction-amount">
+                    <p class="amount ${data.whatType}">₹${data.amount}</p>
+                  </div>
+                  <small style="display: none;" >${data.description}</small>
+                `;
+
+    const li = document.createElement("li");
+    li.dataset.transactionId = "<pending>";
+    li.innerHTML = template;
+
+    mainContent.firstElementChild.lastElementChild.insertBefore(
+      li,
+      mainContent.firstElementChild.lastElementChild.firstElementChild
+    );
+    reloadDetailveiw();
   }
 }
