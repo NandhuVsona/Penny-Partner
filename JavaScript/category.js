@@ -205,7 +205,7 @@ function createCategory(name, icon, category, categoryId) {
   parent.innerHTML += template;
 
   document.getElementById("category-name").value = "";
-  reload();
+  // reload();
 }
 
 document.addEventListener("click", (e) => {
