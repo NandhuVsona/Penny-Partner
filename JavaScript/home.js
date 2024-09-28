@@ -1,3 +1,5 @@
+// import { updateBudgetDb } from "./budget.js";
+
 function goFullscreen() {
   if (document.documentElement.requestFullscreen) {
     document.documentElement.requestFullscreen();
@@ -472,6 +474,8 @@ function verification() {
   }
   let catId = document.querySelector(".category-body .child-body").dataset.id;
 
+
+
   let catIdIsSame = catId != "2876543210" ? false : true;
   if (catIdIsSame) {
     let errorData = {
@@ -542,6 +546,9 @@ function verification() {
       }
     }
   });
+  if(whatType == 'expense'){
+    updateBudgetDb(catId,{spend:amount})
+  }
   if (whatType == "transfer" && accId === catIds) {
     let errorData = {
       title: "Same Account",
@@ -1122,4 +1129,20 @@ function dynamicChange(data) {
   //later you chaet this currrent it wil issue*********===============-------------==========---------
 
   document.querySelector(".input-containers").classList.remove("active");
+}
+
+
+//--------------------UPDATE BUDGETS---------------------
+export async function updateBudgetDb(catId, data) {
+  let userId = "66efd1552e03ec45ce74d5fd"
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/some/${userId}/?categoryId=${catId}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
 }

@@ -220,7 +220,7 @@ setBudgetLimitBtn.addEventListener("click", () => {
       let spend = chechHistory(id)
       let remaining = budget-spend;
 
-      let data = { categoryId: id, budget,remaining,spend, userId };
+      let data = { categoryId: id, budget,spend, userId };
      
       createBudgetDb(userId, data);
       setBudgetTemplate(id, name, image, budget,remaining,spend);
@@ -338,7 +338,7 @@ async function removeBudgetDb(budgetId, callBack) {
 }
 
 //--------------------UPDATE BUDGETS---------------------
-async function updateBudgetDb(budgetId, data) {
+ async function updateBudgetDb(budgetId, data) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/budgets/${budgetId}`,
     {
