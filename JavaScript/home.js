@@ -26,6 +26,7 @@ function exitFullscreen() {
 let expenseCategories;
 let incomeCategories;
 let accounts;
+let transactionHistory;
 async function getAccountsAndCategories() {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/data/66efd1552e03ec45ce74d5fd`
@@ -222,24 +223,28 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
-//  overview("income");
+setTimeout(() => {
+  overview("income");
+}, 2000);
 
-// function overview(category) {
-//   dataAnalysContainer.innerHTML = " ";
-//   transactionHistory.forEach((data) => {
-//     let { transactions } = data;
-//     transactions.forEach((item) => {
-//       if (item.category.type == category) {
-//         let amount = item.amount;
-//         let divideValue = category == "income" ? incomeAmount : expenseAmount;
-//         let name = item.category.name;
-//         let src = item.category.icon;
-//         let percentage = ((amount / divideValue) * 100).toFixed("2");
-//         analysis(src, name, amount, percentage);
-//       }
-//     });
-//   });
-// }
+function overview(category) {
+  dataAnalysContainer.innerHTML = " ";
+  transactionHistory.forEach((data) => {
+    let { transactions } = data;
+    transactions.forEach((item) => {
+      // if (item.category.type == category) {
+      let amount = item.amount;
+      let divideValue =
+        category == "income" ? incomeAmount : expenseAmount || 1000;
+      let name = item.category[0].name;
+      let src = item.category[0].image;
+      // let percentage = ((amount / divideValue) * 100).toFixed("2");
+      let percentage = item.amount / 10;
+      analysis(src, name, amount, percentage);
+      // }
+    });
+  });
+}
 
 analysisOpt.forEach((opt) => {
   opt.addEventListener("click", (e) => {
@@ -792,6 +797,7 @@ async function loadData(userId, month) {
         .forEach((i) => (i.style.display = "none"));
       document.querySelector(".home-container header").style.display = "flex";
       let { data } = res;
+      transactionHistory = data;
       // console.log(data);
       if (data.length > 0) {
         mainContent.innerHTML = " ";
@@ -1080,7 +1086,7 @@ function addEventListener() {
       try {
         if (sturcturedData) {
           dynamicChange(displayData);
-           updateRecordToDb(clickedView.dataset.transactionId,sturcturedData)
+          updateRecordToDb(clickedView.dataset.transactionId, sturcturedData);
         }
       } catch (err) {
         console.log(err.message);
