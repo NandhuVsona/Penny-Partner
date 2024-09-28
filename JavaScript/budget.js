@@ -159,7 +159,7 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate(id, name, image, budget,remaining=0) {
+function setBudgetTemplate(id, name, image, budget, remaining,spend) {
   // ulParent.innerHTML = " ";
   let template = `<li>
                       <div class="text-container">
@@ -173,11 +173,11 @@ function setBudgetTemplate(id, name, image, budget,remaining=0) {
                             <p class="change-font-style">${name}</p>
                             <div class="spent-box">
                               <p>Spent:</p>
-                              <p class="amount-spent red">₹0.00</p>
+                              <p class="amount-spent red">₹${spend}</p>
                             </div>
                             <div class="remaining-box">
                               <p>Remaining:</p>
-                              <p class="amount-remaining green">₹${budget}</p>
+                              <p class="amount-remaining green">₹${remaining}</p>
                             </div>
                           </div>
                         </div>
@@ -194,7 +194,9 @@ function setBudgetTemplate(id, name, image, budget,remaining=0) {
                         <div class="label-content">
                           <div class="label">₹${budget}</div>
                         </div>
-                        <div class="bar-status" style="width:${(remaining/budget)*100}%;"></div>
+                        <div class="bar-status ${spend>budget?'limit-exceed':"limited"}" style="width:${
+                          (spend/budget) * 100
+                        }%;"></div>
                       </div>
                     </li>`;
   ulParent.innerHTML += template;
@@ -214,9 +216,14 @@ setBudgetLimitBtn.addEventListener("click", () => {
   try {
     if (Number(budget) > 0) {
       let userId = "66efd1552e03ec45ce74d5fd";
-      let data = { categoryId: id, budget, userId };
+    
+      let spend = chechHistory(id)
+      let remaining = budget-spend;
+
+      let data = { categoryId: id, budget,remaining,spend, userId };
+     
       createBudgetDb(userId, data);
-      setBudgetTemplate(id, name, image, budget);
+      setBudgetTemplate(id, name, image, budget,remaining,spend);
       reload();
       clickedBudget.remove();
     }
@@ -281,10 +288,9 @@ async function loadDataBudgets() {
     let budgeted = data[0].budgeted;
 
     budgeted.forEach((data) => {
-     
-      let { budget, _id,remaining } = data;
+      let { budget, _id, remaining,spend } = data;
       let { image, name } = data.categoryId;
-      setBudgetTemplate(_id, name, image, budget,remaining);
+      setBudgetTemplate(_id, name, image, budget, remaining,spend);
     });
     unBudgeted.forEach((item) => {
       baseTemplate(item.name, item.image, item._id);
@@ -392,4 +398,16 @@ function reloadDots() {
       openEditBox(btn);
     });
   });
+}
+
+function chechHistory(id) {
+  let history = JSON.parse(localStorage.getItem("Trasnactions")) || [];
+
+  let spendedAmount = history.reduce((acc, item) => {
+    if (item.category._id == id) {
+      acc += item.amount;
+    }
+    return acc;
+  }, 0);
+  return spendedAmount > 0 ? spendedAmount : 0;
 }

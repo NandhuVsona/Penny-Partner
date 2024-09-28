@@ -90,7 +90,7 @@ main section.budgets {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
 }
 .bar-status.limited {
-  width: 40%;
+  
   background: linear-gradient(to left, #02c20f, rgb(0, 134, 60));
 }
 
@@ -100,7 +100,7 @@ main section.budgets {
   height: 10px;
 }
 .bar-status.limit-exceed {
-  width: 100%;
+max-width: 100% !important;
   background: linear-gradient(to left, #ff8000, red);
 }
 

@@ -41,6 +41,9 @@ async function getAccountsAndCategories() {
     loadUserAccounts(accounts);
   }
 }
+let saveBtn = document.querySelector(".add-transcation-save-btn");
+
+saveBtn.addEventListener("click", transactionSave);
 getAccountsAndCategories();
 
 function loadUserAccounts(data) {
@@ -223,9 +226,22 @@ function analysis(src, name, amount, percentage) {
                 </li>`;
   dataAnalysContainer.innerHTML += template;
 }
+let budgetCategory = [];
 setTimeout(() => {
-  overview("income");
-}, 2000);
+  transactionHistory.forEach((data) => {
+    let { transactions } = data;
+
+    transactions.forEach((item) => {
+      if (item.category[0].type === "expense") {
+        budgetCategory.push({
+          category: item.category[0],
+          amount: item.amount,
+        });
+      }
+    });
+  });
+  localStorage.setItem("Trasnactions", JSON.stringify(budgetCategory));
+}, 1500);
 
 function overview(category) {
   dataAnalysContainer.innerHTML = " ";
@@ -575,20 +591,18 @@ function verification() {
 }
 
 function transactionSave() {
-  () => {
-    try {
-      let { sturcturedData, displayData } = verification();
-      let userId = "66efd1552e03ec45ce74d5fd";
-      if (sturcturedData) {
-        saveRecordToDb(userId, sturcturedData);
-        temporaryDisplay(displayData);
-        deleteView();
-        document.querySelector(".input-containers").classList.remove("active");
-      }
-    } catch (err) {
-      console.log(err.message);
+  try {
+    let { sturcturedData, displayData } = verification();
+    let userId = "66efd1552e03ec45ce74d5fd";
+    if (sturcturedData) {
+      saveRecordToDb(userId, sturcturedData);
+      temporaryDisplay(displayData);
+      deleteView();
+      document.querySelector(".input-containers").classList.remove("active");
     }
-  };
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 saveTransactionBtn.addEventListener("click", transactionSave);
@@ -991,7 +1005,7 @@ document.querySelector(".edit-history").addEventListener("click", () => {
     saveBtn.removeEventListener("click", transactionSave);
     saveBtn.lastElementChild.textContent = "UPDATE";
     saveBtn.classList.add("update-transaction");
-    saveBtn.classList.remove("add-transcation-save-btn");
+    // saveBtn.classList.remove("add-transcation-save-btn");
   } catch (err) {
     if (!err instanceof TypeError) {
       console.log(err.message);
