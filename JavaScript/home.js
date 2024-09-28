@@ -126,7 +126,7 @@ function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
     if (item.type == "transfer") {
-      let transferTemplate = `<li data-transaction-id="${item._id}" data-category-id="${item.category[0]._id}" data-account-id="${item.account[0]._id}">
+      let transferTemplate = `<li data-transaction-id="${item._id}" data-user-id="${item.userId}"  data-account-id="${item.account[0]._id}">
                       <div class="transaction-info">
                         <img
                           src="icons/Income-expense/transfer.jpg"
@@ -148,23 +148,23 @@ function childTemplate(transactions) {
                               class="account-icon"
                             />
                             <img
-                              src="${item.category[0].image}"
+                              src="${item.toAccount[0].icon}"
                               alt=""
                               class="account-icon"
                             />
-                             <small class="account-name">${item.category[0].name}</small>
+                             <small class="account-name">${item.toAccount[0].accountName}</small>
                           </div>
                         </div>
                       </div>
                      
                       <div class="transaction-amount">
-                        <p class="amount ${item.category[0].type}">₹${item.amount}</p>
+                        <p class="amount ${item.type}">₹${item.amount}</p>
                       </div>
                        <small style="display: none;" >${item.description}</small>
                     </li>`;
       content += transferTemplate;
     } else {
-      let template = `<li data-transaction-id="${item._id}" data-category-id="${item.category[0]._id}" data-account-id="${item.account[0]._id}">
+      let template = `<li data-transaction-id="${item._id}" data-user-id="${item.userId}" data-category-id="${item.category[0]._id}" data-account-id="${item.account[0]._id}">
                       <div class="transaction-info">
                         <img
                           src="${item.category[0].image}"
@@ -229,21 +229,21 @@ function analysis(src, name, amount, percentage) {
   dataAnalysContainer.innerHTML += template;
 }
 let budgetCategory = [];
-setTimeout(() => {
-  transactionHistory.forEach((data) => {
-    let { transactions } = data;
+// setTimeout(() => {
+//   transactionHistory.forEach((data) => {
+//     let { transactions } = data;
 
-    transactions.forEach((item) => {
-      if (item.category[0].type === "expense") {
-        budgetCategory.push({
-          category: item.category[0],
-          amount: item.amount,
-        });
-      }
-    });
-  });
-  localStorage.setItem("Trasnactions", JSON.stringify(budgetCategory));
-}, 1500);
+//     transactions.forEach((item) => {
+//       if (item.category[0].type === "expense") {
+//         budgetCategory.push({
+//           category: item.category[0],
+//           amount: item.amount,
+//         });
+//       }
+//     });
+//   });
+//   localStorage.setItem("Trasnactions", JSON.stringify(budgetCategory));
+// }, 2500);
 
 function overview(category) {
   dataAnalysContainer.innerHTML = " ";
@@ -474,8 +474,6 @@ function verification() {
   }
   let catId = document.querySelector(".category-body .child-body").dataset.id;
 
-
-
   let catIdIsSame = catId != "2876543210" ? false : true;
   if (catIdIsSame) {
     let errorData = {
@@ -546,17 +544,10 @@ function verification() {
       }
     }
   });
-  if(whatType == 'expense'){
-    updateBudgetDb(catId,{spend:amount})
+  if (whatType == "expense") {
+    updateBudgetDb(catId, { spend: amount });
   }
-  if (whatType == "transfer" && accId === catIds) {
-    let errorData = {
-      title: "Same Account",
-      message: "Choose different account",
-    };
-    showMessage(errorData);
-    return false;
-  }
+
   const date = new Date();
   const options = { month: "long", year: "numeric" };
   const month = date.toLocaleDateString("en-US", options);
@@ -571,6 +562,7 @@ function verification() {
   );
 
   const finalFormattedDate = `${formattedDate}, ${weekday}`;
+
   let userId = "66efd1552e03ec45ce74d5fd";
   //Display data
   let displayData = {
@@ -580,7 +572,7 @@ function verification() {
     categoryIcon,
     amount,
     description,
-    whatType,
+    type: whatType,
     date: finalFormattedDate,
   };
 
@@ -593,7 +585,21 @@ function verification() {
     date: finalFormattedDate,
     description,
     userId,
+    type: whatType,
+    toAccount: catId,
   };
+  if (whatType == "transfer" && accId === catId) {
+    let errorData = {
+      title: "Same Account",
+      message: "Choose different account",
+    };
+    showMessage(errorData);
+    return false;
+  }
+  if (whatType == "transfer" && accId !== catId) {
+    return { sturcturedData, displayData };
+  }
+
   return { sturcturedData, displayData };
 }
 
@@ -650,6 +656,8 @@ function deleteView() {
         clickedView.remove();
       } finally {
         clickedView.remove();
+        let userId = clickedView.dataset.userId;
+        // updateBudgetDb(clickedView.dataset.categoryId, { spend: 0 });
         deleteRecordToDb(clickedView.dataset.transactionId);
       }
     });
@@ -819,7 +827,7 @@ async function loadData(userId, month) {
       document.querySelector(".home-container header").style.display = "flex";
       let { data } = res;
       transactionHistory = data;
-      // console.log(data);
+      console.log(data);
       if (data.length > 0) {
         mainContent.innerHTML = " ";
         data.forEach((record) => {
@@ -873,6 +881,7 @@ async function updateRecordToDb(transactionId, data) {
 
 //--------------DELETE RECORDS--------------------------
 async function deleteRecordToDb(transactionId) {
+  console.log(clickedView);
   try {
     let response = await fetch(
       `https://penny-partner-api.onrender.com/api/v1/users/transactions/${transactionId}`,
@@ -958,7 +967,10 @@ function changeCategory(num) {
 }
 
 function temporaryDisplay(data) {
-  console.log(data);
+  if(data.type == 'transfer'){
+    makeDynamicTransferTemplate(data)
+    return;
+  }
   let isCurrentMonth = document.querySelectorAll(".month")[0].textContent;
 
   let mainContent = document.querySelector(".main-content");
@@ -1131,10 +1143,9 @@ function dynamicChange(data) {
   document.querySelector(".input-containers").classList.remove("active");
 }
 
-
 //--------------------UPDATE BUDGETS---------------------
-export async function updateBudgetDb(catId, data) {
-  let userId = "66efd1552e03ec45ce74d5fd"
+ async function updateBudgetDb(catId, data) {
+  let userId = "66efd1552e03ec45ce74d5fd";
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/budgets/some/${userId}/?categoryId=${catId}`,
     {
@@ -1145,4 +1156,54 @@ export async function updateBudgetDb(catId, data) {
   );
   let res = await req.json();
   console.log(res);
+}
+
+function makeDynamicTransferTemplate(data){
+  console.log(data)
+  let transferTemplate = `<li data-transaction-id="${data._id}" data-user-id="${data.userId}"  data-account-id="">
+  <div class="transaction-info">
+    <img
+      src="icons/Income-expense/transfer.jpg"
+      alt=""
+      class="transaction-icon"
+    />
+    <div class="cat-account">
+      <div class="category-name little-bold">Transfer</div>
+      <div class="transaction-account-info">
+        <img
+          src="${data.accountIcon}"
+          alt=""
+          class="account-icon"
+        />
+         <small class="account-name">${data.accountName}</small>
+          <img
+          src="icons/tarrow.svg"
+          alt=""
+          class="account-icon"
+        />
+        <img
+          src="${data.categoryIcon}"
+          alt=""
+          class="account-icon"
+        />
+         <small class="account-name">${data.categoryName}</small>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="transaction-amount">
+    <p class="amount ${data.type}">₹${data.amount}</p>
+  </div>
+   <small style="display: none;" >${data.description}</small>
+</li>`;
+const li = document.createElement("li");
+li.dataset.transactionId = "<pending>";
+li.innerHTML = transferTemplate;
+li.id = "recently-added";
+
+mainContent.firstElementChild.lastElementChild.insertBefore(
+  li,
+  mainContent.firstElementChild.lastElementChild.firstElementChild
+);
+reloadDetailveiw();
 }

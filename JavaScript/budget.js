@@ -159,7 +159,7 @@ function closeBudgetBox() {
 }
 cancelBudget.addEventListener("click", closeBudgetBox);
 
-function setBudgetTemplate(id, name, image, budget, remaining,spend) {
+function setBudgetTemplate(id, name, image, budget, remaining, spend) {
   // ulParent.innerHTML = " ";
   let template = `<li>
                       <div class="text-container">
@@ -194,9 +194,9 @@ function setBudgetTemplate(id, name, image, budget, remaining,spend) {
                         <div class="label-content">
                           <div class="label">₹${budget}</div>
                         </div>
-                        <div class="bar-status ${spend>budget?'limit-exceed':"limited"}" style="width:${
-                          (spend/budget) * 100
-                        }%;"></div>
+                        <div class="bar-status ${
+                          spend > budget ? "limit-exceed" : "limited"
+                        }" style="width:${(spend / budget) * 100}%;"></div>
                       </div>
                     </li>`;
   ulParent.innerHTML += template;
@@ -216,14 +216,14 @@ setBudgetLimitBtn.addEventListener("click", () => {
   try {
     if (Number(budget) > 0) {
       let userId = "66efd1552e03ec45ce74d5fd";
-    
-      let spend = chechHistory(id)
-      let remaining = budget-spend;
 
-      let data = { categoryId: id, budget,spend, userId };
-     
+      let spend = chechHistory(id);
+      let remaining = budget - spend;
+
+      let data = { categoryId: id, budget, spend, userId };
+
       createBudgetDb(userId, data);
-      setBudgetTemplate(id, name, image, budget,remaining,spend);
+      setBudgetTemplate(id, name, image, budget, remaining, spend);
       reload();
       clickedBudget.remove();
     }
@@ -273,9 +273,9 @@ document.addEventListener("click", (e) => {
 });
 
 //-------------READ BUDGETS -----------------------
-async function loadDataBudgets() {
+async function loadDataBudgets(userId) {
   let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/budgets/66efd1552e03ec45ce74d5fd`
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/${userId}`
   );
   let res = await req.json();
 
@@ -283,14 +283,15 @@ async function loadDataBudgets() {
     let { data } = res;
 
     ulParent.innerHTML = " ";
+    document.querySelector(".budget-list").innerHTML = ''
 
     let unBudgeted = data[0].unBudgeted;
     let budgeted = data[0].budgeted;
 
     budgeted.forEach((data) => {
-      let { budget, _id, remaining,spend } = data;
+      let { budget, _id, remaining, spend } = data;
       let { image, name } = data.categoryId;
-      setBudgetTemplate(_id, name, image, budget, remaining,spend);
+      setBudgetTemplate(_id, name, image, budget, remaining, spend);
     });
     unBudgeted.forEach((item) => {
       baseTemplate(item.name, item.image, item._id);
@@ -299,7 +300,6 @@ async function loadDataBudgets() {
     reload();
   }
 }
-loadDataBudgets();
 
 //--------------------CREATE BUDGETS---------------------
 async function createBudgetDb(userId, data) {
@@ -338,7 +338,7 @@ async function removeBudgetDb(budgetId, callBack) {
 }
 
 //--------------------UPDATE BUDGETS---------------------
- async function updateBudgetDb(budgetId, data) {
+async function updateBudgetDb(budgetId, data) {
   let req = await fetch(
     `https://penny-partner-api.onrender.com/api/v1/users/budgets/${budgetId}`,
     {
@@ -411,3 +411,7 @@ function chechHistory(id) {
   }, 0);
   return spendedAmount > 0 ? spendedAmount : 0;
 }
+
+document.querySelector(".skeleton-budget").addEventListener("click", () => {
+  loadDataBudgets("66efd1552e03ec45ce74d5fd");
+});
