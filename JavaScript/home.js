@@ -120,7 +120,7 @@ function childTemplate(transactions) {
   let content = "";
   transactions.forEach((item) => {
     if (item.type == "transfer") {
-      let transferTemplate = `<li data-transaction-id="${item._id}">
+      let transferTemplate = `<li data-transaction-id="${item._id}" data-category-id="${item.category[0]._id}" data-account-id="${item.account[0]._id}">
                       <div class="transaction-info">
                         <img
                           src="icons/Income-expense/transfer.jpg"
@@ -158,7 +158,7 @@ function childTemplate(transactions) {
                     </li>`;
       content += transferTemplate;
     } else {
-      let template = `<li data-transaction-id="${item._id}">
+      let template = `<li data-transaction-id="${item._id}" data-category-id="${item.category[0]._id}" data-account-id="${item.account[0]._id}">
                       <div class="transaction-info">
                         <img
                           src="${item.category[0].image}"
@@ -569,20 +569,24 @@ function verification() {
   return { sturcturedData, displayData };
 }
 
-saveTransactionBtn.addEventListener("click", () => {
-  try {
-    let { sturcturedData, displayData } = verification();
-    let userId = "66efd1552e03ec45ce74d5fd";
-    if (sturcturedData) {
-      saveRecordToDb(userId, sturcturedData);
-      temporaryDisplay(displayData);
-      deleteView();
-      document.querySelector(".input-containers").classList.remove("active");
+function transactionSave() {
+  () => {
+    try {
+      let { sturcturedData, displayData } = verification();
+      let userId = "66efd1552e03ec45ce74d5fd";
+      if (sturcturedData) {
+        saveRecordToDb(userId, sturcturedData);
+        temporaryDisplay(displayData);
+        deleteView();
+        document.querySelector(".input-containers").classList.remove("active");
+      }
+    } catch (err) {
+      console.log(err.message);
     }
-  } catch (err) {
-    console.log(err.message);
-  }
-});
+  };
+}
+
+saveTransactionBtn.addEventListener("click", transactionSave);
 
 function showMessage(value) {
   let title = document.querySelector(".message-box .message");
@@ -755,7 +759,7 @@ function reloadDetailveiw() {
     li.addEventListener("click", () => {
       clickedView = li;
       let id = li.dataset.transactionId;
-      openDetailView(id);
+      openDetailView();
     });
   });
 }
@@ -788,7 +792,7 @@ async function loadData(userId, month) {
         .forEach((i) => (i.style.display = "none"));
       document.querySelector(".home-container header").style.display = "flex";
       let { data } = res;
-      console.log(data);
+      // console.log(data);
       if (data.length > 0) {
         mainContent.innerHTML = " ";
         data.forEach((record) => {
@@ -814,7 +818,31 @@ const options = { month: "long", year: "numeric" };
 const formatedMonth = date
   .toLocaleDateString("en-US", options)
   .replace(" ", "%20");
-// loadData("66efd1552e03ec45ce74d5fd", formatedMonth);
+loadData("66efd1552e03ec45ce74d5fd", formatedMonth);
+
+//--------------UPDATE RECORDS--------------------------
+async function updateRecordToDb(transactionId, data) {
+  try {
+    let response = await fetch(
+      `https://penny-partner-api.onrender.com/api/v1/users/transactions/${transactionId}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    // Check if deletion was successful
+    if (response.status === 200) {
+      console.log("Successfully updated 💥");
+    } else {
+      const errorData = await response.json();
+      console.error("Failed to update:", errorData);
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
 
 //--------------DELETE RECORDS--------------------------
 async function deleteRecordToDb(transactionId) {
@@ -953,7 +981,18 @@ function temporaryDisplay(data) {
 
 document.querySelector(".edit-history").addEventListener("click", () => {
   let saveBtn = document.querySelector(".add-transcation-save-btn");
-  saveBtn.lastElementChild.textContent = "UPDATE";
+  try {
+    saveBtn.removeEventListener("click", transactionSave);
+    saveBtn.lastElementChild.textContent = "UPDATE";
+    saveBtn.classList.add("update-transaction");
+    saveBtn.classList.remove("add-transcation-save-btn");
+  } catch (err) {
+    if (!err instanceof TypeError) {
+      console.log(err.message);
+    }
+  }
+
+  addEventListener();
   // saveBtn.removeEventListener("click")
 
   const cardElement = document
@@ -973,6 +1012,11 @@ document.querySelector(".edit-history").addEventListener("click", () => {
 
   // Extract the account name
   const accountName = cardElement.querySelector(".a-info").textContent.trim();
+
+  document.querySelector(".account-body .child-body").dataset.id =
+    clickedView.dataset.accountId;
+  document.querySelector(".category-body .child-body").dataset.id =
+    clickedView.dataset.categoryId;
 
   // Extract the amount
   const amount = cardElement
@@ -996,7 +1040,7 @@ document.querySelector(".edit-history").addEventListener("click", () => {
     .setAttribute("src", categoryImg);
   document.querySelector(".category-body .child-body p").textContent =
     categoryName.length > 8 ? categoryName.slice(0, 8) + ".." : categoryName;
-  document.querySelector(".calc-answer").textContent = amount.slice(1);
+  document.querySelector(".calc-values").textContent = amount.slice(1);
 
   if (type == "income") {
     document
@@ -1013,13 +1057,49 @@ document.querySelector(".edit-history").addEventListener("click", () => {
   }
   document.querySelector(".parent-detail-view").classList.remove("active");
   document.querySelector(".input-containers").classList.add("active");
-  console.log({
-    categoryImg,
-    categoryName,
-    description,
-    accountName,
-    amount,
-    accountImg,
-    type,
-  });
+  // console.log({
+  //   categoryImg,
+  //   categoryName,
+  //   description,
+  //   accountName,
+  //   amount,
+  //   accountImg,
+  //   type,
+  // });
 });
+
+function addEventListener() {
+  document
+    .querySelector(".update-transaction")
+    .addEventListener("click", () => {
+      let { sturcturedData, displayData } = verification();
+
+      delete sturcturedData.date;
+      delete sturcturedData.month;
+
+      try {
+        if (sturcturedData) {
+          dynamicChange(displayData);
+           updateRecordToDb(clickedView.dataset.transactionId,sturcturedData)
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    });
+}
+
+function dynamicChange(data) {
+  let element = clickedView;
+  element.lastElementChild.textContent = data.description;
+  element.firstElementChild.children[0].setAttribute("src", data.categoryIcon);
+  element.firstElementChild.children[1].lastElementChild.children[0].setAttribute(
+    "src",
+    data.accountIcon
+  );
+  element.firstElementChild.children[1].lastElementChild.children[1].textContent =
+    data.accountName;
+  element.children[1].children[0].textContent = data.amount;
+  //later you chaet this currrent it wil issue*********===============-------------==========---------
+
+  document.querySelector(".input-containers").classList.remove("active");
+}
