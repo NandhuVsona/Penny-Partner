@@ -294,13 +294,13 @@ main section.active {
 }
 .sidebar.active {
   display: block;
-  /* transition: all 0.3s ease;
+  transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   animation: slideRight 0.3s ease;
-  -webkit-animation: slideRight 0.3s ease; */
+  -webkit-animation: slideRight 0.3s ease;
 }
 .sun-theme{
   width: 80px;

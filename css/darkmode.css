@@ -285,7 +285,31 @@
   border: 1px solid grey;
   border-radius: 10px;
 }
-.app.dark .transfer-arrow{
+.app.dark .transfer-arrow {
   filter: invert(1);
   -webkit-filter: invert(1);
 }
+.app.dark .sidebar header::before {
+  background: linear-gradient(to right, #000000, #2ac5cd);
+}
+.app.dark .cloud-2,
+.app.dark .cloud-3,
+.app.dark .cloud,
+.app.dark .sun-theme {
+  filter: brightness(0.6);
+  -webkit-filter: brightness(0.6);
+}
+/* .sidebar.active .sun-theme {
+  animation: rise 0.3s ease;
+  -webkit-animation: rise 0.3s ease;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(100px);
+    -webkit-transform: translateY(100px);
+    -moz-transform: translateY(100px);
+    -ms-transform: translateY(100px);
+    -o-transform: translateY(100px);
+  }
+} */

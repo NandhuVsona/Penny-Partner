@@ -1,8 +1,14 @@
 //--------------DARK MODE FUNCTIONALITY-----------------
 let isDark = JSON.parse(localStorage.getItem("Theme"));
+let sunMoon = document.querySelector(".theme .left-part img")
 
 if (isDark) {
   document.querySelector(".app").classList.add("dark");
+  document.querySelector(".sun-theme").setAttribute("src","moon.png")
+  sunMoon.setAttribute("src","icons/moon.svg")
+}
+else{
+  document.querySelector(".sun-theme").setAttribute("src","sun.png")
 }
 
 import {
@@ -44,6 +50,7 @@ document
   .addEventListener("click", loadAccountsData);
 
 let navIcons = document.querySelectorAll("footer nav ul li");
+
 let pages = document.querySelectorAll("main section");
 let closeSideBar = document.querySelector(".close");
 let sideBar = document.querySelector(".sidebar");
@@ -73,8 +80,12 @@ preference.addEventListener("click", () => {
   app.classList.toggle("dark");
   if (app.classList.contains("dark")) {
     localStorage.setItem("Theme", "true");
+    document.querySelector(".sun-theme").setAttribute("src","moon.png")
+    sunMoon.setAttribute("src","icons/moon.svg")
   } else {
     localStorage.setItem("Theme", "false");
+    document.querySelector(".sun-theme").setAttribute("src","sun.png")
+    sunMoon.setAttribute("src","icons/sun.svg")
   }
 });
 
