@@ -857,6 +857,7 @@ loadData("66efd1552e03ec45ce74d5fd", formatedMonth);
 
 //--------------UPDATE RECORDS--------------------------
 async function updateRecordToDb(transactionId, data) {
+  console.log(transactionId,data)
   try {
     let response = await fetch(
       `https://penny-partner-api.onrender.com/api/v1/users/transactions/${transactionId}`,
@@ -967,19 +968,17 @@ function changeCategory(num) {
 }
 
 function temporaryDisplay(data) {
-  if(data.type == 'transfer'){
-    makeDynamicTransferTemplate(data)
-    return;
-  }
   let isCurrentMonth = document.querySelectorAll(".month")[0].textContent;
 
   let mainContent = document.querySelector(".main-content");
+  let template;
   if (
     mainContent.children.length > 0 &&
     mainContent.firstElementChild.firstElementChild.textContent == data.date &&
     isCurrentMonth == formatedMonth.replace("%20", " ")
   ) {
-    let template = `
+    if (data.type !== "transfer") {
+      template = `
                   <div class="transaction-info">
                     <img
                       src="${data.categoryIcon}"
@@ -1000,10 +999,48 @@ function temporaryDisplay(data) {
                   </div>
                 
                   <div class="transaction-amount">
-                    <p class="amount ${data.whatType}">₹${data.amount}</p>
+                    <p class="amount ${data.type}">₹${data.amount}</p>
                   </div>
                   <small style="display: none;" >${data.description}</small>
                 `;
+    } else {
+      template = `<li data-transaction-id="${data._id}" data-user-id="${data.userId}"  data-account-id="">
+  <div class="transaction-info">
+    <img
+      src="icons/Income-expense/transfer.jpg"
+      alt=""
+      class="transaction-icon"
+    />
+    <div class="cat-account">
+      <div class="category-name little-bold">Transfer</div>
+      <div class="transaction-account-info">
+        <img
+          src="${data.accountIcon}"
+          alt=""
+          class="account-icon"
+        />
+         <small class="account-name">${data.accountName}</small>
+          <img
+          src="icons/tarrow.svg"
+          alt=""
+         class="transfer-arrow"
+        />
+        <img
+          src="${data.categoryIcon}"
+          alt=""
+          class="account-icon"
+        />
+         <small class="account-name">${data.categoryName}</small>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="transaction-amount">
+    <p class="amount ${data.type}">₹${data.amount}</p>
+  </div>
+   <small style="display: none;" >${data.description}</small>
+</li>`;
+    }
 
     const li = document.createElement("li");
     li.dataset.transactionId = "<pending>";
@@ -1076,24 +1113,38 @@ document.querySelector(".edit-history").addEventListener("click", () => {
     accountName.length > 8 ? accountName.slice(0, 8) + ".." : accountName;
   document
     .querySelector(".category-body .child-body img")
-    .setAttribute("src", type!=="transfer"?categoryImg:clickedView.children[0].children[1].children[1].children[3].getAttribute("src"));
+    .setAttribute(
+      "src",
+      type !== "transfer"
+        ? categoryImg
+        : clickedView.children[0].children[1].children[1].children[3].getAttribute(
+            "src"
+          )
+    );
 
-    let catName = categoryName.length > 8 ? categoryName.slice(0, 8) + ".." : categoryName;
-    let transferName;
-   if(type === 'transfer'){
-    transferName = clickedView.children[0].children[1].children[1].children[4].textContent
-   }
-    
-  document.querySelector(".category-body .child-body p").textContent = type!=="transfer"?catName:transferName.length > 8 ? transferName.slice(0, 8) + ".." :transferName;
+  let catName =
+    categoryName.length > 8 ? categoryName.slice(0, 8) + ".." : categoryName;
+  let transferName;
+  if (type === "transfer") {
+    transferName =
+      clickedView.children[0].children[1].children[1].children[4].textContent;
+  }
+
+  document.querySelector(".category-body .child-body p").textContent =
+    type !== "transfer"
+      ? catName
+      : transferName.length > 8
+      ? transferName.slice(0, 8) + ".."
+      : transferName;
   document.querySelector(".calc-values").textContent = amount.slice(1);
 
   const types = {
     income: ".income-body img",
     expense: ".expense-body img",
-    transfer: ".transfer-body img"
+    transfer: ".transfer-body img",
   };
-  
-  Object.entries(types).forEach(([key,val])=> {
+
+  Object.entries(types).forEach(([key, val]) => {
     const img = document.querySelector(val);
     if (type === key) {
       img.setAttribute("src", "icons/tick.svg");
@@ -1101,7 +1152,7 @@ document.querySelector(".edit-history").addEventListener("click", () => {
       img.removeAttribute("src");
     }
   });
-  
+
   document.querySelector(".parent-detail-view").classList.remove("active");
   document.querySelector(".input-containers").classList.add("active");
   // console.log({
@@ -1136,48 +1187,12 @@ function addEventListener() {
 }
 
 function dynamicChange(data) {
-  console.log(data)
+  console.log(data);
   let element = clickedView;
-  if(data.type=="transfer"){
-    element.children[0].children[1].children[1].children[3].setAttribute("src",data.categoryIcon)
-    element.children[0].children[1].children[1].children[4].textContent = data.categoryName
-  }
-  else{
-
-  }
-  element.lastElementChild.textContent = data.description;
-  element.firstElementChild.children[0].setAttribute("src", data.type!=='transfer'?data.categoryIcon:"icons/Income-expense/transfer.jpg");
-  element.firstElementChild.children[1].lastElementChild.children[0].setAttribute(
-    "src",
-    data.accountIcon
-  );
-  element.firstElementChild.children[1].lastElementChild.children[1].textContent =
-    data.accountName;
-  element.children[1].children[0].textContent = data.amount;
-  //later you chaet this currrent it wil issue*********===============-------------==========---------
-
-  document.querySelector(".input-containers").classList.remove("active");
-}
-
-//--------------------UPDATE BUDGETS---------------------
- async function updateBudgetDb(catId, data) {
-  let userId = "66efd1552e03ec45ce74d5fd";
-  let req = await fetch(
-    `https://penny-partner-api.onrender.com/api/v1/users/budgets/some/${userId}/?categoryId=${catId}`,
-    {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }
-  );
-  let res = await req.json();
-  console.log(res);
-}
-
-function makeDynamicTransferTemplate(data){
-  console.log(data)
-  let transferTemplate = `<li data-transaction-id="${data._id}" data-user-id="${data.userId}"  data-account-id="">
-  <div class="transaction-info">
+  console.log(clickedView.innerHTML)
+  if (data.type == "transfer") {
+    clickedView.innerHTML =`
+    <div class="transaction-info">
     <img
       src="icons/Income-expense/transfer.jpg"
       alt=""
@@ -1195,7 +1210,7 @@ function makeDynamicTransferTemplate(data){
           <img
           src="icons/tarrow.svg"
           alt=""
-          class="account-icon"
+          class="transfer-arrow"
         />
         <img
           src="${data.categoryIcon}"
@@ -1210,16 +1225,119 @@ function makeDynamicTransferTemplate(data){
   <div class="transaction-amount">
     <p class="amount ${data.type}">₹${data.amount}</p>
   </div>
-   <small style="display: none;" >${data.description}</small>
-</li>`;
-const li = document.createElement("li");
-li.dataset.transactionId = "<pending>";
-li.innerHTML = transferTemplate;
-li.id = "recently-added";
-
-mainContent.firstElementChild.lastElementChild.insertBefore(
-  li,
-  mainContent.firstElementChild.lastElementChild.firstElementChild
-);
-reloadDetailveiw();
+   <small style="display: none;" >${data.description}</small>`
+    // element.children[0].children[1].children[1].children[3].setAttribute(
+    //   "src",
+    //   data.categoryIcon
+    // );
+    // element.children[0].children[1].children[1].children[4].textContent =
+    //   data.categoryName;
+  } else {
+   clickedView.innerHTML =  `
+ <div class="transaction-info">
+                    <img
+                      src="${data.categoryIcon}"
+                      alt=""
+                      class="transaction-icon"
+                    />
+                    <div class="cat-account">
+                      <div class="category-name little-bold">${data.categoryName}</div>
+                      <div class="transaction-account-info">
+                        <img
+                          src="${data.accountIcon}"
+                          alt=""
+                          class="account-icon"
+                        />
+                        <small class="account-name">${data.accountName}</small>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="transaction-amount">
+                    <p class="amount ${data.type}">₹${data.amount}</p>
+                  </div>
+                  <small style="display: none;" >${data.description}</small>`
+  }
+  // element.lastElementChild.textContent = data.description;
+  // element.firstElementChild.children[0].setAttribute(
+  //   "src",
+  //   data.type !== "transfer"
+  //     ? data.categoryIcon
+  //     : "icons/Income-expense/transfer.jpg"
+  // );
+  // element.firstElementChild.children[1].lastElementChild.children[0].setAttribute(
+  //   "src",
+  //   data.accountIcon
+  // );
+  // element.firstElementChild.children[1].lastElementChild.children[1].textContent =
+  //   data.accountName;
+  // element.children[1].children[0].textContent = data.amount;
+  //later you chaet this currrent it wil issue*********===============-------------==========---------
+  console.log(clickedView.innerHTML)
+  document.querySelector(".input-containers").classList.remove("active");
 }
+
+//--------------------UPDATE BUDGETS---------------------
+async function updateBudgetDb(catId, data) {
+  let userId = "66efd1552e03ec45ce74d5fd";
+  let req = await fetch(
+    `https://penny-partner-api.onrender.com/api/v1/users/budgets/some/${userId}/?categoryId=${catId}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  let res = await req.json();
+  console.log(res);
+}
+
+// function makeDynamicTransferTemplate(data) {
+//   console.log(data);
+//   let transferTemplate = `<li data-transaction-id="${data._id}" data-user-id="${data.userId}"  data-account-id="">
+//   <div class="transaction-info">
+//     <img
+//       src="icons/Income-expense/transfer.jpg"
+//       alt=""
+//       class="transaction-icon"
+//     />
+//     <div class="cat-account">
+//       <div class="category-name little-bold">Transfer</div>
+//       <div class="transaction-account-info">
+//         <img
+//           src="${data.accountIcon}"
+//           alt=""
+//           class="account-icon"
+//         />
+//          <small class="account-name">${data.accountName}</small>
+//           <img
+//           src="icons/tarrow.svg"
+//           alt=""
+//           class="account-icon"
+//         />
+//         <img
+//           src="${data.categoryIcon}"
+//           alt=""
+//           class="account-icon"
+//         />
+//          <small class="account-name">${data.categoryName}</small>
+//       </div>
+//     </div>
+//   </div>
+ 
+//   <div class="transaction-amount">
+//     <p class="amount ${data.type}">₹${data.amount}</p>
+//   </div>
+//    <small style="display: none;" >${data.description}</small>
+// </li>`;
+//   const li = document.createElement("li");
+//   li.dataset.transactionId = "<pending>";
+//   li.innerHTML = transferTemplate;
+//   li.id = "recently-added";
+
+//   mainContent.firstElementChild.lastElementChild.insertBefore(
+//     li,
+//     mainContent.firstElementChild.lastElementChild.firstElementChild
+//   );
+//   reloadDetailveiw();
+// }
