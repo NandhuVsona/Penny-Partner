@@ -285,3 +285,7 @@
   border: 1px solid grey;
   border-radius: 10px;
 }
+.app.dark .transfer-arrow{
+  filter: invert(1);
+  -webkit-filter: invert(1);
+}

@@ -145,7 +145,7 @@ function childTemplate(transactions) {
                               <img
                               src="icons/tarrow.svg"
                               alt=""
-                              class="account-icon"
+                              class="transfer-arrow"
                             />
                             <img
                               src="${item.toAccount[0].icon}"
@@ -1076,24 +1076,32 @@ document.querySelector(".edit-history").addEventListener("click", () => {
     accountName.length > 8 ? accountName.slice(0, 8) + ".." : accountName;
   document
     .querySelector(".category-body .child-body img")
-    .setAttribute("src", categoryImg);
-  document.querySelector(".category-body .child-body p").textContent =
-    categoryName.length > 8 ? categoryName.slice(0, 8) + ".." : categoryName;
+    .setAttribute("src", type!=="transfer"?categoryImg:clickedView.children[0].children[1].children[1].children[3].getAttribute("src"));
+
+    let catName = categoryName.length > 8 ? categoryName.slice(0, 8) + ".." : categoryName;
+    let transferName;
+   if(type === 'transfer'){
+    transferName = clickedView.children[0].children[1].children[1].children[4].textContent
+   }
+    
+  document.querySelector(".category-body .child-body p").textContent = type!=="transfer"?catName:transferName.length > 8 ? transferName.slice(0, 8) + ".." :transferName;
   document.querySelector(".calc-values").textContent = amount.slice(1);
 
-  if (type == "income") {
-    document
-      .querySelector(".income-body img")
-      .setAttribute("src", "icons/tick.svg");
-  } else if (type == "expense") {
-    document
-      .querySelector(".expense-body img")
-      .setAttribute("src", "icons/tick.svg");
-  } else {
-    document
-      .querySelector(".transfer-body img")
-      .setAttribute("src", "icons/tick.svg");
-  }
+  const types = {
+    income: ".income-body img",
+    expense: ".expense-body img",
+    transfer: ".transfer-body img"
+  };
+  
+  Object.entries(types).forEach(([key,val])=> {
+    const img = document.querySelector(val);
+    if (type === key) {
+      img.setAttribute("src", "icons/tick.svg");
+    } else {
+      img.removeAttribute("src");
+    }
+  });
+  
   document.querySelector(".parent-detail-view").classList.remove("active");
   document.querySelector(".input-containers").classList.add("active");
   // console.log({
@@ -1128,9 +1136,17 @@ function addEventListener() {
 }
 
 function dynamicChange(data) {
+  console.log(data)
   let element = clickedView;
+  if(data.type=="transfer"){
+    element.children[0].children[1].children[1].children[3].setAttribute("src",data.categoryIcon)
+    element.children[0].children[1].children[1].children[4].textContent = data.categoryName
+  }
+  else{
+
+  }
   element.lastElementChild.textContent = data.description;
-  element.firstElementChild.children[0].setAttribute("src", data.categoryIcon);
+  element.firstElementChild.children[0].setAttribute("src", data.type!=='transfer'?data.categoryIcon:"icons/Income-expense/transfer.jpg");
   element.firstElementChild.children[1].lastElementChild.children[0].setAttribute(
     "src",
     data.accountIcon
