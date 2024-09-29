@@ -299,6 +299,9 @@
   filter: brightness(0.6);
   -webkit-filter: brightness(0.6);
 }
+.app.dark .sidebar header img.user-profile{
+  background-color: #c1c1c1;
+}
 /* .sidebar.active .sun-theme {
   animation: rise 0.3s ease;
   -webkit-animation: rise 0.3s ease;

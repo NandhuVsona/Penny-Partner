@@ -303,16 +303,33 @@ main section.active {
   -webkit-animation: slideRight 0.3s ease;
 }
 .sun-theme{
-  width: 80px;
- 
+  width: 100px;
   position: absolute;
-  top: 0;
+  top: -7px;
   left: 0;
   z-index: 1;
 }
-marquee{
+
+.scroll-container {
   position: absolute;
   top: -120px;
+  width: 100%; 
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cloud {
+  animation: scroll-left 30s linear infinite;
+  -webkit-animation: scroll-left 30s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 .cloud{
   width: 300px;
@@ -347,6 +364,7 @@ marquee{
   background-color: white;
   padding: 5px;
   z-index: 1;
+  
 }
 .sidebar .settings ul {
   display: flex;
