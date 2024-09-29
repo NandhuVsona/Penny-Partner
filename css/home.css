@@ -1404,8 +1404,7 @@
 }
 .account-container-body .edit-box.active{
   display: flex;
-  animation: boxDown 0.5s ease;
-  -webkit-animation: boxDown 0.5s ease;
+  
 }
 .account-container-body .edit-box {
   position: absolute;
@@ -1422,7 +1421,9 @@
   width: 100%;
   height: 215px;
   padding: 0px 15px;
-  background-color: rgb(44, 43, 43);
+  animation: boxDown 0.5s ease;
+  -webkit-animation: boxDown 0.5s ease;
+  background-color: rgb(220, 220, 220);
 }
 @keyframes boxDown {
   0% {
@@ -1434,7 +1435,7 @@
 }
 }
 
-.account-container-body .edit-box .input-container form {
+.account-container-body .edit-box .input-container .form {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1444,32 +1445,43 @@
   align-items: center;
   flex-direction: column;
 }
-.account-container-body .edit-box .input-container form label {
+.account-container-body .edit-box .input-container .form label {
   width: 100%;
   padding-top: 15px;
   font-weight: 500;
   font-size: 18px;
 }
-.account-container-body .edit-box .input-container form input {
+.account-container-body .edit-box .input-container .form .input-box {
+  width: 100%;
+  height: 50px;
+position: relative;
+ 
+}
+.account-container-body .edit-box .input-container .form input {
   width: 100%;
   height: 50px;
   border: none;
-  padding-left: 20px;
+  padding-left: 50px;
   font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
 }
-.account-container-body .edit-box .input-container form input:focus {
+.account-container-body .edit-box .input-container .form .input-box img {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+}
+.account-container-body .edit-box .input-container .form input:focus {
   outline: none;
 }
-.account-container-body .edit-box .input-container form .aBtns {
+.account-container-body .edit-box .input-container .form .aBtns {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
 }
-.account-container-body .edit-box .input-container form .aBtns button {
+.account-container-body .edit-box .input-container .form .aBtns button {
   width: 50%;
   height: 50px;
   font-weight: 600;
@@ -1480,4 +1492,11 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+.account-container-body .edit-box .input-container .form .aBtns button:active{
+  transform: scale(0.97);
+  -webkit-transform: scale(0.97);
+  -moz-transform: scale(0.97);
+  -ms-transform: scale(0.97);
+  -o-transform: scale(0.97);
 }

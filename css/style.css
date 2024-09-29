@@ -292,6 +292,7 @@ main section.active {
   top: 10px;
   z-index: 1;
 }
+
 .sidebar.active {
   display: block;
   transition: all 0.3s ease;

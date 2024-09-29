@@ -264,4 +264,14 @@ async function deleteAccountDb(accountId) {
 let editNameBtn = document.querySelector(".edit-username");
 editNameBtn.addEventListener("click", () => {
   document.querySelector(".edit-box").classList.add("active");
+  let inputBox = document.getElementById("username");
+ 
+  inputBox.setSelectionRange(inputBox.value.length,inputBox.value.length)
+  inputBox.focus()
 });
+
+
+let cancelBtn = document.querySelector(".aBtns .cancel-btn")
+cancelBtn.addEventListener("click",()=>{
+  document.querySelector(".edit-box").classList.remove("active")
+})
