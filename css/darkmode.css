@@ -316,3 +316,11 @@
     -o-transform: translateY(100px);
   }
 } */
+
+
+.app.dark .currency-body h2,.app.dark .currency-body{
+  background-color: #000000;
+}
+.app.dark .currency-container{
+background-color: #2f2f2f;
+}

@@ -303,7 +303,7 @@ main section.active {
   animation: slideRight 0.3s ease;
   -webkit-animation: slideRight 0.3s ease;
 }
-.sun-theme{
+.sun-theme {
   width: 100px;
   position: absolute;
   top: -7px;
@@ -314,7 +314,7 @@ main section.active {
 .scroll-container {
   position: absolute;
   top: -120px;
-  width: 100%; 
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -332,27 +332,25 @@ main section.active {
     transform: translateX(-100%);
   }
 }
-.cloud{
+.cloud {
   width: 300px;
- z-index: 1;
+  z-index: 1;
 }
-.cloud-2{
+.cloud-2 {
   width: 300px;
   height: 200px;
- z-index: 1;
- position: absolute;
- top: -50px;
- left: -50px;
+  z-index: 1;
+  position: absolute;
+  top: -50px;
+  left: -50px;
 }
-.cloud-3{
- width: 300px;
- height: 200px;
- z-index: 1;
- position: absolute;
- top: -50px;
- right: -60px;
-
-
+.cloud-3 {
+  width: 300px;
+  height: 200px;
+  z-index: 1;
+  position: absolute;
+  top: -50px;
+  right: -60px;
 }
 .sidebar header img.user-profile {
   width: 100px;
@@ -365,7 +363,6 @@ main section.active {
   background-color: white;
   padding: 5px;
   z-index: 1;
-  
 }
 .sidebar .settings ul {
   display: flex;
@@ -826,3 +823,162 @@ main section.active {
 .app.dark .accounts h3 {
   color: #000000;
 } */
+
+/* Styling for currency container */
+
+.currency-container {
+  z-index: 1;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(224, 224, 224);
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+}
+.currency-container.active {
+  display: flex;
+}
+.currency-body {
+  transform: translateY(30rem);
+  background-color: #ffffff;
+  display: flex;
+  width: 100%;
+  height: 90%;
+  border-radius: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+  flex-direction: column;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  animation: openCurrency 0.5s forwards;
+  transition: transform 0.5s ease; /* Smooth transition */
+  -webkit-transform: translateY(30rem);
+  -moz-transform: translateY(30rem);
+  -ms-transform: translateY(30rem);
+  -o-transform: translateY(30rem);
+}
+.currency-container.active .currency-body {
+  /*animation: openCurrency 0.3s ease;
+  animation-fill-mode: forwards;
+  */transform: translateY(0px);
+  -webkit-transform:;
+  -moz-transform:;
+  -ms-transform:;
+  -o-transform:;
+}
+.currency-body h2 {
+  padding: 10px 0px 10px 15px;
+  border-bottom: 1px solid #bdbdbd;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 5px;
+}
+.currency-body h2 p {
+  width: 10px;
+  height: 10px;
+  display: flex;
+  border-radius: 50%;
+  background-color: #ff6f61;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.currency-body h2 .dot-2 {
+  background-color: #009688;
+}
+.currency-body h2 .dot-3 {
+  background-color: #daa520;
+  margin-right: 10px;
+}
+
+.bottom-part {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: sticky;
+  bottom: 0px;
+  right: 30px;
+  background-color: inherit;
+  border-top: 1px solid #bbbbbb;
+}
+.bottom-part button {
+  width: 100px;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  margin: 0px 10px 0px 0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: background 0.3s ease;
+}
+.bottom-part button:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    to bottom left,
+    rgb(0, 255, 213),
+    rgb(230, 0, 255)
+  );
+}
+.currency-options {
+  width: 100%;
+  display: flex;
+  padding-left: 10px;
+  gap: 20px;
+  align-items: center;
+  flex-direction: column;
+}
+.currency-options li {
+  padding-left: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+.currency-options li input {
+  width: 30px;
+  height: 30px;
+}
+.currency-options li p {
+  font-size: 18px;
+}
+
+@keyframes openCurrency {
+  0% {
+    transform: translateY(30rem);
+
+    -webkit-transform: translateY(30rem);
+    -moz-transform: translateY(30rem);
+    -ms-transform: translateY(30rem);
+    -o-transform: translateY(30rem);
+  }
+  100% {
+    transform: translateY(0); /* Move into view */
+  }
+}

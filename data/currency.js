@@ -1,142 +1,46 @@
-const countries = [
-    {
-        id: 1,
-        name: "India",
-        currencyCode: "INR",
-        currencyName: "Rupee",
-        currencySymbol: "₹"
-    },
-    {
-        id: 2,
-        name: "United States",
-        currencyCode: "USD",
-        currencyName: "Dollar",
-        currencySymbol: "$"
-    },
-    {
-        id: 3,
-        name: "United Kingdom",
-        currencyCode: "GBP",
-        currencyName: "Pound Sterling",
-        currencySymbol: "£"
-    },
-    {
-        id: 4,
-        name: "Japan",
-        currencyCode: "JPY",
-        currencyName: "Yen",
-        currencySymbol: "¥"
-    },
-    {
-        id: 5,
-        name: "European Union",
-        currencyCode: "EUR",
-        currencyName: "Euro",
-        currencySymbol: "€"
-    },
-    {
-        id: 6,
-        name: "Australia",
-        currencyCode: "AUD",
-        currencyName: "Australian Dollar",
-        currencySymbol: "A$"
-    },
-    {
-        id: 7,
-        name: "Canada",
-        currencyCode: "CAD",
-        currencyName: "Canadian Dollar",
-        currencySymbol: "C$"
-    },
-    {
-        id: 8,
-        name: "China",
-        currencyCode: "CNY",
-        currencyName: "Yuan",
-        currencySymbol: "¥"
-    },
-    {
-        id: 9,
-        name: "Russia",
-        currencyCode: "RUB",
-        currencyName: "Ruble",
-        currencySymbol: "₽"
-    },
-    {
-        id: 10,
-        name: "South Africa",
-        currencyCode: "ZAR",
-        currencyName: "Rand",
-        currencySymbol: "R"
-    },
-    {
-        id: 11,
-        name: "Brazil",
-        currencyCode: "BRL",
-        currencyName: "Real",
-        currencySymbol: "R$"
-    },
-    {
-        id: 12,
-        name: "Mexico",
-        currencyCode: "MXN",
-        currencyName: "Peso",
-        currencySymbol: "$"
-    },
-    {
-        id: 13,
-        name: "South Korea",
-        currencyCode: "KRW",
-        currencyName: "Won",
-        currencySymbol: "₩"
-    },
-    {
-        id: 14,
-        name: "Switzerland",
-        currencyCode: "CHF",
-        currencyName: "Swiss Franc",
-        currencySymbol: "Fr"
-    },
-    {
-        id: 15,
-        name: "Sweden",
-        currencyCode: "SEK",
-        currencyName: "Krona",
-        currencySymbol: "kr"
-    },
-    {
-        id: 16,
-        name: "Norway",
-        currencyCode: "NOK",
-        currencyName: "Krone",
-        currencySymbol: "kr"
-    },
-    {
-        id: 17,
-        name: "New Zealand",
-        currencyCode: "NZD",
-        currencyName: "New Zealand Dollar",
-        currencySymbol: "$"
-    },
-    {
-        id: 18,
-        name: "Singapore",
-        currencyCode: "SGD",
-        currencyName: "Singapore Dollar",
-        currencySymbol: "$"
-    },
-    {
-        id: 19,
-        name: "Hong Kong",
-        currencyCode: "HKD",
-        currencyName: "Hong Kong Dollar",
-        currencySymbol: "$"
-    },
-    {
-        id: 20,
-        name: "Saudi Arabia",
-        currencyCode: "SAR",
-        currencyName: "Riyal",
-        currencySymbol: "﷼"
-    }
+export const countriesCurrencyData = [
+  { id: 1, country: "Afghanistan", symbol: "؋", currencyCode: "AFN", currency: "Afghani" },
+  { id: 2, country: "Albania", symbol: "L", currencyCode: "ALL", currency: "Lek" },
+  { id: 3, country: "Algeria", symbol: "د.ج", currencyCode: "DZD", currency: "Dinar" },
+  { id: 4, country: "Argentina", symbol: "$", currencyCode: "ARS", currency: "Peso" },
+  { id: 5, country: "Australia", symbol: "A$", currencyCode: "AUD", currency: "Dollar" },
+  { id: 6, country: "Austria", symbol: "€", currencyCode: "EUR", currency: "Euro" },
+  { id: 7, country: "Bangladesh", symbol: "৳", currencyCode: "BDT", currency: "Taka" },
+  { id: 8, country: "Belgium", symbol: "€", currencyCode: "EUR", currency: "Euro" },
+  { id: 9, country: "Brazil", symbol: "R$", currencyCode: "BRL", currency: "Real" },
+  { id: 10, country: "Canada", symbol: "C$", currencyCode: "CAD", currency: "Dollar" },
+  { id: 11, country: "Chile", symbol: "$", currencyCode: "CLP", currency: "Peso" },
+  { id: 12, country: "China", symbol: "¥", currencyCode: "CNY", currency: "Yuan" },
+  { id: 13, country: "Denmark", symbol: "kr", currencyCode: "DKK", currency: "Krone" },
+  { id: 14, country: "Egypt", symbol: "ج.م", currencyCode: "EGP", currency: "Pound" },
+  { id: 15, country: "France", symbol: "€", currencyCode: "EUR", currency: "Euro" },
+  { id: 16, country: "Germany", symbol: "€", currencyCode: "EUR", currency: "Euro" },
+  { id: 17, country: "India", symbol: "₹", currencyCode: "INR", currency: "Rupee" },
+  { id: 18, country: "Indonesia", symbol: "Rp", currencyCode: "IDR", currency: "Rupiah" },
+  { id: 19, country: "Israel", symbol: "₪", currencyCode: "ILS", currency: "Shekel" },
+  { id: 20, country: "Italy", symbol: "€", currencyCode: "EUR", currency: "Euro" },
+  { id: 21, country: "Japan", symbol: "¥", currencyCode: "JPY", currency: "Yen" },
+  { id: 22, country: "Kenya", symbol: "Sh", currencyCode: "KES", currency: "Shilling" },
+  { id: 23, country: "Malaysia", symbol: "RM", currencyCode: "MYR", currency: "Ringgit" },
+  { id: 24, country: "Mexico", symbol: "$", currencyCode: "MXN", currency: "Peso" },
+  { id: 25, country: "Nepal", symbol: "रू", currencyCode: "NPR", currency: "Rupee" },
+  { id: 26, country: "New Zealand", symbol: "$", currencyCode: "NZD", currency: "Dollar" },
+  { id: 27, country: "Nigeria", symbol: "₦", currencyCode: "NGN", currency: "Naira" },
+  { id: 28, country: "Norway", symbol: "kr", currencyCode: "NOK", currency: "Krone" },
+  { id: 29, country: "Pakistan", symbol: "₨", currencyCode: "PKR", currency: "Rupee" },
+  { id: 30, country: "Philippines", symbol: "₱", currencyCode: "PHP", currency: "Peso" },
+  { id: 31, country: "Russia", symbol: "₽", currencyCode: "RUB", currency: "Ruble" },
+  { id: 32, country: "Saudi Arabia", symbol: "ر.س", currencyCode: "SAR", currency: "Riyal" },
+  { id: 33, country: "Singapore", symbol: "$", currencyCode: "SGD", currency: "Dollar" },
+  { id: 34, country: "South Africa", symbol: "R", currencyCode: "ZAR", currency: "Rand" },
+  { id: 35, country: "South Korea", symbol: "₩", currencyCode: "KRW", currency: "Won" },
+  { id: 36, country: "Spain", symbol: "€", currencyCode: "EUR", currency: "Euro" },
+  { id: 37, country: "Sri Lanka", symbol: "රු", currencyCode: "LKR", currency: "Rupee" },
+  { id: 38, country: "Sweden", symbol: "kr", currencyCode: "SEK", currency: "Krona" },
+  { id: 39, country: "Switzerland", symbol: "Fr", currencyCode: "CHF", currency: "Franc" },
+  { id: 40, country: "Thailand", symbol: "฿", currencyCode: "THB", currency: "Baht" },
+  { id: 41, country: "Turkey", symbol: "₺", currencyCode: "TRY", currency: "Lira" },
+  { id: 42, country: "United Arab Emirates", symbol: "د.إ", currencyCode: "AED", currency: "Dirham" },
+  { id: 43, country: "United Kingdom", symbol: "£", currencyCode: "GBP", currency: "Pound" },
+  { id: 44, country: "United States", symbol: "$", currencyCode: "USD", currency: "Dollar" }
 ];
