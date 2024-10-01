@@ -736,6 +736,14 @@ main section.active {
   flex-direction: column;
   gap: 10px;
 }
+.my-account-container .settings{
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
 
 .my-account-container .settings ul {
   display: flex;
@@ -827,22 +835,23 @@ main section.active {
 /* Styling for currency container */
 
 .currency-container {
-  z-index: 1;
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
+background-color: rgb(255, 255, 255);
+z-index: 10 !important;
+  display: none;
   width: 100%;
   height: 100%;
-  background-color: rgb(224, 224, 224);
   justify-content: center;
-  align-items: center;
+  align-items: start;
   padding: 0px 10px;
 }
 .currency-container.active {
   display: flex;
 }
 .currency-body {
+  z-index: 2;
   transform: translateY(30rem);
   background-color: #ffffff;
   display: flex;
@@ -870,10 +879,7 @@ main section.active {
   /*animation: openCurrency 0.3s ease;
   animation-fill-mode: forwards;
   */transform: translateY(0px);
-  -webkit-transform:;
-  -moz-transform:;
-  -ms-transform:;
-  -o-transform:;
+  
 }
 .currency-body h2 {
   padding: 10px 0px 10px 15px;
@@ -981,4 +987,8 @@ main section.active {
   100% {
     transform: translateY(0); /* Move into view */
   }
+}
+
+.account-container-body .edit-box .input-container .form .aBtns button{
+  background-color: #ffffff;
 }
