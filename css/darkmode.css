@@ -1,7 +1,7 @@
 :root {
   --blur: rgb(160, 160, 160);
-  --darkblur: rgb(0, 0, 0);
-  --dark: #080202;
+  --darkblur: rgb(255, 0, 0);
+  --dark: #ff0000;
   --lightDark: rgb(53, 53, 53);
 }
 
@@ -192,7 +192,7 @@
 .app.dark .rr-container,
 .app.dark .rr-container header,
 .app.dark .rr-container .review-input-container {
-  background-color: #000000;
+  background-color: var(--dark);
 }
 
 .app.dark .star-shadow {
@@ -319,10 +319,10 @@
 
 
 .app.dark .currency-body h2,.app.dark .currency-body{
-  background-color: #000000;
+  background-color: var(--dark);
 }
 .app.dark .currency-container{
-background-color: #000000;
+  background-color: var(--dark);
 }
 
 .app.dark .account-container-body .edit-box .input-container {
