@@ -1,7 +1,6 @@
 const CACHE_NAME = "penny-partner-cache-v1";
 const urlsToCache = [
-  "/",
-  "/index.html",
+  "./index.html",
   "./css/darkmode.css",
   "./css/home.css",
   "./css/style.css",
