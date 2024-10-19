@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/category.css" />
     <link rel="stylesheet" href="css/budget.css" />
     <link rel="stylesheet" href="css/review.css" />
+    <link rel="manifest" href="manifest.json" />
   </head>
   <body>
     <div class="app">
@@ -1364,8 +1365,22 @@
         </div>
       </div>
     </div>
-
+    <script>
+      
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.log('Service Worker registration failed:', error);
+                });
+        });
+      }
+          </script>
     <script type="module" src="JavaScript/home.js"></script>
+    <script type="module" src="./service-worker.js"></script>
     <script async type="module" src="JavaScript/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="JavaScript/analysis.js"></script>
@@ -1374,6 +1389,7 @@
     <script defer type="module" src="JavaScript/budget.js"></script>
     <script type="module" src="JavaScript/review.js"></script>
     <script src="JavaScript/animation.js"></script>
+  
 
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </body>
