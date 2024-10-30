@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Penny Partner</title>
-    <link rel="icon" href="./frontend/images/app-logo.png" type="image/png" />
+    <link rel="icon" href="/images/app-logo.png" type="image/png" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto"
       rel="stylesheet"
@@ -209,7 +209,7 @@
     .section-2 {
       animation: slideleft 0.3s ease;
     }
-     @keyframes slideleft {
+    @keyframes slideleft {
       0% {
         transform: translateX(200px);
       }
@@ -248,7 +248,7 @@
     .otp-container.active {
       display: flex;
     }
-     @keyframes otpbox {
+    @keyframes otpbox {
       0% {
         transform: translate(400px);
       }
@@ -364,7 +364,7 @@
           <section class="active">
             <div class="form-group">
               <img src="icons/message.svg" alt="" />
-              <input type="text" placeholder="Enter your email" />
+              <input id="email" type="text" placeholder="Enter your email" />
             </div>
             <div class="form-group">
               <img src="icons/password.svg" alt="" />
@@ -376,7 +376,7 @@
               <small class="forgot-pass">Forgot password</small>
             </div>
 
-            <button>GET STARTED</button>
+            <button class="signin-btn">GET STARTED</button>
             <div id="gSignInWrapper">
               <div id="customBtn" class="customGPlusSignIn">
                 <img
@@ -425,13 +425,7 @@
                 </div>
                 <ul class="otp-input-boxs">
                   <li>
-                    <input
-                      autofocus
-                      type="tel"
-                      maxlength="1"
-                      placeholder="0"
-                      required
-                    />
+                    <input type="tel" maxlength="1" placeholder="0" required />
                   </li>
                   <li>
                     <input type="tel" maxlength="1" placeholder="0" required />
@@ -470,7 +464,7 @@
       let inputBoxes = document.querySelectorAll("input[type='tel']");
       let sections = document.querySelectorAll("section");
 
-       signUpLabel.addEventListener("click", () => {
+      signUpLabel.addEventListener("click", () => {
         label.style.left = "50%";
         labelColor[1].style.color = "#ffffff";
         labelColor[0].style.color = "#000000";
@@ -495,7 +489,7 @@
       cancelBtn.addEventListener("click", () => {
         document.querySelector(".otp-container").classList.add("remove");
       });
-        sendOtpBtn.addEventListener("click", (e) => {
+      sendOtpBtn.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector(".otp-container").classList.remove("remove");
         document.querySelector(".otp-container").classList.add("active");
@@ -515,6 +509,32 @@
           }
         });
       });
+
+      document.querySelector(".signin-btn").addEventListener("click", () => {
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value.trim();
+        let data = {
+          email,
+          password,
+        };
+        login(data);
+      });
+
+      async function login(data) {
+        let req = await fetch(
+          "https://penny-partner-api.onrender.com/api/v1/users/login",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+        let res = await req.json();
+        if (res.status == "success") {
+          window.location.href = "/";
+        }
+        console.log(res);
+      }
     </script>
   </body>
 </html>
