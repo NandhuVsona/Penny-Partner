@@ -40,13 +40,14 @@ These features protect your data while providing a smooth and hassle-free login 
 ## 📊 Tech Stack
 
 - ❄️ This project uses a **traditional web development stack** to deliver a reliable and intuitive experience:
-  <br/>
+<br></br>
 <div align="center">
     <img src="https://skillicons.dev/icons?i=html,css,javascript,express,mongodb" /><br>
  
 </div>
 
-<br/>
+
+<br></br>
 ## 🛠️ How to Use This Repository  
 
 To get started with **Penny Partner**, follow these simple steps:
@@ -59,21 +60,23 @@ git clone https://github.com/Officialdevpro/penny-partner.git
 ```bash
 cd penny-partner
 ```
-
+<br></br>
 ### 2️⃣ Install Dependencies
 Ensure you have Node.js installed, then run the following command to install the required dependencies:
 ```bash
 npm install
 ```
+<br></br>
 ### 3️⃣ Set Up Environment Variables
-Create a .env file in the root directory and add the following variables:
+Create a .env file in the root directory and add the following variables which have already in the .env.example file.
  
-
+<br></br>
 ### 4️⃣ Start the Development Server
 Run the following command to start the server:
 
 ```bash
 npm start
 ```
+<br></br>
 With Penny Partner, managing your finances has never been easier or more intuitive! 
 🎉 Start simplifying your financial journey today with Penny Partner!  
