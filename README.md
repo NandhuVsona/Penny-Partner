@@ -25,6 +25,14 @@ Penny Partner is your ultimate financial management tool designed to simplify in
 
 ---
 
+## 📊 Tech Stack
+
+- ❄️ This project uses a **traditional web development stack** to deliver a reliable and intuitive experience:
+- <div align="left">
+    <img src="https://skillicons.dev/icons?i=html,css,javascript,express,mongodb" /><br>
+ 
+</div>
+
 With Penny Partner, managing your finances has never been easier or more intuitive!  
 
 🎉 Start simplifying your financial journey today with Penny Partner!  
