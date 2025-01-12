@@ -47,6 +47,33 @@ These features protect your data while providing a smooth and hassle-free login 
 </div>
 
 <br/>
-With Penny Partner, managing your finances has never been easier or more intuitive!  
+## 🛠️ How to Use This Repository  
 
+To get started with **Penny Partner**, follow these simple steps:
+
+### 1️⃣ Clone the Repository  
+Clone the repository to your local machine using Git:
+```bash
+git clone https://github.com/Officialdevpro/penny-partner.git
+```
+```bash
+cd penny-partner
+```
+
+### 2️⃣ Install Dependencies
+Ensure you have Node.js installed, then run the following command to install the required dependencies:
+```bash
+npm install
+```
+### 3️⃣ Set Up Environment Variables
+Create a .env file in the root directory and add the following variables:
+ 
+
+### 4️⃣ Start the Development Server
+Run the following command to start the server:
+
+```bash
+npm start
+```
+With Penny Partner, managing your finances has never been easier or more intuitive! 
 🎉 Start simplifying your financial journey today with Penny Partner!  
