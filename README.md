@@ -79,4 +79,5 @@ npm start
 ```
 <br></br>
 With Penny Partner, managing your finances has never been easier or more intuitive! 
+<br>
 🎉 Start simplifying your financial journey today with Penny Partner!  
