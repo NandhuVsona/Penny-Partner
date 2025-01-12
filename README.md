@@ -25,6 +25,18 @@ Penny Partner is your ultimate financial management tool designed to simplify in
 
 ---
 
+## 🔒 Authentication  
+
+At Penny Partner, we prioritize your security with powerful authentication features to ensure a seamless experience:  
+
+- **📧 OTP Verification:** Quick and secure registration with an email-based one-time password (OTP).  
+- **🔑 Google Login:** One-click access via Google OAuth—no need to remember passwords!  
+- **🪄 Forgot Password:** Simple and secure email recovery to get you back into your account effortlessly.  
+
+These features protect your data while providing a smooth and hassle-free login experience! ✨
+
+---
+
 ## 📊 Tech Stack
 
 - ❄️ This project uses a **traditional web development stack** to deliver a reliable and intuitive experience:
